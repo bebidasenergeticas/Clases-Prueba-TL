@@ -2,7 +2,11 @@
 
 Prueba clases.
 
-## DULCERA: sistema de marca (demo educativa)
+## DULCERA (demo educativa)
+
+**Landing:** `npm start` y abre http://127.0.0.1:4173. Detalles en [`TECHNICAL_README.md`](TECHNICAL_README.md).
+
+### Sistema de marca
 
 > DULCERA es una **marca ficticia** creada con fines educativos. No describe una empresa, productos, instalaciones ni clientes reales.
 
@@ -14,3 +18,6 @@ Prueba clases.
 | [`brand/design-tokens.css`](brand/design-tokens.css) | Variables CSS de color, tipografía y espaciado |
 | `brand/logo-*.svg` | Logotipos oficiales: principal, horizontal, símbolo y monocromos |
 | `brand/concepts/*.svg` | Exploración de los conceptos A, B y C |
+| [`index.html`](index.html) · `css/` · `js/` | Landing: hero 3D (Three.js), scroll narrativo (GSAP + ScrollTrigger + Lenis) y formulario listo para n8n |
+| `assets/placeholders/` · `assets/generated/` | Renders provisionales 3D e imágenes finales (pendientes) |
+| [`TECHNICAL_README.md`](TECHNICAL_README.md) | Arquitectura, ejecución, librerías, assets, n8n y verificación |

@@ -1,0 +1,4 @@
+{
+  "_comment": "Imágenes finales listas en /assets/generated. Regenerar con: node tools/scan-assets.mjs. Vacío = la web usa los renders provisionales de /assets/placeholders.",
+  "images": {}
+}

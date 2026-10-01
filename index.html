@@ -1,0 +1,645 @@
+<!doctype html>
+<html lang="es-MX" class="no-js">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title>DULCERA · Dulces mexicanos contemporáneos (demo)</title>
+  <meta name="description" content="Dulces mexicanos de siempre, hechos con otro cuidado. Cajas de regalo, eventos, regalos corporativos y mayoreo. Marca ficticia de demostración.">
+  <meta name="robots" content="noindex, nofollow">
+  <meta name="theme-color" content="#F5EDE1">
+  <meta property="og:title" content="DULCERA · México, en capas.">
+  <meta property="og:description" content="Marca ficticia de demostración: dulces mexicanos contemporáneos.">
+  <meta property="og:image" content="assets/placeholders/ph-01.webp">
+  <link rel="icon" type="image/svg+xml" href="brand/logo-mark.svg">
+
+  <link rel="preload" href="assets/fonts/fraunces-var.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="preload" href="assets/fonts/manrope-var.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="stylesheet" href="brand/design-tokens.css">
+  <link rel="stylesheet" href="vendor/lenis/lenis.css">
+  <link rel="stylesheet" href="css/main.css">
+  <script>document.documentElement.classList.replace('no-js', 'js');</script>
+</head>
+<body>
+  <a class="skip-link" href="#contenido">Ir al contenido</a>
+
+  <!-- Intro: el símbolo se arma capa por capa -->
+  <div class="loader" data-loader aria-hidden="true">
+    <svg class="loader__mark" viewBox="0 0 100 100">
+      <path class="loader__layer" d="M0 0 H50 A50 50 0 0 1 63.09 1.75 A27 27 0 0 0 79.02 28.67 H0 Z"/>
+      <path class="loader__layer" d="M0 35.67 H97.9 A50 50 0 0 1 97.9 64.33 H0 Z"/>
+      <path class="loader__layer" d="M0 71.33 H95.22 A50 50 0 0 1 50 100 H0 Z"/>
+    </svg>
+  </div>
+
+  <!-- Transición interna de navegación: tres capas que barren la pantalla -->
+  <div class="curtain" data-curtain aria-hidden="true"><span></span><span></span><span></span></div>
+
+  <div class="cursor" data-cursor aria-hidden="true"><span class="cursor__label"></span></div>
+
+  <header class="site-header" data-header>
+    <div class="site-header__inner">
+      <a class="site-header__logo" href="#inicio" data-nav aria-label="DULCERA, ir al inicio">
+        <img src="brand/logo-horizontal.svg" alt="DULCERA" width="460" height="120">
+      </a>
+      <p class="site-header__section" aria-hidden="true"><span data-section-index>01</span><span data-section-name>Inicio</span></p>
+      <nav class="site-nav" id="site-nav" aria-label="Principal">
+        <ul>
+          <li><a href="#productos" data-nav>Productos</a></li>
+          <li><a href="#experiencia" data-nav>Experiencia</a></li>
+          <li><a href="#proceso" data-nav>Proceso</a></li>
+          <li><a href="#eventos" data-nav>Eventos</a></li>
+          <li><a href="#empresas" data-nav>Empresas</a></li>
+          <li><a href="#mayoreo" data-nav>Mayoreo</a></li>
+        </ul>
+      </nav>
+      <a class="btn btn--primary btn--sm site-header__cta" href="#cotizar" data-nav>Cotizar</a>
+      <button class="menu-toggle" type="button" aria-expanded="false" aria-controls="mobile-menu" data-menu-toggle>
+        <span class="sr-only">Abrir menú</span>
+        <span class="menu-toggle__bars" aria-hidden="true"><i></i><i></i><i></i></span>
+      </button>
+    </div>
+  </header>
+
+  <div class="mobile-menu" id="mobile-menu" data-mobile-menu hidden>
+    <nav aria-label="Menú móvil">
+      <ol>
+        <li><a href="#productos" data-nav><span>01</span>Productos</a></li>
+        <li><a href="#experiencia" data-nav><span>02</span>Experiencia</a></li>
+        <li><a href="#proceso" data-nav><span>03</span>Proceso</a></li>
+        <li><a href="#eventos" data-nav><span>04</span>Eventos</a></li>
+        <li><a href="#empresas" data-nav><span>05</span>Empresas</a></li>
+        <li><a href="#mayoreo" data-nav><span>06</span>Mayoreo</a></li>
+        <li><a href="#cotizar" data-nav><span>07</span>Cotizar</a></li>
+      </ol>
+    </nav>
+    <p class="mobile-menu__foot">México, en capas.</p>
+  </div>
+
+  <main id="contenido">
+
+    <!-- ═══════════════════════════ 01 HERO ═══════════════════════════ -->
+    <section id="inicio" class="hero" aria-labelledby="hero-title" data-section="01" data-section-label="Inicio">
+      <div class="hero__sticky">
+        <div class="hero__wordmark" aria-hidden="true">
+          <svg viewBox="0 0 665.16 100" preserveAspectRatio="xMidYMid meet">
+            <g class="hero__letter"><path fill-rule="evenodd" d="M0 0 H34 A50 50 0 0 1 34 100 H0 Z M16 16 H34 A34 34 0 0 1 34 84 H16 Z"/></g>
+            <g class="hero__letter"><path fill-rule="evenodd" d="M108 0 H124 V58 A26 26 0 0 0 176 58 V0 H192 V58 A42 42 0 0 1 108 58 Z"/></g>
+            <g class="hero__letter"><path fill-rule="evenodd" d="M214 0 H230 V84 H276 V100 H214 Z"/></g>
+            <g class="hero__letter"><path fill-rule="evenodd" d="M375.16 16.54 A50 50 0 1 0 375.16 83.46 L363.27 72.75 A34 34 0 1 1 363.27 27.25 Z"/></g>
+            <g class="hero__letter"><path fill-rule="evenodd" d="M399.16 0 H459.16 V16 H415.16 V42 H454.16 V58 H415.16 V84 H459.16 V100 H399.16 Z"/></g>
+            <g class="hero__letter"><path fill-rule="evenodd" d="M483.16 0 H523.16 A29 29 0 0 1 523.16 58 H499.16 V100 H483.16 Z M499.16 16 H523.16 A13 13 0 0 1 523.16 42 H499.16 Z"/><path d="M513.16 50 H531.16 L561.16 100 H542.16 Z"/></g>
+            <g class="hero__letter"><path fill-rule="evenodd" d="M613.16 0 H631.16 L665.16 100 H647.16 L622.16 26.47 L597.16 100 H579.16 Z"/><path d="M600.4 64 H643.92 L648.81 78.4 H595.5 Z"/></g>
+          </svg>
+        </div>
+
+        <canvas class="hero__canvas" data-hero-canvas aria-hidden="true"></canvas>
+        <figure class="hero__fallback media" data-shot="01" data-fit="contain"></figure>
+
+        <div class="hero__copy" data-hero-copy>
+          <p class="eyebrow">Dulces mexicanos contemporáneos</p>
+          <h1 id="hero-title" class="hero__title"><span class="sr-only">DULCERA. </span>México, en <em>capas.</em></h1>
+          <p class="hero__lead">Dulces mexicanos de siempre, hechos con otro cuidado. Para darte un gusto, regalar o llevar a tu empresa y a tu evento.</p>
+          <div class="hero__ctas">
+            <a class="btn btn--primary" href="#productos" data-nav>Conocer productos</a>
+            <a class="btn btn--ghost" href="#cotizar" data-nav data-intent="mayoreo">Cotizar mayoreo</a>
+          </div>
+        </div>
+
+        <ol class="hero__steps" data-hero-steps aria-hidden="true">
+          <li><span>01</span>Rompe el sello.</li>
+          <li><span>02</span>Levanta la tapa.</li>
+          <li><span>03</span>Baja capa por capa.</li>
+        </ol>
+
+        <div class="hero__collections" data-hero-collections aria-hidden="true">
+          <p class="hero__collections-title">Cinco formas de abrir <em>DULCERA.</em></p>
+          <span class="slot-label" data-slot="0"><b>01</b>Classic</span>
+          <span class="slot-label" data-slot="1"><b>02</b>Fruit</span>
+          <span class="slot-label" data-slot="2"><b>03</b>Cacao</span>
+          <span class="slot-label" data-slot="3"><b>04</b>Eventos</span>
+          <span class="slot-label" data-slot="4"><b>05</b>Corporativo</span>
+        </div>
+
+        <div class="hero__cue" data-hero-cue aria-hidden="true">
+          <span class="hero__cue-bars"><i></i><i></i><i></i></span>
+          Desliza para abrir la caja
+        </div>
+      </div>
+    </section>
+
+    <!-- ═══════════════════════════ 02 PRODUCTOS ═══════════════════════════ -->
+    <section id="productos" class="products" aria-labelledby="products-title" data-section="02" data-section-label="Productos">
+      <div class="products__pin" data-products-pin>
+        <div class="products__track" data-products-track>
+          <header class="products__intro">
+            <p class="eyebrow">02 · Productos</p>
+            <h2 id="products-title" class="display-l" data-split>Cinco líneas. <em>Una misma caja.</em></h2>
+            <p class="body-l">La caja que acabas de abrir es la <strong>Caja Capas · Degustación</strong>: nueve piezas en tres niveles. De ella salen las cinco formas de DULCERA.</p>
+            <div class="layer-progress" data-products-progress aria-hidden="true"><i></i><i></i><i></i><i></i><i></i></div>
+            <p class="products__hint" aria-hidden="true">Desliza <span>→</span></p>
+          </header>
+
+          <div class="products__rail" data-products-rail>
+          <article class="line-panel" id="linea-classic" data-line="classic" style="--line: var(--color-mango); --line-ink: var(--color-piloncillo)">
+            <figure class="media line-panel__media" data-shot="07" data-cursor-label="Ver línea"></figure>
+            <div class="line-panel__body">
+              <p class="line-panel__index"><span>01</span> / 05</p>
+              <span class="line-tag">DULCERA CLASSIC</span>
+              <h3 class="line-panel__title">Para quien extraña.</h3>
+              <p>Leche, coco y caramelo, como los recuerdas pero mejor terminados.</p>
+              <ul class="chips" aria-label="Productos de la línea"><li>Leche Quemada</li><li>Cocada Tostada</li></ul>
+              <button class="link-arrow" type="button" data-open-line="classic" aria-haspopup="dialog">Ver la línea <span aria-hidden="true">→</span></button>
+            </div>
+          </article>
+
+          <article class="line-panel" id="linea-fruit" data-line="fruit" style="--line: var(--color-jamaica); --line-ink: var(--color-nata)">
+            <figure class="media line-panel__media" data-shot="06" data-cursor-label="Ver línea"></figure>
+            <div class="line-panel__body">
+              <p class="line-panel__index"><span>02</span> / 05</p>
+              <span class="line-tag">DULCERA FRUIT</span>
+              <h3 class="line-panel__title">Para quien quiere ácido.</h3>
+              <p>Jamaica, mango con chile y tamarindo con sal.</p>
+              <ul class="chips" aria-label="Productos de la línea"><li>Jamaica Cristal</li><li>Mango Chile</li><li>Tamarindo y Sal</li></ul>
+              <button class="link-arrow" type="button" data-open-line="fruit" aria-haspopup="dialog">Ver la línea <span aria-hidden="true">→</span></button>
+            </div>
+          </article>
+
+          <article class="line-panel" id="linea-cacao" data-line="cacao" style="--line: var(--color-cacao); --line-ink: var(--color-nata)">
+            <figure class="media line-panel__media" data-shot="10" data-cursor-label="Ver línea"></figure>
+            <div class="line-panel__body">
+              <p class="line-panel__index"><span>03</span> / 05</p>
+              <span class="line-tag">DULCERA CACAO</span>
+              <h3 class="line-panel__title">Para quien quiere más.</h3>
+              <p>Cacao en capas, del bombón a la tableta.</p>
+              <ul class="chips" aria-label="Productos de la línea"><li>Bombón Cacao-Vainilla</li><li>Tableta Capa de Cajeta</li></ul>
+              <button class="link-arrow" type="button" data-open-line="cacao" aria-haspopup="dialog">Ver la línea <span aria-hidden="true">→</span></button>
+            </div>
+          </article>
+
+          <article class="line-panel" id="linea-eventos" data-line="eventos" style="--line: var(--color-pitaya); --line-ink: var(--color-piloncillo)">
+            <figure class="media line-panel__media" data-shot="18" data-cursor-label="Ver línea"></figure>
+            <div class="line-panel__body">
+              <p class="line-panel__index"><span>04</span> / 05</p>
+              <span class="line-tag">DULCERA EVENTOS</span>
+              <h3 class="line-panel__title">Para la mesa que todos fotografían.</h3>
+              <p>Mesas de dulces por paleta de color y recuerdos con tu nombre.</p>
+              <ul class="chips" aria-label="Productos de la línea"><li>Mesa DULCERA</li><li>Recuerdo DULCERA</li></ul>
+              <button class="link-arrow" type="button" data-open-line="eventos" aria-haspopup="dialog">Ver la línea <span aria-hidden="true">→</span></button>
+            </div>
+          </article>
+
+          <article class="line-panel" id="linea-corporativo" data-line="corporativo" style="--line: var(--color-piloncillo); --line-ink: var(--color-nata)">
+            <figure class="media line-panel__media" data-shot="05" data-cursor-label="Ver línea"></figure>
+            <div class="line-panel__body">
+              <p class="line-panel__index"><span>05</span> / 05</p>
+              <span class="line-tag">DULCERA CORPORATIVO</span>
+              <h3 class="line-panel__title">Para quien hace que las cosas pasen.</h3>
+              <p>Sobria por fuera, con color por dentro. Tu marca junto a la nuestra.</p>
+              <ul class="chips" aria-label="Productos de la línea"><li>Caja Corporativa Capas</li><li>Caja Capas · Degustación</li><li>Caja Arma tu Capa</li></ul>
+              <button class="link-arrow" type="button" data-open-line="corporativo" aria-haspopup="dialog">Ver la línea <span aria-hidden="true">→</span></button>
+            </div>
+          </article>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ═══════════════════════════ 03 EXPERIENCIA ═══════════════════════════ -->
+    <section id="experiencia" class="sensorial" aria-labelledby="sensorial-title" data-section="03" data-section-label="Experiencia">
+      <header class="section-head">
+        <p class="eyebrow">03 · Experiencia</p>
+        <h2 id="sensorial-title" class="display-l" data-split>Primero se ve. <em>Luego se muerde.</em></h2>
+      </header>
+
+      <div class="sensorial__stage" data-sensorial>
+        <article class="sensorial__item" style="--tint: #F6E2C4">
+          <figure class="media sensorial__media" data-shot="03"></figure>
+          <div class="sensorial__text">
+            <p class="sensorial__num">01 / 04 · FRUIT</p>
+            <h3 class="sensorial__title">El chile llega <em>después.</em></h3>
+            <p class="sensorial__product">Mango Chile</p>
+            <p class="sensorial__notes">mango · ácido · picor suave</p>
+            <ul class="ingredients" aria-label="Ingredientes conceptuales"><li>mango</li><li>chile</li><li>sal</li></ul>
+          </div>
+        </article>
+        <article class="sensorial__item" style="--tint: #EFE3D6">
+          <figure class="media sensorial__media" data-shot="04"></figure>
+          <div class="sensorial__text">
+            <p class="sensorial__num">02 / 04 · CACAO</p>
+            <h3 class="sensorial__title">Dos capas que <em>se notan.</em></h3>
+            <p class="sensorial__product">Bombón Cacao-Vainilla</p>
+            <p class="sensorial__notes">vainilla · cacao · esponjoso</p>
+            <ul class="ingredients" aria-label="Ingredientes conceptuales"><li>vainilla</li><li>cacao</li></ul>
+          </div>
+        </article>
+        <article class="sensorial__item" style="--tint: #F3E7D2">
+          <figure class="media sensorial__media" data-shot="08"></figure>
+          <div class="sensorial__text">
+            <p class="sensorial__num">03 / 04 · CLASSIC</p>
+            <h3 class="sensorial__title">Tostado al fuego, <em>por arriba.</em></h3>
+            <p class="sensorial__product">Cocada Tostada</p>
+            <p class="sensorial__notes">coco · tostado · húmedo</p>
+            <ul class="ingredients" aria-label="Ingredientes conceptuales"><li>coco</li><li>leche</li><li>azúcar</li></ul>
+          </div>
+        </article>
+        <article class="sensorial__item" style="--tint: #EEDCCB">
+          <figure class="media sensorial__media" data-shot="09"></figure>
+          <div class="sensorial__text">
+            <p class="sensorial__num">04 / 04 · FRUIT</p>
+            <h3 class="sensorial__title">Agridulce, con un <em>cristal de sal.</em></h3>
+            <p class="sensorial__product">Tamarindo y Sal</p>
+            <p class="sensorial__notes">agridulce · terroso · salino</p>
+            <ul class="ingredients" aria-label="Ingredientes conceptuales"><li>tamarindo</li><li>sal en escamas</li></ul>
+          </div>
+        </article>
+      </div>
+
+      <div class="marquee" aria-hidden="true">
+        <div class="marquee__track">
+          <span>jamaica</span><span>mango</span><span>chile</span><span>tamarindo</span><span>sal</span><span>cacao</span><span>vainilla</span><span>cajeta</span><span>coco</span><span>leche quemada</span>
+          <span>jamaica</span><span>mango</span><span>chile</span><span>tamarindo</span><span>sal</span><span>cacao</span><span>vainilla</span><span>cajeta</span><span>coco</span><span>leche quemada</span>
+        </div>
+      </div>
+      <p class="fine-print container">Sabores e ingredientes conceptuales de una marca ficticia. Ingredientes, alérgenos e información nutrimental: dato real pendiente.</p>
+    </section>
+
+    <!-- ═══════════════════════════ 04 DULCERA EN MOVIMIENTO ═══════════════════════════ -->
+    <section id="proceso" class="process" aria-labelledby="process-title" data-section="04" data-section-label="Proceso" data-theme="dark">
+      <header class="section-head section-head--light">
+        <p class="eyebrow">04 · DULCERA en movimiento</p>
+        <h2 id="process-title" class="display-l" data-split>De una idea a tu mesa, <em>capa por capa.</em></h2>
+      </header>
+
+      <div class="process__layout">
+        <div class="process__stage" aria-hidden="true">
+          <svg class="process__svg" viewBox="0 0 400 400" data-process-svg>
+            <g class="ps-grid">
+              <line x1="80" y1="40" x2="80" y2="360"/><line x1="200" y1="40" x2="200" y2="360"/><line x1="320" y1="40" x2="320" y2="360"/>
+              <line x1="40" y1="80" x2="360" y2="80"/><line x1="40" y1="200" x2="360" y2="200"/><line x1="40" y1="320" x2="360" y2="320"/>
+              <circle cx="200" cy="200" r="120"/>
+            </g>
+            <circle class="ps-seal" cx="200" cy="200" r="168"/>
+            <g class="ps-mark" transform="translate(80 80) scale(2.4)">
+              <path class="ps-outline" d="M0 0 H50 A50 50 0 0 1 50 100 H0 Z" pathLength="1"/>
+              <path class="ps-band ps-band--1" d="M0 0 H50 A50 50 0 0 1 63.09 1.75 A27 27 0 0 0 79.02 28.67 H0 Z"/>
+              <path class="ps-band ps-band--2" d="M0 35.67 H97.9 A50 50 0 0 1 97.9 64.33 H0 Z"/>
+              <path class="ps-band ps-band--3" d="M0 71.33 H95.22 A50 50 0 0 1 50 100 H0 Z"/>
+            </g>
+            <circle class="ps-bite" cx="200" cy="200" r="64.8"/>
+            <rect class="ps-box" x="44" y="56" width="312" height="300" rx="14" pathLength="1"/>
+            <line class="ps-lid" x1="44" y1="112" x2="356" y2="112" pathLength="1"/>
+            <g class="ps-motion"><line x1="372" y1="150" x2="398" y2="150"/><line x1="372" y1="200" x2="398" y2="200"/><line x1="372" y1="250" x2="398" y2="250"/></g>
+          </svg>
+          <ol class="process__dots"><li></li><li></li><li></li><li></li><li></li></ol>
+        </div>
+
+        <ol class="process__steps">
+          <li class="process__step" data-step="0">
+            <p class="process__num">01 · Idea</p>
+            <h3>Todo empieza con una mordida.</h3>
+            <p>Un sabor que ya conoces y una pregunta: ¿cómo se vería mejor?</p>
+          </li>
+          <li class="process__step" data-step="1">
+            <p class="process__num">02 · Diseño</p>
+            <h3>La forma se dibuja antes de existir.</h3>
+            <p>Cada pieza tiene medida, color y un lugar en la caja.</p>
+            <figure class="media process__media" data-shot="16"></figure>
+          </li>
+          <li class="process__step" data-step="2">
+            <p class="process__num">03 · Producción</p>
+            <h3>Capa por capa.</h3>
+            <p>Cocción, corte y terminado, en la secuencia que pide cada sabor.</p>
+            <figure class="media process__media" data-shot="15"></figure>
+          </li>
+          <li class="process__step" data-step="3">
+            <p class="process__num">04 · Empaque</p>
+            <h3>Cada pliegue tiene intención.</h3>
+            <p>Envoltura, charola y caja, pensadas para abrirse despacio.</p>
+            <figure class="media process__media" data-shot="17"></figure>
+          </li>
+          <li class="process__step" data-step="4">
+            <p class="process__num">05 · Entrega</p>
+            <h3>Llega cerrado. Se abre en capas.</h3>
+            <p>El sello es la última capa y la primera mordida.</p>
+            <figure class="media process__media" data-shot="12"></figure>
+          </li>
+        </ol>
+      </div>
+      <p class="fine-print fine-print--light container">Narrativa conceptual de una marca ficticia. No describe instalaciones, capacidad ni procesos industriales reales.</p>
+    </section>
+
+    <!-- ═══════════════════════════ 05 EVENTOS ═══════════════════════════ -->
+    <section id="eventos" class="events" aria-labelledby="events-title" data-section="05" data-section-label="Eventos">
+      <header class="section-head events__head">
+        <p class="eyebrow">05 · DULCERA Eventos</p>
+        <h2 id="events-title" class="display-l" data-split>Haz que el evento también <em>se pueda probar.</em></h2>
+        <p class="body-l">Bodas, bautizos, lanzamientos o fiestas de empresa. Elegimos las piezas por color y por número de invitados, y te proponemos la mesa.</p>
+      </header>
+
+      <div class="events__grid">
+        <figure class="media events__a" data-shot="18" data-speed="-0.06"><figcaption class="tile-caption"><b>Mesas dulces</b>Por paleta, no por montón.</figcaption></figure>
+        <figure class="media events__b" data-shot="19" data-speed="0.08"><figcaption class="tile-caption"><b>Recuerdos</b>Dos piezas que sí se llevan.</figcaption></figure>
+        <figure class="media events__c" data-shot="11" data-speed="-0.04"><figcaption class="tile-caption"><b>Cajas</b>Una línea, un color.</figcaption></figure>
+        <figure class="media events__d" data-shot="02" data-speed="0.05"><figcaption class="tile-caption"><b>Regalos</b>Nueve piezas, tres capas.</figcaption></figure>
+
+        <div class="personalize events__e" data-personalize>
+          <p class="eyebrow">Personalización</p>
+          <h3 class="personalize__title">Tu nombre, en la última capa.</h3>
+          <div class="personalize__preview" aria-hidden="true">
+            <svg viewBox="0 0 320 200" class="favor-svg">
+              <rect class="favor-svg__shadow" x="40" y="168" width="240" height="14" rx="7"/>
+              <rect class="favor-svg__body" x="40" y="40" width="240" height="130" rx="10" data-favor-body/>
+              <rect class="favor-svg__band" x="128" y="40" width="64" height="130"/>
+              <circle class="favor-svg__seal" cx="160" cy="105" r="34"/>
+              <text class="favor-svg__text" x="160" y="101" text-anchor="middle" data-favor-text>Ana &amp; Luis</text>
+              <text class="favor-svg__date" x="160" y="118" text-anchor="middle" data-favor-date>12 · 11</text>
+            </svg>
+          </div>
+          <div class="personalize__controls">
+            <label class="field field--compact">
+              <span class="field__label">Nombres o marca</span>
+              <input type="text" maxlength="18" value="Ana &amp; Luis" data-favor-input autocomplete="off">
+            </label>
+            <label class="field field--compact">
+              <span class="field__label">Fecha</span>
+              <input type="text" maxlength="10" value="12 · 11" data-favor-date-input autocomplete="off">
+            </label>
+            <fieldset class="swatches">
+              <legend class="field__label">Paleta del evento</legend>
+              <label><input type="radio" name="favor-color" value="#F2B8C6" checked><span style="--c:#F2B8C6">Pitaya</span></label>
+              <label><input type="radio" name="favor-color" value="#E39A2D"><span style="--c:#E39A2D">Mango</span></label>
+              <label><input type="radio" name="favor-color" value="#F5EDE1"><span style="--c:#F5EDE1">Nata</span></label>
+              <label><input type="radio" name="favor-color" value="#5B3A2C"><span style="--c:#5B3A2C">Cacao</span></label>
+            </fieldset>
+          </div>
+        </div>
+      </div>
+
+      <div class="events__cta container">
+        <ol class="mini-steps">
+          <li><b>01</b>Cuéntanos la fecha y el número de invitados.</li>
+          <li><b>02</b>Elige la paleta.</li>
+          <li><b>03</b>Recibe tu propuesta.</li>
+        </ol>
+        <a class="btn btn--primary" href="#cotizar" data-nav data-intent="evento">Cotizar mi evento</a>
+      </div>
+    </section>
+
+    <!-- ═══════════════════════════ 06 CORPORATIVO ═══════════════════════════ -->
+    <section id="empresas" class="corporate" aria-labelledby="corporate-title" data-section="06" data-section-label="Empresas">
+      <div class="container corporate__top">
+        <p class="eyebrow">06 · Corporativo</p>
+        <h2 id="corporate-title" class="corporate__title" data-split>DULCERA <em>para empresas.</em></h2>
+        <p class="body-l corporate__lead">Regalos que se abren con calma y se recuerdan. Sobria por fuera, con color por dentro, y con tu marca junto a la nuestra.</p>
+      </div>
+
+      <figure class="media corporate__hero" data-shot="05" data-reveal="widen"></figure>
+
+      <ol class="corporate__list container">
+        <li class="corp-item">
+          <figure class="media corp-item__media" data-shot="20"></figure>
+          <p class="corp-item__num">01</p>
+          <h3>Regalos</h3>
+          <p>Fin de año, clientes y agradecimientos, con tarjeta impresa para cada destinatario.</p>
+        </li>
+        <li class="corp-item">
+          <figure class="media corp-item__media" data-shot="14"></figure>
+          <p class="corp-item__num">02</p>
+          <h3>Eventos</h3>
+          <p>Lanzamientos, conferencias y eventos de marca, con mesa o recuerdo por asistente.</p>
+        </li>
+        <li class="corp-item">
+          <figure class="media corp-item__media" data-shot="13"></figure>
+          <p class="corp-item__num">03</p>
+          <h3>Kits</h3>
+          <p>Bienvenida a nuevos equipos: una caja que se abre en el primer día.</p>
+        </li>
+        <li class="corp-item corp-item--band">
+          <div class="cobrand" data-cobrand aria-hidden="true">
+            <span class="cobrand__box"><span class="cobrand__band"><b>DULCERA</b><i>×</i><b data-cobrand-name>TU MARCA</b></span></span>
+          </div>
+          <p class="corp-item__num">04</p>
+          <h3>Cajas personalizadas</h3>
+          <p>Faja con tu marca, selección de 9 o 16 piezas y mensaje propio.</p>
+          <label class="field field--compact field--inline">
+            <span class="field__label">Prueba tu marca en la faja</span>
+            <input type="text" maxlength="14" placeholder="TU MARCA" data-cobrand-input autocomplete="off">
+          </label>
+        </li>
+      </ol>
+
+      <div class="container corporate__cta">
+        <p class="fine-print">Tiempos de entrega, mínimos y precios: por definir (marca de demostración).</p>
+        <a class="btn btn--dark" href="#cotizar" data-nav data-intent="corporativo">Solicitar cotización</a>
+      </div>
+    </section>
+
+    <!-- ═══════════════════════════ 07 MAYOREO ═══════════════════════════ -->
+    <section id="mayoreo" class="wholesale" aria-labelledby="wholesale-title" data-section="07" data-section-label="Mayoreo" data-theme="dark">
+      <div class="container">
+        <header class="section-head section-head--light section-head--flush">
+          <p class="eyebrow">07 · Mayoreo y distribución</p>
+          <h2 id="wholesale-title" class="display-l" data-split>Para tu mostrador, tu tienda <em>o tu red.</em></h2>
+        </header>
+
+        <div class="wholesale__grid">
+          <figure class="media wholesale__media" data-shot="21" data-speed="-0.05"></figure>
+          <div class="wholesale__cards">
+            <article class="w-card">
+              <p class="w-card__num">01</p>
+              <h3>Tiendas</h3>
+              <p>Exhibidor de mostrador listo para barra: piezas individuales de Classic, Fruit y Cacao.</p>
+            </article>
+            <article class="w-card">
+              <p class="w-card__num">02</p>
+              <h3>Distribución</h3>
+              <p>Cajas master por línea, con código de línea en los cuatro lados y material de punto de venta.</p>
+            </article>
+            <article class="w-card">
+              <p class="w-card__num">03</p>
+              <h3>Retail</h3>
+              <p>Pieza, bolsa y caja de 4 pensadas para anaquel, con el color de cada línea al frente.</p>
+            </article>
+            <p class="fine-print fine-print--light">Cantidades mínimas, precios por volumen y condiciones: dato real pendiente. Se envían con cada propuesta.</p>
+            <a class="btn btn--primary" href="#cotizar" data-nav data-intent="mayoreo">Quiero distribuir DULCERA</a>
+          </div>
+        </div>
+        <figure class="media wholesale__band" data-shot="22"></figure>
+      </div>
+
+      <div class="marquee marquee--outline" aria-hidden="true">
+        <div class="marquee__track marquee__track--slow">
+          <span>Classic</span><span>Fruit</span><span>Cacao</span><span>Classic</span><span>Fruit</span><span>Cacao</span>
+          <span>Classic</span><span>Fruit</span><span>Cacao</span><span>Classic</span><span>Fruit</span><span>Cacao</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- ═══════════════════════════ 08 COTIZAR ═══════════════════════════ -->
+    <section id="cotizar" class="quote" aria-labelledby="quote-title" data-section="08" data-section-label="Cotizar">
+      <figure class="media quote__texture" data-shot="23" aria-hidden="true"></figure>
+      <div class="container quote__layout">
+        <div class="quote__intro">
+          <p class="eyebrow">08 · Cotizar</p>
+          <h2 id="quote-title" class="display-l" data-split>Hablemos de <em>tu pedido.</em></h2>
+          <p class="body-l">Cuéntanos qué necesitas: una caja, una mesa de dulces o un pedido para tu empresa o tu tienda. Te respondemos con una propuesta.</p>
+          <ol class="quote__next">
+            <li><b>01</b>Recibimos tu mensaje.</li>
+            <li><b>02</b>Lo clasificamos por tipo de pedido.</li>
+            <li><b>03</b>Te respondemos con una propuesta.</li>
+          </ol>
+          <p class="demo-note"><span>DEMO</span> Este formulario no envía datos a ningún servidor. Genera el objeto del lead y lo entrega a <code>handleLeadSubmission()</code>, lista para conectarse a n8n.</p>
+        </div>
+
+        <form class="lead-form" id="lead-form" novalidate data-lead-form aria-describedby="form-help">
+          <p id="form-help" class="sr-only">Los campos marcados con asterisco son obligatorios.</p>
+          <fieldset class="intents">
+            <legend class="field__label">¿Qué tipo de pedido es? <span class="field__opt">(opcional, te ayuda a escribir)</span></legend>
+            <div class="intents__list">
+              <button type="button" class="intent" data-intent-chip="evento" aria-pressed="false">Evento</button>
+              <button type="button" class="intent" data-intent-chip="corporativo" aria-pressed="false">Empresa</button>
+              <button type="button" class="intent" data-intent-chip="mayoreo" aria-pressed="false">Mayoreo</button>
+              <button type="button" class="intent" data-intent-chip="regalo" aria-pressed="false">Regalo</button>
+            </div>
+          </fieldset>
+
+          <div class="field" data-field="name">
+            <label class="field__label" for="lead-name">Nombre <span aria-hidden="true">*</span></label>
+            <input id="lead-name" name="name" type="text" autocomplete="name" required minlength="2" maxlength="80" aria-describedby="lead-name-error">
+            <p class="field__error" id="lead-name-error" aria-live="polite"></p>
+          </div>
+
+          <div class="field" data-field="company">
+            <label class="field__label" for="lead-company">Empresa <span class="field__opt">(opcional)</span></label>
+            <input id="lead-company" name="company" type="text" autocomplete="organization" maxlength="100" aria-describedby="lead-company-error">
+            <p class="field__error" id="lead-company-error" aria-live="polite"></p>
+          </div>
+
+          <div class="field field--full" data-field="email">
+            <label class="field__label" for="lead-email">Correo <span aria-hidden="true">*</span></label>
+            <input id="lead-email" name="email" type="email" autocomplete="email" inputmode="email" required maxlength="120" aria-describedby="lead-email-error">
+            <p class="field__error" id="lead-email-error" aria-live="polite"></p>
+          </div>
+
+          <div class="field field--full" data-field="message">
+            <label class="field__label" for="lead-message">Mensaje <span aria-hidden="true">*</span></label>
+            <textarea id="lead-message" name="message" rows="5" required minlength="20" maxlength="1000"
+              placeholder="Necesitamos 600 cajas para un evento empresarial en noviembre y queremos personalizar el empaque."
+              aria-describedby="lead-message-error lead-message-count"></textarea>
+            <div class="field__meta">
+              <p class="field__error" id="lead-message-error" aria-live="polite"></p>
+              <p class="field__count" id="lead-message-count"><span data-count>0</span> / 1000</p>
+            </div>
+          </div>
+
+          <!-- Honeypot antispam: las personas no lo ven; los bots suelen llenarlo -->
+          <div class="hp" aria-hidden="true">
+            <label for="lead-website">Sitio web</label>
+            <input id="lead-website" name="website" type="text" tabindex="-1" autocomplete="off">
+          </div>
+
+          <div class="lead-form__actions">
+            <button class="btn btn--primary btn--lg" type="submit" data-submit><span data-submit-label>Enviar solicitud</span></button>
+            <p class="lead-form__status" role="status" aria-live="polite" data-form-status></p>
+          </div>
+        </form>
+
+        <div class="lead-success" data-lead-success hidden tabindex="-1">
+          <svg class="lead-success__mark" viewBox="0 0 100 100" aria-hidden="true">
+            <path d="M0 0 H50 A50 50 0 0 1 63.09 1.75 A27 27 0 0 0 79.02 28.67 H0 Z"/>
+            <path d="M0 35.67 H97.9 A50 50 0 0 1 97.9 64.33 H0 Z"/>
+            <path d="M0 71.33 H95.22 A50 50 0 0 1 50 100 H0 Z"/>
+          </svg>
+          <h3 class="lead-success__title">Recibimos tu solicitud.</h3>
+          <p>Te escribiremos a <strong data-success-email></strong> con los siguientes pasos. Mientras tanto, mira los productos.</p>
+          <details class="lead-success__debug">
+            <summary>Ver el objeto del lead (demo)</summary>
+            <pre data-success-json></pre>
+          </details>
+          <div class="lead-success__actions">
+            <a class="btn btn--ghost" href="#productos" data-nav>Ver productos</a>
+            <button class="btn btn--text" type="button" data-lead-reset>Enviar otra solicitud</button>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- ═══════════════════════════ 09 FOOTER ═══════════════════════════ -->
+  <footer class="site-footer" data-section="09" data-section-label="Contacto" data-theme="dark">
+    <figure class="media site-footer__bite" data-shot="24"></figure>
+    <div class="container site-footer__grid">
+      <div class="site-footer__brand">
+        <img src="brand/logo-monochrome-light.svg" alt="DULCERA" width="200" height="190" loading="lazy">
+        <p class="site-footer__slogan">México, en <em>capas.</em></p>
+      </div>
+      <nav class="site-footer__col" aria-label="Productos">
+        <p class="site-footer__h">Productos</p>
+        <ul><li><a href="#productos" data-nav>Líneas</a></li><li><a href="#experiencia" data-nav>Experiencia</a></li><li><a href="#proceso" data-nav>Proceso</a></li></ul>
+      </nav>
+      <nav class="site-footer__col" aria-label="Para negocios">
+        <p class="site-footer__h">Para negocios</p>
+        <ul><li><a href="#eventos" data-nav>Eventos</a></li><li><a href="#empresas" data-nav>Empresas</a></li><li><a href="#mayoreo" data-nav>Mayoreo</a></li><li><a href="#cotizar" data-nav>Cotizar</a></li></ul>
+      </nav>
+      <div class="site-footer__col">
+        <p class="site-footer__h">Contacto <span class="tag-demo">DEMO</span></p>
+        <ul class="site-footer__contact">
+          <li>hola@dulcera.demo <span class="tag-demo">ficticio</span></li>
+          <li>+52 00 0000 0000 <span class="tag-demo">ficticio</span></li>
+        </ul>
+        <p class="site-footer__h site-footer__h--sub">Redes <span class="tag-demo">DEMO</span></p>
+        <ul class="socials">
+          <li><button type="button" class="social" data-demo-link="Instagram">Instagram</button></li>
+          <li><button type="button" class="social" data-demo-link="TikTok">TikTok</button></li>
+          <li><button type="button" class="social" data-demo-link="Pinterest">Pinterest</button></li>
+        </ul>
+      </div>
+    </div>
+    <div class="container site-footer__legal">
+      <p>DULCERA es una marca ficticia creada con fines educativos. Productos, imágenes y precios son ilustrativos. Contacto y redes no son reales.</p>
+      <p>© DULCERA (marca ficticia) · Aviso de privacidad: pendiente · Términos: pendiente</p>
+    </div>
+    <div class="site-footer__giant" aria-hidden="true">
+      <svg viewBox="0 0 665.16 100"><use href="#wordmark-symbol"/></svg>
+    </div>
+  </footer>
+
+  <!-- Hoja de línea: transición interna con clip-path -->
+  <dialog class="line-sheet" data-line-sheet aria-labelledby="line-sheet-title">
+    <div class="line-sheet__inner">
+      <button class="line-sheet__close" type="button" data-close-sheet aria-label="Cerrar"><span aria-hidden="true">×</span></button>
+      <div class="line-sheet__media"><figure class="media" data-sheet-media></figure></div>
+      <div class="line-sheet__body">
+        <p class="eyebrow" data-sheet-index></p>
+        <h2 class="display-l" id="line-sheet-title" data-sheet-title></h2>
+        <p class="body-l" data-sheet-intro></p>
+        <ul class="sheet-products" data-sheet-products></ul>
+        <p class="fine-print">Precios: no definidos (marca de demostración). Ingredientes y alérgenos: dato real pendiente.</p>
+        <button class="btn btn--primary" type="button" data-sheet-quote>Cotizar esta línea</button>
+      </div>
+    </div>
+  </dialog>
+
+  <div class="toast" role="status" aria-live="polite" data-toast></div>
+
+  <!-- Wordmark oficial como símbolo reutilizable (mismas rutas que brand/concepts/concept-a-wordmark.svg) -->
+  <svg width="0" height="0" style="position:absolute" aria-hidden="true" focusable="false">
+    <symbol id="wordmark-symbol" viewBox="0 0 665.16 100">
+      <path fill-rule="evenodd" d="M0 0 H34 A50 50 0 0 1 34 100 H0 Z M16 16 H34 A34 34 0 0 1 34 84 H16 Z"/>
+      <path fill-rule="evenodd" d="M108 0 H124 V58 A26 26 0 0 0 176 58 V0 H192 V58 A42 42 0 0 1 108 58 Z"/>
+      <path d="M214 0 H230 V84 H276 V100 H214 Z"/>
+      <path d="M375.16 16.54 A50 50 0 1 0 375.16 83.46 L363.27 72.75 A34 34 0 1 1 363.27 27.25 Z"/>
+      <path d="M399.16 0 H459.16 V16 H415.16 V42 H454.16 V58 H415.16 V84 H459.16 V100 H399.16 Z"/>
+      <path fill-rule="evenodd" d="M483.16 0 H523.16 A29 29 0 0 1 523.16 58 H499.16 V100 H483.16 Z M499.16 16 H523.16 A13 13 0 0 1 523.16 42 H499.16 Z"/>
+      <path d="M513.16 50 H531.16 L561.16 100 H542.16 Z"/>
+      <path d="M613.16 0 H631.16 L665.16 100 H647.16 L622.16 26.47 L597.16 100 H579.16 Z"/>
+      <path d="M600.4 64 H643.92 L648.81 78.4 H595.5 Z"/>
+    </symbol>
+  </svg>
+
+  <script src="vendor/gsap/gsap.min.js" defer></script>
+  <script src="vendor/gsap/ScrollTrigger.min.js" defer></script>
+  <script src="vendor/lenis/lenis.min.js" defer></script>
+  <script type="module" src="js/main.js"></script>
+</body>
+</html>

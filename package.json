@@ -1,0 +1,14 @@
+{
+  "name": "dulcera-landing",
+  "version": "1.0.0",
+  "private": true,
+  "description": "DULCERA — landing de demostración (marca ficticia con fines educativos). Sin build: HTML, CSS y JS con librerías vendorizadas.",
+  "type": "module",
+  "scripts": {
+    "start": "python3 -m http.server 4173 --bind 127.0.0.1",
+    "start:node": "npx --yes http-server . -p 4173 -a 127.0.0.1 -c-1",
+    "assets:scan": "node tools/scan-assets.mjs",
+    "placeholders": "node tools/render-placeholders.mjs",
+    "qa": "node tools/qa.mjs"
+  }
+}
