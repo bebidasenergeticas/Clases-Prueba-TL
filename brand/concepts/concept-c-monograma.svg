@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 140 140" role="img" aria-labelledby="title desc">
+  <title id="title">DULCERA — Concepto C: monograma</title>
+  <desc id="desc">Exploración C. Monograma D en capas con mordida, aplicado como sello circular.</desc>
+  <style>
+    /* Edita aquí el color del logotipo. Paleta DULCERA: Jamaica #C8274A · Piloncillo #2A1A14 · Nata #F5EDE1 */
+    .ink { fill: #F5EDE1; }
+    .seal { fill: #C8274A; }
+  </style>
+  <circle class="seal" fill="#C8274A" cx="70" cy="70" r="70"/>
+  <g class="mark">
+      <path fill="#F5EDE1" class="ink layer-1" d="M41 39 H72 A31 31 0 0 1 80.12 40.08 A16.74 16.74 0 0 0 89.99 56.77 H41 Z"/>
+      <path fill="#F5EDE1" class="ink layer-2" d="M41 61.11 H101.7 A31 31 0 0 1 101.7 78.89 H41 Z"/>
+      <path fill="#F5EDE1" class="ink layer-3" d="M41 83.23 H100.04 A31 31 0 0 1 72 101 H41 Z"/>
+    </g>
+</svg>

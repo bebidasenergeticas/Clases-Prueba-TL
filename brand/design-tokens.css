@@ -1,0 +1,80 @@
+/* DULCERA — design tokens (marca ficticia con fines educativos)
+   Fuente de verdad: brand/BRAND_GUIDE.md §5 (paleta) y §6 (tipografía). */
+
+:root {
+  /* Paleta principal */
+  --color-piloncillo: #2A1A14; /* oscuro principal: texto, fondos oscuros */
+  --color-nata:       #F5EDE1; /* crema: fondo base */
+  --color-jamaica:    #C8274A; /* característico: logotipo, CTAs, sellos */
+  --color-mango:      #E39A2D; /* secundario: CLASSIC, acentos cálidos (nunca texto sobre Nata) */
+  --color-pitaya:     #F2B8C6; /* acento: EVENTOS, stickers */
+
+  /* Neutros de soporte */
+  --color-cacao:   #5B3A2C; /* CACAO, texto secundario */
+  --color-arcilla: #E4D5C3; /* bordes, divisores, fondos de sección */
+  --color-azucar:  #FFFBF5; /* superficies elevadas, campos */
+
+  /* Roles semánticos */
+  --bg:             var(--color-nata);
+  --bg-alt:         var(--color-arcilla);
+  --bg-inverse:     var(--color-piloncillo);
+  --surface:        var(--color-azucar);
+  --text:           var(--color-piloncillo);
+  --text-muted:     var(--color-cacao);
+  --text-inverse:   var(--color-nata);
+  --accent:         var(--color-jamaica);
+  --on-accent:      var(--color-nata);
+  --border:         var(--color-arcilla);
+  --focus-ring:     var(--color-piloncillo);
+
+  /* Color por línea */
+  --line-classic:     var(--color-mango);
+  --line-fruit:       var(--color-jamaica);
+  --line-cacao:       var(--color-cacao);
+  --line-regalo:      var(--color-nata);
+  --line-eventos:     var(--color-pitaya);
+  --line-corporativo: var(--color-piloncillo);
+
+  /* Tipografía */
+  --font-display: "Fraunces", Georgia, "Times New Roman", serif;
+  --font-text:    "Manrope", system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+  --font-mono:    "DM Mono", ui-monospace, "SFMono-Regular", Menlo, Consolas, monospace;
+
+  /* Escala tipográfica fluida: mobile → desktop */
+  --fs-display-xl: clamp(3.25rem, 1.6rem + 5.2vw, 6rem);
+  --fs-display-l:  clamp(2.5rem, 1.6rem + 2.8vw, 4rem);
+  --fs-heading:    clamp(1.875rem, 1.5rem + 1.2vw, 2.5rem);
+  --fs-title:      clamp(1.3125rem, 1.2rem + 0.4vw, 1.5rem);
+  --fs-body-l:     clamp(1.125rem, 1.05rem + 0.3vw, 1.25rem);
+  --fs-body:       clamp(1rem, 0.97rem + 0.1vw, 1.0625rem);
+  --fs-label:      0.8125rem;
+  --fs-micro:      0.75rem;
+  --tracking-label: 0.1em;
+  --tracking-display: -0.015em;
+
+  /* Espaciado (escala de 4 px) */
+  --space-1: 4px;  --space-2: 8px;  --space-3: 12px; --space-4: 16px;
+  --space-5: 24px; --space-6: 32px; --space-7: 48px; --space-8: 64px;
+  --space-9: 96px; --space-10: 128px;
+
+  /* Forma */
+  --radius-s: 6px;
+  --radius-m: 14px;
+  --radius-pill: 999px;
+
+  /* Retícula */
+  --container-max: 1280px;
+  --gutter: 24px;
+
+  /* Movimiento */
+  --ease: cubic-bezier(.2, .7, .2, 1);
+  --duration: 300ms;
+}
+
+@media (max-width: 767px) {
+  :root { --gutter: 16px; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  :root { --duration: 0ms; }
+}

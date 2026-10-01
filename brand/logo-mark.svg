@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 120 120" role="img" aria-labelledby="title desc">
+  <title id="title">DULCERA — símbolo</title>
+  <desc id="desc">Monograma D formado por tres capas con una mordida en la esquina superior derecha.</desc>
+  <style>
+    /* Edita aquí el color del logotipo. Paleta DULCERA: Jamaica #C8274A · Piloncillo #2A1A14 · Nata #F5EDE1 */
+    .ink { fill: #C8274A; }
+  </style>
+  <g class="mark">
+      <path fill="#C8274A" class="ink layer-1" d="M10 10 H60 A50 50 0 0 1 73.09 11.75 A27 27 0 0 0 89.02 38.67 H10 Z"/>
+      <path fill="#C8274A" class="ink layer-2" d="M10 45.67 H107.9 A50 50 0 0 1 107.9 74.33 H10 Z"/>
+      <path fill="#C8274A" class="ink layer-3" d="M10 81.33 H105.22 A50 50 0 0 1 60 110 H10 Z"/>
+    </g>
+</svg>
