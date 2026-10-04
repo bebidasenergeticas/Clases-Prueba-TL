@@ -1,0 +1,7 @@
+node_modules
+out/*
+!out/effort-vertical.mp4
+reference-frames
+reference.mp4
+.DS_Store
+public/sfx
