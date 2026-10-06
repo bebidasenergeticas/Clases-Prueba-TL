@@ -1,0 +1,394 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>FinView — Centro de Información Financiera</title>
+  <meta name="description" content="Demo educativa: cómo una web app recibe datos financieros ficticios, los procesa y los convierte en información útil.">
+
+  <!-- Tipografías: Inter (texto y cifras) + JetBrains Mono (detalles tipo terminal) -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+<div class="app">
+
+  <!-- ============ SIDEBAR ============ -->
+  <aside class="sidebar" id="sidebar" aria-label="Navegación principal">
+    <div class="brand">
+      <div class="brand-mark" aria-hidden="true">
+        <svg viewBox="0 0 24 24"><path d="M5 19V9M10 19V5M15 19v-7M20 19V8" /></svg>
+      </div>
+      <div>
+        <div class="brand-name">FinView</div>
+        <div class="brand-sub">Centro de Información Financiera</div>
+      </div>
+    </div>
+
+    <nav class="nav">
+      <div class="nav-label">Análisis</div>
+      <a class="nav-item" href="#dashboard" data-view="dashboard">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="3" width="7" height="9" rx="1.5"/><rect x="14" y="3" width="7" height="5" rx="1.5"/><rect x="14" y="12" width="7" height="9" rx="1.5"/><rect x="3" y="16" width="7" height="5" rx="1.5"/></svg>
+        <span>Dashboard</span>
+      </a>
+      <a class="nav-item" href="#estados" data-view="estados">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="4" width="18" height="16" rx="2"/><path d="M3 9h18M9 9v11"/></svg>
+        <span>Estados financieros</span>
+      </a>
+      <a class="nav-item" href="#graficas" data-view="graficas">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 3v18h18"/><path d="M7 15l4-4 3 3 5-6"/></svg>
+        <span>Gráficas</span>
+      </a>
+      <a class="nav-item" href="#indicadores" data-view="indicadores">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 12l4-3"/><path d="M12 3v2M3 12h2M19 12h2"/></svg>
+        <span>Indicadores y semáforo</span>
+      </a>
+
+      <div class="nav-label">Datos</div>
+      <a class="nav-item" href="#registrar" data-view="registrar">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M12 8v8M8 12h8"/></svg>
+        <span>Registrar información</span>
+      </a>
+    </nav>
+
+    <div class="sidebar-foot">
+      <div class="demo-card">
+        <div class="demo-card-head"><span class="live-dot" aria-hidden="true"></span> Modo demo</div>
+        <p>Todos los datos son <strong>ficticios</strong> y viven solo en la memoria de tu navegador. Sin servidor, sin base de datos, sin login.</p>
+      </div>
+    </div>
+  </aside>
+  <div class="sidebar-backdrop" id="sidebarBackdrop" hidden></div>
+
+  <!-- ============ ÁREA PRINCIPAL ============ -->
+  <div class="main">
+
+    <!-- Cinta de indicadores (estilo terminal) -->
+    <div class="ticker" aria-hidden="true">
+      <div class="ticker-tag">FINVIEW · LIVE DEMO</div>
+      <div class="ticker-viewport"><div class="ticker-track" id="tickerTrack"></div></div>
+    </div>
+
+    <header class="topbar">
+      <button class="icon-btn menu-btn" id="menuBtn" aria-label="Abrir menú" aria-controls="sidebar" aria-expanded="false">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 7h16M4 12h16M4 17h16"/></svg>
+      </button>
+
+      <div class="topbar-title">
+        <div class="eyebrow" id="viewEyebrow">FinView / Dashboard</div>
+        <h1 id="viewTitle">Dashboard</h1>
+      </div>
+
+      <div class="topbar-actions">
+        <div class="period">
+          <span class="period-label">Periodo</span>
+          <div class="segmented" id="periodSelector" role="group" aria-label="Seleccionar periodo"></div>
+        </div>
+        <button class="btn btn-primary" id="reportBtn" type="button">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M7 3h7l5 5v13H7z"/><path d="M14 3v5h5M10 13h6M10 17h6"/></svg>
+          Generar reporte
+        </button>
+      </div>
+    </header>
+
+    <main class="content" id="content">
+
+      <!-- ===== VISTA: DASHBOARD ===== -->
+      <section class="view" id="view-dashboard" data-title="Dashboard">
+        <div class="context-bar reveal" style="--i:0">
+          <div>
+            <span class="eyebrow">Periodo analizado</span>
+            <div class="context-period"><span data-bind="periodo">2025</span> <span class="badge" id="dataOrigin">Datos de ejemplo</span></div>
+          </div>
+          <p class="context-note">Empresa demo · cifras ficticias en pesos (MXN) · <span id="prevNote">comparado contra 2024</span></p>
+        </div>
+
+        <div class="kpi-grid" id="kpiGrid"></div>
+
+        <div class="grid-2-1">
+          <article class="card reveal" style="--i:7">
+            <header class="card-head">
+              <div>
+                <h2 class="card-title">Ingresos vs gastos</h2>
+                <p class="card-sub">Gastos = costos + gastos operativos · todos los periodos</p>
+              </div>
+              <a class="link-btn" href="#graficas">Ver gráficas →</a>
+            </header>
+            <div class="chart-box chart-box-lg"><canvas id="chartDashIngGas" aria-label="Gráfica de ingresos contra gastos por periodo" role="img"></canvas></div>
+          </article>
+
+          <article class="card reveal" style="--i:8">
+            <header class="card-head">
+              <div>
+                <h2 class="card-title">Semáforo financiero</h2>
+                <p class="card-sub">Periodo <span data-bind="periodo">2025</span></p>
+              </div>
+              <a class="link-btn" href="#indicadores">Detalle →</a>
+            </header>
+            <div class="semaforo-compact" id="semaforoCompact"></div>
+          </article>
+        </div>
+
+        <article class="card reveal" style="--i:9">
+          <header class="card-head">
+            <div>
+              <h2 class="card-title">Indicadores automáticos</h2>
+              <p class="card-sub">JavaScript sustituye los valores del periodo en cada fórmula</p>
+            </div>
+          </header>
+          <div class="formula-grid" id="formulasCompact"></div>
+        </article>
+      </section>
+
+      <!-- ===== VISTA: ESTADOS FINANCIEROS ===== -->
+      <section class="view" id="view-estados" data-title="Estados financieros">
+        <article class="card reveal" style="--i:0">
+          <div class="tabs" role="tablist" aria-label="Estados financieros">
+            <button class="tab" role="tab" id="tab-resultados" aria-controls="panel-resultados" aria-selected="true" data-tab="resultados">Estado de resultados</button>
+            <button class="tab" role="tab" id="tab-balance" aria-controls="panel-balance" aria-selected="false" tabindex="-1" data-tab="balance">Balance general</button>
+            <button class="tab" role="tab" id="tab-flujo" aria-controls="panel-flujo" aria-selected="false" tabindex="-1" data-tab="flujo">Flujo de efectivo</button>
+            <span class="tab-indicator" aria-hidden="true"></span>
+          </div>
+
+          <div class="tab-panel is-active" role="tabpanel" id="panel-resultados" aria-labelledby="tab-resultados">
+            <p class="panel-intro">¿Cuánto vendió la empresa, cuánto gastó y cuánto le quedó? La columna resaltada es el periodo seleccionado; <strong>% ingresos</strong> indica qué parte de cada peso vendido representa cada renglón.</p>
+            <div class="table-wrap"><table class="fin-table" id="tablaResultados"></table></div>
+            <p class="footnote">Simplificación educativa: en un estado de resultados real, antes de la utilidad neta también se restan intereses e impuestos.</p>
+          </div>
+
+          <div class="tab-panel" role="tabpanel" id="panel-balance" aria-labelledby="tab-balance" hidden>
+            <p class="panel-intro">¿Qué tiene la empresa (activos), qué debe (pasivos) y qué pertenece a los dueños (capital)? Siempre se cumple: <strong>Activos = Pasivos + Capital</strong>.</p>
+            <div class="table-wrap"><table class="fin-table" id="tablaBalance"></table></div>
+            <p class="footnote">"Otros activos" = activos totales − efectivo (inventarios, cuentas por cobrar, equipo, etc.).</p>
+          </div>
+
+          <div class="tab-panel" role="tabpanel" id="panel-flujo" aria-labelledby="tab-flujo" hidden>
+            <p class="panel-intro">¿De dónde vino y a dónde fue el dinero? Parte del efectivo inicial, suma o resta los flujos del periodo y llega al efectivo final.</p>
+            <div class="table-wrap"><table class="fin-table" id="tablaFlujo"></table></div>
+            <p class="footnote" id="flujoNota">El efectivo inicial de un periodo es el efectivo final del periodo anterior.</p>
+          </div>
+        </article>
+      </section>
+
+      <!-- ===== VISTA: GRÁFICAS ===== -->
+      <section class="view" id="view-graficas" data-title="Gráficas">
+        <article class="card reveal" style="--i:0">
+          <header class="card-head">
+            <div>
+              <h2 class="card-title">Ingresos vs gastos</h2>
+              <p class="card-sub">Pasa el cursor sobre las barras · haz clic en la leyenda para ocultar una serie</p>
+            </div>
+          </header>
+          <div class="chart-box chart-box-lg"><canvas id="chartIngGas" role="img" aria-label="Ingresos contra gastos por periodo"></canvas></div>
+        </article>
+
+        <div class="grid-2">
+          <article class="card reveal" style="--i:1">
+            <header class="card-head">
+              <div>
+                <h2 class="card-title">Utilidad por periodo</h2>
+                <p class="card-sub">El periodo seleccionado se resalta</p>
+              </div>
+            </header>
+            <div class="chart-box"><canvas id="chartUtilidad" role="img" aria-label="Utilidad neta por periodo"></canvas></div>
+          </article>
+
+          <article class="card reveal" style="--i:2">
+            <header class="card-head">
+              <div>
+                <h2 class="card-title">Evolución del efectivo</h2>
+                <p class="card-sub">Efectivo al cierre de cada periodo</p>
+              </div>
+            </header>
+            <div class="chart-box"><canvas id="chartEfectivo" role="img" aria-label="Efectivo al cierre por periodo"></canvas></div>
+          </article>
+        </div>
+      </section>
+
+      <!-- ===== VISTA: INDICADORES Y SEMÁFORO ===== -->
+      <section class="view" id="view-indicadores" data-title="Indicadores y semáforo">
+        <article class="card reveal" style="--i:0">
+          <header class="card-head">
+            <div>
+              <h2 class="card-title">Indicadores automáticos</h2>
+              <p class="card-sub">Fórmula → sustitución con los datos del periodo <span data-bind="periodo">2025</span> → resultado</p>
+            </div>
+          </header>
+          <div class="formula-grid formula-grid-full" id="formulasFull"></div>
+        </article>
+
+        <article class="card reveal" style="--i:1">
+          <header class="card-head">
+            <div>
+              <h2 class="card-title">Semáforo financiero</h2>
+              <p class="card-sub">Estados simulados con umbrales ilustrativos</p>
+            </div>
+          </header>
+          <div class="semaforo-full" id="semaforoFull"></div>
+          <p class="disclaimer">
+            <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 8v5M12 16h.01"/></svg>
+            Los umbrales son ilustrativos para fines educativos. No son un estándar contable ni constituyen recomendación de inversión.
+          </p>
+        </article>
+      </section>
+
+      <!-- ===== VISTA: REGISTRAR INFORMACIÓN ===== -->
+      <section class="view" id="view-registrar" data-title="Registrar información">
+
+        <!-- Diagrama del flujo de datos: Entrada → Proceso → Salida -->
+        <article class="card pipeline-card reveal" style="--i:0">
+          <ol class="pipeline" id="pipeline">
+            <li class="pipe-step" data-step="1">
+              <span class="pipe-num">01</span>
+              <div><strong>Entrada</strong><small>Capturas datos en el formulario</small></div>
+            </li>
+            <li class="pipe-step" data-step="2">
+              <span class="pipe-num">02</span>
+              <div><strong>Validación</strong><small>JavaScript revisa que tengan sentido</small></div>
+            </li>
+            <li class="pipe-step" data-step="3">
+              <span class="pipe-num">03</span>
+              <div><strong>Proceso</strong><small>Se calculan utilidad, margen y capital</small></div>
+            </li>
+            <li class="pipe-step" data-step="4">
+              <span class="pipe-num">04</span>
+              <div><strong>Salida</strong><small>Se actualizan dashboard, tablas y gráficas</small></div>
+            </li>
+          </ol>
+        </article>
+
+        <div class="grid-form">
+          <article class="card reveal" style="--i:1">
+            <header class="card-head">
+              <div>
+                <h2 class="card-title">Capturar datos del periodo</h2>
+                <p class="card-sub">Si el periodo ya existe se actualiza; si no, se crea uno nuevo</p>
+              </div>
+              <button class="btn btn-ghost btn-sm" id="btnCargar" type="button">Cargar periodo actual</button>
+            </header>
+
+            <form id="finForm" novalidate>
+              <div class="form-grid">
+                <div class="field field-period">
+                  <label for="f-periodo">Periodo</label>
+                  <div class="input-wrap">
+                    <input id="f-periodo" name="periodo" type="number" inputmode="numeric" min="2020" max="2035" step="1" required>
+                  </div>
+                  <small class="hint">Año entre 2020 y 2035</small>
+                </div>
+
+                <div class="field">
+                  <label for="f-ingresos">Ingresos</label>
+                  <div class="input-wrap has-prefix"><span class="prefix">$</span>
+                    <input id="f-ingresos" name="ingresos" type="number" inputmode="decimal" min="0" step="any" required>
+                  </div>
+                  <small class="hint">Ventas totales del periodo</small>
+                </div>
+
+                <div class="field">
+                  <label for="f-costos">Costos</label>
+                  <div class="input-wrap has-prefix"><span class="prefix">$</span>
+                    <input id="f-costos" name="costos" type="number" inputmode="decimal" min="0" step="any" required>
+                  </div>
+                  <small class="hint">Lo que cuesta producir o comprar lo vendido</small>
+                </div>
+
+                <div class="field">
+                  <label for="f-gastosOp">Gastos operativos</label>
+                  <div class="input-wrap has-prefix"><span class="prefix">$</span>
+                    <input id="f-gastosOp" name="gastosOp" type="number" inputmode="decimal" min="0" step="any" required>
+                  </div>
+                  <small class="hint">Sueldos, renta, marketing, servicios…</small>
+                </div>
+
+                <div class="field">
+                  <label for="f-activos">Activos</label>
+                  <div class="input-wrap has-prefix"><span class="prefix">$</span>
+                    <input id="f-activos" name="activos" type="number" inputmode="decimal" min="0" step="any" required>
+                  </div>
+                  <small class="hint">Todo lo que la empresa tiene</small>
+                </div>
+
+                <div class="field">
+                  <label for="f-pasivos">Pasivos</label>
+                  <div class="input-wrap has-prefix"><span class="prefix">$</span>
+                    <input id="f-pasivos" name="pasivos" type="number" inputmode="decimal" min="0" step="any" required>
+                  </div>
+                  <small class="hint">Todo lo que la empresa debe</small>
+                </div>
+
+                <div class="field">
+                  <label for="f-efectivo">Efectivo</label>
+                  <div class="input-wrap has-prefix"><span class="prefix">$</span>
+                    <input id="f-efectivo" name="efectivo" type="number" inputmode="decimal" min="0" step="any" required>
+                  </div>
+                  <small class="hint">Dinero disponible al cierre (forma parte de los activos)</small>
+                </div>
+              </div>
+
+              <div class="form-errors" id="formErrors" role="alert" hidden></div>
+
+              <div class="form-actions">
+                <button class="btn btn-primary btn-lg" type="submit" id="btnProcesar">
+                  <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+                  Procesar información
+                </button>
+                <button class="btn btn-ghost" type="button" id="btnReset">Restaurar datos de ejemplo</button>
+              </div>
+            </form>
+          </article>
+
+          <div class="stack">
+            <article class="card reveal" style="--i:2">
+              <header class="card-head">
+                <div>
+                  <h2 class="card-title">Vista previa en vivo</h2>
+                  <p class="card-sub">Se recalcula mientras escribes</p>
+                </div>
+              </header>
+              <div class="live-preview" id="livePreview"></div>
+            </article>
+
+            <article class="card reveal" style="--i:3">
+              <header class="card-head">
+                <div>
+                  <h2 class="card-title">Bitácora de procesamiento</h2>
+                  <p class="card-sub">Registros de esta sesión (en memoria)</p>
+                </div>
+              </header>
+              <ul class="log" id="bitacora"></ul>
+            </article>
+          </div>
+        </div>
+      </section>
+
+    </main>
+  </div>
+</div>
+
+<!-- ============ REPORTE (vista preparada para impresión) ============ -->
+<div class="report-overlay" id="reportOverlay" hidden>
+  <div class="report-toolbar">
+    <span class="eyebrow">Vista de reporte · lista para imprimir o guardar como PDF</span>
+    <div class="report-toolbar-actions">
+      <button class="btn btn-primary" id="btnPrint" type="button">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M7 9V3h10v6M7 17H4v-7h16v7h-3"/><rect x="7" y="14" width="10" height="7"/></svg>
+        Imprimir / PDF
+      </button>
+      <button class="btn btn-ghost" id="btnCloseReport" type="button">Cerrar</button>
+    </div>
+  </div>
+  <article class="report-paper" id="reportPaper" aria-label="Reporte financiero"></article>
+</div>
+
+<div class="toast" id="toast" role="status" aria-live="polite"></div>
+
+<!-- Chart.js (librería de gráficas) desde CDN -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.min.js"></script>
+<script src="script.js"></script>
+</body>
+</html>
