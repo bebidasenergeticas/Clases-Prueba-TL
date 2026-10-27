@@ -1,0 +1,1802 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Arquitecturas Multiagente · E1577</title>
+<meta name="description" content="Top Learning · E1577 · Semana 26 · Diseño de Agentes: harnesses, orquestadores, routing y modelos de decisión.">
+<!--
+  Presentación autocontenida. Dependencias externas OPCIONALES:
+   · Google Fonts (Geist, Instrument Serif, JetBrains Mono) → si fallan, se usan fuentes del sistema.
+   · Three.js r128 desde cdnjs → si falla o no hay WebGL, se muestran diagramas SVG equivalentes.
+  Atajos: ← → navegar · F pantalla completa · N notas · P vista de presentador (ventana aparte) · R referencias · Esc cerrar.
+-->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Geist:wght@300;400;500;600&family=Instrument+Serif:ital@0;1&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+*{box-sizing:border-box}
+:root{
+  --ink:#0A111B; --graph:#171D24; --graph2:#1D242D; --ivory:#F2F1EA; --lime:#C8EC88; --blue:#75A7FF; --gray:#8994A3; --warn:#F2A27C;
+  --iv2:rgba(242,241,234,.80); --iv3:rgba(242,241,234,.58);
+  --line:rgba(242,241,234,.10); --line2:rgba(242,241,234,.22);
+  --sans:'Geist','Inter Tight','Inter',system-ui,-apple-system,'Segoe UI',Roboto,sans-serif;
+  --serif:'Instrument Serif','Cormorant Garamond',Georgia,'Times New Roman',serif;
+  --mono:'JetBrains Mono','IBM Plex Mono',ui-monospace,Menlo,Consolas,monospace;
+  --ease:cubic-bezier(.2,.7,.1,1);
+}
+html,body{margin:0;height:100%;background:var(--ink);color:var(--ivory);font-family:var(--sans);overflow:hidden;-webkit-font-smoothing:antialiased;text-rendering:optimizeLegibility}
+button{font-family:inherit}
+.viewport{position:fixed;inset:0;overflow:hidden;background:radial-gradient(1300px 900px at 72% 38%,#111c2b 0%,var(--ink) 62%)}
+.stage{position:absolute;left:50%;top:50%;width:1920px;height:1080px;transform:translate(-50%,-50%) scale(var(--s,.5));transform-origin:center}
+.stage::before{content:'';position:absolute;inset:0;pointer-events:none;
+  background-image:linear-gradient(var(--line) 1px,transparent 1px),linear-gradient(90deg,var(--line) 1px,transparent 1px);
+  background-size:120px 120px;background-position:-1px -1px;opacity:.28;
+  -webkit-mask-image:radial-gradient(ellipse at 50% 45%,#000 20%,transparent 78%);mask-image:radial-gradient(ellipse at 50% 45%,#000 20%,transparent 78%)}
+
+/* ── Slides ───────────────────────── */
+.slide{position:absolute;inset:0;padding:118px 140px 100px;opacity:0;visibility:hidden;overflow:hidden;
+  transform:translate3d(80px,0,0) scale(.985);
+  transition:opacity .55s var(--ease),transform .9s var(--ease),visibility 0s linear .9s}
+.slide.past{transform:translate3d(-80px,0,0) scale(.985)}
+.slide.active{opacity:1;visibility:visible;transform:none;transition:opacity .75s var(--ease) .08s,transform 1s var(--ease),visibility 0s}
+.slide:not(.active) *{animation-play-state:paused!important}
+.chrome{position:absolute;top:50px;left:140px;right:140px;display:flex;justify-content:space-between;align-items:center;font:500 15px/1 var(--mono);letter-spacing:.16em;text-transform:uppercase;color:var(--gray);z-index:5}
+.chrome b{color:var(--lime);font-weight:500}
+.chrome .sep{display:inline-block;width:46px;height:1px;background:var(--line2);vertical-align:middle;margin:0 14px}
+.foot{position:absolute;bottom:42px;left:140px;font:400 13px/1 var(--mono);letter-spacing:.14em;text-transform:uppercase;color:rgba(137,148,163,.55);z-index:5}
+
+/* ── Reveal ───────────────────────── */
+.rv{opacity:0;transform:translateY(26px);transition:opacity .8s var(--ease),transform 1s var(--ease);transition-delay:calc(var(--d,0) * 110ms + 180ms)}
+.slide.active .rv{opacity:1;transform:none}
+.rvx{opacity:0;transform:translateX(-30px);transition:opacity .8s var(--ease),transform 1s var(--ease);transition-delay:calc(var(--d,0) * 110ms + 180ms)}
+.slide.active .rvx{opacity:1;transform:none}
+
+/* ── Type ─────────────────────────── */
+.kicker{font:500 17px/1.2 var(--mono);letter-spacing:.16em;text-transform:uppercase;color:var(--lime)}
+.h1{font:500 156px/.9 var(--sans);letter-spacing:-.05em;margin:30px 0 0}
+.h2{font:500 68px/1.03 var(--sans);letter-spacing:-.035em;margin:16px 0 0;max-width:1560px}
+.h2.h2s{font-size:58px}
+.h3{font:500 34px/1.15 var(--sans);letter-spacing:-.02em;margin:0}
+.serif{font-family:var(--serif);font-weight:400;font-style:italic;letter-spacing:-.01em}
+.h1 .serif,.h2 .serif{font-size:1.08em}
+.lead{font:400 31px/1.38 var(--sans);color:var(--iv2);margin:0}
+.p{font:400 25px/1.45 var(--sans);color:var(--iv2);margin:0}
+.sm{font:400 20px/1.45 var(--sans);color:var(--gray);margin:0}
+.mono{font-family:var(--mono)}
+.lime{color:var(--lime)} .blue{color:var(--blue)} .gray{color:var(--gray)} .warn{color:var(--warn)} .ivory{color:var(--ivory)}
+em{font-style:normal;color:var(--ivory)}
+.tag{display:inline-flex;align-items:center;gap:9px;font:500 13px/1 var(--mono);letter-spacing:.15em;text-transform:uppercase;padding:7px 11px 7px 10px;border:1px solid var(--line2);border-radius:2px;color:var(--gray);white-space:nowrap}
+.tag::before{content:'';width:6px;height:6px;border-radius:50%;background:currentColor}
+.tag.lime{border-color:rgba(200,236,136,.45);color:var(--lime)}
+.tag.blue{border-color:rgba(117,167,255,.5);color:var(--blue)}
+.tag.warn{border-color:rgba(242,162,124,.5);color:var(--warn)}
+.tag.iv{border-color:rgba(242,241,234,.4);color:var(--ivory)}
+.rule{height:1px;background:var(--line2);border:0;margin:0}
+.panel{background:linear-gradient(180deg,rgba(23,29,36,.92),rgba(23,29,36,.7));border:1px solid var(--line);border-radius:3px}
+.abs{position:absolute}
+.row{display:flex} .col{display:flex;flex-direction:column}
+.btn{font:500 17px/1 var(--mono);letter-spacing:.05em;color:var(--ivory);background:rgba(23,29,36,.6);border:1px solid var(--line2);padding:15px 20px;cursor:pointer;border-radius:2px;transition:all .25s var(--ease);text-align:left}
+.btn:hover{border-color:rgba(200,236,136,.6);color:var(--lime)}
+.btn.on{border-color:var(--lime);color:var(--ink);background:var(--lime)}
+.btn:focus-visible,.hit:focus-visible,.layer:focus-visible{outline:2px solid var(--lime);outline-offset:3px}
+.note-strip{display:flex;gap:22px;align-items:center;padding:20px 26px;border-left:3px solid var(--lime);background:rgba(200,236,136,.05)}
+.note-strip.warn{border-left-color:var(--warn);background:rgba(242,162,124,.05)}
+.note-strip.blue{border-left-color:var(--blue);background:rgba(117,167,255,.05)}
+
+/* ── SVG diagram vocabulary ───────── */
+svg.dg{overflow:visible;display:block}
+.dg text{font-family:var(--sans);fill:var(--ivory)}
+.dg .t-mono{font-family:var(--mono);letter-spacing:.12em;text-transform:uppercase}
+.dg .t-g{fill:var(--gray)} .dg .t-l{fill:var(--lime)} .dg .t-b{fill:var(--blue)} .dg .t-w{fill:var(--warn)} .dg .t-k{fill:var(--ink)}
+.edge{stroke:rgba(242,241,234,.24);stroke-width:2;fill:none;transition:stroke .4s,stroke-width .4s,opacity .4s}
+.edge.l{stroke:rgba(200,236,136,.55)} .edge.b{stroke:rgba(117,167,255,.5)} .edge.w{stroke:rgba(242,162,124,.6)}
+.edge.flow{stroke-dasharray:3 9;animation:dash 1.2s linear infinite}
+.edge.hot{stroke:var(--lime);stroke-width:3.2;opacity:1}
+.edge.dim{opacity:.18}
+@keyframes dash{to{stroke-dashoffset:-24}}
+.box{fill:rgba(23,29,36,.95);stroke:rgba(242,241,234,.18);stroke-width:1.5;transition:all .4s}
+.box.l{stroke:var(--lime)} .box.b{stroke:var(--blue)} .box.w{stroke:var(--warn)}
+.box.hot{fill:rgba(200,236,136,.12);stroke:var(--lime);stroke-width:2.5}
+.nd{fill:var(--graph);stroke:var(--blue);stroke-width:2}
+.nd.l{stroke:var(--lime)}
+.pulse{fill:var(--lime);filter:drop-shadow(0 0 6px rgba(200,236,136,.9))}
+.pulse.b{fill:var(--blue);filter:drop-shadow(0 0 6px rgba(117,167,255,.9))}
+.halo{transform-box:fill-box;transform-origin:center;animation:halo 2.6s var(--ease) infinite}
+@keyframes halo{0%{transform:scale(.8);opacity:.7}100%{transform:scale(1.9);opacity:0}}
+
+/* ── GL hosts ─────────────────────── */
+.gl{position:absolute;overflow:hidden}
+.gl canvas{display:block;position:absolute;inset:0}
+.gl-fb{position:absolute;inset:0;display:flex;align-items:center;justify-content:center}
+body.gl-on .gl-fb{display:none}
+
+/* ── S1 Cover ─────────────────────── */
+.s-cover .gl{right:-40px;top:0;width:1200px;height:1080px;-webkit-mask-image:linear-gradient(90deg,transparent 0,#000 22%);mask-image:linear-gradient(90deg,transparent 0,#000 22%)}
+.cover-text{position:absolute;left:140px;top:190px;width:980px;z-index:2}
+.cover-quote{font:400 46px/1.15 var(--serif);font-style:italic;color:var(--iv2);margin:58px 0 0;padding-left:28px;border-left:2px solid var(--lime)}
+.cover-quote em{color:var(--ivory)}
+.route{position:absolute;right:140px;bottom:118px;z-index:2;list-style:none;margin:0;padding:22px 26px;width:460px;background:rgba(10,17,27,.72);border:1px solid var(--line);backdrop-filter:blur(6px)}
+.route li{font:400 20px/1.25 var(--sans);color:var(--iv2);padding:9px 0;display:flex;gap:16px;border-bottom:1px solid var(--line)}
+.route li:last-child{border:0}
+.route li b{font:500 15px/1.6 var(--mono);color:var(--lime);font-weight:500}
+.route .tag{margin-bottom:10px}
+.meta{position:absolute;left:140px;bottom:112px;display:grid;grid-template-columns:repeat(3,auto);gap:16px 58px;z-index:2;margin:0}
+.meta div{display:flex;flex-direction:column;gap:6px}
+.meta dt{font:500 13px/1 var(--mono);letter-spacing:.16em;text-transform:uppercase;color:var(--gray)}
+.meta dd{margin:0;font:400 21px/1.2 var(--sans);color:var(--ivory)}
+
+/* ── S2 ───────────────────────────── */
+.vs2{display:grid;grid-template-columns:1fr 120px 1fr;margin-top:46px;align-items:start}
+.vs2 .cap{display:flex;justify-content:space-between;align-items:baseline;margin-bottom:10px}
+.vs2 .mid{display:flex;align-items:center;justify-content:center;height:380px;font:italic 400 64px var(--serif);color:var(--gray)}
+
+/* ── S3 ───────────────────────────── */
+.ladder{list-style:none;margin:0;padding:0}
+.ladder li{display:grid;grid-template-columns:70px 1fr;gap:0 18px;padding:17px 0;border-top:1px solid var(--line)}
+.ladder li:last-child{border-bottom:1px solid var(--line)}
+.ladder .n{font:500 16px/1.7 var(--mono);color:var(--gray)}
+.ladder h4{margin:0;font:500 30px/1.2 var(--sans);letter-spacing:-.015em}
+.ladder p{margin:6px 0 0;font:400 21px/1.4 var(--sans);color:var(--iv3)}
+.ladder li.hl{border-top-color:var(--lime)}
+.ladder li.hl .n,.ladder li.hl h4{color:var(--lime)}
+.cyc .pill rect{fill:rgba(23,29,36,.96);stroke:rgba(242,241,234,.2);stroke-width:1.5;transition:all .35s}
+.cyc .pill text{font-size:21px;transition:fill .35s}
+.cyc .pill.on rect{fill:var(--lime);stroke:var(--lime)}
+.cyc .pill.on text{fill:var(--ink)}
+
+/* ── S4 harness ───────────────────── */
+.s-harness .gl{left:1000px;top:150px;width:800px;height:600px}
+.def{padding:26px 30px;border:1px solid var(--line);background:rgba(23,29,36,.6)}
+.def .tag{margin-bottom:14px}
+.wr{display:grid;grid-template-columns:1fr 1fr;gap:18px;margin-top:22px}
+.wr div{padding:16px 20px;font:400 19px/1.4 var(--sans);color:var(--iv2);border-top:2px solid}
+.wr .x{border-color:var(--warn)} .wr .ok{border-color:var(--lime)}
+.wr b{display:block;font:500 13px/1 var(--mono);letter-spacing:.14em;margin-bottom:9px}
+.legend6{position:absolute;left:1000px;top:770px;width:800px;display:grid;grid-template-columns:repeat(3,1fr);gap:12px}
+.legend6 div{padding:12px 14px;border:1px solid var(--line);opacity:.18;transform:translateY(8px);transition:opacity .6s var(--ease),transform .6s var(--ease),border-color .6s}
+.slide.active .legend6 div{opacity:1;transform:none;transition-delay:calc(var(--i) * 550ms + 500ms)}
+.legend6 b{display:block;font:500 13px/1 var(--mono);letter-spacing:.12em;text-transform:uppercase;margin-bottom:7px}
+.legend6 span{font:400 17px/1.3 var(--sans);color:var(--iv2)}
+
+/* ── S5 stack ─────────────────────── */
+.stack{perspective:1600px;width:820px}
+.stack-inner{transform:rotateY(16deg) rotateX(6deg);transform-style:preserve-3d;transform-origin:left center}
+.layer{display:grid;grid-template-columns:64px 1fr auto;align-items:center;gap:16px;width:100%;margin:0 0 9px;padding:0 22px;height:76px;background:linear-gradient(90deg,rgba(29,36,45,.95),rgba(23,29,36,.75));border:1px solid var(--line2);color:var(--ivory);cursor:pointer;text-align:left;transition:transform .45s var(--ease),border-color .3s,background .3s;transform:translateZ(0)}
+.layer:hover{transform:translateZ(24px);border-color:rgba(200,236,136,.5)}
+.layer.on{transform:translateZ(50px) translateX(12px);border-color:var(--lime);background:linear-gradient(90deg,rgba(200,236,136,.16),rgba(23,29,36,.85))}
+.layer .n{font:500 16px var(--mono);color:var(--gray)}
+.layer.on .n{color:var(--lime)}
+.layer .es{font:500 25px/1.1 var(--sans);letter-spacing:-.01em}
+.layer .en{font:400 15px var(--mono);color:var(--gray);letter-spacing:.06em}
+.detail{padding:40px 44px;min-height:560px}
+.detail .big{font:400 120px/1 var(--serif);font-style:italic;color:var(--lime)}
+.detail .ex{margin-top:26px;padding:20px 24px;border-left:3px solid var(--blue);background:rgba(117,167,255,.06)}
+.detail .ex b{display:block;font:500 13px/1 var(--mono);letter-spacing:.15em;color:var(--blue);margin-bottom:10px}
+.fade-swap{animation:swap .5s var(--ease)}
+@keyframes swap{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:none}}
+
+/* ── S6 ───────────────────────────── */
+.arch3{display:grid;grid-template-columns:1fr 400px 1fr;gap:34px;margin-top:40px}
+.archcol h3{font:500 44px/1 var(--sans);letter-spacing:-.03em;margin:12px 0 6px}
+.archcol .by{font:400 15px var(--mono);color:var(--gray);letter-spacing:.08em}
+.mods{margin-top:22px;position:relative;padding-left:30px}
+.mods::before{content:'';position:absolute;left:7px;top:10px;bottom:10px;width:1px;background:var(--line2)}
+.mod{position:relative;padding:12px 18px;margin-bottom:10px;border:1px solid var(--line);background:rgba(23,29,36,.75);font:400 20px/1.3 var(--sans);color:var(--iv2)}
+.mod::before{content:'';position:absolute;left:-28px;top:50%;width:11px;height:11px;margin-top:-6px;border-radius:50%;background:var(--ink);border:2px solid var(--blue)}
+.archcol.oc .mod::before{border-color:var(--lime)}
+.mod b{color:var(--ivory);font-weight:500}
+.shared{align-self:center;padding:28px 26px;border:1px solid rgba(200,236,136,.35);background:rgba(200,236,136,.04);position:relative}
+.shared ul{list-style:none;margin:16px 0 0;padding:0}
+.shared li{font:400 19px/1.35 var(--sans);color:var(--iv2);padding:9px 0;border-top:1px solid var(--line)}
+.shared li::before{content:'↔ ';color:var(--lime);font-family:var(--mono)}
+
+/* ── S7 eco ───────────────────────── */
+.eco{display:grid;grid-template-columns:1040px 1fr;gap:44px;margin-top:34px}
+.eco-row{display:grid;grid-template-columns:230px 230px 1fr;align-items:center;gap:18px;width:100%;height:76px;padding:0 22px;margin-bottom:8px;border:1px solid var(--line);background:rgba(23,29,36,.7);color:var(--ivory);cursor:pointer;text-align:left;transition:all .35s var(--ease);position:relative}
+.eco-row::before{content:'';position:absolute;left:0;top:0;bottom:0;width:4px;background:var(--c,var(--gray))}
+.eco-row:hover{border-color:var(--line2);transform:translateX(6px)}
+.eco-row.on{border-color:var(--c);background:rgba(23,29,36,.95);transform:translateX(14px)}
+.eco-row .cat{font:500 14px/1.2 var(--mono);letter-spacing:.1em;text-transform:uppercase;color:var(--c)}
+.eco-row .prod{font:500 24px/1.1 var(--sans)}
+.eco-row .q{font:400 18px/1.3 var(--sans);color:var(--iv3)}
+.eco-row.alt{border-style:dashed}
+
+/* ── S10 table ────────────────────── */
+.cmp{width:100%;border-collapse:collapse;margin-top:30px}
+.cmp th{font:500 15px var(--mono);letter-spacing:.14em;text-transform:uppercase;color:var(--gray);text-align:left;padding:0 22px 16px;border-bottom:1px solid var(--line2)}
+.cmp th .h{display:flex;align-items:center;gap:16px;font:500 32px var(--sans);letter-spacing:-.02em;text-transform:none;color:var(--ivory)}
+.cmp td{padding:15px 22px;font:400 21px/1.3 var(--sans);color:var(--iv2);border-bottom:1px solid var(--line);vertical-align:middle}
+.cmp td:first-child{font:500 15px var(--mono);letter-spacing:.1em;text-transform:uppercase;color:var(--ivory);width:300px}
+.cmp tr.rv td{transition:none}
+.cmp .adv{color:var(--lime)}
+.cmp .adv::before{content:'▲ ';font-size:13px;vertical-align:2px}
+
+/* ── S11 bands ────────────────────── */
+.bands{margin-top:10px;display:grid;gap:7px}
+.band{display:grid;grid-template-columns:300px 1fr;align-items:center;height:50px;padding:0 22px;border:1px dashed var(--line2);background:rgba(23,29,36,.55)}
+.band b{font:500 15px var(--mono);letter-spacing:.12em;text-transform:uppercase;color:var(--blue)}
+.band span{font:400 20px/1.2 var(--sans);color:var(--iv2)}
+
+/* ── S12 agents ───────────────────── */
+.hit{position:absolute;transform:translate(-50%,-50%);width:250px;padding:18px 20px;border:1px solid var(--line2);background:rgba(16,23,33,.95);color:var(--ivory);cursor:pointer;text-align:left;transition:all .35s var(--ease)}
+.hit:hover{border-color:rgba(117,167,255,.7)}
+.hit.on{border-color:var(--blue);background:#15233a;transform:translate(-50%,-50%) scale(1.05)}
+.hit .k{font:500 13px var(--mono);letter-spacing:.15em;color:var(--blue);text-transform:uppercase}
+.hit .t{font:500 27px/1.15 var(--sans);margin-top:8px;display:block}
+.adl{display:grid;grid-template-columns:170px 1fr;gap:0;margin-top:20px}
+.adl dt{font:500 13px/1.5 var(--mono);letter-spacing:.14em;text-transform:uppercase;color:var(--gray);padding:15px 0;border-top:1px solid var(--line)}
+.adl dd{margin:0;font:400 20px/1.4 var(--sans);color:var(--iv2);padding:12px 0;border-top:1px solid var(--line)}
+.adl dd.no{color:var(--warn)}
+
+/* ── S13 routing ──────────────────── */
+.tabs{display:flex;gap:10px}
+.tabs .btn{flex:1;text-align:center;white-space:nowrap;font-size:15px;padding:15px 8px}
+
+/* ── S14 Jev ──────────────────────── */
+.code{font:400 17px/1.6 var(--mono);color:var(--iv2);white-space:pre;margin:0}
+.code .k{color:var(--blue)} .code .s{color:var(--lime)} .code .c{color:var(--gray)} .code .n{color:var(--warn)}
+.typed{display:grid;gap:12px}
+.typed .ty{display:grid;grid-template-columns:96px 1fr;align-items:center;gap:16px;padding:14px 18px;border:1px solid var(--line);background:rgba(23,29,36,.8)}
+.typed .ty b{font:500 14px var(--mono);letter-spacing:.12em;color:var(--lime);text-transform:uppercase}
+.dtab{width:100%;border-collapse:collapse}
+.dtab td{padding:11px 14px;border-bottom:1px solid var(--line);font:400 19px/1.3 var(--sans);color:var(--iv2)}
+.dtab td:first-child{color:var(--ivory);font-weight:500;width:260px}
+.dtab td:last-child{font:500 14px var(--mono);letter-spacing:.08em;text-align:right;white-space:nowrap}
+
+/* ── S15 Jev demo ─────────────────── */
+.steps{display:grid;grid-template-columns:repeat(5,1fr);gap:16px;margin-top:26px}
+.stp{position:relative;padding:20px 20px 22px;border:1px solid var(--line);background:rgba(23,29,36,.75);min-height:388px;opacity:.22;filter:saturate(.3);transition:opacity .6s var(--ease),border-color .5s,filter .6s}
+.stp.on{opacity:1;filter:none;border-color:var(--line2)}
+.stp.cur{border-color:var(--lime);box-shadow:0 0 0 1px rgba(200,236,136,.25),0 18px 60px -30px rgba(200,236,136,.5)}
+.stp .sn{font:500 13px var(--mono);letter-spacing:.15em;color:var(--lime);text-transform:uppercase}
+.stp h4{margin:10px 0 12px;font:500 24px/1.15 var(--sans);letter-spacing:-.01em}
+.stp p{margin:0;font:400 17px/1.4 var(--sans);color:var(--iv2)}
+.stp:not(:last-child)::after{content:'→';position:absolute;right:-15px;top:46%;font:400 20px var(--mono);color:var(--gray);z-index:2}
+.bar{margin:14px 0 0}
+.bar .lb{display:flex;justify-content:space-between;font:400 16px var(--sans);color:var(--iv2);margin-bottom:6px}
+.bar .lb b{font:500 16px var(--mono);color:var(--ivory)}
+.bar .tr{height:10px;background:rgba(242,241,234,.08);position:relative}
+.bar .fl{position:absolute;left:0;top:0;bottom:0;width:0;background:var(--blue);transition:width 1.1s var(--ease)}
+.bar.top .fl{background:var(--lime)}
+.thr{position:absolute;top:-5px;bottom:-5px;width:2px;background:var(--warn);transition:left .2s}
+input[type=range]{-webkit-appearance:none;appearance:none;width:100%;height:4px;background:rgba(242,241,234,.15);outline:none;margin:16px 0 8px}
+input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;width:22px;height:22px;border-radius:50%;background:var(--warn);cursor:pointer;border:3px solid var(--ink)}
+input[type=range]::-moz-range-thumb{width:18px;height:18px;border-radius:50%;background:var(--warn);cursor:pointer;border:3px solid var(--ink)}
+.outc{margin-top:12px;padding:14px 16px;border-left:3px solid var(--lime);background:rgba(200,236,136,.06);font:400 17px/1.4 var(--sans);color:var(--ivory)}
+.outc.w{border-left-color:var(--warn);background:rgba(242,162,124,.07)}
+
+/* ── S16 constellation ────────────── */
+.cl{position:absolute;width:390px}
+.cl .k{font:500 14px var(--mono);letter-spacing:.14em;text-transform:uppercase;color:var(--lime)}
+.cl .t{font:500 34px/1.1 var(--sans);letter-spacing:-.02em;margin:8px 0 6px;color:var(--ivory)}
+.cl p{margin:0;font:400 19px/1.35 var(--sans);color:var(--iv3)}
+.cl.r{text-align:right}
+.cl.alt .k{color:var(--gray)}
+
+/* ── S17 gate ─────────────────────── */
+.gate-flow{display:grid;grid-template-columns:repeat(5,1fr);gap:22px;margin-top:34px;position:relative}
+.gnode{padding:20px 22px;border:1px solid var(--line2);background:rgba(23,29,36,.85);min-height:212px;position:relative;transition:all .5s var(--ease)}
+.gnode .k{font:500 13px var(--mono);letter-spacing:.15em;text-transform:uppercase;color:var(--gray)}
+.gnode h4{margin:10px 0 8px;font:500 25px/1.15 var(--sans)}
+.gnode p{margin:0;font:400 18px/1.4 var(--sans);color:var(--iv2)}
+.gnode.stop{border-color:var(--warn);background:rgba(242,162,124,.08)}
+.gnode.stop .k{color:var(--warn)}
+.gnode.ok{border-color:var(--lime);background:rgba(200,236,136,.08)}
+.gnode.ok .k{color:var(--lime)}
+.gnode:not(:last-child)::after{content:'';position:absolute;right:-22px;top:50%;width:22px;height:1px;background:var(--line2)}
+.gate-flow .gnode.held::after{background:var(--warn)}
+.gbtns{display:flex;gap:12px;margin-top:14px}
+.gbtns .btn{flex:1;text-align:center;padding:12px}
+.gate-pulse{position:absolute;inset:-1px;border:2px solid var(--warn);animation:gp 1.8s ease-out infinite;pointer-events:none}
+@keyframes gp{0%{opacity:.9}100%{opacity:0;transform:scale(1.06)}}
+
+/* ── S18 dash ─────────────────────── */
+.kpis{display:grid;grid-template-columns:repeat(4,1fr);gap:14px}
+.kpi{padding:20px 22px 18px;border:1px solid var(--line);background:rgba(23,29,36,.82);min-height:236px;display:flex;flex-direction:column}
+.kpi .k{font:500 13px/1.3 var(--mono);letter-spacing:.12em;text-transform:uppercase;color:var(--gray)}
+.kpi .v{font:500 50px/1 var(--sans);letter-spacing:-.03em;margin:14px 0 8px;color:var(--ivory)}
+.kpi .v small{font:400 22px var(--sans);color:var(--gray);letter-spacing:0;margin-left:4px}
+.kpi .d{font:400 16px/1.35 var(--sans);color:var(--iv3);margin-top:auto}
+.kpi.l .v{color:var(--lime)} .kpi.w .v{color:var(--warn)} .kpi.b .v{color:var(--blue)}
+.sim-banner{display:inline-flex;align-items:center;gap:12px;padding:9px 16px;border:1px dashed var(--warn);color:var(--warn);font:500 14px var(--mono);letter-spacing:.14em;text-transform:uppercase}
+
+/* ── S19 sim ──────────────────────── */
+.sim{display:grid;grid-template-columns:390px 760px 1fr;gap:30px;margin-top:26px}
+.case{display:block;width:100%;margin-bottom:12px;padding:18px 20px;border:1px solid var(--line2);background:rgba(23,29,36,.75);color:var(--ivory);cursor:pointer;text-align:left;transition:all .3s var(--ease)}
+.case:hover{border-color:rgba(200,236,136,.6)}
+.case.on{border-color:var(--lime);background:rgba(200,236,136,.08)}
+.case .k{font:500 13px var(--mono);letter-spacing:.14em;color:var(--lime);text-transform:uppercase}
+.case .t{display:block;font:500 23px/1.2 var(--sans);margin-top:8px}
+.case .s{display:block;font:400 16px/1.35 var(--sans);color:var(--gray);margin-top:6px}
+.sim-svg .sp circle.c{fill:var(--graph);stroke:rgba(242,241,234,.25);stroke-width:2;transition:all .45s}
+.sim-svg .sp.on circle.c{fill:rgba(117,167,255,.2);stroke:var(--blue);stroke-width:3}
+.sim-svg .sp.hum.on circle.c{fill:rgba(242,162,124,.18);stroke:var(--warn)}
+.sim-svg .sp text{font-size:20px}
+.sim-svg .orch circle.c{fill:var(--graph);stroke:var(--lime);stroke-width:2.5}
+.sim-svg .orch.think circle.ring{animation:halo 1.2s var(--ease) infinite}
+.sim-svg .req rect{fill:rgba(23,29,36,.95);stroke:rgba(242,241,234,.25);stroke-width:1.5;transition:all .4s}
+.sim-svg .req.on rect{stroke:var(--lime)}
+.log{height:388px;overflow:hidden;padding:18px 20px;font:400 14px/1.55 var(--mono);color:var(--iv2);border:1px solid var(--line);background:rgba(6,11,18,.85)}
+.log div{animation:swap .4s var(--ease)}
+.log .ts{color:var(--gray)} .log .ok{color:var(--lime)} .log .lw{color:var(--warn)} .log .bl{color:var(--blue)}
+.resp{margin-top:14px;padding:16px 18px;min-height:118px;border:1px solid var(--line);font:400 18px/1.4 var(--sans);color:var(--iv2)}
+.resp b{display:block;font:500 13px var(--mono);letter-spacing:.14em;text-transform:uppercase;color:var(--gray);margin-bottom:8px}
+.resp.ok{border-color:rgba(200,236,136,.5)} .resp.w{border-color:rgba(242,162,124,.6)}
+
+/* ── S20 ──────────────────────────── */
+.s-close .gl{inset:0}
+.s-close .veil{position:absolute;inset:0;background:linear-gradient(90deg,rgba(10,17,27,.96) 0%,rgba(10,17,27,.86) 46%,rgba(10,17,27,.15) 75%,rgba(10,17,27,0) 100%);pointer-events:none}
+.recap{display:grid;grid-template-columns:1fr 1fr;gap:0 40px;margin-top:40px;max-width:1080px}
+.recap div{display:grid;grid-template-columns:200px 1fr;padding:12px 0;border-top:1px solid var(--line);font:400 20px/1.3 var(--sans);color:var(--iv2)}
+.recap b{font:500 14px/1.6 var(--mono);letter-spacing:.1em;text-transform:uppercase;color:var(--lime);font-weight:500}
+
+/* ── HUD (fuera del escenario) ────── */
+.hud{position:fixed;right:18px;bottom:16px;display:flex;align-items:center;gap:6px;z-index:50;opacity:.9;transition:opacity .5s}
+.hud.idle{opacity:.12}
+.hud button{width:38px;height:38px;display:grid;place-items:center;background:rgba(23,29,36,.85);border:1px solid var(--line2);color:var(--ivory);cursor:pointer;border-radius:2px;font:500 13px var(--mono)}
+.hud button:hover{border-color:var(--lime);color:var(--lime)}
+.hud button:focus-visible{outline:2px solid var(--lime)}
+.hud .cnt{font:500 13px var(--mono);letter-spacing:.12em;color:var(--gray);padding:0 10px;min-width:74px;text-align:center}
+.hud .cnt b{color:var(--ivory);font-weight:500}
+.progress{position:fixed;left:0;bottom:0;height:3px;width:100%;background:rgba(242,241,234,.06);z-index:49}
+.progress i{display:block;height:100%;width:0;background:var(--lime);transition:width .7s var(--ease)}
+.notes-panel{position:fixed;top:0;right:0;bottom:0;width:min(560px,92vw);background:rgba(17,23,30,.98);border-left:1px solid var(--line2);z-index:60;transform:translateX(102%);transition:transform .45s var(--ease);padding:28px 30px 80px;overflow:auto;font:400 16px/1.55 var(--sans);color:var(--iv2)}
+.notes-panel.open{transform:none}
+.notes-panel h5{margin:0 0 4px;font:500 12px var(--mono);letter-spacing:.16em;text-transform:uppercase;color:var(--lime)}
+.notes-panel h6{margin:0 0 18px;font:500 22px/1.2 var(--sans);color:var(--ivory)}
+.notes-panel p{margin:0 0 12px}
+.notes-panel b{color:var(--ivory)}
+.notes-panel .src{font-size:13px;color:var(--gray);border-top:1px solid var(--line);padding-top:10px;margin-top:16px}
+.notes-panel .close,.refs .close{position:absolute;top:18px;right:18px;background:none;border:1px solid var(--line2);color:var(--ivory);width:34px;height:34px;cursor:pointer}
+aside.notes{display:none}
+.refs{position:fixed;inset:0;z-index:70;background:rgba(10,17,27,.97);overflow:auto;display:none;padding:60px max(24px,8vw)}
+.refs.open{display:block}
+.refs-in{max-width:1000px;margin:0 auto;font:400 17px/1.6 var(--sans);color:var(--iv2)}
+.refs h2{font:500 40px/1.1 var(--sans);letter-spacing:-.02em;color:var(--ivory);margin:10px 0 20px}
+.refs h3{font:500 13px var(--mono);letter-spacing:.16em;text-transform:uppercase;color:var(--lime);margin:34px 0 10px}
+.refs a{color:var(--blue);word-break:break-all}
+.refs li{margin-bottom:10px}
+.toast{position:fixed;left:50%;bottom:60px;transform:translateX(-50%);background:var(--graph);border:1px solid var(--line2);padding:12px 18px;font:400 15px var(--sans);z-index:80;opacity:0;transition:opacity .3s;pointer-events:none}
+.toast.on{opacity:1}
+.help{position:fixed;left:18px;bottom:16px;font:400 12px var(--mono);letter-spacing:.08em;color:rgba(137,148,163,.6);z-index:50;transition:opacity .5s}
+.hud.idle ~ .help{opacity:0}
+
+/* ── Accesibilidad / movimiento ───── */
+@media (prefers-reduced-motion: reduce){
+  .slide,.rv,.rvx,.legend6 div,.layer,.eco-row,.stp,.bar .fl{transition:none!important}
+  .edge.flow,.halo,.gate-pulse,.sim-svg .orch.think circle.ring{animation:none!important}
+  .pulse{display:none}
+}
+
+/* ── Impresión: 1 diapositiva por página ── */
+@media print{
+  @page{size:1920px 1080px;margin:0}
+  html,body{overflow:visible;height:auto;background:var(--ink);-webkit-print-color-adjust:exact;print-color-adjust:exact}
+  .viewport{position:static;overflow:visible;background:var(--ink)}
+  .stage{position:static;transform:none!important;width:1920px;height:auto}
+  .stage::before{display:none}
+  .slide{position:relative;width:1920px;height:1080px;opacity:1!important;visibility:visible!important;transform:none!important;break-after:page;page-break-after:always;background:var(--ink)}
+  .rv,.rvx,.legend6 div,.stp{opacity:1!important;transform:none!important;filter:none!important}
+  .gl canvas{display:none!important}
+  body.gl-on .gl-fb{display:flex!important}
+  .hud,.progress,.notes-panel,.help,.toast{display:none!important}
+  .refs{display:block!important;position:relative;inset:auto;overflow:visible;background:var(--ink);padding:80px 140px;break-before:page}
+  .refs .close{display:none}
+}
+</style>
+</head>
+<body>
+<div class="viewport" id="viewport">
+<main class="stage" id="stage" aria-live="polite">
+
+<!-- ═════════ 01 PORTADA ═════════ -->
+<section class="slide s-cover" data-sec="Portada" data-title="Arquitecturas Multiagente">
+  <div class="gl" data-scene="network" aria-hidden="true"></div>
+  <div class="cover-text">
+    <div class="kicker rv">Top Learning · Inteligencia Artificial y Automatización</div>
+    <h1 class="h1 rv" style="--d:1">Arquitecturas<br><span class="serif">Multiagente</span></h1>
+    <p class="lead rv" style="--d:2;margin-top:34px;font-size:36px">Harnesses, orquestadores y modelos de decisión.</p>
+    <p class="cover-quote rv" style="--d:3">De modelos que <em>responden</em><br>a sistemas que <em class="lime">colaboran</em>.</p>
+  </div>
+  <ol class="route rv" style="--d:5">
+    <span class="tag lime">Ruta de hoy · temario oficial</span>
+    <li><b>01</b>Superagente vs. orquestador</li>
+    <li><b>02</b>Subagentes especializados</li>
+    <li><b>03</b>Routing inteligente</li>
+    <li><b>04</b>Monitoreo y optimización</li>
+  </ol>
+  <dl class="meta rv" style="--d:4">
+    <div><dt>Grupo</dt><dd>E1577 · Nivel 2</dd></div>
+    <div><dt>Semana</dt><dd>26 de 28</dd></div>
+    <div><dt>Módulo</dt><dd>Diseño de Agentes</dd></div>
+    <div><dt>Fecha</dt><dd>26 de octubre de 2026</dd></div>
+    <div style="grid-column:span 2"><dt>Profesor</dt><dd>Kevin Daniel Martínez Orozco</dd></div>
+  </dl>
+  <aside class="notes" data-time="1 min">
+    <p><b>Explicar:</b> hoy pasamos de “un agente que responde” a “un sistema de agentes que colabora”. Ya conocen Hermes, OpenRouter, memoria, skills, MCP y OpenCode; hoy los ubicamos dentro de una arquitectura.</p>
+    <p><b>Ruta:</b> los cuatro subtemas oficiales son la columna vertebral: superagente vs. orquestador, subagentes especializados, routing inteligente, monitoreo y optimización. Harness, OpenRouter y Jev son complementos para entenderlos.</p>
+    <p><b>Pregunta de apertura:</b> “¿Quién le ha pedido a un solo chat que haga cinco cosas distintas a la vez? ¿Cómo salió?”</p>
+    <p><b>Visual:</b> el nodo central verde es el orquestador; los nodos azules, agentes especializados; los pulsos, información que viaja.</p>
+  </aside>
+</section>
+
+<!-- ═════════ 02 PROBLEMA ═════════ -->
+<section class="slide" data-sec="Fundamentos" data-title="El problema de un agente que hace todo">
+  <div class="kicker rv">El punto de partida</div>
+  <h2 class="h2 rv" style="--d:1">¿Un agente capaz de hacerlo <span class="serif lime">todo</span>… o varios agentes <span class="serif blue">especializados</span>?</h2>
+  <div class="vs2">
+    <div class="rv" style="--d:2">
+      <div class="cap"><span class="h3">Una persona, cuatro puestos</span><span class="tag warn">Sobrecarga</span></div>
+      <svg class="dg" viewBox="0 0 760 380" width="760" height="380">
+        <path class="edge w flow" d="M380 190 C 520 60, 160 40, 92 64"/>
+        <path class="edge w flow" d="M380 190 C 240 330, 600 20, 668 64" style="animation-duration:1.6s"/>
+        <path class="edge w flow" d="M380 190 C 600 260, 120 220, 92 316" style="animation-duration:.9s"/>
+        <path class="edge w flow" d="M380 190 C 150 120, 560 400, 668 316" style="animation-duration:1.4s"/>
+        <path class="edge w" d="M92 64 C 300 180, 460 200, 668 316" opacity=".35"/>
+        <path class="edge w" d="M668 64 C 460 180, 300 200, 92 316" opacity=".35"/>
+        <circle class="halo" cx="380" cy="190" r="62" fill="none" stroke="#F2A27C" stroke-width="2"/>
+        <circle cx="380" cy="190" r="62" fill="#171D24" stroke="#F2A27C" stroke-width="2.5"/>
+        <text x="380" y="186" text-anchor="middle" font-size="20" font-weight="500">1 agente</text>
+        <text x="380" y="212" text-anchor="middle" class="t-mono t-w" font-size="11">todo a la vez</text>
+        <g font-size="23"><circle cx="92" cy="64" r="9" fill="#F2A27C"/><text x="92" y="30" text-anchor="middle">Ventas</text>
+        <circle cx="668" cy="64" r="9" fill="#F2A27C"/><text x="668" y="30" text-anchor="middle">Soporte</text>
+        <circle cx="92" cy="316" r="9" fill="#F2A27C"/><text x="92" y="362" text-anchor="middle">Finanzas</text>
+        <circle cx="668" cy="316" r="9" fill="#F2A27C"/><text x="668" y="362" text-anchor="middle">Marketing</text></g>
+      </svg>
+    </div>
+    <div class="mid rv" style="--d:3">vs.</div>
+    <div class="rv" style="--d:4">
+      <div class="cap"><span class="h3">Un equipo coordinado</span><span class="tag lime">Especialización</span></div>
+      <svg class="dg" viewBox="0 0 760 380" width="760" height="380">
+        <path class="edge l pp" data-dur="2.4" d="M380 190 L 92 64"/>
+        <path class="edge l pp" data-dur="2.8" d="M380 190 L 668 64"/>
+        <path class="edge l pp" data-dur="2.2" d="M380 190 L 92 316"/>
+        <path class="edge l pp" data-dur="3" d="M380 190 L 668 316"/>
+        <circle cx="380" cy="190" r="40" fill="#171D24" stroke="#C8EC88" stroke-width="2.5"/>
+        <text x="380" y="196" text-anchor="middle" font-size="16" class="t-mono t-l">COORD.</text>
+        <g font-size="23">
+        <circle class="nd" cx="92" cy="64" r="24"/><text x="92" y="22" text-anchor="middle">Ventas</text>
+        <circle class="nd" cx="668" cy="64" r="24"/><text x="668" y="22" text-anchor="middle">Soporte</text>
+        <circle class="nd" cx="92" cy="316" r="24"/><text x="92" y="372" text-anchor="middle">Finanzas</text>
+        <circle class="nd" cx="668" cy="316" r="24"/><text x="668" y="372" text-anchor="middle">Marketing</text></g>
+      </svg>
+    </div>
+  </div>
+  <div class="row" style="gap:40px;margin-top:34px">
+    <div class="rv" style="--d:5;flex:1"><span class="tag iv">Analogía empresarial</span>
+      <p class="p" style="margin-top:14px">Una persona puede atender ventas, soporte, finanzas y marketing. Funciona… hasta que crecen las responsabilidades: <em>más contexto que recordar, más herramientas, más reglas y errores más difíciles de rastrear.</em></p></div>
+    <div class="note-strip warn rv" style="--d:6;flex:1;align-items:flex-start;flex-direction:column;gap:10px">
+      <span class="tag warn">Matiz importante</span>
+      <p class="p"><em>Más agentes ≠ mejor rendimiento.</em> Cada traspaso añade latencia, costo, contexto que puede perderse y un nuevo punto de falla.</p></div>
+  </div>
+  <aside class="notes" data-time="1.5 min">
+    <p><b>Explicar:</b> la pregunta no tiene respuesta universal. Depende del volumen de tareas, de qué tan distintas son y de los riesgos.</p>
+    <p><b>Ejemplo:</b> en una tienda pequeña, una persona lo hace todo y funciona. En una empresa de 200 personas, separar áreas reduce errores… pero también aparecen reuniones, traspasos y malentendidos. Lo mismo pasa con agentes.</p>
+    <p><b>Pregunta:</b> “En su trabajo, ¿qué tareas se rompen cuando una sola persona tiene demasiadas responsabilidades?”</p>
+    <p><b>Error a anticipar:</b> creer que “multiagente” es automáticamente más avanzado o mejor. Es una decisión de diseño con costos.</p>
+  </aside>
+</section>
+
+<!-- ═════════ 03 QUÉ ES UN AGENTE ═════════ -->
+<section class="slide" data-sec="Fundamentos" data-title="Qué es realmente un agente de IA">
+  <div class="kicker rv">Vocabulario preciso</div>
+  <h2 class="h2 rv" style="--d:1">¿Qué es <span class="serif">realmente</span> un agente de IA?</h2>
+  <div class="row" style="gap:90px;margin-top:26px;align-items:flex-start">
+    <ol class="ladder" style="width:820px">
+      <li class="rvx" style="--d:2"><span class="n">01</span><div><h4>Modelo de lenguaje (LLM)</h4><p>Recibe texto y genera texto. Por sí solo no ejecuta acciones en el mundo.</p></div></li>
+      <li class="rvx" style="--d:3"><span class="n">02</span><div><h4>Chatbot</h4><p>Un LLM con interfaz de conversación. Responde turno a turno a lo que le escribes.</p></div></li>
+      <li class="rvx hl" style="--d:4"><span class="n">03</span><div><h4>Agente</h4><p>Un LLM dentro de un ciclo: decide pasos, usa herramientas y verifica resultados hasta cumplir un objetivo o detenerse.</p></div></li>
+      <li class="rvx" style="--d:5"><span class="n">04</span><div><h4>Sistema multiagente</h4><p>Varios agentes con roles distintos, coordinados para resolver un problema mayor.</p></div></li>
+    </ol>
+    <div class="rv" style="--d:3">
+      <svg class="dg cyc" viewBox="0 0 700 660" width="620" height="585">
+        <circle cx="330" cy="330" r="220" fill="none" stroke="rgba(242,241,234,.14)" stroke-width="2"/>
+        <path class="edge pp" data-dur="7.2" data-steps="6" data-target=".cyc .pill" stroke="none" d="M330 110 A220 220 0 1 1 330 550 A220 220 0 1 1 330 110"/>
+        <text x="330" y="312" text-anchor="middle" class="t-mono t-g" font-size="15">CICLO AGÉNTICO</text>
+        <text x="330" y="350" text-anchor="middle" font-size="30" class="serif" style="font-family:var(--serif);font-style:italic">hacia un objetivo</text>
+        <g class="pill"><rect x="225" y="83" width="210" height="54" rx="27"/><text x="330" y="117" text-anchor="middle">1 · Observar</text></g>
+        <g class="pill"><rect x="405" y="193" width="230" height="54" rx="27"/><text x="520" y="227" text-anchor="middle">2 · Interpretar</text></g>
+        <g class="pill"><rect x="415" y="413" width="210" height="54" rx="27"/><text x="520" y="447" text-anchor="middle">3 · Decidir</text></g>
+        <g class="pill"><rect x="190" y="523" width="280" height="54" rx="27"/><text x="330" y="557" text-anchor="middle">4 · Usar herramientas</text></g>
+        <g class="pill"><rect x="35" y="413" width="210" height="54" rx="27"/><text x="140" y="447" text-anchor="middle">5 · Verificar</text></g>
+        <g class="pill"><rect x="5" y="193" width="270" height="54" rx="27"/><text x="140" y="227" text-anchor="middle">6 · ¿Seguir o terminar?</text></g>
+      </svg>
+    </div>
+  </div>
+  <div class="note-strip rv" style="--d:6;margin-top:18px">
+    <span class="tag lime">Clave</span>
+    <p class="p">No confundas <em>inteligencia del modelo</em> con <em>capacidades del entorno</em>: el modelo propone qué hacer; leer un archivo o enviar un correo solo es posible si el entorno le da esa herramienta.</p>
+  </div>
+  <aside class="notes" data-time="1.5 min">
+    <p><b>Explicar:</b> la escalera va de “genera texto” a “trabaja en ciclo hacia un objetivo”. Lo que convierte a un chatbot en agente no es un modelo más grande, sino el ciclo con herramientas y verificación.</p>
+    <p><b>Ejemplo:</b> “Resérvame una sala para mañana”. Observa (agenda), interpreta (mañana = fecha concreta), decide (sala libre), usa herramienta (calendario), verifica (¿se creó el evento?), termina.</p>
+    <p><b>Pregunta:</b> “¿ChatGPT o Claude en modo chat son agentes?” Respuesta matizada: depende de si tienen herramientas activas y un ciclo de ejecución.</p>
+    <p><b>Error a anticipar:</b> pensar que el modelo “sabe” enviar correos. Solo puede pedir usar una herramienta que el entorno le ofrezca.</p>
+  </aside>
+</section>
+
+<!-- ═════════ 04 HARNESS ═════════ -->
+<section class="slide s-harness" data-sec="Harness y ecosistema" data-title="Qué es un agent harness">
+  <div style="width:800px">
+    <div class="kicker rv">Concepto clave</div>
+    <h2 class="h2 rv" style="--d:1">¿Qué es un <span class="serif lime">agent harness</span>?</h2>
+    <p class="sm rv mono" style="--d:1;margin-top:8px;letter-spacing:.06em">En español: arnés agéntico</p>
+    <div class="def rv" style="--d:2;margin-top:28px">
+      <span class="tag lime">Definición técnica</span>
+      <p class="p" style="color:var(--ivory)">Es la <em>infraestructura de software</em> que permite que un modelo participe en un ciclo de trabajo: le entrega instrucciones y contexto, expone herramientas, conserva estado, aplica permisos, ejecuta acciones y le devuelve los resultados.</p>
+    </div>
+    <div class="def rv" style="--d:3;margin-top:16px;border-color:rgba(117,167,255,.3)">
+      <span class="tag blue">Analogía</span>
+      <p class="p">El modelo es el <em>motor cognitivo</em>; el harness es el chasis, la transmisión, los frenos y el tablero que organizan y controlan su operación.</p>
+    </div>
+    <div class="wr rv" style="--d:4">
+      <div class="x"><b class="warn">✕ IMPRECISO</b>“El harness es el cerebro del agente.”</div>
+      <div class="ok"><b class="lime">✓ CORRECTO</b>El modelo aporta lenguaje y razonamiento; el harness organiza cómo usa contexto, herramientas y ciclos.</div>
+    </div>
+  </div>
+  <div class="gl" data-scene="harness" aria-hidden="true"></div>
+  <div class="legend6">
+    <div style="--i:0"><b class="blue">Modelo</b><span>Capacidades cognitivas</span></div>
+    <div style="--i:1"><b>Instrucciones</b><span>Delimitan el comportamiento</span></div>
+    <div style="--i:2"><b class="lime">Herramientas</b><span>Permiten acciones</span></div>
+    <div style="--i:3"><b>Estado y memoria</b><span>Conservan información</span></div>
+    <div style="--i:4"><b class="lime">Controles</b><span>Verifican o restringen</span></div>
+    <div style="--i:5"><b class="gray">Harness</b><span>Organiza modelo ↔ entorno</span></div>
+  </div>
+  <aside class="notes" data-time="2.5 min">
+    <p><b>Explicar:</b> esta es la diapositiva más importante de la primera parte. Las capas que aparecen alrededor del núcleo azul (el modelo) son lo que el harness añade: instrucciones, herramientas, estado/memoria, controles y el propio ciclo de ejecución.</p>
+    <p><b>Ejemplo:</b> el mismo modelo dentro de Hermes se comporta como asistente personal con Telegram y memoria; dentro de OpenCode, como programador que edita archivos. El modelo puede ser el mismo; cambia el harness.</p>
+    <p><b>Pregunta:</b> “Si cambio el modelo en Hermes por otro vía OpenRouter, ¿pierdo mis skills y mi memoria?” (No: esas viven en el harness, aunque el resultado puede variar según el modelo).</p>
+    <p><b>Error a anticipar:</b> “el harness es el cerebro”. Marcar la diferencia entre analogía (motor/chasis) y definición técnica.</p>
+    <p class="src">Concepto general de “harness” en sistemas agénticos; ver encuesta “From Question Answering to Task Completion: A Survey on Agent System and Harness Design” (arXiv, 2026) en referencias.</p>
+  </aside>
+</section>
+
+<!-- ═════════ 05 ANATOMÍA HARNESS ═════════ -->
+<section class="slide" data-sec="Harness y ecosistema" data-title="Anatomía de un harness profesional">
+  <div class="kicker rv">Interactivo · haz clic en cada capa</div>
+  <h2 class="h2 rv" style="--d:1">Anatomía de un <span class="serif">harness</span> profesional</h2>
+  <div class="row" style="gap:60px;margin-top:32px;align-items:flex-start">
+    <div class="stack rv" style="--d:2">
+      <div class="stack-inner" id="layers"></div>
+    </div>
+    <div class="detail panel rv" style="--d:3;flex:1" id="layerDetail" aria-live="polite"></div>
+  </div>
+  <aside class="notes" data-time="2 min">
+    <p><b>Explicar:</b> recorrer 3 o 4 capas con clic, no las 8 en detalle. Recomendado: 3 (herramientas), 4 (ciclo), 6 (permisos) y 8 (observabilidad).</p>
+    <p><b>Ejemplo:</b> conectar con lo que ya vieron: en OpenCode el agente Plan pide permiso antes de editar; en Hermes las skills y la memoria persisten entre sesiones.</p>
+    <p><b>Pregunta:</b> “¿Cuál de estas capas creen que falla más en la práctica?” (Suele ser contexto mal definido o permisos demasiado amplios).</p>
+    <p><b>Error a anticipar:</b> creer que todos los harness tienen las 8 capas igual de desarrolladas. Es un modelo de referencia, no una lista obligatoria.</p>
+  </aside>
+</section>
+
+<!-- ═════════ 06 HERMES VS OPENCODE ═════════ -->
+<section class="slide" data-sec="Harness y ecosistema" data-title="Hermes Agent vs. OpenCode">
+  <div class="kicker rv">Dos harnesses · dos propósitos</div>
+  <h2 class="h2 h2s rv" style="--d:1">Hermes Agent <span class="serif gray">y</span> OpenCode: ninguno <span class="serif lime">es</span> el modelo</h2>
+  <div class="arch3">
+    <div class="archcol rvx" style="--d:2">
+      <span class="tag blue">Agente de propósito general</span>
+      <h3>Hermes Agent</h3><div class="by">NOUS RESEARCH · CÓDIGO ABIERTO</div>
+      <div class="mods">
+        <div class="mod"><b>Canales de mensajería</b> · Telegram, Discord, Slack…</div>
+        <div class="mod"><b>Memoria</b> entre sesiones</div>
+        <div class="mod"><b>Skills</b> reutilizables que se crean y refinan</div>
+        <div class="mod"><b>Herramientas</b> y servidores MCP</div>
+        <div class="mod"><b>Delegación</b> a subagentes con herramientas acotadas</div>
+        <div class="mod"><b>Proveedores de modelos</b> configurables (p. ej. OpenRouter)</div>
+      </div>
+    </div>
+    <div class="shared rv" style="--d:4">
+      <span class="tag lime">Lo que comparten</span>
+      <ul>
+        <li>Usan modelos de IA externos</li>
+        <li>Organizan instrucciones y herramientas</li>
+        <li>Ejecutan ciclos agénticos</li>
+        <li>Admiten distintas configuraciones de modelos</li>
+        <li>Tienen controles y mecanismos de extensión</li>
+      </ul>
+    </div>
+    <div class="archcol oc rvx" style="--d:3">
+      <span class="tag lime">Agente de codificación</span>
+      <h3>OpenCode</h3><div class="by">HARNESS DE DESARROLLO · CÓDIGO ABIERTO</div>
+      <div class="mods">
+        <div class="mod"><b>Interfaz de terminal</b> trabajando sobre un proyecto</div>
+        <div class="mod"><b>Agentes primarios</b> · Build (todas las herramientas) y Plan (análisis)</div>
+        <div class="mod"><b>Subagentes</b> · p. ej. General y Explore, invocables con @</div>
+        <div class="mod"><b>Herramientas de desarrollo</b> · archivos, comandos, búsqueda</div>
+        <div class="mod"><b>Permisos</b> por agente: permitir, preguntar o negar</div>
+        <div class="mod"><b>Modelo configurable</b> por agente y proveedor</div>
+      </div>
+    </div>
+  </div>
+  <div class="row rv" style="--d:5;gap:34px;margin-top:22px">
+    <p class="sm" style="flex:1"><span class="blue mono" style="font-size:14px;letter-spacing:.12em">CONVIENE HERMES →</span> tareas personales o de negocio recurrentes, por canales de mensajería, con memoria y automatizaciones.</p>
+    <p class="sm" style="flex:1"><span class="lime mono" style="font-size:14px;letter-spacing:.12em">CONVIENE OPENCODE →</span> crear o modificar software en un repositorio, con control fino de archivos y comandos.</p>
+  </div>
+  <aside class="notes" data-time="1.5 min">
+    <p><b>Explicar:</b> los dos son harnesses; ninguno “es” un modelo. Ambos pueden usar modelos distintos. No hay ganador universal: dependen del trabajo.</p>
+    <p><b>Ejemplo:</b> la landing page que construyeron se hizo mejor con un agente de codificación (archivos, comandos, vista previa). Un recordatorio diario por Telegram encaja mejor en Hermes.</p>
+    <p><b>Pregunta:</b> “¿Qué usarían para revisar su bandeja de Gmail cada mañana? ¿Y para corregir un error en el HTML de su landing?”</p>
+    <p><b>Error a anticipar:</b> “Hermes es un modelo”. El nombre Hermes también lo usan modelos de Nous Research; aquí hablamos de Hermes <i>Agent</i>, el harness.</p>
+    <p class="src">Fuentes: documentación de Hermes Agent (Nous Research) y de OpenCode (opencode.ai/docs/agents). Funciones según documentación pública; verificar cambios de versión antes de clase.</p>
+  </aside>
+</section>
+
+<!-- ═════════ 07 ECOSISTEMA ═════════ -->
+<section class="slide" data-sec="Harness y ecosistema" data-title="El ecosistema del agente">
+  <div class="kicker rv">Interactivo · categorías, no marcas</div>
+  <h2 class="h2 h2s rv" style="--d:1">El ecosistema del agente: <span class="serif">¿qué hace qué?</span></h2>
+  <div class="eco">
+    <div id="ecoRows" class="rv" style="--d:2"></div>
+    <div class="col rv" style="--d:3;gap:18px">
+      <div class="panel" id="ecoDetail" style="padding:32px 34px;min-height:430px" aria-live="polite"></div>
+      <div class="note-strip"><p class="p" style="font-size:22px"><em>No son competidores:</em> ocupan capas distintas. Un mismo sistema puede usar varias a la vez.</p></div>
+    </div>
+  </div>
+  <aside class="notes" data-time="2 min">
+    <p><b>Explicar:</b> cada fila responde una pregunta diferente. OpenRouter no compite con Hermes; Jev no compite con un LLM general; n8n es otra forma de integrar sistemas.</p>
+    <p><b>Ejemplo:</b> “Hermes (harness) usa un LLM a través de OpenRouter (gateway), consulta a Jev para decidir a qué especialista enviar un caso (decisión), y llama a la API de Gmail mediante una herramienta o MCP (acción).”</p>
+    <p><b>Pregunta:</b> “¿En qué capa ubicarían n8n?” (Automatización de workflows: flujos definidos que integran sistemas; puede incluir pasos con IA).</p>
+    <p><b>Error a anticipar:</b> la orquestación no siempre es un producto separado: a veces vive dentro del harness (p. ej. delegación a subagentes) o en un framework.</p>
+  </aside>
+</section>
+
+<!-- ═════════ 08 OPENROUTER ═════════ -->
+<section class="slide" data-sec="Harness y ecosistema" data-title="OpenRouter: acceso y routing de modelos">
+  <div class="kicker rv">Model gateway</div>
+  <h2 class="h2 h2s rv" style="--d:1">OpenRouter: <span class="serif">una puerta</span> hacia muchos modelos</h2>
+  <div class="rv" style="--d:2;margin-top:30px">
+    <svg class="dg" viewBox="0 0 1640 330" width="1640" height="330">
+      <path class="edge l pp" data-dur="1.8" d="M270 165 L 470 165"/>
+      <text x="370" y="148" text-anchor="middle" class="t-mono t-g" font-size="13">PETICIÓN</text>
+      <path class="edge w" stroke-dasharray="6 8" d="M850 165 C 1000 165, 1000 50, 1160 50"/>
+      <path class="edge l pp" data-dur="1.6" d="M850 165 L 1160 165"/>
+      <path class="edge" d="M850 165 C 1000 165, 1000 280, 1160 280" opacity=".5"/>
+      <text x="990" y="78" class="t-mono t-w" font-size="13">1.º INTENTO</text>
+      <text x="1000" y="152" class="t-mono t-l" font-size="13">FALLBACK</text>
+      <rect class="box" x="0" y="105" width="270" height="120"/>
+      <text x="26" y="146" class="t-mono t-g" font-size="13">HARNESS</text>
+      <text x="26" y="190" font-size="24" font-weight="500">Hermes · OpenCode</text>
+      <rect class="box l" x="470" y="60" width="380" height="210" style="fill:rgba(200,236,136,.06)"/>
+      <text x="498" y="100" class="t-mono t-l" font-size="13">MODEL GATEWAY</text>
+      <text x="498" y="150" font-size="46" font-weight="500" letter-spacing="-1.5">OpenRouter</text>
+      <text x="498" y="190" font-size="20" class="t-g">una API · una clave · muchos modelos</text>
+      <text x="498" y="240" font-size="13" class="t-mono t-g">FALLBACKS · AUTO ROUTER · PROVEEDORES</text>
+      <rect class="box w" x="1160" y="12" width="480" height="76"/>
+      <text x="1186" y="58" font-size="23">Proveedor A · modelo 1</text><text x="1614" y="57" text-anchor="end" class="t-mono t-w" font-size="13">✕ NO DISPONIBLE</text>
+      <rect class="box hot" x="1160" y="127" width="480" height="76"/>
+      <text x="1186" y="173" font-size="23">Proveedor B · modelo 2</text><text x="1614" y="172" text-anchor="end" class="t-mono t-l" font-size="13">● RESPONDE</text>
+      <rect class="box" x="1160" y="242" width="480" height="76"/>
+      <text x="1186" y="288" font-size="23" class="t-g">Proveedor C · modelo 3</text>
+    </svg>
+  </div>
+  <div class="row" style="gap:50px;margin-top:30px">
+    <dl class="adl rv" style="--d:3;width:820px;margin:0;grid-template-columns:230px 1fr">
+      <dt>Model gateway</dt><dd>Un punto de acceso único a modelos de distintas empresas, con la misma forma de pedir.</dd>
+      <dt>Proveedor</dt><dd>Quien ejecuta realmente el modelo (inferencia) y cobra por ello.</dd>
+      <dt>Fallback</dt><dd>Lista ordenada de alternativas si el modelo falla, está saturado o limitado.</dd>
+      <dt>Criterios</dt><dd>Capacidad, ventana de contexto, costo, latencia, disponibilidad y privacidad.</dd>
+    </dl>
+    <div class="col rv" style="--d:4;flex:1;gap:14px">
+      <div class="panel" style="padding:20px 24px;border-color:rgba(200,236,136,.4)"><div class="kicker" style="font-size:14px">Routing de modelos</div><p class="p" style="color:var(--ivory);margin-top:6px">¿Qué <em>modelo o proveedor</em> procesa esta petición? → OpenRouter</p></div>
+      <div class="panel" style="padding:20px 24px;border-color:rgba(117,167,255,.45)"><div class="kicker blue" style="font-size:14px">Routing de agentes</div><p class="p" style="color:var(--ivory);margin-top:6px">¿Qué <em>especialista</em> ejecuta esta tarea? → tu orquestador</p></div>
+      <p class="sm"><span class="warn">⚠</span> Los modelos gratuitos tienen límites de uso y disponibilidad variable. “Gratis” no es ilimitado ni libre de costos indirectos.</p>
+    </div>
+  </div>
+  <aside class="notes" data-time="2 min">
+    <p><b>Explicar:</b> OpenRouter unifica el acceso: el harness habla con una sola API y OpenRouter dirige la petición a un modelo/proveedor. Si el primero falla, puede intentar el siguiente de una lista (fallback). También ofrece un “auto router” que elige modelo según la petición.</p>
+    <p><b>Ejemplo:</b> en Hermes configuraron una clave de OpenRouter y eligieron un modelo. Cambiar de modelo fue cambiar un identificador, no reinstalar nada.</p>
+    <p><b>Pregunta clave:</b> “Si OpenRouter ya hace routing, ¿para qué necesito un orquestador?” → OpenRouter elige el <i>modelo</i>; el orquestador elige el <i>especialista</i>. No son lo mismo.</p>
+    <p><b>Error a anticipar:</b> “con modelos :free puedo automatizar todo gratis”. Hay límites de solicitudes por minuto/día que dependen de la cuenta, disponibilidad cambiante y costos indirectos (reintentos, tiempo, menor calidad). No citar cifras sin verificarlas en la documentación vigente.</p>
+    <p class="src">Fuentes: openrouter.ai/docs (model routing, model fallbacks), openrouter.ai/blog/insights/model-routing/. Precios y límites cambian: no se muestran cifras.</p>
+  </aside>
+</section>
+
+<!-- ═════════ 09 ORQUESTADOR ═════════ -->
+<section class="slide" data-sec="01 · Superagente vs. orquestador" data-title="Qué es un orquestador">
+  <div class="kicker rv">Subtema 01</div>
+  <h2 class="h2 rv" style="--d:1">¿Qué es un <span class="serif lime">orquestador</span>?</h2>
+  <div class="row" style="gap:60px;margin-top:30px;align-items:flex-start">
+    <div style="width:600px" class="col">
+      <p class="p rv" style="--d:2;color:var(--ivory)">El componente que <em>coordina</em> tareas, decide secuencias, asigna responsabilidades, administra dependencias e integra los resultados de agentes o herramientas.</p>
+      <div class="rv" style="--d:3;margin-top:26px"><span class="tag blue">Analogía</span>
+        <p class="sm" style="margin-top:10px;font-size:21px;color:var(--iv2)">Como un director de orquesta: no toca todos los instrumentos; decide quién entra, cuándo y cómo se integra cada parte.</p></div>
+      <div class="rv" style="--d:4;margin-top:30px">
+        <div class="tabs" role="tablist">
+          <button class="btn on" data-orch="det" role="tab">Determinista</button>
+          <button class="btn" data-orch="llm" role="tab">Dirigido por modelo</button>
+        </div>
+        <div id="orchTxt" class="panel" style="margin-top:14px;padding:22px 24px;min-height:190px" aria-live="polite"></div>
+      </div>
+    </div>
+    <div class="rv" style="--d:3;flex:1">
+      <p class="sm mono" style="font-size:15px;letter-spacing:.1em;margin-bottom:10px">EJEMPLO · «CREA UNA PROPUESTA COMERCIAL PARA ESTE CLIENTE»</p>
+      <svg class="dg" id="orchSvg" viewBox="0 0 1000 620" width="1000" height="620">
+        <g id="orchEdges">
+          <path class="edge l" d="M500 124 C 500 210, 88 200, 88 300"/>
+          <path class="edge l" d="M500 124 C 500 210, 294 220, 294 300"/>
+          <path class="edge l" d="M500 124 L 500 300"/>
+          <path class="edge l" d="M500 124 C 500 220, 706 220, 706 300"/>
+          <path class="edge l" d="M500 124 C 500 210, 912 200, 912 300"/>
+        </g>
+        <path class="edge l pp" data-dur="5" d="M176 335 L 206 335 M382 335 L 412 335 M588 335 L 618 335 M794 335 L 824 335"/>
+        <path class="edge w" stroke-dasharray="5 7" d="M912 370 C 912 440, 706 440, 706 370"/>
+        <text x="809" y="458" text-anchor="middle" class="t-mono t-w" font-size="12">SI NO APRUEBA, CORREGIR</text>
+        <path class="edge l pp" data-dur="2.4" d="M912 370 C 912 520, 700 555, 620 555"/>
+        <rect class="box l" x="400" y="40" width="200" height="84" style="fill:rgba(200,236,136,.08)"/>
+        <text x="500" y="76" text-anchor="middle" class="t-mono t-l" font-size="13">ORQUESTADOR</text>
+        <text x="500" y="105" text-anchor="middle" font-size="21" id="orchMode">flujo programado</text>
+        <g font-size="20">
+          <rect class="box" x="0" y="300" width="176" height="70"/><text x="88" y="332" text-anchor="middle">Entender</text><text x="88" y="356" text-anchor="middle" class="t-g" font-size="16">la solicitud</text>
+          <rect class="box b" x="206" y="300" width="176" height="70"/><text x="294" y="332" text-anchor="middle">Datos del</text><text x="294" y="356" text-anchor="middle" class="t-g" font-size="16">cliente (CRM)</text>
+          <rect class="box b" x="412" y="300" width="176" height="70"/><text x="500" y="332" text-anchor="middle">Precios</text><text x="500" y="356" text-anchor="middle" class="t-g" font-size="16">y disponibilidad</text>
+          <rect class="box b" x="618" y="300" width="176" height="70"/><text x="706" y="332" text-anchor="middle">Borrador</text><text x="706" y="356" text-anchor="middle" class="t-g" font-size="16">redactor</text>
+          <rect class="box b" x="824" y="300" width="176" height="70"/><text x="912" y="332" text-anchor="middle">Revisión</text><text x="912" y="356" text-anchor="middle" class="t-g" font-size="16">revisor</text>
+        </g>
+        <g id="orchQ" opacity="0" style="transition:opacity .4s">
+          <text x="200" y="240" class="t-mono t-l" font-size="22">?</text><text x="385" y="240" class="t-mono t-l" font-size="22">?</text><text x="510" y="240" class="t-mono t-l" font-size="22">?</text><text x="610" y="240" class="t-mono t-l" font-size="22">?</text><text x="800" y="240" class="t-mono t-l" font-size="22">?</text>
+        </g>
+        <rect class="box hot" x="380" y="520" width="240" height="70"/>
+        <text x="500" y="562" text-anchor="middle" font-size="22" font-weight="500">Propuesta final</text>
+      </svg>
+    </div>
+  </div>
+  <aside class="notes" data-time="1.5 min">
+    <p><b>Explicar:</b> orquestar = coordinar, no ejecutar todo. Usar los dos botones para mostrar la diferencia: determinista (el código fija la secuencia) vs. dirigido por modelo (un LLM decide el siguiente paso según lo que va pasando).</p>
+    <p><b>Ejemplo:</b> la propuesta comercial: entender → datos del cliente → precios → borrador → revisión → (si no aprueba, corregir) → final.</p>
+    <p><b>Pregunta:</b> “¿Qué parte de este flujo dejarían fija por código y cuál dejarían decidir al modelo?”</p>
+    <p><b>Error a anticipar:</b> pensar que el orquestador siempre es un LLM. Muchas orquestaciones robustas son deterministas con pasos de IA acotados (como un workflow de n8n).</p>
+  </aside>
+</section>
+
+<!-- ═════════ 10 SUPERAGENTE VS ORQUESTADOR ═════════ -->
+<section class="slide" data-sec="01 · Superagente vs. orquestador" data-title="Superagente vs. orquestador multiagente">
+  <div class="kicker rv">Subtema 01 · comparación central</div>
+  <h2 class="h2 h2s rv" style="--d:1">Superagente <span class="serif gray">vs.</span> orquestador multiagente</h2>
+  <table class="cmp rv" style="--d:2">
+    <thead><tr><th>Criterio</th>
+      <th><span class="h"><svg width="46" height="46" viewBox="0 0 46 46"><circle cx="23" cy="23" r="12" fill="none" stroke="#F2A27C" stroke-width="2"/><g stroke="rgba(242,241,234,.5)"><line x1="23" y1="11" x2="23" y2="2"/><line x1="35" y1="23" x2="44" y2="23"/><line x1="23" y1="35" x2="23" y2="44"/><line x1="11" y1="23" x2="2" y2="23"/><line x1="31" y1="15" x2="38" y2="8"/><line x1="15" y1="31" x2="8" y2="38"/></g></svg>Superagente</span><span style="display:block;margin-top:6px">Un agente · muchas herramientas</span></th>
+      <th><span class="h"><svg width="46" height="46" viewBox="0 0 46 46"><circle cx="23" cy="23" r="7" fill="#C8EC88"/><g stroke="rgba(200,236,136,.6)"><line x1="23" y1="23" x2="6" y2="7"/><line x1="23" y1="23" x2="40" y2="7"/><line x1="23" y1="23" x2="6" y2="39"/><line x1="23" y1="23" x2="40" y2="39"/></g><g fill="#171D24" stroke="#75A7FF" stroke-width="2"><circle cx="6" cy="7" r="4"/><circle cx="40" cy="7" r="4"/><circle cx="6" cy="39" r="4"/><circle cx="40" cy="39" r="4"/></g></svg>Orquestador multiagente</span><span style="display:block;margin-top:6px">Coordina y delega a especialistas</span></th></tr></thead>
+    <tbody>
+      <tr><td>Simplicidad</td><td class="adv">Alta: un prompt, un ciclo, menos piezas</td><td>Menor: más componentes y acuerdos entre ellos</td></tr>
+      <tr><td>Especialización</td><td>Limitada: un solo contexto lo cubre todo</td><td class="adv">Alta: cada agente con su rol y herramientas</td></tr>
+      <tr><td>Mantenimiento</td><td>Fácil al inicio; frágil al crecer</td><td class="adv">Modular, aunque exige coordinar cambios</td></tr>
+      <tr><td>Latencia</td><td class="adv">Menor: sin traspasos</td><td>Mayor: cada delegación suma tiempo (salvo paralelismo)</td></tr>
+      <tr><td>Costos</td><td>Menos llamadas, pero contextos largos</td><td>Más llamadas; contextos cortos y modelos a la medida</td></tr>
+      <tr><td>Diagnóstico de errores</td><td>Difícil aislar qué falló</td><td class="adv">Más fácil si hay trazas por agente</td></tr>
+      <tr><td>Escalabilidad</td><td>Se satura con muchas herramientas</td><td class="adv">Se agregan especialistas sin rehacer todo</td></tr>
+      <tr><td>Contexto compartido</td><td class="adv">Natural: todo está en un lugar</td><td>Hay que pasarlo explícitamente</td></tr>
+    </tbody>
+  </table>
+  <div class="note-strip rv" style="--d:3;margin-top:24px">
+    <span class="tag lime">Regla práctica</span>
+    <p class="p" style="color:var(--ivory)">Empieza con un agente. Divide cuando aparezcan señales claras: demasiadas herramientas, roles en conflicto, permisos distintos o errores imposibles de rastrear.</p>
+  </div>
+  <aside class="notes" data-time="2.5 min">
+    <p><b>Explicar:</b> recorrer la tabla buscando el equilibrio: el ▲ verde marca qué opción <i>tiende</i> a tener ventaja en ese criterio; no es una regla absoluta. “Costos” queda sin ventaja clara porque depende del caso.</p>
+    <p><b>Ejemplo:</b> un asistente que solo resume correos → superagente basta. Un sistema que cotiza, atiende incidencias y aprueba descuentos con permisos diferentes → conviene separar.</p>
+    <p><b>Pregunta:</b> “¿Qué señal les indicaría que su agente de Hermes ya necesita dividirse?”</p>
+    <p><b>Error a anticipar:</b> “multiagente siempre gana”. La investigación y la práctica muestran que más llamadas y traspasos pueden empeorar latencia, costo y tasa de éxito. La regla práctica es una recomendación pedagógica, no una norma oficial.</p>
+  </aside>
+</section>
+
+<!-- ═════════ 11 ANATOMÍA MULTIAGENTE ═════════ -->
+<section class="slide" data-sec="01 · Superagente vs. orquestador" data-title="Anatomía de un sistema multiagente">
+  <div class="kicker rv">Arquitectura de referencia</div>
+  <h2 class="h2 h2s rv" style="--d:1">Anatomía de un sistema <span class="serif">multiagente</span></h2>
+  <div class="rv" style="--d:2;margin-top:0">
+    <svg class="dg" viewBox="0 0 1640 400" width="1640" height="400">
+      <path class="edge l pp" data-dur="1.6" d="M170 200 L 254 200"/>
+      <path class="edge l pp" data-dur="2" d="M474 200 C 520 200, 510 105, 558 105"/>
+      <path class="edge l pp" data-dur="2" d="M474 200 L 558 200"/>
+      <path class="edge l pp" data-dur="2" d="M474 200 C 520 200, 510 295, 558 295"/>
+      <path class="edge b pp" data-dur="2.2" data-c="b" d="M798 105 C 840 105, 840 160, 882 160"/>
+      <path class="edge b pp" data-dur="2.2" data-c="b" d="M798 200 L 882 200"/>
+      <path class="edge b pp" data-dur="2.2" data-c="b" d="M798 295 C 840 295, 840 240, 882 240"/>
+      <path class="edge l pp" data-dur="1.8" d="M1102 200 L 1186 200"/>
+      <path class="edge l pp" data-dur="1.6" d="M1386 200 L 1470 200"/>
+      <path class="edge w" stroke-dasharray="5 7" d="M1286 245 C 1286 370, 364 370, 364 260"/>
+      <text x="825" y="388" text-anchor="middle" class="t-mono t-w" font-size="13">SI LA VERIFICACIÓN FALLA → REINTENTAR, CORREGIR O ESCALAR</text>
+      <rect class="box" x="0" y="155" width="170" height="90"/><text x="85" y="195" text-anchor="middle" class="t-mono t-g" font-size="13">ENTRADA</text><text x="85" y="224" text-anchor="middle" font-size="22">Usuario</text>
+            <rect class="box l" x="254" y="140" width="220" height="120" style="fill:rgba(200,236,136,.08)"/><text x="364" y="190" text-anchor="middle" class="t-mono t-l" font-size="13">COORDINA</text><text x="364" y="222" text-anchor="middle" font-size="25" font-weight="500">Orquestador</text>
+      <rect class="box b" x="558" y="70" width="240" height="70"/><text x="678" y="113" text-anchor="middle" font-size="22">Agente de ventas</text>
+      <rect class="box b" x="558" y="165" width="240" height="70"/><text x="678" y="208" text-anchor="middle" font-size="22">Agente de soporte</text>
+      <rect class="box b" x="558" y="260" width="240" height="70"/><text x="678" y="303" text-anchor="middle" font-size="22">Investigador</text>
+      <rect class="box" x="882" y="100" width="220" height="200"/><text x="992" y="138" text-anchor="middle" class="t-mono t-g" font-size="13">INTEGRACIONES</text>
+      <text x="992" y="180" text-anchor="middle" font-size="21">CRM</text><text x="992" y="212" text-anchor="middle" font-size="21">Correo</text><text x="992" y="244" text-anchor="middle" font-size="21">Pagos</text><text x="992" y="276" text-anchor="middle" font-size="21">Documentos</text>
+      <rect class="box" x="1186" y="155" width="200" height="90"/><text x="1286" y="195" text-anchor="middle" class="t-mono t-g" font-size="13">CONTROL</text><text x="1286" y="224" text-anchor="middle" font-size="22">Verificación</text>
+      <rect class="box hot" x="1470" y="155" width="170" height="90"/><text x="1555" y="195" text-anchor="middle" class="t-mono t-l" font-size="13">SALIDA</text><text x="1555" y="224" text-anchor="middle" font-size="22">Resultado</text>
+    </svg>
+  </div>
+  <div class="bands">
+    <div class="band rv" style="--d:3"><b>Estado de la tarea</b><span>En qué paso va, qué está pendiente y qué ya se completó.</span></div>
+    <div class="band rv" style="--d:4"><b>Memoria o contexto</b><span>La información que cada agente necesita, y solo esa.</span></div>
+    <div class="band rv" style="--d:5"><b>Restricciones</b><span>Permisos, políticas y límites técnicos por agente.</span></div>
+    <div class="band rv" style="--d:6"><b>Registro de ejecución</b><span>Quién hizo qué, con qué herramienta, cuánto tardó y si falló.</span></div>
+    <div class="band rv" style="--d:7"><b>Supervisión humana</b><span>Puntos donde una persona aprueba, corrige o toma el control.</span></div>
+  </div>
+  <p class="sm rv" style="--d:8;margin-top:14px">Arquitectura de referencia: no todos los sistemas necesitan todas estas capas. Agrega cada una cuando resuelva un problema real.</p>
+  <aside class="notes" data-time="1.5 min">
+    <p><b>Explicar:</b> recorrer el flujo de izquierda a derecha y luego las bandas transversales, que atraviesan todo el sistema.</p>
+    <p><b>Ejemplo:</b> “quiero cotizar 20 sillas”: entrada → orquestador → ventas → CRM/catálogo → verificación (¿precio correcto?) → respuesta. Si falla la verificación, vuelve atrás.</p>
+    <p><b>Pregunta:</b> “¿Qué banda les parece imprescindible incluso en un sistema pequeño?” (Normalmente: registro y restricciones).</p>
+    <p><b>Error a anticipar:</b> diseñar todas las capas desde el día uno. Es sobreingeniería.</p>
+  </aside>
+</section>
+
+<!-- ═════════ 12 SUBAGENTES ═════════ -->
+<section class="slide" data-sec="02 · Subagentes especializados" data-title="Subagentes especializados">
+  <div class="kicker rv">Subtema 02 · interactivo</div>
+  <h2 class="h2 h2s rv" style="--d:1">Subagentes <span class="serif lime">especializados</span></h2>
+  <p class="sm rv mono" style="--d:1;margin-top:10px;font-size:15px;letter-spacing:.1em">EMPRESA FICTICIA · MOBILIA NORTE · MUEBLES DE OFICINA</p>
+  <div class="row" style="gap:50px;margin-top:20px;align-items:flex-start">
+    <div class="rv" style="--d:2;position:relative;width:980px;height:640px" id="agWrap">
+      <svg class="dg" viewBox="0 0 980 640" width="980" height="640" style="position:absolute;inset:0">
+        <path class="edge l pp" data-dur="2.4" id="ae-0" d="M490 320 L 190 120"/>
+        <path class="edge l pp" data-dur="2.6" id="ae-1" d="M490 320 L 790 120"/>
+        <path class="edge l pp" data-dur="2.2" id="ae-2" d="M490 320 L 190 520"/>
+        <path class="edge l pp" data-dur="2.8" id="ae-3" d="M490 320 L 790 520"/>
+        <circle cx="490" cy="320" r="160" fill="none" stroke="rgba(242,241,234,.07)" stroke-dasharray="2 6"/>
+        <circle class="halo" cx="490" cy="320" r="76" fill="none" stroke="#C8EC88" stroke-width="1.5"/>
+        <circle cx="490" cy="320" r="76" fill="#121A24" stroke="#C8EC88" stroke-width="2.5"/>
+        <text x="490" y="312" text-anchor="middle" class="t-mono t-l" font-size="13">COORDINADOR</text>
+        <text x="490" y="342" text-anchor="middle" font-size="20">delega y valida</text>
+      </svg>
+      <button class="hit" style="left:190px;top:120px" data-ag="0"><span class="k">Agente 01</span><span class="t">Ventas</span></button>
+      <button class="hit" style="left:790px;top:120px" data-ag="1"><span class="k">Agente 02</span><span class="t">Soporte</span></button>
+      <button class="hit" style="left:190px;top:520px" data-ag="2"><span class="k">Agente 03</span><span class="t">Investigador</span></button>
+      <button class="hit" style="left:790px;top:520px" data-ag="3"><span class="k">Agente 04</span><span class="t">Redactor / revisor</span></button>
+    </div>
+    <div class="col rv" style="--d:3;flex:1">
+      <div class="panel" id="agDetail" style="padding:28px 30px;min-height:470px" aria-live="polite"></div>
+      <div class="note-strip" style="margin-top:16px;flex-direction:column;align-items:flex-start;gap:6px">
+        <p class="p" style="font-size:21px;color:var(--ivory)">Especializar = <em class="lime">reducir</em> responsabilidad y permisos.</p>
+        <p class="sm">Si dos agentes tienen el mismo rol, herramientas y datos, probablemente sobra uno.</p>
+      </div>
+    </div>
+  </div>
+  <aside class="notes" data-time="1.5 min">
+    <p><b>Explicar:</b> hacer clic en Ventas y en Redactor/revisor. Mostrar las cuatro preguntas de diseño: ¿de qué es responsable?, ¿qué información recibe?, ¿qué herramientas necesita?, ¿qué NO puede hacer?</p>
+    <p><b>Ejemplo:</b> el agente de ventas puede generar cotizaciones, pero no aplicar descuentos por encima de la política: eso conecta con la diapositiva de controles.</p>
+    <p><b>Pregunta:</b> “¿El investigador debería poder enviar correos a clientes?” (No: su función es reunir información; mínimo privilegio).</p>
+    <p><b>Error a anticipar:</b> crear un agente por cada tarea pequeña. La especialización se justifica por responsabilidades, herramientas o permisos distintos.</p>
+  </aside>
+</section>
+
+<!-- ═════════ 13 ROUTING ═════════ -->
+<section class="slide" data-sec="03 · Routing inteligente" data-title="Routing inteligente">
+  <div class="kicker rv">Subtema 03 · interactivo</div>
+  <h2 class="h2 h2s rv" style="--d:1">Routing inteligente: <span class="serif">¿a quién enviamos esto?</span></h2>
+  <div class="note-strip blue rv" style="--d:2;margin-top:22px">
+    <span class="tag blue">Caso</span>
+    <p class="p" style="color:var(--ivory);font-size:26px">«El cliente quiere comprar un producto, pero también reporta un <em>error de facturación</em>.»</p>
+  </div>
+  <div class="row" style="gap:50px;margin-top:26px;align-items:flex-start">
+    <div class="rv" style="--d:3">
+      <svg class="dg" id="rtSvg" viewBox="0 0 1000 520" width="1000" height="520">
+        <path class="edge l pp" data-dur="1.6" d="M170 260 L 260 260"/>
+        <path class="edge" id="rt-0" d="M460 260 C 540 260, 540 58, 620 58"/>
+        <path class="edge" id="rt-1" d="M460 260 C 540 260, 540 194, 620 194"/>
+        <path class="edge" id="rt-2" d="M460 260 C 540 260, 540 330, 620 330"/>
+        <path class="edge" id="rt-3" d="M460 260 C 540 260, 540 466, 620 466"/>
+        <rect class="box" x="0" y="220" width="170" height="80"/><text x="85" y="256" text-anchor="middle" class="t-mono t-g" font-size="13">SOLICITUD</text><text x="85" y="283" text-anchor="middle" font-size="20">del cliente</text>
+        <rect class="box l" x="260" y="205" width="200" height="110" style="fill:rgba(200,236,136,.08)"/><text x="360" y="250" text-anchor="middle" class="t-mono t-l" font-size="13">ROUTER</text><text x="360" y="284" text-anchor="middle" font-size="22" id="rtLbl">reglas</text>
+        <g font-size="22">
+          <rect class="box" id="rb-0" x="620" y="20" width="380" height="76"/><text x="646" y="66">Ventas</text><text x="1000" y="10" text-anchor="end" class="t-mono t-l" font-size="13" id="rs-0"></text>
+          <rect class="box" id="rb-1" x="620" y="156" width="380" height="76"/><text x="646" y="202">Soporte · facturación</text><text x="1000" y="146" text-anchor="end" class="t-mono t-l" font-size="13" id="rs-1"></text>
+          <rect class="box" id="rb-2" x="620" y="292" width="380" height="76"/><text x="646" y="338">Secuencial: Soporte → Ventas</text><text x="1000" y="282" text-anchor="end" class="t-mono t-l" font-size="13" id="rs-2"></text>
+          <rect class="box" id="rb-3" x="620" y="428" width="380" height="76"/><text x="646" y="474">Revisión humana</text><text x="1000" y="418" text-anchor="end" class="t-mono t-l" font-size="13" id="rs-3"></text>
+        </g>
+      </svg>
+    </div>
+    <div class="col rv" style="--d:4;flex:1;gap:14px">
+      <div class="tabs" role="tablist">
+        <button class="btn on" data-rt="0" role="tab">A · Determinista</button>
+        <button class="btn" data-rt="1" role="tab">B · LLM</button>
+        <button class="btn" data-rt="2" role="tab">C · Híbrida</button>
+      </div>
+      <div class="panel" id="rtTxt" style="padding:24px 26px;min-height:400px" aria-live="polite"></div>
+    </div>
+  </div>
+  <aside class="notes" data-time="2 min">
+    <p><b>Explicar:</b> antes de mostrar estrategias, preguntar al grupo a dónde enviarían el caso. Luego hacer clic en A, B y C.</p>
+    <p><b>Conceptos:</b> <i>routing compuesto</i> = dividir la solicitud en subtareas para dos especialistas; <i>secuencial</i> = uno después del otro (primero resolver el pago, después cerrar la venta); <i>escalamiento</i> = enviar a una persona cuando hay riesgo, dinero o baja confianza.</p>
+    <p><b>Pregunta:</b> “¿Qué pasa si las reglas encuentran ‘comprar’ y también ‘error’?” (Conflicto: hace falta una regla de prioridad).</p>
+    <p><b>Error a anticipar:</b> confundir este routing (agentes) con el de OpenRouter (modelos).</p>
+  </aside>
+</section>
+
+<!-- ═════════ 14 JEV ═════════ -->
+<section class="slide" data-sec="03 · Routing inteligente" data-title="Jev: modelos especializados en decidir">
+  <div class="kicker rv">Modelos de decisión · TypeSafe AI · septiembre 2026</div>
+  <h2 class="h2 h2s rv" style="--d:1">Jev: un modelo que no conversa, <span class="serif lime">decide</span></h2>
+  <div class="row" style="gap:28px;margin-top:30px;align-items:center">
+    <div class="panel rv" style="--d:2;padding:22px 24px;width:520px">
+      <span class="tag">Estado · entrada</span>
+<pre class="code" style="margin-top:14px">{
+  <span class="k">"mensaje"</span>: <span class="s">"Quiero 20 sillas, pero
+   mi pago marca error"</span>,
+  <span class="k">"cliente"</span>: <span class="s">"recurrente"</span>,
+  <span class="k">"canal"</span>: <span class="s">"chat web"</span>
+}</pre>
+    </div>
+    <svg class="dg rv" style="--d:3" viewBox="0 0 300 260" width="300" height="260">
+      <path class="edge l pp" data-dur="1.4" d="M0 130 L 95 130"/>
+      <path class="edge l pp" data-dur="1.4" d="M205 130 C 250 130, 250 30, 300 30"/>
+      <path class="edge l pp" data-dur="1.4" d="M205 130 L 300 130"/>
+      <path class="edge l pp" data-dur="1.4" d="M205 130 C 250 130, 250 230, 300 230"/>
+      <circle class="halo" cx="150" cy="130" r="55" fill="none" stroke="#C8EC88" stroke-width="1.5"/>
+      <circle cx="150" cy="130" r="55" fill="#121A24" stroke="#C8EC88" stroke-width="2.5"/>
+      <text x="150" y="128" text-anchor="middle" font-size="34" style="font-family:var(--serif);font-style:italic">Jev</text>
+      <text x="150" y="152" text-anchor="middle" class="t-mono t-l" font-size="11">SYSTEM ONE</text>
+    </svg>
+    <div class="typed rv" style="--d:4;flex:1">
+      <div class="ty"><b>Choice</b><span class="p" style="font-size:19px">Área → <span class="mono lime">ventas 0.46 · soporte 0.41 · humano 0.13</span></span></div>
+      <div class="ty"><b>Score</b><span class="p" style="font-size:19px">Urgencia (escala 0–3) → <span class="mono lime">2.1</span></span></div>
+      <div class="ty"><b>Noul</b><span class="p" style="font-size:19px">¿Menciona un problema de pago? (sí/no) → <span class="mono lime">0.93</span></span></div>
+      <span class="tag warn" style="justify-self:start">Valores ilustrativos · no son salidas reales</span>
+    </div>
+  </div>
+  <div class="row" style="gap:50px;margin-top:30px;align-items:flex-start">
+    <div class="col rv" style="--d:5;width:740px;gap:14px">
+      <p class="p"><em>Un LLM produce texto.</em> Jev recibe un <em>estado</em> (texto o JSON) y <em>preguntas definidas</em>, y devuelve respuestas tipadas: una elección, una puntuación o una probabilidad.</p>
+      <p class="p"><em>System One Models:</em> el nombre alude al “Sistema 1” de Kahneman, el pensamiento rápido e intuitivo. Modelos para decisiones acotadas, no para deliberar ni redactar.</p>
+    </div>
+    <div class="rv" style="--d:6;flex:1">
+      <table class="dtab">
+        <tr><td>Generación de lenguaje</td><td>Redactar, explicar, resumir</td><td class="blue">LLM</td></tr>
+        <tr><td>Clasificación</td><td>Elegir entre categorías</td><td class="lime">JEV · CHOICE</td></tr>
+        <tr><td>Puntuación</td><td>Ubicar en una escala</td><td class="lime">JEV · SCORE</td></tr>
+        <tr><td>Decisión estructurada</td><td>Sí/no con probabilidad</td><td class="lime">JEV · NOUL</td></tr>
+        <tr><td>Política de ejecución</td><td>Qué hacer con esa probabilidad</td><td class="warn">TU CÓDIGO</td></tr>
+      </table>
+    </div>
+  </div>
+  <p class="sm rv" style="--d:7;margin-top:18px"><span class="warn">⚠</span> Jev <em>no</em> es un agente completo ni sustituye a un LLM: no redacta ni ejecuta herramientas. Su salida siempre respeta el formato, pero <em>formato válido no significa respuesta correcta</em>.</p>
+  <aside class="notes" data-time="2 min">
+    <p><b>Explicar para principiantes:</b> un LLM es como alguien que te contesta con un párrafo. Jev es como un formulario inteligente: le das la situación y le preguntas “¿ventas, soporte o humano?”, y te devuelve una de esas opciones con probabilidades. No puede responder otra cosa.</p>
+    <p><b>Tipos de pregunta (según documentación del fabricante y fuentes secundarias):</b> Choice (elige entre opciones definidas, con probabilidad por opción), Score (posición en una escala definida), Noul (probabilidad de sí/no).</p>
+    <p><b>Calibración:</b> el fabricante afirma que entrena para que las probabilidades estén calibradas (si dice 80%, acierta ~80% de las veces <i>en conjunto</i>). Eso no garantiza que una respuesta individual sea correcta.</p>
+    <p><b>Pregunta:</b> “¿Por qué podría ser útil que un modelo NO pueda escribir texto libre?” (Salidas predecibles que el código puede usar directamente).</p>
+    <p><b>Error a anticipar:</b> “Jev nunca se equivoca porque no alucina”. La afirmación del fabricante se refiere al formato, no a la exactitud.</p>
+    <p class="src">Fuentes: typesafe.ai/blog/introducing-system-one-models-and-jev · docs.typesafe.ai. Afirmaciones de rendimiento del fabricante NO se muestran por no estar verificadas de forma independiente.</p>
+  </aside>
+</section>
+
+<!-- ═════════ 15 JEV + ORQUESTADOR ═════════ -->
+<section class="slide" data-sec="03 · Routing inteligente" data-title="Jev + orquestador">
+  <div class="kicker rv">Demostración · probabilidades simuladas</div>
+  <div class="row" style="justify-content:space-between;align-items:flex-end">
+    <h2 class="h2 h2s rv" style="--d:1">Decidir con <span class="serif lime">incertidumbre</span></h2>
+    <div class="row rv" style="--d:2;gap:10px">
+      <button class="btn" id="jvReset">↺ Reiniciar</button>
+      <button class="btn on" id="jvNext">Siguiente paso ▸</button>
+    </div>
+  </div>
+  <p class="p rv" style="--d:2;margin-top:14px">«Quiero comprar <em>20 sillas</em>, pero mi sistema de pago presenta un <em>error</em>.»</p>
+  <div class="steps">
+    <div class="stp" data-s="1"><div class="sn">01 · Estado</div><h4>Lo que sabemos</h4><p>Mensaje del cliente, historial (recurrente), canal (chat web) y pedido en curso.</p></div>
+    <div class="stp" data-s="2"><div class="sn">02 · Pregunta</div><h4>Choice tipada</h4><p>¿Qué destino debe atender esto?</p><p class="mono lime" style="font-size:15px;margin-top:12px">opciones = [ventas, soporte, revisión humana]</p></div>
+    <div class="stp" data-s="3"><div class="sn">03 · Probabilidades</div><h4>Salida del modelo</h4>
+      <div class="bar top" data-p=".46"><div class="lb"><span>Ventas</span><b>0.46</b></div><div class="tr"><div class="fl"></div><i class="thr"></i></div></div>
+      <div class="bar" data-p=".41"><div class="lb"><span>Soporte</span><b>0.41</b></div><div class="tr"><div class="fl"></div><i class="thr"></i></div></div>
+      <div class="bar" data-p=".13"><div class="lb"><span>Revisión humana</span><b>0.13</b></div><div class="tr"><div class="fl"></div><i class="thr"></i></div></div>
+      <p class="sm" style="font-size:14px;margin-top:12px">Simulado · ilustrativo</p></div>
+    <div class="stp" data-s="4"><div class="sn">04 · Política</div><h4>Umbral de confianza</h4>
+      <p>Decide tu código, no el modelo. Mueve el umbral:</p>
+      <input type="range" id="jvThr" min="0.30" max="0.90" step="0.01" value="0.60" aria-label="Umbral de confianza">
+      <p class="mono" style="font-size:16px">umbral = <span class="warn" id="jvThrV">0.60</span></p>
+      <p class="sm" style="font-size:15px;margin-top:8px">Ningún valor es universal: se calibra con datos del negocio.</p></div>
+    <div class="stp" data-s="5"><div class="sn">05 · Delegación</div><h4 id="jvOutH">Resultado</h4><div class="outc" id="jvOut"></div></div>
+  </div>
+  <div class="note-strip warn rv" style="--d:4;margin-top:22px;flex-direction:column;align-items:flex-start;gap:8px">
+    <span class="tag warn">Hallazgo de investigación · según el resumen del artículo</span>
+    <p class="p" style="font-size:21px">En un estudio con 4 500 ejecuciones (Ling et al., arXiv:2610.13092), integrar Jev <em>redujo costo y latencia de decisión</em>, pero el éxito de las tareas se mantuvo cerca de la línea base en un entorno y <em>bajó en dos agentes móviles</em>. Conclusión: mide el <em>éxito final</em>, no solo el costo de cada decisión.</p>
+  </div>
+  <aside class="notes" data-time="2.5 min">
+    <p><b>Explicar:</b> avanzar paso a paso con “Siguiente paso”. Estado → pregunta de decisión → probabilidades → política de selección → delegación.</p>
+    <p><b>Demostración del umbral:</b> con 0.60, ninguna opción lo supera → el sistema pide aclaración o escala a un LLM más capaz. Bajar el umbral a 0.45 → delega solo a Ventas… y el error de pago podría quedar sin atender. Esa es la lección: un umbral mal elegido automatiza errores.</p>
+    <p><b>Matiz:</b> dos opciones cercanas (0.46 vs 0.41) suelen indicar que la solicitud tiene dos intenciones: candidata a routing compuesto o secuencial.</p>
+    <p><b>Pregunta:</b> “¿Quién debería decidir el umbral: el desarrollador, el negocio o el modelo?”</p>
+    <p><b>Error a anticipar:</b> “una probabilidad de 0.9 garantiza que es correcto”. No: es una estimación; se valida con datos.</p>
+    <p class="src">Ling, Y., Yu, S., Chen, Z. y Fang, C. (2026). When Faster Decisions Do Not Make Better Agents: An Empirical Study of Jev in Agent Workflows. arXiv:2610.13092. Resumen consultado vía buscador; leer el artículo completo antes de citar cifras adicionales.</p>
+  </aside>
+</section>
+
+<!-- ═════════ 16 HERRAMIENTAS DEL ORQUESTADOR ═════════ -->
+<section class="slide" data-sec="03 · Routing inteligente" data-title="Herramientas de un orquestador">
+  <div class="kicker rv">Mapa por función</div>
+  <h2 class="h2 h2s rv" style="--d:1">¿Qué puede usar un <span class="serif lime">orquestador</span>?</h2>
+  <div class="rv" style="--d:2;position:relative;width:1640px;height:690px;margin-top:20px">
+    <svg class="dg" viewBox="0 0 1640 690" width="1640" height="690" style="position:absolute;inset:0">
+      <ellipse cx="820" cy="345" rx="230" ry="150" fill="none" stroke="rgba(242,241,234,.08)" stroke-dasharray="2 7"/>
+      <ellipse cx="820" cy="345" rx="360" ry="250" fill="none" stroke="rgba(242,241,234,.06)" stroke-dasharray="2 7"/>
+      <path class="edge l pp" data-dur="2.6" data-rev d="M820 345 C 640 345, 560 105, 400 105"/>
+      <path class="edge l pp" data-dur="2.4" d="M820 345 C 1000 345, 1080 105, 1240 105"/>
+      <path class="edge l pp" data-dur="2.2" d="M820 345 L 400 345"/>
+      <path class="edge l pp" data-dur="2.5" d="M820 345 L 1240 345"/>
+      <path class="edge l pp" data-dur="2.8" data-rev d="M820 345 C 640 345, 560 585, 400 585"/>
+      <path class="edge" stroke-dasharray="5 7" d="M820 345 C 1000 345, 1080 585, 1240 585"/>
+      <circle class="halo" cx="820" cy="345" r="88" fill="none" stroke="#C8EC88" stroke-width="1.5"/>
+      <circle cx="820" cy="345" r="88" fill="#121A24" stroke="#C8EC88" stroke-width="2.5"/>
+      <text x="820" y="340" text-anchor="middle" font-size="25" font-weight="500">Orquestador</text>
+      <text x="820" y="368" text-anchor="middle" class="t-mono t-l" font-size="12">COORDINA</text>
+      <g fill="#0A111B" stroke="#C8EC88" stroke-width="2"><circle cx="400" cy="105" r="7"/><circle cx="1240" cy="105" r="7"/><circle cx="400" cy="345" r="7"/><circle cx="1240" cy="345" r="7"/><circle cx="400" cy="585" r="7"/></g>
+      <circle cx="1240" cy="585" r="7" fill="#0A111B" stroke="#8994A3" stroke-width="2"/>
+    </svg>
+    <div class="cl" style="left:0;top:50px"><div class="k">Entornos agénticos</div><div class="t">Hermes · OpenCode</div><p>Ejecutan el ciclo del agente con herramientas, memoria y permisos.</p></div>
+    <div class="cl r" style="right:0;top:50px"><div class="k">Acceso a modelos</div><div class="t">OpenRouter</div><p>Elige y accede a modelos/proveedores, con fallbacks.</p></div>
+    <div class="cl" style="left:0;top:290px"><div class="k">Decisión estructurada</div><div class="t">Jev</div><p>Elecciones, puntuaciones y probabilidades para pasos acotados.</p></div>
+    <div class="cl r" style="right:0;top:290px"><div class="k">Capacidades</div><div class="t">APIs · MCP</div><p>Acciones concretas en otros sistemas, de forma estándar.</p></div>
+    <div class="cl" style="left:0;top:530px"><div class="k">Frameworks de orquestación</div><div class="t">LangGraph · CrewAI…</div><p>Coordinar agentes con código. Verificar en su documentación oficial.</p></div>
+    <div class="cl r alt" style="right:0;top:530px"><div class="k">Alternativa · workflows</div><div class="t" style="color:var(--iv2)">n8n</div><p>Integrar sistemas con flujos definidos, con o sin IA.</p></div>
+  </div>
+  <aside class="notes" data-time="1 min">
+    <p><b>Explicar:</b> no es para instalar todo. Es para saber qué problema resuelve cada categoría y no mezclar funciones.</p>
+    <p><b>Ejemplo:</b> “Necesito que el sistema elija entre 3 especialistas de forma rápida y estructurada” → decisión (Jev o un LLM con salida estructurada). “Necesito leer el CRM” → API o MCP.</p>
+    <p><b>Pregunta:</b> “¿Cuál de estas categorías ya usaron en el curso?” (Hermes, OpenCode, OpenRouter, MCP, n8n).</p>
+    <p><b>Error a anticipar:</b> pensar que LangGraph o CrewAI son obligatorios. Son opciones; sus capacidades deben verificarse en su documentación vigente. n8n queda como alternativa de integración, no como el tema central.</p>
+  </aside>
+</section>
+
+<!-- ═════════ 17 CONTROLES ═════════ -->
+<section class="slide" data-sec="04 · Monitoreo y optimización" data-title="Controles, handoff y escalamiento">
+  <div class="kicker rv">Recordatorio de la semana anterior · interactivo</div>
+  <h2 class="h2 h2s rv" style="--d:1">Controles, <span class="serif">handoff</span> y escalamiento</h2>
+  <p class="p rv" style="--d:2;margin-top:14px"><span class="tag" style="margin-right:12px">Caso ficticio</span><em>Laura Pérez</em> solicita un descuento del <em class="warn">20%</em>. La política permite un máximo automático del <em class="lime">10%</em>.</p>
+  <div class="gate-flow rv" style="--d:3" id="gate">
+    <div class="gnode"><div class="k">1 · Solicitud</div><h4>Laura pide 20%</h4><p>Llega por chat al agente de ventas.</p></div>
+    <div class="gnode"><div class="k">2 · El agente propone</div><h4>“Aplicar 20%”</h4><p>Propone; todavía no ejecuta.</p></div>
+    <div class="gnode stop held"><div class="k">3 · La política verifica</div><h4>20% &gt; 10%</h4><p>Bloqueo técnico: requiere autorización.</p></div>
+    <div class="gnode" id="gHuman"><div class="gate-pulse" id="gPulse"></div><div class="k">4 · Humano decide</div><h4>¿Autorizar?</h4>
+      <div class="gbtns"><button class="btn" id="gYes">Aprobar</button><button class="btn" id="gNo">Rechazar</button></div></div>
+    <div class="gnode" id="gLog"><div class="k">5 · El sistema registra</div><h4 id="gLogH">En espera…</h4><p id="gLogP">Nada se ejecuta sin autorización.</p></div>
+  </div>
+  <div class="row" style="gap:40px;margin-top:28px;align-items:stretch">
+    <div class="panel rv" style="--d:4;padding:22px 26px;width:820px">
+      <span class="tag">Validación técnica · pseudocódigo</span>
+<pre class="code" style="margin-top:12px"><span class="k">if</span> descuento_propuesto &gt; <span class="n">0.10</span>:
+    estado = <span class="s">"PENDIENTE_APROBACION"</span>
+    notificar(supervisor)
+    registrar(solicitud, motivo=<span class="s">"excede política"</span>)
+    <span class="k">return</span>   <span class="c"># la acción NO se ejecuta</span></pre>
+    </div>
+    <div class="col rv" style="--d:5;flex:1;justify-content:center;gap:16px">
+      <p class="h3" style="font-size:32px">Un prompt <span class="serif warn">pide</span>.<br>Un control técnico <span class="serif lime">impide</span>.</p>
+      <p class="sm">“No des más de 10%” en las instrucciones puede ignorarse o malinterpretarse. La validación en código no depende de que el modelo obedezca.</p>
+    </div>
+  </div>
+  <aside class="notes" data-time="1.5 min">
+    <p><b>Explicar:</b> recuperar Human-in-the-Loop sin repetir la clase: el agente propone, la política técnica verifica, el humano autoriza o rechaza, el sistema registra.</p>
+    <p><b>Demostración:</b> hacer clic en “Aprobar” y luego reiniciar entrando de nuevo a la diapositiva; mostrar “Rechazar”. En ambos casos queda registro.</p>
+    <p><b>Pregunta:</b> “¿Por qué no basta con escribir en el prompt ‘nunca des más del 10%’?”</p>
+    <p><b>Error a anticipar:</b> confiar en instrucciones como mecanismo de seguridad. Las instrucciones guían; los controles en código hacen cumplir. Handoff = traspaso del caso a otra persona o agente con el contexto necesario.</p>
+  </aside>
+</section>
+
+<!-- ═════════ 18 MÉTRICAS ═════════ -->
+<section class="slide" data-sec="04 · Monitoreo y optimización" data-title="Cómo medir un sistema multiagente">
+  <div class="row" style="justify-content:space-between;align-items:center">
+    <div class="kicker rv">Subtema 04 · observabilidad</div>
+    <span class="sim-banner rv" style="--d:1">⚠ Datos ficticios · solo demostración</span>
+  </div>
+  <h2 class="h2 h2s rv" style="--d:1">¿Cómo medir la <span class="serif lime">calidad</span> de un sistema multiagente?</h2>
+  <div class="row" style="gap:34px;margin-top:30px;align-items:flex-start">
+    <div class="kpis rv" style="--d:2;width:1080px">
+      <div class="kpi l"><div class="k">Routing correcto</div><div class="v"><span data-to="91.4">0</span><small>%</small></div><div class="d">Casos enviados al especialista adecuado.</div></div>
+      <div class="kpi l"><div class="k">Finalización exitosa</div><div class="v"><span data-to="84.2">0</span><small>%</small></div><div class="d">Tareas resueltas de principio a fin.</div></div>
+      <div class="kpi b"><div class="k">Latencia p50 / p95</div><div class="v"><span data-to="6.8">0</span><small>s / 19 s</small></div><div class="d">Tiempo típico y en los peores casos.</div></div>
+      <div class="kpi b"><div class="k">Costo por tarea completada</div><div class="v"><span data-to="0.031" data-dec="3">0</span><small>USD</small></div><div class="d">Simulado. No por llamada: por resultado logrado.</div></div>
+      <div class="kpi w"><div class="k">Errores de herramientas</div><div class="v"><span data-to="3.7">0</span><small>%</small></div><div class="d">Llamadas a APIs o tools que fallan.</div></div>
+      <div class="kpi"><div class="k">Escalamiento a humano</div><div class="v"><span data-to="8.9">0</span><small>%</small></div><div class="d">Ni muy alto (inútil) ni cero (riesgoso).</div></div>
+      <div class="kpi"><div class="k">Calidad de respuesta</div><div class="v"><span data-to="4.1">0</span><small>/ 5</small></div><div class="d">Evaluada con rúbrica humana o automática.</div></div>
+      <div class="kpi"><div class="k">Recuperación de errores</div><div class="v"><span data-to="62">0</span><small>%</small></div><div class="d">Fallas que el sistema corrige solo.</div></div>
+    </div>
+    <div class="panel rv" style="--d:3;flex:1;padding:22px 24px">
+      <div class="kicker" style="font-size:14px">Más agentes ≠ mejor</div>
+      <svg class="dg" viewBox="0 0 470 330" width="470" height="330" style="margin-top:12px">
+        <line x1="40" y1="290" x2="460" y2="290" stroke="rgba(242,241,234,.3)"/>
+        <line x1="40" y1="290" x2="40" y2="20" stroke="rgba(242,241,234,.3)"/>
+        <rect x="140" y="20" width="130" height="270" fill="rgba(200,236,136,.06)"/>
+        <text x="205" y="44" text-anchor="middle" class="t-mono t-l" font-size="11">ZONA ÚTIL</text>
+        <path d="M40 250 C 120 120, 180 70, 220 75 C 280 82, 360 160, 460 230" fill="none" stroke="#C8EC88" stroke-width="3"/>
+        <path d="M40 270 C 160 250, 300 170, 460 50" fill="none" stroke="#F2A27C" stroke-width="2.5" stroke-dasharray="6 6"/>
+        <text x="455" y="222" text-anchor="end" font-size="15" class="t-l">tasa de éxito</text>
+        <text x="455" y="74" text-anchor="end" font-size="15" class="t-w">costo y latencia</text>
+        <text x="250" y="318" text-anchor="middle" font-size="14" class="t-g">más agentes · más pasos · más llamadas →</text>
+      </svg>
+      <p class="sm" style="font-size:15px;margin-top:6px">Curva conceptual, no medida. Cada paso extra puede introducir errores, latencia y costo.</p>
+    </div>
+  </div>
+  <aside class="notes" data-time="1.5 min">
+    <p><b>Explicar:</b> todos los valores son inventados para enseñar cómo leer un panel. Lo importante son las definiciones.</p>
+    <p><b>Métrica clave:</b> costo por <i>tarea completada</i>, no por llamada. Un sistema barato que falla mucho sale caro.</p>
+    <p><b>Pregunta:</b> “Si el escalamiento a humano es 0%, ¿es buena noticia?” (Posiblemente no: puede indicar que el sistema decide cosas que no debería).</p>
+    <p><b>Error a anticipar:</b> optimizar una sola métrica (p. ej. latencia) y empeorar la tasa de éxito. Conecta con el hallazgo sobre Jev de la diapositiva 15.</p>
+  </aside>
+</section>
+
+<!-- ═════════ 19 SIMULADOR ═════════ -->
+<section class="slide" data-sec="04 · Monitoreo y optimización" data-title="Simulador de orquestación">
+  <div class="row" style="justify-content:space-between;align-items:center">
+    <div class="kicker rv">Simulador interactivo</div>
+    <span class="sim-banner rv" style="--d:1">● Simulación local determinista · ningún modelo se está ejecutando</span>
+  </div>
+  <h2 class="h2 h2s rv" style="--d:1">Simulador de <span class="serif lime">orquestación</span></h2>
+  <div class="sim">
+    <div class="rv" style="--d:2">
+      <button class="case" data-case="0"><span class="k">Caso 1</span><span class="t">Cotización de 20 sillas</span><span class="s">Solicitud comercial clara</span></button>
+      <button class="case" data-case="1"><span class="k">Caso 2</span><span class="t">Incidencia de acceso</span><span class="s">Problema técnico de cuenta</span></button>
+      <button class="case" data-case="2"><span class="k">Caso 3</span><span class="t">Descuento del 20%</span><span class="s">Límite automático: 10%</span></button>
+      <div class="resp" id="simReq"><b>Solicitud</b><span class="gray">Selecciona un caso para iniciar.</span></div>
+    </div>
+    <div class="rv" style="--d:3">
+      <svg class="dg sim-svg" viewBox="0 0 760 620" width="760" height="620">
+        <path class="edge" id="se-req" d="M380 96 L 380 206"/>
+        <path class="edge" id="se-0" d="M380 270 L 120 190"/>
+        <path class="edge" id="se-1" d="M380 270 L 640 190"/>
+        <path class="edge" id="se-2" d="M380 270 L 120 430"/>
+        <path class="edge" id="se-3" d="M380 270 L 640 430"/>
+        <path class="edge" id="se-4" d="M380 270 L 380 520"/>
+        <g class="req" id="sn-req"><rect x="230" y="36" width="300" height="60"/><text x="380" y="73" text-anchor="middle" font-size="20">Solicitud entrante</text></g>
+        <g class="orch" id="sn-orch"><circle class="ring" cx="380" cy="270" r="64" fill="none" stroke="#C8EC88" stroke-width="2" style="transform-box:fill-box;transform-origin:center"/><circle class="c" cx="380" cy="270" r="64"/><text x="380" y="266" text-anchor="middle" class="t-mono t-l" font-size="12">ORQUESTADOR</text><text x="380" y="292" text-anchor="middle" font-size="17" id="sOrchT">en espera</text></g>
+        <g class="sp" id="sn-0"><circle class="c" cx="120" cy="190" r="46"/><text x="120" y="197" text-anchor="middle">Ventas</text></g>
+        <g class="sp" id="sn-1"><circle class="c" cx="640" cy="190" r="46"/><text x="640" y="197" text-anchor="middle">Soporte</text></g>
+        <g class="sp" id="sn-2"><circle class="c" cx="120" cy="430" r="46"/><text x="120" y="437" text-anchor="middle" font-size="16">Investig.</text></g>
+        <g class="sp" id="sn-3"><circle class="c" cx="640" cy="430" r="46"/><text x="640" y="437" text-anchor="middle" font-size="16">Redactor</text></g>
+        <g class="sp hum" id="sn-4"><circle class="c" cx="380" cy="540" r="46"/><text x="380" y="547" text-anchor="middle">Humano</text></g>
+      </svg>
+    </div>
+    <div class="rv" style="--d:4">
+      <div class="log" id="simLog" aria-live="polite"><div class="ts">// registro de ejecución (simulado)</div></div>
+      <div class="resp" id="simResp"><b>Resultado</b><span class="gray">—</span></div>
+    </div>
+  </div>
+  <aside class="notes" data-time="2.5 min">
+    <p><b>Explicar:</b> ejecutar los tres casos en orden. Señalar en cada uno: 1) la solicitud, 2) el análisis del orquestador, 3) el especialista iluminado, 4) la decisión, 5) la respuesta o escalamiento, 6) el registro de la ruta.</p>
+    <p><b>Aclarar:</b> es una simulación local y determinista: no hay API keys, ni modelo, ni datos reales. Siempre da el mismo resultado.</p>
+    <p><b>Pregunta:</b> en el caso 3, “¿qué pasaría si quitamos el control de política?”.</p>
+    <p><b>Puente a la práctica:</b> “Ahora ustedes diseñarán en papel (o en Hermes/OpenCode) el routing de su propio proceso con al menos dos especialistas y un punto de control humano”.</p>
+  </aside>
+</section>
+
+<!-- ═════════ 20 CIERRE ═════════ -->
+<section class="slide s-close" data-sec="Cierre" data-title="La arquitectura importa">
+  <div class="gl" data-scene="system" aria-hidden="true"></div>
+  <div class="veil"></div>
+  <div style="position:relative;z-index:2">
+    <div class="kicker rv">Cierre · la arquitectura importa</div>
+    <h2 class="h2 rv" style="--d:1;max-width:1150px;font-size:62px">El futuro no consiste solamente en modelos más inteligentes. Consiste en <span class="serif lime">sistemas mejor diseñados.</span></h2>
+    <div class="recap rv" style="--d:2">
+      <div><b>LLM</b><span>aporta capacidades cognitivas</span></div>
+      <div><b>Harness</b><span>organiza su ejecución</span></div>
+      <div><b>Herramientas</b><span>permiten actuar</span></div>
+      <div><b>Orquestador</b><span>coordina</span></div>
+      <div><b>Especialistas</b><span>ejecutan responsabilidades</span></div>
+      <div><b>Modelos de decisión</b><span>ayudan a elegir opciones</span></div>
+      <div><b>Controles</b><span>mantienen los límites</span></div>
+      <div><b>Observabilidad</b><span>comprueba resultados</span></div>
+    </div>
+    <div class="note-strip rv" style="--d:3;margin-top:34px;max-width:1080px;flex-direction:column;align-items:flex-start;gap:10px">
+      <span class="tag lime">Para la práctica</span>
+      <p class="p" style="color:var(--ivory);font-size:28px;font-family:var(--serif);font-style:italic;line-height:1.3">«Si mañana tuvieras que automatizar un proceso de tu trabajo, ¿crearías un agente generalista o un equipo especializado? ¿Por qué?»</p>
+    </div>
+  </div>
+  <aside class="notes" data-time="1 min">
+    <p><b>Explicar:</b> recapitular con una frase por componente. Pedir a 2 o 3 personas que respondan la pregunta final en voz alta o en el chat.</p>
+    <p><b>Criterio de buena respuesta:</b> justifica con volumen, diferencia de tareas, permisos, riesgos y costo; no responde “multiagente porque es más avanzado”.</p>
+    <p><b>Transición:</b> pasar a la práctica (≈55 min restantes).</p>
+    <p><b>Referencias:</b> tecla R para abrir la lista completa de fuentes.</p>
+  </aside>
+</section>
+
+</main>
+</div>
+
+<!-- HUD -->
+<div class="progress" aria-hidden="true"><i id="prog"></i></div>
+<nav class="hud" id="hud" aria-label="Controles de la presentación">
+  <button id="bPrev" title="Anterior (←)" aria-label="Diapositiva anterior">‹</button>
+  <span class="cnt" id="cnt"><b>01</b> / 20</span>
+  <button id="bNext" title="Siguiente (→)" aria-label="Diapositiva siguiente">›</button>
+  <button id="bNotes" title="Notas del profesor (N)" aria-label="Notas del profesor">N</button>
+  <button id="bPres" title="Vista de presentador en otra ventana (P)" aria-label="Vista de presentador">P</button>
+  <button id="bRefs" title="Referencias (R)" aria-label="Referencias">R</button>
+  <button id="bFull" title="Pantalla completa (F)" aria-label="Pantalla completa">⤢</button>
+</nav>
+<div class="help">← → navegar · F pantalla completa · N notas · P presentador · R referencias</div>
+<aside class="notes-panel" id="notesPanel" aria-label="Notas del profesor"><button class="close" id="nClose" aria-label="Cerrar notas">✕</button><div id="notesBody"></div></aside>
+<div class="toast" id="toast" role="status"></div>
+
+<section class="refs" id="refs" aria-label="Referencias">
+  <button class="close" id="rClose" aria-label="Cerrar referencias">✕</button>
+  <div class="refs-in">
+    <div class="kicker">E1577 · Semana 26 · Diseño de Agentes</div>
+    <h2>Referencias y notas de verificación</h2>
+    <p>Este material es <b>contenido complementario del profesor</b>; no constituye documentación institucional oficial de Top Learning por el solo hecho de aparecer en esta presentación.</p>
+    <h3>Documentación técnica (fuentes primarias)</h3>
+    <ul>
+      <li>Nous Research. <i>Hermes Agent — Documentation.</i> <a href="https://hermes-agent.nousresearch.com/docs" target="_blank" rel="noopener">https://hermes-agent.nousresearch.com/docs</a></li>
+      <li>OpenCode. <i>Docs</i> y <i>Agents.</i> <a href="https://opencode.ai/docs/" target="_blank" rel="noopener">https://opencode.ai/docs/</a> · <a href="https://opencode.ai/docs/agents" target="_blank" rel="noopener">https://opencode.ai/docs/agents</a> · <a href="https://docs.opencode.ai/docs/" target="_blank" rel="noopener">https://docs.opencode.ai/docs/</a></li>
+      <li>OpenRouter. <i>Documentation</i> (model routing, model fallbacks). <a href="https://openrouter.ai/docs" target="_blank" rel="noopener">https://openrouter.ai/docs</a> · <a href="https://openrouter.ai/blog/insights/model-routing/" target="_blank" rel="noopener">https://openrouter.ai/blog/insights/model-routing/</a></li>
+      <li>Model Context Protocol. <a href="https://modelcontextprotocol.io" target="_blank" rel="noopener">https://modelcontextprotocol.io</a></li>
+      <li>n8n. <i>Documentation.</i> <a href="https://docs.n8n.io" target="_blank" rel="noopener">https://docs.n8n.io</a></li>
+      <li>LangGraph y CrewAI: consultar su documentación oficial vigente antes de afirmar capacidades.</li>
+    </ul>
+    <h3>Afirmaciones del fabricante</h3>
+    <ul>
+      <li>TypeSafe AI. <i>Introducing System One Models and Jev.</i> <a href="https://typesafe.ai/blog/introducing-system-one-models-and-jev" target="_blank" rel="noopener">https://typesafe.ai/blog/introducing-system-one-models-and-jev</a></li>
+      <li>TypeSafe AI. <i>Docs — Introduction.</i> <a href="https://docs.typesafe.ai/introduction" target="_blank" rel="noopener">https://docs.typesafe.ai/introduction</a></li>
+    </ul>
+    <h3>Investigación</h3>
+    <ul>
+      <li>Ling, Y., Yu, S., Chen, Z. y Fang, C. (2026). <i>When Faster Decisions Do Not Make Better Agents: An Empirical Study of Jev in Agent Workflows.</i> arXiv:2610.13092. <a href="https://arxiv.org/abs/2610.13092" target="_blank" rel="noopener">https://arxiv.org/abs/2610.13092</a></li>
+      <li><i>From Question Answering to Task Completion: A Survey on Agent System and Harness Design</i> (arXiv, 2026). <a href="https://arxiv.org/pdf/2606.20683" target="_blank" rel="noopener">https://arxiv.org/pdf/2606.20683</a></li>
+    </ul>
+    <h3>Ejemplos inventados para la clase</h3>
+    <ul>
+      <li>Mobilia Norte, Laura Pérez, los tres casos del simulador, las probabilidades de Jev y todas las métricas del panel son <b>ficticios</b> y tienen fines exclusivamente didácticos.</li>
+      <li>La curva “más agentes ≠ mejor” es conceptual, no una medición.</li>
+    </ul>
+    <h3>Nota de verificación</h3>
+    <p>Durante la preparación, el entorno de trabajo no pudo abrir directamente las URL primarias (fallo de resolución DNS). El contenido se contrastó con resultados de búsqueda que citan esas fuentes y con fuentes secundarias. Se omitieron cifras de precios, velocidad y benchmarks del fabricante. <b>Antes de la clase, revisa las páginas oficiales</b> por si cambiaron funciones, nombres de agentes (p. ej. subagentes de OpenCode) o límites de OpenRouter.</p>
+    <p style="margin-top:30px" class="gray">Atajos: ← → navegar · F pantalla completa · N notas · P presentador · R referencias · Esc cerrar · Ctrl/Cmd+P imprimir a PDF (una diapositiva por página).</p>
+  </div>
+</section>
+
+<script>
+(() => {
+'use strict';
+const $ = (s, r = document) => r.querySelector(s);
+const $$ = (s, r = document) => [...r.querySelectorAll(s)];
+const NS = 'http://www.w3.org/2000/svg';
+const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
+const stage = $('#stage');
+const slides = $$('.slide');
+const N = slides.length;
+let cur = -1, scale = 1;
+
+/* ── Chrome por diapositiva ── */
+slides.forEach((s, i) => {
+  const c = document.createElement('div'); c.className = 'chrome';
+  c.innerHTML = `<span>E1577 <span class="sep"></span> Diseño de Agentes</span><span>${s.dataset.sec} <span class="sep"></span> <b>${String(i + 1).padStart(2, '0')}</b> / ${N}</span>`;
+  s.prepend(c);
+  const f = document.createElement('div'); f.className = 'foot';
+  f.textContent = 'Top Learning · contenido complementario del profesor';
+  s.appendChild(f);
+});
+
+/* ── Escala 16:9 ── */
+function fit() {
+  scale = Math.min(innerWidth / 1920, innerHeight / 1080);
+  stage.style.setProperty('--s', scale);
+  if (G.active) sizeGL();
+}
+addEventListener('resize', fit);
+
+/* ── Navegación ── */
+const hooks = {};
+function go(n, force) {
+  n = Math.max(0, Math.min(N - 1, n));
+  if (n === cur && !force) return;
+  slides.forEach((s, i) => { s.classList.toggle('active', i === n); s.classList.toggle('past', i < n); s.setAttribute('aria-hidden', i !== n); });
+  cur = n;
+  $('#cnt').innerHTML = `<b>${String(n + 1).padStart(2, '0')}</b> / ${N}`;
+  $('#prog').style.width = ((n + 1) / N * 100) + '%';
+  history.replaceState(null, '', '#' + (n + 1));
+  renderNotes(); updatePresenter();
+  preparePulses(slides[n]);
+  attachGL(slides[n]);
+  const h = hooks[slides[n].dataset.title]; if (h) h();
+}
+const next = () => go(cur + 1), prev = () => go(cur - 1);
+$('#bNext').onclick = next; $('#bPrev').onclick = prev;
+function handleKey(e) {
+  const tg = e.target;
+  if (tg && (tg.tagName === 'INPUT' || tg.tagName === 'TEXTAREA')) return;
+  const k = e.key;
+  if (['ArrowRight', 'PageDown', ' '].includes(k)) { e.preventDefault(); next(); }
+  else if (['ArrowLeft', 'PageUp'].includes(k)) { e.preventDefault(); prev(); }
+  else if (k === 'Home') go(0);
+  else if (k === 'End') go(N - 1);
+  else if (k === 'f' || k === 'F') toggleFS();
+  else if (k === 'n' || k === 'N') toggleNotes();
+  else if (k === 'p' || k === 'P') openPresenter();
+  else if (k === 'r' || k === 'R') toggleRefs();
+  else if (k === 'Escape') { $('#notesPanel').classList.remove('open'); $('#refs').classList.remove('open'); }
+  poke();
+}
+addEventListener('keydown', handleKey);
+/* táctil / swipe */
+let sx = null, sy = 0;
+$('#viewport').addEventListener('pointerdown', e => { if (e.target.closest('button,input,a')) return; sx = e.clientX; sy = e.clientY; });
+$('#viewport').addEventListener('pointerup', e => {
+  if (sx === null) return; const dx = e.clientX - sx, dy = e.clientY - sy; sx = null;
+  if (Math.abs(dx) > 60 && Math.abs(dx) > Math.abs(dy) * 1.4) dx < 0 ? next() : prev();
+});
+/* HUD auto-oculto */
+let idleT; const hud = $('#hud');
+function poke() { hud.classList.remove('idle'); clearTimeout(idleT); idleT = setTimeout(() => hud.classList.add('idle'), 2600); }
+addEventListener('pointermove', poke); poke();
+/* Pantalla completa */
+function toggleFS() {
+  if (!document.fullscreenElement) (document.documentElement.requestFullscreen || document.documentElement.webkitRequestFullscreen || (() => {})).call(document.documentElement);
+  else (document.exitFullscreen || document.webkitExitFullscreen).call(document);
+}
+$('#bFull').onclick = toggleFS;
+/* Toast */
+function toast(m) { const t = $('#toast'); t.textContent = m; t.classList.add('on'); setTimeout(() => t.classList.remove('on'), 2600); }
+
+/* ── Notas ── */
+function notesHTML(i) {
+  const s = slides[i], a = s.querySelector('aside.notes');
+  return { title: s.dataset.title, time: a ? a.dataset.time : '', html: a ? a.innerHTML : '<p>Sin notas.</p>' };
+}
+function renderNotes() {
+  const d = notesHTML(cur);
+  $('#notesBody').innerHTML = `<h5>Notas del profesor · ${String(cur + 1).padStart(2, '0')}/${N} · ⏱ ${d.time}</h5><h6>${d.title}</h6>${d.html}`;
+}
+function toggleNotes() { $('#notesPanel').classList.toggle('open'); }
+$('#bNotes').onclick = toggleNotes; $('#nClose').onclick = toggleNotes;
+function toggleRefs() { $('#refs').classList.toggle('open'); }
+$('#bRefs').onclick = toggleRefs; $('#rClose').onclick = toggleRefs;
+
+/* Vista de presentador (ventana aparte: el alumnado no la ve si compartes solo la pestaña) */
+let pw = null, pStart = 0, pTimer = null;
+function openPresenter() {
+  if (pw && !pw.closed) { pw.focus(); return; }
+  pw = window.open('', 'e1577_presentador', 'width=980,height=760');
+  if (!pw) { toast('Permite ventanas emergentes para la vista de presentador'); return; }
+  pw.document.write(`<!doctype html><html lang="es"><head><meta charset="utf-8"><title>Presentador · E1577</title><style>
+  body{margin:0;background:#0A111B;color:#F2F1EA;font:17px/1.55 system-ui,sans-serif;padding:28px 34px}
+  .top{display:flex;justify-content:space-between;font:500 13px ui-monospace,monospace;letter-spacing:.14em;color:#8994A3;text-transform:uppercase}
+  .top b{color:#C8EC88;font-weight:500} h1{font-weight:500;font-size:30px;margin:14px 0 18px;letter-spacing:-.02em}
+  .n p{margin:0 0 12px;color:rgba(242,241,234,.85)} .n b{color:#F2F1EA} .n .src{font-size:13px;color:#8994A3}
+  .nx{margin-top:22px;padding-top:14px;border-top:1px solid rgba(242,241,234,.15);color:#8994A3;font-size:15px}
+  #clk{font-size:22px;color:#F2F1EA}</style></head><body><div class="top"><span id="pos"></span><span id="clk">00:00</span></div><h1 id="tt"></h1><div class="n" id="nn"></div><div class="nx" id="nx"></div></body></html>`);
+  pw.document.close();
+  pw.document.addEventListener('keydown', handleKey);
+  pStart = Date.now(); clearInterval(pTimer);
+  pTimer = setInterval(() => { if (!pw || pw.closed) return clearInterval(pTimer); const s = Math.floor((Date.now() - pStart) / 1000); pw.document.getElementById('clk').textContent = String(Math.floor(s / 60)).padStart(2, '0') + ':' + String(s % 60).padStart(2, '0'); }, 1000);
+  updatePresenter();
+}
+$('#bPres').onclick = openPresenter;
+function updatePresenter() {
+  if (!pw || pw.closed) return;
+  const d = notesHTML(cur), doc = pw.document;
+  doc.getElementById('pos').innerHTML = `<b>${String(cur + 1).padStart(2, '0')}</b> / ${N} · ⏱ ${d.time}`;
+  doc.getElementById('tt').textContent = d.title;
+  doc.getElementById('nn').innerHTML = d.html;
+  doc.getElementById('nx').textContent = cur < N - 1 ? 'Siguiente → ' + slides[cur + 1].dataset.title : 'Fin de la presentación';
+}
+
+/* ── Pulsos SVG (solo en la diapositiva activa) ── */
+function preparePulses(slide) {
+  if (slide._pulses) return;
+  slide._pulses = [];
+  $$('path.pp', slide).forEach(p => {
+    const len = p.getTotalLength(); if (!len) return;
+    const n = +(p.dataset.n || 1), dots = [];
+    const isB = p.dataset.c === 'b';
+    for (let i = 0; i < n; i++) {
+      const c = document.createElementNS(NS, 'circle');
+      c.setAttribute('r', p.dataset.steps ? 9 : 5.5); c.setAttribute('class', 'pulse' + (isB ? ' b' : ''));
+      p.parentNode.insertBefore(c, p.nextSibling); dots.push(c);
+    }
+    const tgt = p.dataset.target ? $$(p.dataset.target, slide) : null;
+    slide._pulses.push({ p, len, dots, dur: +(p.dataset.dur || 2.5), rev: p.hasAttribute('data-rev'), steps: +(p.dataset.steps || 0), tgt, last: -1, ph: Math.random() });
+  });
+}
+function tickPulses(slide, t) {
+  if (!slide._pulses) return;
+  for (const o of slide._pulses) {
+    o.dots.forEach((c, i) => {
+      let u = ((t / o.dur) + (o.steps ? 0 : o.ph) + i / o.dots.length) % 1; if (o.rev) u = 1 - u;
+      const pt = o.p.getPointAtLength(u * o.len);
+      c.setAttribute('cx', pt.x); c.setAttribute('cy', pt.y);
+      c.setAttribute('opacity', o.steps ? 1 : Math.min(1, Math.sin(u * Math.PI) * 1.6));
+      if (o.steps && o.tgt) {
+        const k = Math.floor(u * o.steps + .5) % o.steps;
+        if (k !== o.last) { o.tgt.forEach((e, j) => e.classList.toggle('on', j === k)); o.last = k; }
+      }
+    });
+  }
+}
+
+/* ── WebGL / Three.js ── */
+const G = { ok: false, r: null, scenes: {}, active: null, host: null, enter: 0 };
+let mx = 0, my = 0, tmx = 0, tmy = 0;
+addEventListener('pointermove', e => { tmx = e.clientX / innerWidth - .5; tmy = e.clientY / innerHeight - .5; });
+function fallbackSVG(kind) {
+  if (kind === 'harness') {
+    let r = ''; [70, 110, 150, 190, 230, 270].forEach((R, i) => r += `<ellipse cx="400" cy="300" rx="${R}" ry="${R * (.45 + i * .06)}" fill="none" stroke="${['#F2F1EA', '#C8EC88', '#75A7FF'][i % 3]}" stroke-opacity=".45" stroke-width="1.5" ${i % 2 ? 'stroke-dasharray="3 7"' : ''} transform="rotate(${i * 22 - 40} 400 300)"/>`);
+    return `<svg viewBox="0 0 800 600" width="100%" height="100%">${r}<circle cx="400" cy="300" r="46" fill="#75A7FF" opacity=".9"/><circle cx="400" cy="300" r="80" fill="#75A7FF" opacity=".12"/><text x="400" y="306" text-anchor="middle" fill="#0A111B" font-family="monospace" font-size="14">MODELO</text></svg>`;
+  }
+  let s = '', l = ''; const n = 7, cx = 600, cy = 540;
+  for (let i = 0; i < n; i++) { const a = i / n * Math.PI * 2 - .4, R = i % 2 ? 330 : 250; const x = cx + Math.cos(a) * R, y = cy + Math.sin(a) * R * .62; l += `<line x1="${cx}" y1="${cy}" x2="${x}" y2="${y}" stroke="#8994A3" stroke-opacity=".4"/>`; s += `<circle cx="${x}" cy="${y}" r="14" fill="#171D24" stroke="#75A7FF" stroke-width="2.5"/><circle cx="${x}" cy="${y}" r="34" fill="#75A7FF" opacity=".08"/>`; }
+  return `<svg viewBox="0 0 1200 1080" width="100%" height="100%" preserveAspectRatio="xMidYMid meet"><ellipse cx="${cx}" cy="${cy}" rx="330" ry="205" fill="none" stroke="#F2F1EA" stroke-opacity=".1"/>${l}${s}<circle cx="${cx}" cy="${cy}" r="110" fill="#C8EC88" opacity=".08"/><circle cx="${cx}" cy="${cy}" r="44" fill="#121A24" stroke="#C8EC88" stroke-width="3"/><circle cx="${cx}" cy="${cy}" r="18" fill="#C8EC88"/></svg>`;
+}
+$$('.gl').forEach(h => { const d = document.createElement('div'); d.className = 'gl-fb'; d.innerHTML = fallbackSVG(h.dataset.scene); h.appendChild(d); });
+
+function loadThree() {
+  let done = false;
+  const s = document.createElement('script');
+  s.src = 'https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js';
+  s.onload = () => { done = true; initGL(); };
+  s.onerror = () => { done = true; console.info('Three.js no disponible: usando diagramas SVG.'); };
+  document.head.appendChild(s);
+  setTimeout(() => { if (!done) console.info('Three.js tarda en cargar: se mantiene el respaldo SVG.'); }, 6000);
+}
+function initGL() {
+  if (!window.THREE) return;
+  try {
+    const c = document.createElement('canvas');
+    if (!(c.getContext('webgl2') || c.getContext('webgl'))) throw new Error('sin WebGL');
+    G.r = new THREE.WebGLRenderer({ antialias: true, alpha: true, powerPreference: 'low-power' });
+    G.r.setClearColor(0x000000, 0);
+  } catch (e) { console.info('WebGL no disponible: usando diagramas SVG.'); return; }
+  G.ok = true; G.tex = glowTex();
+  document.body.classList.add('gl-on');
+  attachGL(slides[cur]);
+}
+const C = { lime: 0xC8EC88, blue: 0x75A7FF, ivory: 0xF2F1EA, gray: 0x8994A3, ink: 0x0A111B };
+function glowTex() {
+  const c = document.createElement('canvas'); c.width = c.height = 128; const x = c.getContext('2d');
+  const g = x.createRadialGradient(64, 64, 0, 64, 64, 64);
+  g.addColorStop(0, 'rgba(255,255,255,1)'); g.addColorStop(.22, 'rgba(255,255,255,.5)'); g.addColorStop(1, 'rgba(255,255,255,0)');
+  x.fillStyle = g; x.fillRect(0, 0, 128, 128); return new THREE.CanvasTexture(c);
+}
+const sprite = (col, sc, op = 1) => { const s = new THREE.Sprite(new THREE.SpriteMaterial({ map: G.tex, color: col, transparent: true, opacity: op, depthWrite: false, blending: THREE.AdditiveBlending })); s.scale.set(sc, sc, 1); return s; };
+const lineBetween = (a, b, col, op) => new THREE.Line(new THREE.BufferGeometry().setFromPoints([a, b]), new THREE.LineBasicMaterial({ color: col, transparent: true, opacity: op }));
+function circlePts(r, seg = 128) { const p = []; for (let i = 0; i <= seg; i++) { const a = i / seg * Math.PI * 2; p.push(new THREE.Vector3(Math.cos(a) * r, 0, Math.sin(a) * r)); } return p; }
+const circleLine = (r, col, op) => new THREE.Line(new THREE.BufferGeometry().setFromPoints(circlePts(r)), new THREE.LineBasicMaterial({ color: col, transparent: true, opacity: op }));
+function dotsRing(r, n, col, size, op) { const g = new THREE.BufferGeometry().setFromPoints(circlePts(r, n).slice(0, n)); return new THREE.Points(g, new THREE.PointsMaterial({ color: col, size, transparent: true, opacity: op, depthWrite: false })); }
+function stars(n, r0, r1) {
+  const p = new Float32Array(n * 3);
+  for (let i = 0; i < n; i++) { const v = new THREE.Vector3(Math.random() - .5, Math.random() - .5, Math.random() - .5).normalize().multiplyScalar(r0 + Math.random() * (r1 - r0)); p.set([v.x, v.y, v.z], i * 3); }
+  const g = new THREE.BufferGeometry(); g.setAttribute('position', new THREE.BufferAttribute(p, 3));
+  return new THREE.Points(g, new THREE.PointsMaterial({ color: C.gray, size: .05, transparent: true, opacity: .5, depthWrite: false }));
+}
+const ORIGIN = () => new THREE.Vector3();
+
+function buildNetwork(o = {}) {
+  const scene = new THREE.Scene(); scene.fog = new THREE.Fog(C.ink, 13, 30);
+  const cam = new THREE.PerspectiveCamera(o.fov || 38, 1, .1, 100); cam.position.set(0, o.camY || 1.8, o.camZ || 12.5); cam.lookAt(0, 0, 0);
+  const root = new THREE.Group(); scene.add(root); root.position.x = o.offsetX || 0;
+  const core = new THREE.Group(); root.add(core);
+  core.add(new THREE.Mesh(new THREE.IcosahedronGeometry(1.05, 1), new THREE.MeshBasicMaterial({ color: C.lime, wireframe: true, transparent: true, opacity: .7 })));
+  const inner = new THREE.Mesh(new THREE.IcosahedronGeometry(.48, 3), new THREE.MeshBasicMaterial({ color: C.lime })); core.add(inner);
+  core.add(sprite(C.lime, 4.4, .5));
+  const r1 = circleLine(4.4, C.ivory, .1); r1.rotation.x = .12; root.add(r1);
+  const r2 = dotsRing(6.2, 160, C.gray, .05, .45); r2.rotation.x = -.1; root.add(r2);
+  const n = o.n || 7, agents = [], pulses = [];
+  for (let i = 0; i < n; i++) {
+    const a = i / n * Math.PI * 2 + .3, r = i % 2 ? 4.9 : 3.8, y = Math.sin(i * 2.1) * 1.3;
+    const pos = new THREE.Vector3(Math.cos(a) * r, y, Math.sin(a) * r);
+    const g = new THREE.Group(); g.position.copy(pos);
+    g.add(new THREE.Mesh(new THREE.OctahedronGeometry(.28, 0), new THREE.MeshBasicMaterial({ color: C.blue })));
+    g.add(new THREE.Mesh(new THREE.OctahedronGeometry(.5, 0), new THREE.MeshBasicMaterial({ color: C.blue, wireframe: true, transparent: true, opacity: .4 })));
+    g.add(sprite(C.blue, 1.9, .45)); root.add(g);
+    agents.push({ g, pos, ph: Math.random() * 6 });
+    root.add(lineBetween(ORIGIN(), pos, C.gray, .4));
+    for (let k = 0; k < 2; k++) { const s = sprite(k ? C.blue : C.lime, .6, .95); root.add(s); pulses.push({ s, to: pos, off: k * .5 + Math.random() * .3, dir: k ? -1 : 1, sp: .22 + Math.random() * .12 }); }
+  }
+  for (let i = 0; i < n; i++) root.add(lineBetween(agents[i].pos, agents[(i + 1) % n].pos, C.gray, .13));
+  for (let i = 0; i < n; i += 2) root.add(lineBetween(agents[i].pos, agents[(i + 3) % n].pos, C.blue, .08));
+  root.add(stars(360, 9, 26));
+  const extra = [];
+  if (o.system) {
+    [1.7, 2.15].forEach((R, i) => { const m = new THREE.Mesh(new THREE.TorusGeometry(R, .014, 6, 140), new THREE.MeshBasicMaterial({ color: i ? C.blue : C.ivory, transparent: true, opacity: .5 })); m.rotation.x = Math.PI / 2 + (i ? .5 : -.3); core.add(m); extra.push(m); });
+    const grid = new THREE.GridHelper(36, 36, C.blue, C.gray); grid.material.transparent = true; grid.material.opacity = .1; grid.position.y = -3.4; root.add(grid);
+    agents.forEach(a => { const f = new THREE.Vector3(a.pos.x * 1.15, -3.4, a.pos.z * 1.15); root.add(lineBetween(a.pos, f, C.lime, .16)); const sq = new THREE.Mesh(new THREE.PlaneGeometry(.35, .35), new THREE.MeshBasicMaterial({ color: C.lime, transparent: true, opacity: .55, side: THREE.DoubleSide })); sq.rotation.x = -Math.PI / 2; sq.position.copy(f); root.add(sq); });
+    const tools = dotsRing(8, 36, C.lime, .12, .7); tools.position.y = -.4; root.add(tools); extra.push(tools);
+  }
+  return {
+    scene, cam,
+    update(t) {
+      root.rotation.y = t * .07 + mx * .5; root.rotation.x = my * .18 + .04;
+      core.rotation.y = -t * .3; core.rotation.x = t * .11; inner.scale.setScalar(1 + Math.sin(t * 2) * .07);
+      agents.forEach(a => { a.g.rotation.y = t * .8 + a.ph; a.g.position.y = a.pos.y + Math.sin(t * .9 + a.ph) * .1; });
+      pulses.forEach(p => { let u = (t * p.sp + p.off) % 1; if (p.dir < 0) u = 1 - u; p.s.position.lerpVectors(ORIGIN(), p.to, u); p.s.material.opacity = Math.sin(u * Math.PI) * .95; });
+      if (extra.length) { extra[extra.length - 1].rotation.y = -t * .05; }
+    }
+  };
+}
+function buildHarness() {
+  const scene = new THREE.Scene();
+  const cam = new THREE.PerspectiveCamera(36, 1, .1, 100); cam.position.set(0, .8, 13); cam.lookAt(0, 0, 0);
+  const root = new THREE.Group(); scene.add(root);
+  const core = new THREE.Group(); root.add(core);
+  core.add(new THREE.Mesh(new THREE.IcosahedronGeometry(.9, 3), new THREE.MeshBasicMaterial({ color: C.blue })));
+  core.add(new THREE.Mesh(new THREE.IcosahedronGeometry(1.15, 1), new THREE.MeshBasicMaterial({ color: C.blue, wireframe: true, transparent: true, opacity: .45 })));
+  core.add(sprite(C.blue, 5, .55));
+  const defs = [
+    { r: 1.8, c: C.ivory, tilt: [1.2, 0, .3], type: 'tube', sp: .5 },
+    { r: 2.35, c: C.lime, tilt: [.35, .2, 0], type: 'dots', sp: -.35 },
+    { r: 2.9, c: C.ivory, tilt: [1.45, .5, 0], type: 'line', sp: .3 },
+    { r: 3.45, c: C.blue, tilt: [.9, -.6, .2], type: 'dots', sp: -.25 },
+    { r: 4.0, c: C.lime, tilt: [1.57, 0, 0], type: 'tube', sp: .2 },
+    { r: 4.55, c: C.gray, tilt: [.25, .9, .1], type: 'line', sp: -.15 }
+  ];
+  const layers = defs.map((d, i) => {
+    const tiltG = new THREE.Group(); tiltG.rotation.set(...d.tilt); root.add(tiltG);
+    const spin = new THREE.Group(); tiltG.add(spin);
+    const mats = []; let base;
+    if (d.type === 'tube') { const m = new THREE.Mesh(new THREE.TorusGeometry(d.r, .02, 6, 180), new THREE.MeshBasicMaterial({ color: d.c, transparent: true, opacity: 0 })); m.rotation.x = Math.PI / 2; spin.add(m); mats.push(m.material); base = .75; }
+    else if (d.type === 'dots') { const p = dotsRing(d.r, 120, d.c, .07, 0); spin.add(p); mats.push(p.material); base = .9; }
+    else { const l = circleLine(d.r, d.c, 0); spin.add(l); mats.push(l.material); base = .55; }
+    const sat = new THREE.Mesh(new THREE.SphereGeometry(.09, 12, 12), new THREE.MeshBasicMaterial({ color: d.c, transparent: true, opacity: 0 })); sat.position.set(d.r, 0, 0); spin.add(sat); mats.push(sat.material);
+    const gl = sprite(d.c, .9, 0); gl.position.copy(sat.position); spin.add(gl); mats.push(gl.material);
+    return { tiltG, spin, mats, base, d, delay: i * .55 + .3 };
+  });
+  root.add(stars(220, 8, 20));
+  return {
+    scene, cam,
+    update(t, te) {
+      root.rotation.y = mx * .5 + t * .04; root.rotation.x = my * .2;
+      core.rotation.y = t * .25;
+      layers.forEach(L => {
+        const k = Math.max(0, Math.min(1, (te - L.delay) / 1.1)), e = 1 - Math.pow(1 - k, 3);
+        L.tiltG.scale.setScalar(.35 + .65 * e);
+        L.mats.forEach((m, j) => m.opacity = (j === 0 ? L.base : .95) * e);
+        L.spin.rotation.y = t * L.d.sp;
+      });
+    }
+  };
+}
+const builders = { network: () => buildNetwork({ offsetX: 1.1 }), harness: buildHarness, system: () => buildNetwork({ system: true, n: 6, camZ: 13.5, camY: 3.2, fov: 40, offsetX: 5.2 }) };
+function attachGL(slide) {
+  const host = slide && slide.querySelector('.gl');
+  G.active = null; G.host = null;
+  if (!host || !G.ok) return;
+  const name = host.dataset.scene;
+  if (!G.scenes[name]) G.scenes[name] = builders[name]();
+  host.appendChild(G.r.domElement);
+  G.host = host; G.active = G.scenes[name]; G.enter = performance.now() / 1000;
+  sizeGL();
+  if (reduce) { G.active.update(6, 20); G.r.render(G.active.scene, G.active.cam); }
+}
+function sizeGL() {
+  if (!G.host) return;
+  const w = G.host.clientWidth, h = G.host.clientHeight;
+  G.r.setPixelRatio(Math.min((window.devicePixelRatio || 1) * scale, 1.5));
+  G.r.setSize(w, h);
+  G.active.cam.aspect = w / h; G.active.cam.updateProjectionMatrix();
+  if (reduce) G.r.render(G.active.scene, G.active.cam);
+}
+
+/* ── Bucle único (pausado si la pestaña está oculta) ── */
+function frame(now) {
+  requestAnimationFrame(frame);
+  if (document.hidden || reduce) return;
+  const t = now / 1000;
+  mx += (tmx - mx) * .04; my += (tmy - my) * .04;
+  if (cur >= 0) tickPulses(slides[cur], t);
+  if (G.active) { G.active.update(t, t - G.enter); G.r.render(G.active.scene, G.active.cam); }
+}
+
+/* ═════ Interacciones por diapositiva ═════ */
+
+/* 05 · capas del harness */
+const LAYERS = [
+  ['Model interface', 'Interfaz con el modelo', 'El conector que envía mensajes al LLM y recibe su respuesta: texto o solicitudes para usar herramientas. Permite cambiar de modelo o de proveedor sin rehacer el agente.', 'Configurar Hermes para usar un modelo a través de OpenRouter.'],
+  ['Context & instructions', 'Contexto e instrucciones', 'Lo que el modelo “ve” en cada paso: instrucciones de sistema, rol, archivos relevantes, historial y resultados previos. Delimita qué debe hacer y cómo.', 'Un archivo Markdown con reglas del proyecto (por ejemplo, AGENTS.md en OpenCode).'],
+  ['Tool registry', 'Registro de herramientas', 'El catálogo de acciones disponibles. Cada herramienta tiene nombre, descripción y parámetros para que el modelo sepa cuándo y cómo pedirla.', 'leer_archivo · buscar_web · enviar_correo · consultar_crm.'],
+  ['Agent loop', 'Ciclo del agente', 'El bucle de trabajo: el modelo propone, el harness ejecuta, devuelve el resultado y se repite hasta terminar o alcanzar un límite.', 'Un máximo de iteraciones para evitar bucles infinitos.'],
+  ['Memory & state', 'Memoria y estado', 'Qué se conserva durante la tarea (estado) y entre sesiones (memoria). Evita repetir preguntas y permite continuar trabajos.', 'Recordar preferencias del usuario o retomar una conversación iniciada en otro canal.'],
+  ['Permissions & guardrails', 'Permisos y barreras', 'Reglas técnicas sobre qué puede hacerse sin preguntar, qué requiere aprobación y qué está prohibido.', 'En OpenCode, un agente puede configurarse para pedir permiso antes de editar archivos o ejecutar comandos.'],
+  ['Execution environment', 'Entorno de ejecución', 'Dónde ocurren realmente las acciones: terminal, carpeta de trabajo, contenedor aislado, navegador o servidor.', 'Una “sandbox” aislada para ejecutar código sin tocar el equipo principal.'],
+  ['Observability & logging', 'Observabilidad y registro', 'El rastro de lo que pasó: pasos, herramientas usadas, tiempos, costos y errores. Sin esto no se puede depurar ni mejorar.', 'Revisar por qué el agente envió un correo al destinatario equivocado.']
+];
+(() => {
+  const wrap = $('#layers'), det = $('#layerDetail');
+  LAYERS.forEach((L, i) => { const b = document.createElement('button'); b.className = 'layer'; b.innerHTML = `<span class="n">${String(i + 1).padStart(2, '0')}</span><span class="es">${L[1]}</span><span class="en">${L[0]}</span>`; b.onclick = () => sel(i); wrap.appendChild(b); });
+  function sel(i) {
+    $$('.layer', wrap).forEach((b, j) => { b.classList.toggle('on', j === i); b.setAttribute('aria-pressed', j === i); });
+    const L = LAYERS[i];
+    det.innerHTML = `<div class="fade-swap"><div class="row" style="justify-content:space-between;align-items:flex-start"><div class="big">${String(i + 1).padStart(2, '0')}</div><span class="tag">${L[0]}</span></div><h3 class="h3" style="font-size:44px;margin-top:18px">${L[1]}</h3><p class="p" style="margin-top:16px;color:var(--ivory)">${L[2]}</p><div class="ex"><b>EJEMPLO</b><span class="p" style="font-size:22px">${L[3]}</span></div></div>`;
+  }
+  sel(3);
+})();
+
+/* 07 · ecosistema */
+const ECO = [
+  ['Harness', 'Hermes · OpenCode', '¿Cómo se organiza el ciclo de trabajo del agente?', 'var(--ivory)', 'Software que envuelve al modelo con instrucciones, herramientas, memoria, permisos y ejecución.', 'Hermes atiende por Telegram con memoria; OpenCode edita archivos de un proyecto.'],
+  ['Orquestación', 'Capa de coordinación', '¿Quién hace qué, en qué orden?', 'var(--lime)', 'Coordina tareas, agentes y dependencias, e integra resultados. Puede vivir dentro de un harness, en un framework o en código propio.', 'Delegar la investigación a un subagente y la redacción a otro.'],
+  ['Modelo de decisión', 'Jev', '¿Qué opción elegir y con qué probabilidad?', 'var(--blue)', 'Modelo que devuelve decisiones estructuradas (elección, puntuación, probabilidad) en lugar de texto libre.', '¿Ventas, soporte o revisión humana?'],
+  ['Model gateway', 'OpenRouter', '¿Qué modelo o proveedor atiende la petición?', 'var(--ivory)', 'Punto único de acceso a modelos de varios proveedores, con selección de modelo y fallbacks.', 'Si el proveedor A no responde, intentar con B.'],
+  ['LLM', 'El modelo de lenguaje', '¿Cómo interpretar, razonar y generar lenguaje?', 'var(--blue)', 'Aporta las capacidades cognitivas: comprender instrucciones, razonar con texto y generar respuestas o solicitudes de herramientas.', 'Redactar el borrador de una propuesta comercial.'],
+  ['Tools / APIs', 'Operaciones disponibles', '¿Qué acción concreta puedo ejecutar?', 'var(--lime)', 'Funciones que el harness ejecuta en nombre del modelo: leer, escribir, consultar, enviar.', 'Crear un evento en el calendario mediante su API.'],
+  ['MCP', 'Model Context Protocol', '¿Cómo conecto capacidades de forma estándar?', 'var(--lime)', 'Protocolo abierto para exponer herramientas y datos a aplicaciones de IA compatibles, sin una integración distinta para cada una.', 'Un servidor MCP que da acceso a Gmail o a una base de datos.'],
+  ['Workflows · alternativa', 'n8n', '¿Cómo integro sistemas con flujos definidos?', 'var(--gray)', 'Automatizador de flujos: pasos definidos que conectan aplicaciones; puede incluir nodos con IA. Alternativa de integración, no el centro de esta clase.', 'Cada formulario nuevo → guardar en hoja de cálculo → avisar por correo.']
+];
+(() => {
+  const rows = $('#ecoRows'), det = $('#ecoDetail');
+  ECO.forEach((E, i) => { const b = document.createElement('button'); b.className = 'eco-row' + (i === 7 ? ' alt' : ''); b.style.setProperty('--c', E[3]); b.innerHTML = `<span class="cat">${E[0]}</span><span class="prod">${E[1]}</span><span class="q">${E[2]}</span>`; b.onclick = () => sel(i); rows.appendChild(b); });
+  function sel(i) {
+    $$('.eco-row', rows).forEach((b, j) => { b.classList.toggle('on', j === i); b.setAttribute('aria-pressed', j === i); });
+    const E = ECO[i];
+    det.innerHTML = `<div class="fade-swap"><div class="kicker" style="color:${E[3]}">${E[0]}</div><h3 class="h3" style="font-size:42px;margin-top:12px">${E[1]}</h3><p class="p" style="margin-top:18px;color:var(--ivory)">${E[4]}</p><div class="ex" style="margin-top:22px;padding:18px 22px;border-left:3px solid ${E[3]};background:rgba(242,241,234,.04)"><b class="mono" style="display:block;font-size:13px;letter-spacing:.15em;color:var(--gray);margin-bottom:8px">EJEMPLO</b><span class="p" style="font-size:22px">${E[5]}</span></div></div>`;
+  }
+  sel(0);
+})();
+
+/* 09 · orquestador determinista / dirigido por modelo */
+(() => {
+  const txt = {
+    det: ['Determinista', 'El flujo lo define el código: siempre los mismos pasos, en el mismo orden.', 'Predecible, auditable y barato.', 'Rígido ante casos imprevistos.'],
+    llm: ['Dirigido por modelo', 'Un LLM decide el siguiente paso según el resultado anterior.', 'Flexible ante situaciones nuevas.', 'Menos predecible; más costoso de verificar y depurar.']
+  };
+  function set(k) {
+    $$('[data-orch]').forEach(b => { b.classList.toggle('on', b.dataset.orch === k); b.setAttribute('aria-selected', b.dataset.orch === k); });
+    const T = txt[k];
+    $('#orchTxt').innerHTML = `<div class="fade-swap"><p class="p" style="color:var(--ivory)">${T[1]}</p><p class="sm" style="margin-top:12px"><span class="lime">+</span> ${T[2]}<br><span class="warn">−</span> ${T[3]}</p></div>`;
+    $$('#orchEdges path').forEach(p => { p.classList.toggle('flow', k === 'llm'); });
+    $('#orchQ').setAttribute('opacity', k === 'llm' ? 1 : 0);
+    $('#orchMode').textContent = k === 'llm' ? 'el LLM decide' : 'flujo programado';
+  }
+  $$('[data-orch]').forEach(b => b.onclick = () => set(b.dataset.orch));
+  set('det');
+})();
+
+/* 12 · subagentes */
+const AG = [
+  ['Ventas', 'Cotizar, recomendar productos y registrar oportunidades.', 'Solicitud del cliente, catálogo y lista de precios vigente.', 'Consultar catálogo · generar cotización · crear oportunidad en el CRM.', 'Aplicar descuentos fuera de política · emitir reembolsos.'],
+  ['Soporte', 'Diagnosticar incidencias de acceso, pagos o entregas.', 'Descripción del problema e historial del ticket.', 'Base de conocimiento · estado del pedido · crear ticket.', 'Modificar precios · cerrar cuentas de clientes.'],
+  ['Investigador', 'Reunir información sobre clientes, mercado o competidores.', 'Una pregunta concreta y las fuentes permitidas.', 'Búsqueda web · consulta de documentos internos (RAG).', 'Escribir en sistemas · contactar clientes.'],
+  ['Redactor / revisor', 'Redactar y revisar textos contra criterios definidos.', 'Borrador, guía de estilo y rúbrica de calidad.', 'Plantillas · verificador de políticas y tono.', 'Enviar comunicaciones sin aprobación.']
+];
+(() => {
+  const det = $('#agDetail');
+  function sel(i) {
+    $$('#agWrap .hit').forEach((b, j) => { b.classList.toggle('on', j === i); b.setAttribute('aria-pressed', j === i); });
+    $$('[id^="ae-"]').forEach((p, j) => { p.classList.toggle('hot', j === i); p.classList.toggle('dim', j !== i); });
+    const A = AG[i];
+    det.innerHTML = `<div class="fade-swap"><div class="kicker blue">Agente ${String(i + 1).padStart(2, '0')}</div><h3 class="h3" style="font-size:42px;margin-top:10px">${A[0]}</h3><dl class="adl"><dt>Responsable de</dt><dd>${A[1]}</dd><dt>Recibe</dt><dd>${A[2]}</dd><dt>Herramientas</dt><dd>${A[3]}</dd><dt>No puede</dt><dd class="no">${A[4]}</dd></dl></div>`;
+  }
+  $$('#agWrap .hit').forEach(b => b.onclick = () => sel(+b.dataset.ag));
+  sel(0);
+})();
+
+/* 13 · routing */
+const RT = [
+  { lbl: 'reglas', hot: [1], dim: [2, 3], soft: [0], st: ['REGLA 1 ✓', 'PRIORIDAD ✓', '', ''],
+    h: 'A · Determinista', d: 'Reglas explícitas: si el mensaje contiene “comprar” → Ventas; si contiene “error” o “factura” → Soporte.',
+    c: 'Aquí se activan <em>las dos reglas</em>: hace falta una regla de prioridad (p. ej. “primero los problemas de pago”).', pro: 'Predecible, rápido, barato y auditable.', con: 'Frágil ante sinónimos, errores de escritura y casos mixtos.' },
+  { lbl: 'LLM', hot: [2], dim: [0, 1, 3], soft: [], st: ['', '', 'ELEGIDO ✓', ''],
+    h: 'B · Basada en LLM', d: 'Un modelo interpreta la intención y elige el destino, explicando su criterio.',
+    c: 'Detecta <em>dos intenciones</em> y propone una ruta secuencial: primero resolver el pago, después cerrar la compra.', pro: 'Entiende matices y lenguaje natural.', con: 'Más costo y latencia; puede equivocarse y es menos predecible.' },
+  { lbl: 'reglas + LLM', hot: [2, 3], dim: [0, 1], soft: [], st: ['', '', 'LLM ✓', 'CONTROL ✓'],
+    h: 'C · Híbrida', d: 'Reglas para lo claro, un modelo (LLM o de decisión) para lo ambiguo y controles explícitos para acciones críticas.',
+    c: 'Ruta secuencial Soporte → Ventas, y <em>revisión humana</em> si hay que modificar un cobro o aplicar un ajuste.', pro: 'Equilibra costo, flexibilidad y seguridad.', con: 'Más diseño inicial: definir qué es “claro”, “ambiguo” y “crítico”.' }
+];
+(() => {
+  function set(k) {
+    const R = RT[k];
+    $$('[data-rt]').forEach(b => { b.classList.toggle('on', +b.dataset.rt === k); b.setAttribute('aria-selected', +b.dataset.rt === k); });
+    $('#rtLbl').textContent = R.lbl;
+    for (let i = 0; i < 4; i++) {
+      const e = $('#rt-' + i), b = $('#rb-' + i);
+      e.classList.toggle('hot', R.hot.includes(i)); e.classList.toggle('flow', R.hot.includes(i) || R.soft.includes(i));
+      e.classList.toggle('dim', R.dim.includes(i)); b.classList.toggle('hot', R.hot.includes(i));
+      $('#rs-' + i).textContent = R.st[i];
+    }
+    $('#rtTxt').innerHTML = `<div class="fade-swap"><h3 class="h3">${R.h}</h3><p class="p" style="margin-top:14px">${R.d}</p><p class="p" style="margin-top:14px;color:var(--ivory)">${R.c}</p><p class="sm" style="margin-top:16px"><span class="lime">+</span> ${R.pro}<br><span class="warn">−</span> ${R.con}</p><p class="sm mono" style="font-size:14px;margin-top:18px;letter-spacing:.06em;line-height:1.8"><span class="lime">COMPUESTO</span> · dividir en subtareas<br><span class="lime">SECUENCIAL</span> · una tras otra<br><span class="lime">ESCALAMIENTO</span> · a una persona</p></div>`;
+  }
+  $$('[data-rt]').forEach(b => b.onclick = () => set(+b.dataset.rt));
+  set(0);
+})();
+
+/* 15 · Jev + orquestador */
+(() => {
+  let step = 0;
+  const stps = $$('.stp'), thr = $('#jvThr');
+  const P = [['Ventas', .46], ['Soporte', .41], ['Revisión humana', .13]];
+  function outcome() {
+    const th = +thr.value; $('#jvThrV').textContent = th.toFixed(2);
+    $$('.stp .thr').forEach(m => m.style.left = (th * 100) + '%');
+    const o = $('#jvOut');
+    if (P[0][1] >= th) {
+      $('#jvOutH').textContent = 'Delegar a Ventas';
+      o.className = 'outc';
+      o.innerHTML = `0.46 ≥ ${th.toFixed(2)} → se delega a <b>Ventas</b>.<br><span class="warn">Riesgo:</span> el error de pago podría quedar sin atender.`;
+    } else {
+      $('#jvOutH').textContent = 'Incertidumbre';
+      o.className = 'outc w';
+      o.innerHTML = `0.46 &lt; ${th.toFixed(2)} → no se delega aún.<br>Pedir aclaración, consultar un LLM más capaz o, si persiste, <b>revisión humana</b>.`;
+    }
+  }
+  function render() {
+    stps.forEach((s, i) => { s.classList.toggle('on', i < step); s.classList.toggle('cur', i === step - 1); });
+    $$('.stp .bar').forEach(b => b.querySelector('.fl').style.width = step >= 3 ? (+b.dataset.p * 100) + '%' : '0');
+    $('#jvNext').disabled = step >= 5; $('#jvNext').style.opacity = step >= 5 ? .4 : 1;
+  }
+  $('#jvNext').onclick = () => { step = Math.min(5, step + 1); render(); };
+  $('#jvReset').onclick = () => { step = 0; thr.value = .6; outcome(); render(); };
+  thr.oninput = outcome;
+  hooks['Jev + orquestador'] = () => { step = 1; outcome(); render(); };
+  outcome(); render();
+})();
+
+/* 17 · punto de control humano */
+(() => {
+  function reset() {
+    $('#gHuman').className = 'gnode'; $('#gLog').className = 'gnode';
+    $('#gPulse').style.display = ''; $('#gLogH').textContent = 'En espera…'; $('#gLogP').textContent = 'Nada se ejecuta sin autorización.';
+    $('#gYes').classList.remove('on'); $('#gNo').classList.remove('on');
+  }
+  $('#gYes').onclick = () => { reset(); $('#gYes').classList.add('on'); $('#gHuman').className = 'gnode ok'; $('#gPulse').style.display = 'none'; $('#gLog').className = 'gnode ok'; $('#gLogH').textContent = 'Aprobado'; $('#gLogP').textContent = '20% aplicado por autorización de supervisor · registrado con fecha, responsable y motivo.'; };
+  $('#gNo').onclick = () => { reset(); $('#gNo').classList.add('on'); $('#gHuman').className = 'gnode stop'; $('#gPulse').style.display = 'none'; $('#gLog').className = 'gnode stop'; $('#gLogH').textContent = 'Rechazado'; $('#gLogP').textContent = 'Se ofrece el 10% permitido · decisión registrada · se informa a Laura.'; };
+  hooks['Controles, handoff y escalamiento'] = reset;
+})();
+
+/* 18 · contadores */
+hooks['Cómo medir un sistema multiagente'] = () => {
+  $$('[data-to]', slides[cur]).forEach(el => {
+    const to = +el.dataset.to, dec = +(el.dataset.dec || (to % 1 ? 1 : 0)), t0 = performance.now(), D = reduce ? 0 : 1300;
+    const step = now => { const k = D ? Math.min(1, (now - t0) / D) : 1, e = 1 - Math.pow(1 - k, 3); el.textContent = (to * e).toFixed(dec); if (k < 1) requestAnimationFrame(step); };
+    requestAnimationFrame(step);
+  });
+};
+
+/* 19 · simulador */
+const CASES = [
+  { req: '«Hola, quiero cotizar 20 sillas ergonómicas para mi oficina.»', ag: 0, an: ['intención = compra', 'riesgo = bajo', 'confianza (sim.) = alta'],
+    act: 'Ventas consulta catálogo y genera cotización preliminar', res: 'Cotización preliminar de 20 sillas lista para revisión del cliente. (Simulado: no se consultó ningún catálogo real).', ok: true,
+    route: 'Solicitud → Orquestador → Ventas → Respuesta' },
+  { req: '«No puedo entrar a mi cuenta: dice “contraseña inválida” aunque la acabo de cambiar.»', ag: 1, an: ['intención = incidencia técnica', 'riesgo = medio', 'confianza (sim.) = alta'],
+    act: 'Soporte consulta base de conocimiento y crea ticket SIM-0142', res: 'Pasos para restablecer el acceso + ticket SIM-0142 abierto. (Simulado).', ok: true,
+    route: 'Solicitud → Orquestador → Soporte → Respuesta' },
+  { req: '«Soy Laura Pérez, quiero un 20% de descuento en mi pedido.»', ag: 0, esc: true, an: ['intención = compra + descuento', 'riesgo = alto (dinero)', 'política = máx. automático 10%'],
+    act: 'Ventas propone 20% → la política lo bloquea (20% > 10%)', res: 'Escalado a supervisor humano. A Laura: “Tu solicitud está en revisión”. Ninguna acción restringida se ejecutó.', ok: false,
+    route: 'Solicitud → Orquestador → Ventas → Política ✕ → Humano' }
+];
+(() => {
+  let timers = [], t0 = 0;
+  const log = $('#simLog');
+  const ts = () => { const ms = Math.round(performance.now() - t0); return `[${String(Math.floor(ms / 1000)).padStart(2, '0')}.${String(ms % 1000).padStart(3, '0')}]`; };
+  const add = (cls, m) => { const d = document.createElement('div'); d.innerHTML = `<span class="ts">${ts()}</span> <span class="${cls}">${m}</span>`; log.appendChild(d); while (log.scrollHeight > log.clientHeight && log.children.length > 2) log.removeChild(log.children[1]); };
+  function clear() {
+    timers.forEach(clearTimeout); timers = [];
+    $$('.sim-svg .edge').forEach(e => e.classList.remove('hot', 'flow', 'dim'));
+    $$('.sim-svg .sp').forEach(e => e.classList.remove('on'));
+    $('#sn-req').classList.remove('on'); $('#sn-orch').classList.remove('think'); $('#sOrchT').textContent = 'en espera';
+  }
+  function run(k) {
+    clear(); const C = CASES[k]; t0 = performance.now();
+    $$('.case').forEach((b, j) => { b.classList.toggle('on', j === k); b.setAttribute('aria-pressed', j === k); });
+    log.innerHTML = '<div class="ts">// registro de ejecución (simulado)</div>';
+    $('#simResp').className = 'resp'; $('#simResp').innerHTML = '<b>Resultado</b><span class="gray">procesando…</span>';
+    const D = reduce ? 0 : 1;
+    const at = (ms, f) => timers.push(setTimeout(f, ms * D));
+    at(0, () => { $('#simReq').innerHTML = `<b>1 · Solicitud</b>${C.req}`; $('#sn-req').classList.add('on'); $('#se-req').classList.add('hot', 'flow'); add('bl', 'solicitud recibida'); });
+    at(900, () => { $('#sn-orch').classList.add('think'); $('#sOrchT').textContent = 'analizando'; add('', '2 · orquestador analiza la solicitud'); });
+    C.an.forEach((a, i) => at(1400 + i * 450, () => add('bl', '   ' + a)));
+    at(2900, () => {
+      $('#sn-orch').classList.remove('think'); $('#sOrchT').textContent = 'delegando';
+      for (let i = 0; i < 5; i++) $('#se-' + i).classList.add('dim');
+      $('#se-' + C.ag).classList.remove('dim'); $('#se-' + C.ag).classList.add('hot', 'flow'); $('#sn-' + C.ag).classList.add('on');
+      add('ok', `3 · especialista: ${['Ventas', 'Soporte'][C.ag]}`);
+    });
+    at(3800, () => add(C.esc ? 'lw' : 'ok', '4 · ' + C.act));
+    if (C.esc) at(4600, () => { $('#se-4').classList.remove('dim'); $('#se-4').classList.add('hot', 'flow'); $('#sn-4').classList.add('on'); $('#sOrchT').textContent = 'escalando'; add('lw', '   ESCALAMIENTO → supervisor humano'); });
+    at(C.esc ? 5400 : 4700, () => { $('#simResp').className = 'resp ' + (C.ok ? 'ok' : 'w'); $('#simResp').innerHTML = `<b>5 · ${C.ok ? 'Respuesta' : 'Escalamiento'}</b>${C.res}`; add(C.ok ? 'ok' : 'lw', '5 · ' + (C.ok ? 'respuesta entregada' : 'en espera de autorización')); });
+    at(C.esc ? 6200 : 5500, () => { add('', '6 · ruta registrada:'); add('ok', '   ' + C.route); $('#sOrchT').textContent = 'listo'; });
+  }
+  $$('.case').forEach(b => b.onclick = () => run(+b.dataset.case));
+  hooks['Simulador de orquestación'] = () => { if (!$('.case.on')) { clear(); } };
+})();
+
+/* ── Inicio ── */
+fit();
+const start = parseInt((location.hash || '').slice(1), 10);
+go(isNaN(start) ? 0 : start - 1, true);
+requestAnimationFrame(frame);
+loadThree();
+addEventListener('visibilitychange', () => { if (!document.hidden) poke(); });
+})();
+</script>
+</body>
+</html>
