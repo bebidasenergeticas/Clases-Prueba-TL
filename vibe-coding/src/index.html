@@ -1,0 +1,499 @@
+<!doctype html>
+<html lang="es-MX">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Vibe Coding · Top Learning</title>
+<meta name="description" content="De una idea escrita a una aplicación funcional: cómo la inteligencia artificial está transformando la creación de software. Presentación de la clase en vivo del programa «Inteligencia Artificial y Automatización con n8n».">
+<meta name="color-scheme" content="dark">
+<!-- @inline-css -->
+</head>
+<body>
+<div id="viewport">
+<div id="stage" aria-live="polite">
+  <canvas id="gl" aria-hidden="true"></canvas>
+  <div id="grain" aria-hidden="true"></div>
+
+  <!-- ===================================================== 01 · PORTADA -->
+  <section class="slide s-cover" data-scene="cover" data-title="VIBE CODING: el software cambia de paradigma">
+    <div class="cover-brand mono">Top Learning <span class="dot"></span> Inteligencia Artificial y Automatización con n8n</div>
+    <h1 class="cover-title" data-qa-ignore><span>Vibe</span><span>Coding</span></h1>
+    <p class="cover-sub">De una idea escrita a una aplicación funcional: cómo la inteligencia artificial está transformando la creación de software.</p>
+    <p class="cover-q">¿Y si pudieras construir una aplicación simplemente describiendo lo que necesitas?</p>
+    <div class="cover-meta mono"><span>27 · 10 · 2026</span><span class="rule"></span><span>Clase en vivo · 25 min</span></div>
+    <span class="tag3d" data-anchor="idea"><b>Idea</b>lenguaje natural</span>
+    <span class="tag3d" data-anchor="software"><b>Software</b>código que se ejecuta</span>
+  </section>
+
+  <!-- ===================================================== 02 · PROBLEMA -->
+  <section class="slide" data-title="El problema antes de la IA" data-steps="2">
+    <div class="kicker">01 <i></i> El problema</div>
+    <h2 class="title">Construir software siempre ha requerido<br>un camino largo y especializado</h2>
+
+    <div class="tracks">
+      <div class="track track-a">
+        <div class="track-head"><span class="mono">Sin IA</span><b>Desarrollo tradicional</b></div>
+        <ol class="stages">
+          <li><span class="node"><i class="ic" data-icon="doc"></i></span><b>Requisitos</b><em class="who"><s class="h">Persona</s></em></li>
+          <li><span class="node"><i class="ic" data-icon="layout"></i></span><b>Diseño</b><em class="who"><s class="h">Persona</s></em></li>
+          <li><span class="node"><i class="ic" data-icon="code"></i></span><b>Programación</b><em class="who"><s class="h">Persona</s></em></li>
+          <li><span class="node"><i class="ic" data-icon="check"></i></span><b>Pruebas</b><em class="who"><s class="h">Persona</s></em></li>
+          <li><span class="node"><i class="ic" data-icon="wrench"></i></span><b>Corrección</b><em class="who"><s class="h">Persona</s></em></li>
+          <li><span class="node"><i class="ic" data-icon="cloud"></i></span><b>Despliegue</b><em class="who"><s class="h">Persona</s></em></li>
+        </ol>
+        <p class="track-note">Cada etapa exige conocimiento técnico especializado.</p>
+      </div>
+
+      <div class="track track-b frag" data-step="1">
+        <div class="track-head"><span class="mono lime">Con IA</span><b>Desarrollo apoyado por IA</b></div>
+        <ol class="stages">
+          <li class="human"><span class="node"><i class="ic" data-icon="doc"></i></span><b>Requisitos</b><em class="who"><s class="h">Persona decide</s></em></li>
+          <li class="ai"><span class="node"><i class="ic" data-icon="layout"></i></span><b>Diseño</b><em class="who"><s class="h">Persona</s><s class="a">IA</s></em></li>
+          <li class="ai"><span class="node"><i class="ic" data-icon="code"></i></span><b>Programación</b><em class="who"><s class="a">IA</s><s class="h">revisión</s></em></li>
+          <li class="human"><span class="node"><i class="ic" data-icon="check"></i></span><b>Pruebas</b><em class="who"><s class="h">Persona valida</s><s class="a">IA</s></em></li>
+          <li class="ai"><span class="node"><i class="ic" data-icon="wrench"></i></span><b>Corrección</b><em class="who"><s class="a">IA</s><s class="h">Persona</s></em></li>
+          <li class="ai"><span class="node"><i class="ic" data-icon="cloud"></i></span><b>Despliegue</b><em class="who"><s class="h">Persona</s><s class="a">IA</s></em></li>
+        </ol>
+        <div class="assist-band" aria-hidden="true"><span class="mono">La IA asiste</span></div>
+      </div>
+    </div>
+
+    <p class="takeaway frag" data-step="2"><b>Las etapas no desaparecen.</b> Cambia quién escribe el primer borrador; definir y validar sigue siendo trabajo humano.</p>
+  </section>
+
+  <!-- ===================================================== 03 · CONCEPTO -->
+  <section class="slide s-def" data-title="¿Qué es exactamente el vibe coding?" data-steps="4">
+    <div class="kicker">02 <i></i> El concepto</div>
+    <h2 class="title">¿Qué es exactamente el vibe coding?</h2>
+    <p class="def">Crear software <mark>describiendo en lenguaje natural</mark> lo que quieres y dejando que la IA escriba el código.</p>
+
+    <figure class="quote frag" data-step="1">
+      <span class="qmark" aria-hidden="true" data-qa-ignore>“</span>
+      <blockquote>Hay un nuevo tipo de programación al que llamo <b>vibe coding</b>, en el que te entregas por completo a las vibras, abrazas lo exponencial y <b>olvidas que el código siquiera existe</b>.</blockquote>
+      <p class="orig mono">“…where you fully give in to the vibes, embrace exponentials, and forget that the code even exists.”</p>
+      <figcaption><b>Andrej Karpathy</b> · cofundador de OpenAI y exdirector de IA en Tesla · X, 2 feb 2025 · <span class="muted">traducción propia</span></figcaption>
+    </figure>
+
+    <div class="lenses">
+      <article class="lens frag" data-step="2">
+        <header><span class="mono lime">Sentido original · 2025</span></header>
+        <h3>Aceptar sin revisar</h3>
+        <p>Pedir, aceptar todos los cambios y probar, <b>sin leer el código</b>. Pensado para proyectos desechables de fin de semana.</p>
+        <p class="src mono">“Accept All” always, I don’t read the diffs anymore.</p>
+      </article>
+      <article class="lens lens-b frag" data-step="3">
+        <header><span class="mono">Uso amplio · 2026</span></header>
+        <h3>Desarrollar con lenguaje natural</h3>
+        <p>Cualquier desarrollo guiado por instrucciones a una IA, <b>a menudo con revisión y pruebas</b>.</p>
+        <p class="src mono">Si lo revisas, lo pruebas y lo entiendes, es programación asistida por IA (paráfrasis de S. Willison).</p>
+      </article>
+    </div>
+
+    <ol class="timeline frag" data-step="4">
+      <li><time class="mono">2 feb 2025</time><span>Karpathy acuña el término en X</span></li>
+      <li><time class="mono">19 mar 2025</time><span>Willison: no toda la programación con IA es vibe coding</span></li>
+      <li><time class="mono">6 nov 2025</time><span>Collins lo elige palabra del año</span></li>
+      <li class="now"><time class="mono">oct 2026</time><span>Se usa en sentido amplio</span></li>
+    </ol>
+    <p class="refs mono">Fuentes: Karpathy (X, 2025) · Willison (2025) · Fowler, bliki «Vibe Coding» · Collins Dictionary (2025)</p>
+  </section>
+
+  <!-- ===================================================== 04 · CÓMO FUNCIONA -->
+  <section class="slide s-flow" data-title="¿Cómo funciona?" data-steps="7">
+    <div class="kicker">03 <i></i> Funcionamiento</div>
+    <h2 class="title">De la idea a la aplicación, en ciclos</h2>
+    <div class="legend mono"><span class="lg-h">Persona</span><span class="lg-a">IA</span></div>
+
+    <div class="flow">
+      <svg class="flow-svg" viewBox="0 0 1680 560" aria-hidden="true">
+        <defs>
+          <linearGradient id="flowGrad" gradientUnits="userSpaceOnUse" x1="80" x2="1600" y1="300" y2="300">
+            <stop offset="0" stop-color="#F3F0E5" stop-opacity=".55"/>
+            <stop offset=".3" stop-color="#C8EC88" stop-opacity=".9"/>
+            <stop offset=".75" stop-color="#C8EC88" stop-opacity=".9"/>
+            <stop offset="1" stop-color="#F3F0E5" stop-opacity=".55"/>
+          </linearGradient>
+        </defs>
+        <path class="flow-track" d="M80 300 L1600 300"/>
+        <path class="flow-line" id="flowLine" d="M80 300 L1600 300" pathLength="1"/>
+        <path class="flow-loop" id="flowLoop" d="M1600 262 C1600 70, 1290 40, 840 40 C 400 40, 333 70, 333 262" pathLength="1"/>
+        <g class="flow-pulse"><circle r="9"/><animateMotion dur="6s" repeatCount="indefinite" path="M80 300 L1600 300 C1640 300, 1600 60, 840 40 C 330 40, 333 120, 333 300 L1600 300"/></g>
+      </svg>
+      <div class="loop-label mono frag" data-step="7">Iterar: vuelves a describir lo que falta o falló</div>
+      <ol class="flow-nodes">
+        <li class="h frag" data-step="1"><span class="fn">1</span><b>Idea</b><p><s class="h">Tú</s> detectas un problema real</p></li>
+        <li class="h frag" data-step="2"><span class="fn">2</span><b>Instrucción</b><p><s class="h">Tú</s> lo describes en lenguaje natural</p></li>
+        <li class="a frag" data-step="3"><span class="fn">3</span><b>Modelo de IA</b><p><s class="a">IA</s> interpreta y planea una solución</p></li>
+        <li class="a frag" data-step="4"><span class="fn">4</span><b>Código</b><p><s class="a">IA</s> escribe y edita archivos</p></li>
+        <li class="a frag" data-step="5"><span class="fn">5</span><b>Ejecución</b><p><s class="a">IA</s> o <s class="h">Tú</s> ejecutan la app</p></li>
+        <li class="h frag" data-step="6"><span class="fn">6</span><b>Pruebas</b><p><s class="h">Tú</s> verificas; <s class="a">IA</s> puede probar</p></li>
+        <li class="h frag" data-step="7"><span class="fn">7</span><b>Iteración</b><p><s class="h">Tú</s> pides ajustes y repites</p></li>
+      </ol>
+    </div>
+    <p class="takeaway">Casi nunca sale perfecto a la primera: <b>el valor está en el ciclo.</b></p>
+  </section>
+
+  <!-- ===================================================== 05 · DETRÁS DE UNA INSTRUCCIÓN -->
+  <section class="slide s-arch" data-scene="architecture" data-title="Qué sucede detrás de una instrucción" data-steps="6">
+    <div class="kicker">04 <i></i> Bajo el capó</div>
+    <h2 class="title">Qué sucede detrás<br>de una instrucción</h2>
+
+    <span class="tag3d" data-anchor="prompt"><b>Lenguaje natural</b>tu instrucción</span>
+    <span class="tag3d right" data-anchor="llm"><b>LLM</b>modelo de lenguaje</span>
+    <span class="tag3d" data-anchor="frontend"><b>Frontend</b>lo que ves</span>
+    <span class="tag3d" data-anchor="backend"><b>Backend</b>lo que calcula</span>
+    <span class="tag3d" data-anchor="db"><b>Base de datos</b>lo que se guarda</span>
+
+    <ol class="glossary">
+      <li class="frag" data-step="1"><span class="gn">1</span><div><b>Lenguaje natural</b><p>Lo que escribes como hablarías: «Quiero ver mis ingresos por mes».</p></div></li>
+      <li class="frag" data-step="2"><span class="gn">2</span><div><b>Modelo de lenguaje (LLM)</b><p>Entrenado con enormes cantidades de texto y código; genera texto eligiendo continuaciones probables.</p></div></li>
+      <li class="frag" data-step="3"><span class="gn">3</span><div><b>Generación de código</b><p>Traduce tu petición a instrucciones que una computadora puede ejecutar.</p></div></li>
+      <li class="frag" data-step="4"><span class="gn">4</span><div><b>Frontend</b><p>Lo que ves y tocas: pantallas, botones y gráficas.</p></div></li>
+      <li class="frag" data-step="5"><span class="gn">5</span><div><b>Backend</b><p>Lo que trabaja detrás: reglas, cálculos y conexión con los datos.</p></div></li>
+      <li class="frag" data-step="6"><span class="gn">6</span><div><b>Base de datos</b><p>Donde la información se guarda de forma ordenada y persistente.</p></div></li>
+    </ol>
+  </section>
+
+  <!-- ===================================================== 06 · TRES FORMAS -->
+  <section class="slide s-three" data-title="Tres formas de desarrollar software" data-steps="3">
+    <div class="kicker">05 <i></i> Comparativa</div>
+    <h2 class="title">Tres formas de construir software</h2>
+
+    <div class="map">
+      <svg viewBox="0 0 760 600" aria-hidden="true">
+        <defs>
+          <marker id="arrowHead" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="9" markerHeight="9" orient="auto-start-reverse"><path d="M0 0 L10 5 L0 10 z" fill="#858C92"/></marker>
+          <radialGradient id="zoneSafe" cx=".85" cy=".1" r=".9"><stop offset="0" stop-color="#C8EC88" stop-opacity=".16"/><stop offset="1" stop-color="#C8EC88" stop-opacity="0"/></radialGradient>
+        </defs>
+        <rect x="80" y="20" width="660" height="500" fill="url(#zoneSafe)"/>
+        <g class="map-grid">
+          <line x1="80" y1="270" x2="740" y2="270"/><line x1="410" y1="20" x2="410" y2="520"/>
+        </g>
+        <line class="map-axis" x1="80" y1="520" x2="745" y2="520" marker-end="url(#arrowHead)"/>
+        <line class="map-axis" x1="80" y1="520" x2="80" y2="15" marker-end="url(#arrowHead)"/>
+        <text class="map-tick" x="80" y="556">Persona</text>
+        <text class="map-tick" x="740" y="556" text-anchor="end">IA</text>
+        <text class="map-axis-t" x="410" y="590" text-anchor="middle">¿Quién escribe la mayor parte del código?</text>
+        <text class="map-tick" x="66" y="512" text-anchor="end">Poca</text>
+        <text class="map-tick" x="66" y="36" text-anchor="end">Mucha</text>
+        <text class="map-axis-t" transform="translate(22 270) rotate(-90)" text-anchor="middle">Revisión y pruebas humanas</text>
+
+        <g class="pt pt-1 frag" data-step="1"><circle cx="190" cy="92" r="30"/><text x="190" y="102" text-anchor="middle">1</text></g>
+        <g class="pt pt-2 frag" data-step="2"><circle cx="630" cy="104" r="30"/><text x="630" y="114" text-anchor="middle">2</text></g>
+        <g class="pt pt-3 frag" data-step="3"><circle cx="640" cy="440" r="30"/><text x="640" y="450" text-anchor="middle">3</text></g>
+        <path class="pt-drift frag" data-step="3" d="M640 404 C 640 300, 640 220, 632 142" />
+      </svg>
+      <p class="map-note mono">Esquema conceptual · no son datos medidos</p>
+    </div>
+
+    <div class="approaches">
+      <article class="ap frag" data-step="1">
+        <span class="apn">1</span>
+        <div><h3>Programación tradicional</h3>
+        <p><b>+</b> Control total y comprensión profunda.</p>
+        <p><b>−</b> Requiere formación y más tiempo.</p></div>
+        <div class="sup"><span class="mono">Supervisión</span><i class="meter m5"></i></div>
+      </article>
+      <article class="ap ap-2 frag" data-step="2">
+        <span class="apn">2</span>
+        <div><h3>Programación asistida por IA</h3>
+        <p><b>+</b> Rapidez con control de calidad.</p>
+        <p><b>−</b> Exige saber evaluar lo que genera la IA.</p></div>
+        <div class="sup"><span class="mono">Supervisión</span><i class="meter m4"></i></div>
+      </article>
+      <article class="ap ap-3 frag" data-step="3">
+        <span class="apn">3</span>
+        <div><h3>Vibe coding (sentido original)</h3>
+        <p><b>+</b> Máxima rapidez para explorar ideas.</p>
+        <p><b>−</b> Errores y riesgos ocultos sin detectar.</p></div>
+        <div class="sup"><span class="mono">Supervisión</span><i class="meter m1"></i></div>
+      </article>
+    </div>
+    <p class="refs mono">Distinción entre 2 y 3: S. Willison (19 mar 2025) · M. Fowler, bliki «Vibe Coding»</p>
+  </section>
+
+  <!-- ===================================================== 07 · HERRAMIENTAS -->
+  <section class="slide s-tools" data-title="Herramientas del ecosistema" data-steps="3">
+    <div class="kicker">06 <i></i> Ecosistema</div>
+    <h2 class="title">Herramientas: no todas hacen lo mismo</h2>
+
+    <div class="families">
+      <article class="fam frag" data-step="1">
+        <header><span class="mono lime">Agentes de código</span><p>Trabajan sobre tu proyecto: leen, editan, ejecutan comandos y pruebas.</p></header>
+        <ul>
+          <li><b>Claude Code</b><span class="by">Anthropic</span><p>Terminal, IDE, app de escritorio y web.</p></li>
+          <li><b>Codex</b><span class="by">OpenAI</span><p>CLI local, extensión de IDE y agente en la nube.</p></li>
+          <li><b>OpenCode</b><span class="by">Código abierto</span><p>Agente de terminal; admite modelos de varios proveedores.</p></li>
+        </ul>
+      </article>
+      <article class="fam frag" data-step="2">
+        <header><span class="mono lime">Editor con IA</span><p>Un editor de código con asistente y agente integrados.</p></header>
+        <ul>
+          <li><b>Cursor</b><span class="by">Anysphere</span><p>Editor derivado de VS Code con agente integrado.</p></li>
+        </ul>
+        <div class="fam-aside">
+          <span class="mono">¿Y n8n?</span>
+          <p>No es una herramienta de vibe coding: automatiza flujos entre aplicaciones. Puede conectar lo que construyas con el resto de tus sistemas.</p>
+        </div>
+      </article>
+      <article class="fam frag" data-step="3">
+        <header><span class="mono lime">Constructores de apps web</span><p>Desde el navegador, a partir de una conversación.</p></header>
+        <ul>
+          <li><b>Lovable</b><span class="by">Lovable</span><p>Apps web completas; se integra con Supabase para datos y usuarios.</p></li>
+          <li><b>Bolt</b><span class="by">StackBlitz</span><p>Genera y ejecuta la app dentro del navegador (WebContainers).</p></li>
+          <li><b>v0</b><span class="by">Vercel</span><p>Genera apps web y las publica en Vercel.</p></li>
+        </ul>
+      </article>
+    </div>
+
+    <div class="spectrum" aria-hidden="true">
+      <span class="mono">Más control técnico</span><i></i><span class="mono">Menor barrera de entrada</span>
+    </div>
+    <p class="refs mono">Según documentación oficial de cada herramienta, consultada en octubre de 2026. Las capacidades cambian con frecuencia; no se comparan precios.</p>
+  </section>
+
+  <!-- ===================================================== 08 · ESPECIFICACIÓN -->
+  <section class="slide s-spec" data-title="De un prompt básico a una especificación útil" data-steps="4">
+    <div class="kicker">07 <i></i> Especificación</div>
+    <h2 class="title">Del prompt vago a la especificación útil</h2>
+
+    <div class="vague">
+      <span class="mono label">Prompt básico</span>
+      <div class="prompt mono"><span class="caret">›</span> Crea una aplicación de finanzas<span class="cursor"></span></div>
+      <ul class="doubts">
+        <li>¿Para quién?</li><li>¿Con qué datos?</li><li>¿Qué debe calcular?</li><li>¿Cómo sé si está bien?</li>
+      </ul>
+      <p class="vague-note">El modelo rellenará cada hueco con <b>suposiciones</b>.</p>
+    </div>
+
+    <svg class="spec-arrow" viewBox="0 0 120 40" aria-hidden="true"><path d="M4 20 H108 M94 8 L110 20 L94 32"/></svg>
+
+    <div class="spec">
+      <span class="mono label lime">Especificación</span>
+      <dl>
+        <div class="frag" data-step="1"><dt class="mono">Usuario</dt><dd>Dirección de finanzas de una pyme, sin conocimientos técnicos.</dd></div>
+        <div class="frag" data-step="1"><dt class="mono">Objetivo</dt><dd>Ver ingresos, egresos y flujo neto por mes para decidir rápido.</dd></div>
+        <div class="frag" data-step="2"><dt class="mono">Datos</dt><dd>Excel <code>movimientos.xlsx</code>: Fecha, Concepto, Tipo (Ingreso/Egreso), Monto <b>siempre positivo</b>.</dd></div>
+        <div class="frag" data-step="2"><dt class="mono">Funciones</dt><dd>Indicadores, gráfica mensual y relectura del archivo cada 5 s.</dd></div>
+        <div class="frag" data-step="3"><dt class="mono">Diseño</dt><dd>Fondo oscuro, acento verde lima, legible en una videollamada.</dd></div>
+        <div class="frag" data-step="3"><dt class="mono">Restricciones</dt><dd>Solo lectura del Excel, datos ficticios, ninguna clave en el código.</dd></div>
+        <div class="frag key" data-step="4"><dt class="mono">Validación</dt><dd>Con los datos de prueba: ingresos <b>2,750,000</b> · egresos <b>2,038,000</b> · flujo neto <b>712,000</b>.</dd></div>
+      </dl>
+    </div>
+
+    <p class="takeaway">Un modelo más capaz no adivina lo que no dijiste: <b>los requisitos siguen siendo tu responsabilidad.</b></p>
+  </section>
+
+  <!-- ===================================================== 09 · CASO PRÁCTICO -->
+  <section class="slide s-case" data-scene="excel" data-title="Caso práctico: dashboard financiero empresarial" data-steps="3">
+    <div class="kicker">08 <i></i> Caso práctico</div>
+    <h2 class="title">Dashboard financiero empresarial</h2>
+    <p class="case-co"><span class="mono">Empresa ficticia</span> Comercializadora Nébula · ingresos, egresos y flujo neto, ene–jun 2026</p>
+
+    <span class="tag3d station" data-anchor="excel"><b>1 · Archivo Excel</b>movimientos.xlsx</span>
+    <span class="tag3d station" data-anchor="backend"><b>2 · Backend</b>lee y calcula</span>
+    <span class="tag3d station" data-anchor="api"><b>3 · API</b>GET /api/resumen</span>
+    <span class="tag3d station" data-anchor="dash"><b>4 · Dashboard</b>muestra indicadores</span>
+
+    <div class="edit-callout frag" data-step="1" data-anchor="cell">
+      <span class="mono">Celda D30 · Proveedores, junio</span>
+      <b><s>172,000</s> → 202,000</b>
+      <em class="mono">Archivo guardado ✓</em>
+    </div>
+
+    <ol class="console mono">
+      <li class="frag" data-step="1"><time>10:42:03</time> Excel · movimientos.xlsx guardado</li>
+      <li class="frag" data-step="2" style="--d:.2s"><time>10:42:05</time> Dashboard → GET /api/resumen</li>
+      <li class="frag" data-step="2" style="--d:1.1s"><time>10:42:05</time> Backend relee el archivo y recalcula</li>
+      <li class="frag" data-step="2" style="--d:2.2s"><time>10:42:05</time> Egresos jun <b>372,000 → 402,000</b> · Flujo neto <b>712,000 → 682,000</b></li>
+    </ol>
+
+    <aside class="impl frag" data-step="3">
+      <span class="mono lime">Importante</span>
+      <p>La actualización automática <b>no ocurre por pedirla en un prompt</b>: hay que programarla y comprobarla.</p>
+      <ul><li>Relectura periódica</li><li>Vigilancia del archivo</li><li>Botón «Actualizar»</li></ul>
+    </aside>
+    <p class="sim-tag mono">Simulación didáctica</p>
+  </section>
+
+  <!-- ===================================================== 10 · VALIDACIÓN -->
+  <section class="slide s-valid" data-title="Cómo comprobar que nuestra aplicación funciona" data-steps="3">
+    <div class="kicker">09 <i></i> Validación</div>
+    <h2 class="title">Una interfaz bonita<br>no garantiza cálculos correctos</h2>
+
+    <div class="cycle">
+      <svg viewBox="0 0 600 600" aria-hidden="true">
+        <circle class="cy-track" cx="300" cy="300" r="210"/>
+        <circle class="cy-arc" cx="300" cy="300" r="210" pathLength="1"/>
+        <g class="cy-pulse"><circle r="9"/><animateMotion dur="7s" repeatCount="indefinite" path="M300 90 A210 210 0 1 1 299.9 90"/></g>
+      </svg>
+      <ol class="cy-nodes">
+        <li style="--a:-90deg"><span>Generar</span></li>
+        <li style="--a:-18deg"><span>Ejecutar</span></li>
+        <li style="--a:54deg" class="hot"><span>Detectar<br>errores</span></li>
+        <li style="--a:126deg"><span>Corregir</span></li>
+        <li style="--a:198deg"><span>Volver a<br>probar</span></li>
+      </ol>
+      <div class="cy-center mono">ciclo de<br>validación</div>
+    </div>
+
+    <div class="bugcase">
+      <div class="kpi-card">
+        <span class="mono">Dashboard · flujo neto ene–jun</span>
+        <strong class="kpi-wrong">$4,788,000</strong>
+        <div class="spark" data-chart="spark"></div>
+        <em class="mono looks">Se ve impecable…</em>
+      </div>
+
+      <div class="check frag" data-step="1">
+        <span class="mono label">Prueba de control</span>
+        <div class="calc mono"><span>Ingresos</span><b>2,750,000</b><span>− Egresos</span><b>2,038,000</b><span class="eq">= Flujo neto</span><b class="lime">712,000</b></div>
+        <p class="how">Cálculo independiente: calculadora o <code>SUMAR.SI.CONJUNTO</code> en Excel.</p>
+        <p class="mismatch"><b>4,788,000 ≠ 712,000</b> → hay un error de lógica</p>
+      </div>
+
+      <div class="cause frag" data-step="2">
+        <span class="mono label">Causa</span>
+        <p>Los egresos venían con signo negativo y el código volvió a restarlos:</p>
+        <code class="mono">2,750,000 − (−2,038,000) = 4,788,000</code>
+      </div>
+
+      <div class="fix frag" data-step="3">
+        <span class="mono label lime">Corrección</span>
+        <p>Definir la <b>convención de signos</b> en la especificación y agregar una <b>prueba</b> con el resultado esperado.</p>
+        <span class="pass mono">✓ prueba: flujo neto = 712,000</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===================================================== 11 · APLICACIONES -->
+  <section class="slide s-apps" data-title="Aplicaciones reales en empresas" data-steps="4">
+    <div class="kicker">10 <i></i> Aplicaciones</div>
+    <h2 class="title">Qué pueden construir las empresas</h2>
+
+    <div class="apps">
+      <article class="app frag" data-step="1">
+        <div class="mini mini-sales" aria-hidden="true"><div class="mini-bar"><i></i><i></i><i></i></div><div class="mini-kpis"><b></b><b></b><b></b></div><div class="mini-chart" data-chart="minibars"></div></div>
+        <div class="app-txt"><h3>Dashboard de ventas</h3><p>Sustituye el reporte que alguien arma a mano cada semana.</p>
+        <p class="needs"><span class="mono">Necesita además</span> fuente de datos confiable y actualización programada.</p></div>
+      </article>
+      <article class="app frag" data-step="2">
+        <div class="mini mini-inv" aria-hidden="true"><div class="mini-bar"><i></i><i></i><i></i></div><div class="mini-table"><p><i></i><i></i><b class="ok"></b></p><p><i></i><i></i><b class="low"></b></p><p><i></i><i></i><b class="ok"></b></p><p><i></i><i></i><b class="ok"></b></p><p><i></i><i></i><b class="low"></b></p></div></div>
+        <div class="app-txt"><h3>Inventario básico</h3><p>Saber qué hay en almacén y qué está por agotarse.</p>
+        <p class="needs"><span class="mono">Necesita además</span> base de datos persistente, usuarios y respaldos.</p></div>
+      </article>
+      <article class="app frag" data-step="3">
+        <div class="mini mini-landing" aria-hidden="true"><div class="mini-bar"><i></i><i></i><i></i></div><div class="mini-hero"><b></b><i></i><i class="short"></i></div><div class="mini-form"><i></i><i></i><b>Enviar</b></div></div>
+        <div class="app-txt"><h3>Landing page con formulario</h3><p>Captar prospectos para una campaña.</p>
+        <p class="needs"><span class="mono">Necesita además</span> hosting, destino de los datos (CRM, hoja o webhook de n8n) y aviso de privacidad.</p></div>
+      </article>
+      <article class="app frag" data-step="4">
+        <div class="mini mini-crm" aria-hidden="true"><div class="mini-bar"><i></i><i></i><i></i></div><div class="mini-cols"><div><b></b><i></i><i></i><i></i></div><div><b></b><i></i><i></i></div><div><b></b><i class="hl"></i></div></div></div>
+        <div class="app-txt"><h3>Seguimiento de clientes</h3><p>Que ningún cliente se pierda entre correos.</p>
+        <p class="needs"><span class="mono">Necesita además</span> base de datos, inicio de sesión y permisos.</p></div>
+      </article>
+    </div>
+    <p class="takeaway">Prototiparlos con IA es rápido. <b>Operarlos todos los días requiere sistemas adicionales.</b></p>
+  </section>
+
+  <!-- ===================================================== 12 · RIESGOS -->
+  <section class="slide s-risks" data-title="Riesgos y limitaciones" data-steps="2">
+    <div class="kicker">11 <i></i> Riesgos</div>
+    <h2 class="title">Lo que la demo no muestra</h2>
+
+    <div class="above">
+      <div class="demo-pill"><i class="ic" data-icon="play"></i><span>La demo funciona</span><b class="mono">✓</b></div>
+    </div>
+    <div class="waterline" aria-hidden="true"><svg viewBox="0 0 1680 40" preserveAspectRatio="none"><path d="M0 20 Q 70 4 140 20 T 280 20 T 420 20 T 560 20 T 700 20 T 840 20 T 980 20 T 1120 20 T 1260 20 T 1400 20 T 1540 20 T 1680 20"/></svg><span class="mono">Lo que se ve</span><span class="mono below-t">Lo que no se ve</span></div>
+
+    <div class="depths frag" data-step="1">
+      <article><i class="ic" data-icon="logic"></i><h3>Errores de lógica</h3><p>Cálculos que parecen correctos y no lo son.</p></article>
+      <article><i class="ic" data-icon="shield"></i><h3>Vulnerabilidades</h3><p>Entradas sin validar y rutas sin control de acceso.</p></article>
+      <article><i class="ic" data-icon="key"></i><h3>Información sensible expuesta</h3><p>Claves o datos personales visibles en el navegador.</p></article>
+      <article><i class="ic" data-icon="package"></i><h3>Dependencias y configuración</h3><p>Paquetes inexistentes o mal configurados. <span class="cite mono">Spracklen et al., USENIX Security 2025</span></p></article>
+      <article><i class="ic" data-icon="tangle"></i><h3>Código difícil de mantener</h3><p>Nadie entiende cómo funciona ni se atreve a cambiarlo.</p></article>
+      <article><i class="ic" data-icon="load"></i><h3>Falla en uso real</h3><p>Más usuarios, datos inesperados, conexiones lentas.</p></article>
+    </div>
+
+    <p class="principle frag" data-step="2">«Que funcione una vez <b>no significa</b> que esté listo para producción».</p>
+  </section>
+
+  <!-- ===================================================== 13 · PROTOTIPO A PRODUCTO -->
+  <section class="slide s-prod" data-title="De prototipo a producto profesional" data-steps="3">
+    <div class="kicker">12 <i></i> Madurez</div>
+    <h2 class="title">Del prototipo al producto profesional</h2>
+
+    <div class="stairs" data-chart="stairs"></div>
+
+    <div class="levels">
+      <article class="lvl frag" data-step="1">
+        <span class="mono lime">Escalón 1</span><h3>Prototipo</h3><p>Explorar una idea con datos ficticios. <b>Aquí el vibe coding es válido.</b></p>
+        <ul class="chips"><li>Datos ficticios</li><li>Uso personal</li></ul>
+      </article>
+      <article class="lvl frag" data-step="2">
+        <span class="mono lime">Escalón 2</span><h3>Piloto interno</h3><p>Pocas personas de confianza lo usan de verdad.</p>
+        <ul class="chips"><li>Control de versiones (Git)</li><li>Pruebas</li><li>Revisión del código</li></ul>
+      </article>
+      <article class="lvl frag" data-step="3">
+        <span class="mono lime">Escalón 3</span><h3>Producción</h3><p>Clientes, datos reales y operación diaria.</p>
+        <ul class="chips"><li>Autenticación y permisos</li><li>Base de datos segura y respaldos</li><li>Manejo seguro de claves</li><li>Monitoreo y registros</li></ul>
+      </article>
+    </div>
+
+    <div class="tradeoff mono" aria-hidden="true">
+      <span>Rapidez de prototipado</span><i class="down"></i><span>Confiabilidad operativa</span><i class="up"></i>
+    </div>
+  </section>
+
+  <!-- ===================================================== 14 · EJERCICIO -->
+  <section class="slide s-lab" data-title="El ejercicio de hoy" data-steps="0">
+    <div class="kicker">13 <i></i> Práctica</div>
+    <h2 class="title">El ejercicio de hoy</h2>
+
+    <ol class="lab-steps">
+      <li><span>1</span><p><b>Construye</b> un dashboard financiero empresarial con ayuda de IA.</p></li>
+      <li><span>2</span><p><b>Crea o usa</b> un Excel ficticio de movimientos.</p></li>
+      <li><span>3</span><p><b>Conecta</b> el archivo a la aplicación mediante el backend.</p></li>
+      <li><span>4</span><p><b>Modifica</b> una cifra en Excel.</p></li>
+      <li><span>5</span><p><b>Guarda</b> el archivo y comprueba la actualización.</p></li>
+      <li><span>6</span><p><b>Identifica</b> qué indicador cambió y verifica el cálculo.</p></li>
+    </ol>
+
+    <figure class="reference">
+      <div class="browser">
+        <div class="browser-bar"><i></i><i></i><i></i><span class="mono">localhost:8000 · Flujo de efectivo</span></div>
+        <div class="dash" data-chart="dashboard"></div>
+      </div>
+      <figcaption class="mono">Resultado de referencia · los números deben coincidir; el diseño puede variar</figcaption>
+    </figure>
+    <p class="lab-note mono">Prompt de referencia: <b>materiales/prompt-referencia.md</b> · Evidencia: captura antes / después + cálculo verificado</p>
+  </section>
+
+  <!-- ===================================================== 15 · CONCLUSIÓN -->
+  <section class="slide s-close" data-scene="closing" data-title="Conclusión" data-steps="2">
+    <div class="kicker">14 <i></i> Cierre</div>
+    <blockquote class="close-quote">La inteligencia artificial puede <b>acelerar</b> la construcción del software. Nuestra responsabilidad es <mark>definir</mark> qué debe hacer, <mark>comprobar</mark> que lo haga correctamente y <mark>decidir</mark> cuándo está listo para utilizarse.</blockquote>
+    <ul class="verbs mono frag" data-step="1"><li>Definir</li><li>Comprobar</li><li>Decidir</li></ul>
+    <p class="close-q frag" data-step="2">¿Qué aplicación construirías para resolver un problema real de tu trabajo?</p>
+  </section>
+
+  <!-- ===================================================== 16 · FUENTES -->
+  <section class="slide s-sources" data-title="Anexo · Fuentes" data-annex="1">
+    <div class="kicker">Anexo <i></i> Fuentes</div>
+    <h2 class="title">Fuentes verificables</h2>
+    <div class="sources" data-chart="sources"></div>
+    <p class="refs mono">Hechos documentados: fechas, autores y definiciones citadas. Interpretaciones: «uso amplio» del término en 2026, mapa conceptual de la diapositiva 6 y agrupación de herramientas. Datos del caso práctico: ficticios.</p>
+  </section>
+
+  <footer id="chrome" aria-hidden="true">
+    <span class="mono brand">Top Learning <i></i> Vibe Coding</span>
+    <span class="mono pager"><b id="pageNum">01</b> / 15</span>
+    <div id="progress"><i></i></div>
+  </footer>
+</div>
+</div>
+
+<div id="hud" class="mono" hidden></div>
+<!-- @inline-js -->
+</body>
+</html>

@@ -1,0 +1,18 @@
+{
+  "name": "vibe-coding-presentacion",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Presentación «Vibe Coding» — Top Learning · Inteligencia Artificial y Automatización con n8n",
+  "type": "module",
+  "scripts": {
+    "build": "node scripts/build.mjs",
+    "export": "node scripts/export.mjs",
+    "pptx": "python3 scripts/make_pptx.py",
+    "qa": "node scripts/qa.mjs",
+    "all": "npm run build && npm run qa && npm run export && npm run pptx"
+  },
+  "devDependencies": {
+    "esbuild": "^0.24.0",
+    "three": "^0.169.0"
+  }
+}
