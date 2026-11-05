@@ -329,6 +329,16 @@ body.ov #progress{opacity:0}
   .travel{display:none}
   #ui,#progress,#help{display:none!important}
 }
+
+/* course close */
+.topics{display:grid;grid-template-columns:repeat(3,1fr);gap:26px 40px;flex:1;align-content:center}
+.topics > div{border-top:1px solid var(--line2);padding-top:18px}
+.topics h4{font-size:28px;font-weight:600;margin:10px 0 8px;letter-spacing:-.01em}
+.topics p{font-size:21px;line-height:1.42;color:var(--muted)}
+.refx{flex:1;display:flex;flex-direction:column;justify-content:center;max-width:1450px}
+.refx p.big{font-family:var(--serif);font-size:54px;line-height:1.22;letter-spacing:-.015em}
+.refx p.big em{color:var(--lime)}
+.refx p.small{font-size:26px;line-height:1.5;color:var(--muted);margin-top:40px;max-width:1200px}
 </style>
 </head>
 <body>
@@ -1254,8 +1264,49 @@ body.ov #progress{opacity:0}
   </div>
 </section>
 
+<!-- ======================= LO QUE PUDO FALTAR ======================= -->
+<section class="slide" data-act="V · Cierre del curso">
+  <div class="bd">
+    <h2 class="r">Lo que queda por <em>explorar</em></h2>
+    <p class="lead r" style="margin-top:-12px">Temas que no alcanzamos a profundizar y que conviene estudiar después del curso.</p>
+    <div class="topics">
+      <div class="r"><div class="num-s">01</div><h4>Evaluación de agentes</h4><p>Cómo medir si un agente responde bien de forma consistente, con casos de prueba y criterios definidos.</p></div>
+      <div class="r"><div class="num-s">02</div><h4>Observabilidad</h4><p>Seguir cada decisión, llamada a herramienta y costo para entender por qué un agente actuó como actuó.</p></div>
+      <div class="r"><div class="num-s">03</div><h4>Memoria y RAG</h4><p>Dar a los agentes conocimiento de la empresa sin depender de lo que el modelo “recuerda”.</p></div>
+      <div class="r"><div class="num-s">04</div><h4>Seguridad agéntica</h4><p>Inyección de instrucciones, manejo de credenciales y límites a lo que un agente puede ejecutar.</p></div>
+      <div class="r"><div class="num-s">05</div><h4>Costos y latencia</h4><p>Elegir el modelo adecuado para cada tarea: no todo necesita el modelo más grande.</p></div>
+      <div class="r"><div class="num-s">06</div><h4>Ética y gobernanza</h4><p>Privacidad de datos, transparencia con los clientes y responsabilidad sobre las decisiones automatizadas.</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- ======================= FUTURO ======================= -->
+<section class="slide" data-act="V · Cierre del curso">
+  <div class="bd">
+    <h2 class="r">Hacia dónde va la <em>IA agéntica</em></h2>
+    <p class="lead r" style="margin-top:-12px">Tendencias que vale la pena observar con criterio, no con prisa.</p>
+    <div class="nots">
+      <div class="not r"><span class="k">01</span><h3>Agentes que se comunican entre sí.</h3><p>Protocolos para que agentes de distintos proveedores colaboren, como MCP conecta herramientas.</p></div>
+      <div class="not r"><span class="k">02</span><h3>Agentes que usan interfaces.</h3><p>Sistemas capaces de operar navegadores y aplicaciones como lo haría una persona, donde no existe una API.</p></div>
+      <div class="not r"><span class="k">03</span><h3>Tareas de mayor duración.</h3><p>Agentes que trabajan durante horas en objetivos complejos, con puntos de revisión humana.</p></div>
+      <div class="not r"><span class="k">04</span><h3>Identidad y permisos para agentes.</h3><p>Cada agente con credenciales, límites y registros propios, como cualquier integrante de un equipo.</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- ======================= REFLEXIÓN ======================= -->
+<section class="slide" data-act="V · Cierre del curso">
+  <div class="bd">
+    <div class="refx">
+      <div class="eyebrow r">Penúltima sesión · una reflexión</div>
+      <p class="big r" style="margin-top:28px">Las herramientas cambiarán de nombre cada año. Lo que permanece es el <em>criterio</em>: saber qué automatizar, qué delegar a un agente y qué decisión conservar como humana.</p>
+      <p class="small r">La IA no reemplaza el juicio profesional; lo amplifica. Quien entiende el proceso, los datos y las personas detrás de cada flujo es quien convierte la tecnología en valor.</p>
+    </div>
+  </div>
+</section>
+
 <!-- ======================= 24 · CIERRE ======================= -->
-<section class="slide closing" data-act="Cierre">
+<section class="slide closing" data-act="V · Cierre del curso">
   <svg viewBox="0 0 1920 1080" width="1920" height="1080" style="position:absolute;inset:0;opacity:.5" aria-hidden="true">
     <g class="lnf">
       <path class="dr" pathLength="1" d="M1500 160 L1700 320 L1620 560 L1820 700"/>
@@ -1267,6 +1318,7 @@ body.ov #progress{opacity:0}
   </svg>
   <div class="bd">
     <blockquote class="r">Un agente inteligente no es un sistema empresarial.<span>Las conexiones, los procesos y los controles lo convierten en uno.</span></blockquote>
+    <p class="r" style="margin-top:48px;font-size:28px;color:var(--muted)">Gracias por este recorrido. Nos vemos en la última sesión del curso.</p>
     <div class="sig r"><span>Kevin Daniel Martínez Orozco</span><span>E1577 · Top Learning</span><span>2 de noviembre de 2026</span></div>
   </div>
 </section>
