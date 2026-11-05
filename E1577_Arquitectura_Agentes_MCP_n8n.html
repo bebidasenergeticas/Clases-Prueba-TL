@@ -1,0 +1,1448 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>De agentes inteligentes a sistemas empresariales conectados · E1577</title>
+<style>
+:root{
+  --night:#0E1012; --graphite:#1D2024; --panel:#17191C; --ivory:#F4F1E9; --lime:#FF8A3D;
+  --steel:#A9B4BF; --steel-d:#5C6670; --gray:#8C969E;
+  --line:rgba(244,241,233,.13); --line2:rgba(244,241,233,.24);
+  --muted:rgba(244,241,233,.74); --dim:rgba(244,241,233,.56);
+  --sans:"Inter","Inter var","Segoe UI Variable Text","Segoe UI",system-ui,-apple-system,"Helvetica Neue",Arial,sans-serif;
+  --serif:"Iowan Old Style","Palatino Linotype","Book Antiqua",Palatino,Georgia,serif;
+  --mono:"JetBrains Mono","SF Mono","Cascadia Mono",Consolas,"Roboto Mono",ui-monospace,monospace;
+  --ease:cubic-bezier(.16,.84,.3,1);
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html,body{width:100%;height:100%;overflow:hidden;background:#08090A;color:var(--ivory);font-family:var(--sans);-webkit-font-smoothing:antialiased;text-rendering:optimizeLegibility}
+#deck{position:absolute;left:50%;top:50%;width:1920px;height:1080px;transform:translate(-50%,-50%) scale(var(--s,1));transform-origin:center center}
+
+/* ---------- Slides ---------- */
+.slide{position:absolute;inset:0;width:1920px;height:1080px;overflow:hidden;background:
+  radial-gradient(1100px 680px at 88% -8%,rgba(169,180,191,.075),transparent 62%),
+  radial-gradient(900px 600px at -5% 110%,rgba(255,138,61,.035),transparent 60%),var(--night);
+  opacity:0;visibility:hidden;transform:scale(1.012);transition:opacity .7s var(--ease),transform .7s var(--ease),visibility 0s linear .7s;transform-origin:0 0}
+.slide.active{opacity:1;visibility:visible;transform:none;transition:opacity .7s var(--ease),transform .7s var(--ease),visibility 0s}
+.slide::before{content:"";position:absolute;inset:0;pointer-events:none;opacity:.5;
+  background-image:radial-gradient(rgba(244,241,233,.07) 1px,transparent 1.2px);background-size:40px 40px;
+  -webkit-mask-image:linear-gradient(180deg,transparent,#000 30%,#000 70%,transparent);mask-image:linear-gradient(180deg,transparent,#000 30%,#000 70%,transparent)}
+.hd{position:absolute;top:52px;left:120px;right:120px;display:flex;justify-content:space-between;align-items:center;font:500 17px/1 var(--mono);letter-spacing:.16em;text-transform:uppercase;color:var(--dim)}
+.hd .act{display:flex;align-items:center;gap:16px}
+.hd .act::before{content:"";width:28px;height:2px;background:var(--lime)}
+.ft{position:absolute;bottom:44px;left:120px;right:120px;display:flex;justify-content:space-between;font:500 16px/1 var(--mono);letter-spacing:.12em;color:rgba(244,241,233,.42)}
+.ft .num{color:var(--dim)}
+.ft .num b{color:var(--ivory);font-weight:500}
+.bd{position:absolute;top:128px;left:120px;right:120px;bottom:104px;display:flex;flex-direction:column}
+
+h2{font-size:58px;line-height:1.08;font-weight:600;letter-spacing:-.024em;max-width:1500px;margin-bottom:30px}
+h2 em,.serif{font-family:var(--serif);font-style:italic;font-weight:400;letter-spacing:-.01em}
+h2 em{color:var(--lime)}
+.lead{font-size:28px;line-height:1.45;color:var(--muted);max-width:1300px}
+.eyebrow{font:500 19px/1.3 var(--mono);letter-spacing:.14em;text-transform:uppercase;color:var(--lime)}
+.lbl{font:500 17px/1.3 var(--mono);letter-spacing:.14em;text-transform:uppercase;color:var(--dim)}
+.lime{color:var(--lime)} .steel{color:var(--steel)} .muted{color:var(--muted)}
+.mono{font-family:var(--mono)}
+.pill{display:inline-flex;align-items:center;gap:8px;font:500 16px/1 var(--mono);letter-spacing:.1em;text-transform:uppercase;padding:9px 14px;border-radius:999px;border:1px solid var(--line2);color:var(--muted);white-space:nowrap}
+.pill.l{border-color:rgba(255,138,61,.55);color:var(--lime);background:rgba(255,138,61,.06)}
+.pill.s{border-color:rgba(169,180,191,.55);color:var(--steel);background:rgba(169,180,191,.06)}
+.pill.i{border-color:rgba(244,241,233,.5);color:var(--ivory)}
+.rule{height:1px;background:var(--line);width:100%}
+.statement{font-family:var(--serif);font-style:italic;font-size:38px;line-height:1.25;color:var(--ivory)}
+.statement b{font-weight:400;color:var(--lime)}
+
+/* ---------- Animations ---------- */
+.r{opacity:0;transform:translateY(16px)}
+.active .r{animation:rise .95s var(--ease) var(--d,0ms) both}
+.fi{opacity:0}
+.active .fi{animation:fade .9s ease var(--d,0ms) both}
+.pop{opacity:0;transform-box:fill-box;transform-origin:center;transform:scale(.6)}
+.active .pop{animation:pop .8s var(--ease) var(--d,0ms) both}
+.dr{stroke-dasharray:1;stroke-dashoffset:1}
+.active .dr{animation:draw 1.2s cubic-bezier(.65,0,.35,1) var(--d,0ms) forwards}
+@keyframes rise{from{opacity:0;transform:translateY(16px)}to{opacity:1;transform:none}}
+@keyframes fade{from{opacity:0}to{opacity:1}}
+@keyframes pop{from{opacity:0;transform:scale(.6)}to{opacity:1;transform:scale(1)}}
+@keyframes draw{to{stroke-dashoffset:0}}
+@keyframes flow{to{stroke-dashoffset:-36}}
+@keyframes travel{0%{transform:translateX(0);opacity:0}6%{opacity:1}94%{opacity:1}100%{transform:translateX(1344px);opacity:0}}
+@keyframes breathe{0%,100%{opacity:.35;transform:scale(1)}50%{opacity:.1;transform:scale(1.25)}}
+
+/* ---------- SVG vocabulary ---------- */
+svg{display:block;overflow:visible}
+svg text{font-family:var(--sans)}
+.tx{fill:#F4F1E9;font-size:24px;font-weight:500}
+.tx2{fill:rgba(244,241,233,.72);font-size:20px}
+.tm{font-family:var(--mono);font-size:17px;fill:rgba(244,241,233,.58);letter-spacing:.08em}
+.tl{fill:#FF8A3D} .ts{fill:#A9B4BF} .tdim{fill:rgba(244,241,233,.4)}
+.bx{fill:#191C20;stroke:rgba(244,241,233,.24);stroke-width:1.5}
+.bxl{fill:rgba(255,138,61,.06);stroke:#FF8A3D;stroke-width:1.5}
+.bxs{fill:rgba(169,180,191,.07);stroke:#A9B4BF;stroke-width:1.5}
+.bxd{fill:rgba(244,241,233,.015);stroke:rgba(244,241,233,.26);stroke-width:1.5;stroke-dasharray:6 8}
+.bxg{fill:none;stroke:rgba(244,241,233,.16);stroke-width:1.5;stroke-dasharray:4 6}
+.ln{stroke:rgba(244,241,233,.42);stroke-width:1.6;fill:none}
+.lnf{stroke:rgba(244,241,233,.16);stroke-width:1.3;fill:none}
+.lnl{stroke:#FF8A3D;stroke-width:1.8;fill:none}
+.lns{stroke:#A9B4BF;stroke-width:1.7;fill:none}
+.dash{stroke-dasharray:6 7}
+.flow{stroke:#FF8A3D;stroke-width:2.4;fill:none;stroke-dasharray:2 16;stroke-linecap:round}
+.active .flow{animation:fade .9s ease var(--d,0ms) both,flow 1.4s linear infinite}
+.halo{transform-box:fill-box;transform-origin:center}
+.active .halo{animation:breathe 4.5s ease-in-out infinite}
+
+/* ---------- Cover ---------- */
+.cover h1{font-family:var(--serif);font-weight:400;font-size:100px;line-height:1.02;letter-spacing:-.025em;margin:34px 0 34px;max-width:1060px}
+.cover h1 em{font-style:italic;color:var(--lime)}
+.cv-sub{font-size:32px;line-height:1.4;color:var(--muted);max-width:900px}
+.cv-meta{position:absolute;left:0;bottom:0;display:flex;gap:64px}
+.cv-meta div{font-size:24px;color:var(--ivory);border-top:1px solid var(--line2);padding-top:18px;min-width:180px}
+.cv-meta span{display:block;font:500 15px/1 var(--mono);letter-spacing:.16em;text-transform:uppercase;color:var(--dim);margin-bottom:12px}
+.cv-net{position:absolute;right:-20px;top:-10px;width:700px;height:840px}
+
+/* ---------- Generic layouts ---------- */
+.cols{display:grid;gap:40px}
+.card{border:1px solid var(--line);border-radius:20px;background:linear-gradient(180deg,rgba(30,33,37,.55),rgba(22,24,27,.35));padding:36px 38px}
+.num-s{font:500 17px/1 var(--mono);color:var(--lime);letter-spacing:.12em}
+
+/* recap */
+.recap{display:grid;grid-template-columns:720px 1fr;gap:80px;flex:1;align-items:start}
+.recap-item{padding:26px 0;border-top:1px solid var(--line)}
+.recap-item h3{font-size:31px;font-weight:600;letter-spacing:-.01em;margin:12px 0 10px}
+.recap-item p{font-size:24px;line-height:1.45;color:var(--muted)}
+
+/* question */
+.q-wrap{flex:1;display:flex;flex-direction:column;justify-content:center}
+.q-big{font-family:var(--serif);font-weight:400;font-size:92px;line-height:1.05;letter-spacing:-.025em;max-width:1500px;margin:22px 0 0}
+.q-big em{color:var(--lime)}
+.q-grid{display:grid;grid-template-columns:repeat(5,1fr);gap:28px;margin-top:auto}
+.q-grid div{border-top:1px solid var(--line2);padding-top:22px}
+.q-grid h4{font-size:32px;font-weight:600;margin:12px 0 10px;letter-spacing:-.01em}
+.q-grid p{font-size:22px;line-height:1.4;color:var(--muted)}
+
+/* anatomy */
+.anat{display:grid;grid-template-columns:500px 1fr;gap:70px;flex:1}
+.legend{margin-top:42px;display:flex;flex-direction:column;gap:16px}
+.legend div{display:flex;align-items:center;gap:16px;font-size:22px;color:var(--muted)}
+.legend i{width:30px;height:4px;border-radius:2px;display:block}
+.stack{display:flex;flex-direction:column;gap:9px;justify-content:center}
+.layer{display:grid;grid-template-columns:56px 300px 1fr;align-items:center;gap:18px;padding:15px 26px 15px 24px;border-radius:14px;background:rgba(30,33,37,.42);border:1px solid var(--line);position:relative}
+.layer::before{content:"";position:absolute;left:0;top:14px;bottom:14px;width:3px;border-radius:2px;background:var(--c,var(--lime))}
+.layer .n{font:500 17px/1 var(--mono);color:var(--dim)}
+.layer h4{font-size:29px;font-weight:600;letter-spacing:-.01em}
+.layer h4 small{display:block;font:italic 400 19px/1.3 var(--serif);color:var(--c,var(--lime));margin-top:6px;letter-spacing:0}
+.layer p{font-size:22px;line-height:1.38;color:var(--muted)}
+
+/* decide */
+.split{display:grid;grid-template-columns:1fr 1fr;gap:44px;flex:1}
+.split .card{padding:34px 40px;display:flex;flex-direction:column}
+.split h3{font-size:38px;font-weight:600;letter-spacing:-.015em;margin:14px 0 8px}
+.split .crit{font-family:var(--serif);font-style:italic;font-size:25px;color:var(--muted);margin-bottom:18px}
+.ul{list-style:none}
+.ul li{font-size:25px;line-height:1.35;padding:13px 0 13px 34px;border-top:1px solid var(--line);position:relative}
+.ul li::before{content:"";position:absolute;left:4px;top:26px;width:14px;height:2px;background:var(--b,var(--lime))}
+.testq{font:500 21px/1.3 var(--mono);color:var(--muted);letter-spacing:.02em;margin:-8px 0 26px}
+.testq b{color:var(--ivory);font-weight:500}
+
+/* defs row */
+.defs{display:grid;gap:44px}
+.defs h4{font-size:28px;font-weight:600;margin:12px 0 8px;letter-spacing:-.01em}
+.defs p{font-size:22px;line-height:1.42;color:var(--muted)}
+.defs > div{border-top:1px solid var(--line2);padding-top:18px}
+
+/* primitives */
+.prim{display:grid;grid-template-columns:repeat(3,1fr);gap:36px;flex:1}
+.prim .card{display:flex;flex-direction:column;padding:34px 36px}
+.prim h3{font-size:42px;font-weight:600;letter-spacing:-.02em;margin:18px 0 8px}
+.prim .desc{font-size:24px;line-height:1.42;color:var(--muted);min-height:68px}
+.kv{margin-top:20px;border-top:1px solid var(--line);padding-top:16px}
+.kv .lbl{margin-bottom:8px;font-size:15px}
+.kv div{font-size:23px}
+.code{font:500 20px/1.4 var(--mono);color:var(--lime);background:rgba(14,16,18,.7);border:1px solid var(--line);border-radius:10px;padding:12px 14px;word-break:break-word}
+
+/* sequence */
+.seq{display:grid;grid-template-columns:500px 1fr;gap:60px;flex:1}
+.steps{display:flex;flex-direction:column;gap:18px;margin-top:6px}
+.step{display:grid;grid-template-columns:52px 1fr;gap:14px;align-items:start}
+.step .c{width:40px;height:40px;border-radius:50%;border:1.5px solid var(--lime);color:var(--lime);font:500 18px/37px var(--mono);text-align:center}
+.step h4{font-size:26px;font-weight:600;margin-bottom:4px}
+.step p{font-size:21px;line-height:1.38;color:var(--muted)}
+
+/* compare */
+.cmp{display:grid;grid-template-columns:repeat(4,1fr);gap:28px;flex:1}
+.cmp .card{padding:24px 26px 26px;display:flex;flex-direction:column}
+.cmp .card.hl{border-color:rgba(255,138,61,.45);background:linear-gradient(180deg,rgba(255,138,61,.07),rgba(22,24,27,.3))}
+.cmp h3{font-size:36px;font-weight:600;letter-spacing:-.015em;margin:8px 0 6px}
+.cmp .met{font-family:var(--serif);font-style:italic;font-size:23px;line-height:1.3;color:var(--muted);min-height:60px;margin-bottom:6px}
+.cmp .row{border-top:1px solid var(--line);padding:11px 0 10px}
+.cmp .row .lbl{font-size:14px;margin-bottom:5px}
+.cmp .row div{font-size:20px;line-height:1.36}
+
+/* not */
+.nots{display:flex;flex-direction:column;flex:1;justify-content:center}
+.not{display:grid;grid-template-columns:90px 640px 1fr;gap:30px;align-items:start;padding:28px 0;border-top:1px solid var(--line)}
+.not:last-child{border-bottom:1px solid var(--line)}
+.not .k{font:500 18px/1.6 var(--mono);color:var(--lime);letter-spacing:.12em}
+.not h3{font-family:var(--serif);font-weight:400;font-size:40px;line-height:1.12;letter-spacing:-.01em}
+.not h3 s{text-decoration-thickness:2px;text-decoration-color:rgba(255,138,61,.7)}
+.not p{font-size:23px;line-height:1.45;color:var(--muted)}
+
+/* arch bottom */
+.three{display:grid;grid-template-columns:repeat(3,1fr);gap:40px;margin-top:auto}
+.three > div{border-top:1px solid var(--line2);padding-top:18px}
+.three h4{font-size:26px;font-weight:600;margin:10px 0 8px}
+.three p{font-size:22px;line-height:1.42;color:var(--muted)}
+
+/* two ways */
+.ways{display:grid;grid-template-columns:1fr 1fr;gap:40px;flex:1}
+.ways .card{padding:28px 32px 18px}
+.ways h3{font-size:34px;font-weight:600;letter-spacing:-.015em;margin:10px 0 14px}
+.attr{display:grid;grid-template-columns:200px 1fr;gap:18px;padding:12px 0;border-top:1px solid var(--line)}
+.attr .lbl{font-size:14px;padding-top:5px}
+.attr div:last-child{font-size:21px;line-height:1.38;color:var(--muted)}
+.note{font-size:21px;color:var(--muted);margin-top:22px;display:flex;gap:14px;align-items:baseline}
+
+/* matrix */
+.mtx{display:grid;grid-template-columns:880px 1fr;gap:70px;flex:1;align-items:center}
+.qs{display:flex;flex-direction:column;gap:0}
+.qs > div{padding:24px 0;border-top:1px solid var(--line)}
+.qs > div:last-child{border-bottom:1px solid var(--line)}
+.qs h4{font-size:27px;font-weight:500;line-height:1.3;margin-bottom:10px}
+.qs p{font:500 19px/1.3 var(--mono);color:var(--lime);letter-spacing:.04em}
+
+/* case */
+.case{display:grid;grid-template-columns:740px 1fr;gap:80px;flex:1}
+.case p.ctx{font-size:26px;line-height:1.45;color:var(--muted);margin-bottom:26px}
+.case .ul li{font-size:23px;padding:12px 0 12px 34px}
+.case .ul li::before{top:24px}
+.msg{border:1px solid var(--line2);border-radius:20px;background:rgba(30,33,37,.5);padding:30px 34px}
+.msg .q{font-size:29px;line-height:1.5;margin-top:16px}
+.msg mark{background:none;color:var(--ivory);border-bottom:2px solid var(--lime);padding-bottom:1px}
+.ext{margin-top:26px;display:grid;grid-template-columns:230px 1fr;border-top:1px solid var(--line)}
+.ext div{padding:11px 0;border-bottom:1px solid var(--line);font-size:22px}
+.ext div:nth-child(odd){font:500 15px/2 var(--mono);letter-spacing:.12em;text-transform:uppercase;color:var(--dim)}
+
+/* journey */
+.jr{position:relative;margin-top:10px}
+.stations{display:grid;grid-template-columns:repeat(5,1fr);gap:0}
+.station{padding:0 24px;text-align:left;border-left:1px solid var(--line)}
+.station:first-child{border-left:none}
+.station h4{font-size:30px;font-weight:600;letter-spacing:-.01em;margin:6px 0 12px}
+.station .pill{margin-bottom:16px}
+.station p{font-size:21px;line-height:1.4;color:var(--muted);min-height:118px}
+.station .out{margin-top:14px;border-top:1px solid var(--line);padding-top:12px;font-size:20px;line-height:1.35}
+.station .out .lbl{font-size:13px;margin-bottom:6px}
+.state{margin-top:26px;display:grid;grid-template-columns:repeat(5,1fr)}
+.state div{font:500 18px/1 var(--mono);color:var(--steel);padding:14px 24px;letter-spacing:.03em}
+.travel{opacity:0}
+.active .travel{animation:travel 7s cubic-bezier(.45,0,.55,1) 1.6s infinite}
+
+/* orchestration */
+.orch{display:grid;grid-template-columns:470px 1fr;gap:60px;flex:1}
+.mantra{font-family:var(--serif);font-size:36px;line-height:1.22;letter-spacing:-.01em;margin:16px 0 32px}
+.mantra span{display:block}
+.mantra span:nth-child(2){color:var(--steel)}
+.mantra span:nth-child(3){color:var(--lime)}
+.orch .side p:not(.mantra){font-size:22px;line-height:1.45;color:var(--muted);padding:16px 0;border-top:1px solid var(--line)}
+
+/* controls */
+.ctrl{display:grid;grid-template-columns:repeat(5,1fr);gap:28px;margin-top:auto}
+.ctrl > div{border-top:2px solid var(--c,var(--line2));padding-top:18px}
+.ctrl h4{font-size:26px;font-weight:600;margin:10px 0 10px;letter-spacing:-.01em}
+.ctrl p{font-size:20px;line-height:1.42;color:var(--muted)}
+
+/* metrics */
+.mets{display:flex;flex-direction:column;flex:1;justify-content:center}
+.met-row{display:grid;grid-template-columns:420px 1fr 300px;gap:40px;align-items:center;padding:20px 0;border-top:1px solid var(--line)}
+.met-row:last-child{border-bottom:1px solid var(--line)}
+.met-row h4{font-size:28px;font-weight:600;letter-spacing:-.01em}
+.met-row h4 small{display:block;font:500 15px/1.4 var(--mono);color:var(--dim);letter-spacing:.12em;text-transform:uppercase;margin-top:6px}
+.fx{display:flex;align-items:center;gap:16px;font-size:23px;color:var(--ivory);flex-wrap:wrap}
+.fx .eq{color:var(--lime);font-family:var(--mono)}
+.frac{display:inline-flex;flex-direction:column;align-items:center;text-align:center}
+.frac span:first-child{padding:0 8px 6px;border-bottom:1.5px solid rgba(244,241,233,.7)}
+.frac span:last-child{padding:6px 8px 0}
+.fx .op{font-family:var(--mono);color:var(--dim)}
+.met-row .why{font-size:20px;line-height:1.4;color:var(--muted)}
+
+/* reflection */
+.refl{display:flex;flex-direction:column;flex:1;justify-content:center}
+.refl > div{display:grid;grid-template-columns:90px 1fr;gap:20px;padding:22px 0;border-top:1px solid var(--line);align-items:baseline}
+.refl > div:last-child{border-bottom:1px solid var(--line)}
+.refl .k{font-family:var(--serif);font-style:italic;font-size:44px;color:var(--lime);line-height:1}
+.refl p{font-size:29px;line-height:1.38}
+
+/* closing */
+.closing .bd{justify-content:center}
+.closing blockquote{font-family:var(--serif);font-weight:400;font-size:86px;line-height:1.08;letter-spacing:-.025em;max-width:1500px}
+.closing blockquote span{display:block;color:var(--lime);font-style:italic;font-size:64px;line-height:1.18;margin-top:34px;max-width:1450px}
+.closing .sig{margin-top:64px;display:flex;gap:48px;font:500 17px/1 var(--mono);letter-spacing:.14em;text-transform:uppercase;color:var(--dim)}
+
+/* sources */
+.src{display:flex;flex-direction:column;margin-top:10px}
+.src a{display:grid;grid-template-columns:70px 640px 1fr;gap:20px;padding:26px 0;border-top:1px solid var(--line);color:inherit;text-decoration:none;align-items:baseline}
+.src a:last-child{border-bottom:1px solid var(--line)}
+.src a:hover .u{color:var(--lime)}
+.src .k{font:500 17px var(--mono);color:var(--lime)}
+.src h4{font-size:27px;font-weight:600}
+.src h4 small{display:block;font-size:20px;font-weight:400;color:var(--muted);margin-top:6px}
+.src .u{font:500 19px/1.4 var(--mono);color:var(--steel);word-break:break-all;transition:color .2s}
+
+/* ---------- UI ---------- */
+#progress{position:fixed;left:0;bottom:0;height:3px;width:100%;background:rgba(244,241,233,.06);z-index:20}
+#progress i{display:block;height:100%;width:0;background:var(--lime);transition:width .6s var(--ease)}
+#ui{position:fixed;right:22px;bottom:18px;display:flex;gap:6px;z-index:21;opacity:0;transition:opacity .4s;pointer-events:none}
+body.show-ui #ui{opacity:1;pointer-events:auto}
+#ui button{width:42px;height:42px;border-radius:12px;border:1px solid rgba(244,241,233,.16);background:rgba(14,16,18,.82);color:var(--ivory);cursor:pointer;display:grid;place-items:center;backdrop-filter:blur(8px);transition:border-color .2s,background .2s}
+#ui button:hover{border-color:var(--lime);background:rgba(30,33,37,.95)}
+#ui svg{width:18px;height:18px;stroke:currentColor;fill:none;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round}
+#help{position:fixed;left:22px;bottom:22px;font:500 12px/1 var(--mono);letter-spacing:.1em;color:rgba(244,241,233,.45);z-index:21;opacity:0;transition:opacity .4s;pointer-events:none}
+body.show-ui #help{opacity:1}
+
+/* ---------- Overview ---------- */
+body.ov{overflow:auto}
+body.ov .slide{opacity:1;visibility:visible;cursor:pointer;outline:2px solid transparent;outline-offset:0;border-radius:0;transition:transform .6s var(--ease),outline-color .2s,opacity .4s;box-shadow:0 30px 80px rgba(0,0,0,.45)}
+body.ov .slide:hover{outline:8px solid rgba(255,138,61,.55)}
+body.ov .slide.cur{outline:8px solid var(--lime)}
+body.ov .r,body.ov .fi,body.ov .pop{opacity:1!important;animation:none!important;transform:none!important}
+body.ov .dr{stroke-dashoffset:0!important;animation:none!important}
+body.ov .travel{display:none}
+body.ov #progress{opacity:0}
+
+@media (prefers-reduced-motion:reduce){
+  .r,.fi,.pop{opacity:1!important;transform:none!important;animation:none!important}
+  .dr{stroke-dashoffset:0!important;animation:none!important}
+  .flow,.halo,.travel{animation:none!important}
+}
+
+/* ---------- Print ---------- */
+@page{size:1920px 1080px;margin:0}
+@media print{
+  html,body{width:1920px;height:auto;overflow:visible;background:var(--night)}
+  *{-webkit-print-color-adjust:exact;print-color-adjust:exact}
+  #deck{position:static;transform:none!important;width:1920px;height:auto}
+  .slide{position:relative!important;inset:auto;opacity:1!important;visibility:visible!important;transform:none!important;break-after:page;page-break-after:always;outline:none!important;box-shadow:none!important}
+  .slide:last-child{break-after:auto;page-break-after:auto}
+  .r,.fi,.pop{opacity:1!important;transform:none!important;animation:none!important}
+  .dr{stroke-dashoffset:0!important;animation:none!important}
+  .flow,.halo{animation:none!important;opacity:1!important}
+  .travel{display:none}
+  #ui,#progress,#help{display:none!important}
+}
+
+/* course close */
+.topics{display:grid;grid-template-columns:repeat(3,1fr);gap:26px 40px;flex:1;align-content:center}
+.topics > div{border-top:1px solid var(--line2);padding-top:18px}
+.topics h4{font-size:28px;font-weight:600;margin:10px 0 8px;letter-spacing:-.01em}
+.topics p{font-size:21px;line-height:1.42;color:var(--muted)}
+.refx{flex:1;display:flex;flex-direction:column;justify-content:center;max-width:1450px}
+.refx p.big{font-family:var(--serif);font-size:54px;line-height:1.22;letter-spacing:-.015em}
+.refx p.big em{color:var(--lime)}
+.refx p.small{font-size:26px;line-height:1.5;color:var(--muted);margin-top:40px;max-width:1200px}
+</style>
+</head>
+<body>
+
+<!-- Shared SVG markers -->
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <defs>
+    <marker id="ah" viewBox="0 0 10 10" refX="8.5" refY="5" markerWidth="9" markerHeight="9" markerUnits="userSpaceOnUse" orient="auto-start-reverse"><path d="M1 1 L9 5 L1 9" fill="none" stroke="rgba(244,241,233,.6)" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></marker>
+    <marker id="ahl" viewBox="0 0 10 10" refX="8.5" refY="5" markerWidth="10" markerHeight="10" markerUnits="userSpaceOnUse" orient="auto-start-reverse"><path d="M1 1 L9 5 L1 9" fill="none" stroke="#FF8A3D" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></marker>
+    <marker id="ahs" viewBox="0 0 10 10" refX="8.5" refY="5" markerWidth="10" markerHeight="10" markerUnits="userSpaceOnUse" orient="auto-start-reverse"><path d="M1 1 L9 5 L1 9" fill="none" stroke="#A9B4BF" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></marker>
+  </defs>
+</svg>
+
+<main id="deck">
+
+<!-- ======================= 01 · PORTADA ======================= -->
+<section class="slide cover" data-act="Top Learning · Sesión teórica">
+  <div class="bd">
+    <div class="eyebrow r" style="margin-top:40px">Inteligencia Artificial y Automatización con n8n · Nivel 2</div>
+    <h1 class="r">De agentes inteligentes a sistemas empresariales <em>conectados.</em></h1>
+    <p class="cv-sub r">Arquitectura multiagente, MCP, n8n e integración de procesos.</p>
+    <div class="cv-meta r">
+      <div><span>Profesor</span>Kevin Daniel Martínez Orozco</div>
+      <div><span>Grupo</span>E1577</div>
+      <div><span>Fecha</span>2 de noviembre de 2026</div>
+    </div>
+    <svg class="cv-net" viewBox="0 0 700 840" aria-hidden="true">
+      <g>
+        <path class="lnf dr" pathLength="1" d="M300 60 L150 170"/><path class="lnf dr" pathLength="1" d="M300 60 L560 140"/>
+        <path class="lnf dr" pathLength="1" d="M680 260 L560 140"/><path class="lnf dr" pathLength="1" d="M680 260 L640 420"/>
+        <path class="lnf dr" pathLength="1" d="M650 790 L540 690"/><path class="lnf dr" pathLength="1" d="M60 790 L200 680"/>
+        <path class="lnf dr" pathLength="1" d="M30 230 L90 420"/><path class="lnf dr" pathLength="1" d="M30 230 L150 170"/>
+        <path class="lnf dr" pathLength="1" d="M380 810 L200 680"/><path class="lnf dr" pathLength="1" d="M380 810 L540 690"/>
+        <path class="lnf dr" pathLength="1" d="M430 250 L360 400"/><path class="lnf dr" pathLength="1" d="M430 250 L560 140"/>
+        <path class="lnf dr" pathLength="1" d="M250 520 L360 400"/><path class="lnf dr" pathLength="1" d="M250 520 L90 420"/><path class="lnf dr" pathLength="1" d="M250 520 L200 680"/>
+        <path class="lnf dr" pathLength="1" d="M480 560 L360 400"/><path class="lnf dr" pathLength="1" d="M480 560 L540 690"/><path class="lnf dr" pathLength="1" d="M480 560 L640 420"/>
+        <path class="lnf dr" pathLength="1" d="M150 170 L560 140"/><path class="lnf dr" pathLength="1" d="M560 140 L640 420"/>
+        <path class="lnf dr" pathLength="1" d="M640 420 L540 690"/><path class="lnf dr" pathLength="1" d="M540 690 L200 680"/>
+        <path class="lnf dr" pathLength="1" d="M200 680 L90 420"/><path class="lnf dr" pathLength="1" d="M90 420 L150 170"/>
+      </g>
+      <g>
+        <path class="ln dr" pathLength="1" d="M360 400 L150 170"/><path class="ln dr" pathLength="1" d="M360 400 L560 140"/>
+        <path class="ln dr" pathLength="1" d="M360 400 L640 420"/><path class="ln dr" pathLength="1" d="M360 400 L540 690"/>
+        <path class="ln dr" pathLength="1" d="M360 400 L200 680"/><path class="ln dr" pathLength="1" d="M360 400 L90 420"/>
+      </g>
+      <path class="flow" d="M360 400 L560 140"/><path class="flow" d="M360 400 L640 420"/><path class="flow" d="M640 420 L540 690"/><path class="flow" d="M360 400 L150 170"/>
+      <g fill="rgba(244,241,233,.35)">
+        <circle class="pop" cx="300" cy="60" r="3.5"/><circle class="pop" cx="680" cy="260" r="3.5"/><circle class="pop" cx="650" cy="790" r="3.5"/>
+        <circle class="pop" cx="60" cy="790" r="3.5"/><circle class="pop" cx="30" cy="230" r="3.5"/><circle class="pop" cx="380" cy="810" r="3.5"/>
+        <circle class="pop" cx="430" cy="250" r="3.5"/><circle class="pop" cx="250" cy="520" r="3.5"/><circle class="pop" cx="480" cy="560" r="3.5"/>
+      </g>
+      <g>
+        <circle class="pop" cx="150" cy="170" r="18" fill="#0E1012" stroke="rgba(244,241,233,.3)" stroke-width="1.5"/><circle class="pop" cx="150" cy="170" r="6" fill="#F4F1E9"/>
+        <circle class="pop" cx="560" cy="140" r="18" fill="#0E1012" stroke="rgba(244,241,233,.3)" stroke-width="1.5"/><circle class="pop" cx="560" cy="140" r="6" fill="#F4F1E9"/>
+        <circle class="pop" cx="640" cy="420" r="18" fill="#0E1012" stroke="rgba(244,241,233,.3)" stroke-width="1.5"/><circle class="pop" cx="640" cy="420" r="6" fill="#F4F1E9"/>
+        <circle class="pop" cx="540" cy="690" r="18" fill="#0E1012" stroke="rgba(244,241,233,.3)" stroke-width="1.5"/><circle class="pop" cx="540" cy="690" r="6" fill="#F4F1E9"/>
+        <circle class="pop" cx="200" cy="680" r="18" fill="#0E1012" stroke="rgba(244,241,233,.3)" stroke-width="1.5"/><circle class="pop" cx="200" cy="680" r="6" fill="#F4F1E9"/>
+        <circle class="pop" cx="90" cy="420" r="18" fill="#0E1012" stroke="rgba(244,241,233,.3)" stroke-width="1.5"/><circle class="pop" cx="90" cy="420" r="6" fill="#F4F1E9"/>
+        <circle class="halo" cx="360" cy="400" r="78" fill="none" stroke="#FF8A3D" stroke-width="1"/>
+        <circle class="pop" cx="360" cy="400" r="40" fill="#0E1012" stroke="rgba(255,138,61,.55)" stroke-width="1.5"/>
+        <circle class="pop" cx="360" cy="400" r="15" fill="#FF8A3D"/>
+      </g>
+      <g class="tm" style="font-size:18px">
+        <text class="fi" x="150" y="134" text-anchor="middle">agentes</text>
+        <text class="fi" x="560" y="104" text-anchor="middle">MCP</text>
+        <text class="fi" x="640" y="468" text-anchor="middle">n8n</text>
+        <text class="fi" x="540" y="738" text-anchor="middle">CRM</text>
+        <text class="fi" x="200" y="728" text-anchor="middle">supervisión</text>
+        <text class="fi" x="90" y="468" text-anchor="middle">herramientas</text>
+        <text class="fi tl" x="360" y="476" text-anchor="middle">orquestador</text>
+      </g>
+    </svg>
+  </div>
+</section>
+
+<!-- ======================= 02 · RECAPITULACIÓN ======================= -->
+<section class="slide" data-act="I · De lo aprendido a la arquitectura">
+  <div class="bd">
+    <h2 class="r">Punto de partida: agentes que ya <em>colaboran</em></h2>
+    <div class="recap">
+      <div>
+        <div class="recap-item r"><div class="num-s">01 · Desarrollo asistido</div><h3>Describir la intención, revisar el resultado</h3><p>Vibe coding con herramientas como Codex y Claude Code: el agente produce, la persona dirige y valida.</p></div>
+        <div class="recap-item r"><div class="num-s">02 · Arneses agénticos</div><h3>OpenCode y Hermes Agent</h3><p>Perfiles con instrucciones propias, herramientas y un tablero Kanban para repartir y seguir el trabajo.</p></div>
+        <div class="recap-item r"><div class="num-s">03 · Patrones multiagente</div><h3>Orquestador, especialistas y subagentes</h3><p>Delegación secuencial cuando un paso depende del anterior; paralela cuando las tareas son independientes.</p></div>
+      </div>
+      <div>
+        <svg viewBox="0 0 820 600" width="820" height="600" aria-label="Orquestador con tres agentes de marketing">
+          <rect class="bxl pop" x="250" y="20" width="320" height="100" rx="16"/>
+          <text class="tx fi" x="410" y="64" text-anchor="middle">Orquestador</text>
+          <text class="tx2 fi" x="410" y="96" text-anchor="middle" style="font-size:18px">planifica · delega · consolida</text>
+          <path class="ln fi" d="M334 120 L130 318" marker-end="url(#ah)"/>
+          <path class="lnl dash fi" d="M150 320 L352 122" marker-end="url(#ahl)"/>
+          <path class="ln fi" d="M402 120 L402 318" marker-end="url(#ah)"/>
+          <path class="lnl dash fi" d="M418 320 L418 122" marker-end="url(#ahl)"/>
+          <path class="ln fi" d="M470 120 L670 318" marker-end="url(#ah)"/>
+          <path class="lnl dash fi" d="M690 320 L486 122" marker-end="url(#ahl)"/>
+          <rect class="bx pop" x="10" y="320" width="260" height="120" rx="16"/>
+          <text class="tx fi" x="140" y="370" text-anchor="middle">Estrategia</text>
+          <text class="tx2 fi" x="140" y="404" text-anchor="middle" style="font-size:18px">público y mensaje</text>
+          <rect class="bx pop" x="280" y="320" width="260" height="120" rx="16"/>
+          <text class="tx fi" x="410" y="370" text-anchor="middle">Contenido</text>
+          <text class="tx2 fi" x="410" y="404" text-anchor="middle" style="font-size:18px">redacción de piezas</text>
+          <rect class="bx pop" x="550" y="320" width="260" height="120" rx="16"/>
+          <text class="tx fi" x="680" y="370" text-anchor="middle">Analítica</text>
+          <text class="tx2 fi" x="680" y="404" text-anchor="middle" style="font-size:18px">lectura de resultados</text>
+          <g class="fi">
+            <line x1="200" y1="500" x2="250" y2="500" class="ln"/><text class="tm" x="262" y="506">delega</text>
+            <line x1="420" y1="500" x2="470" y2="500" class="lnl dash"/><text class="tm" x="482" y="506">reporta</text>
+          </g>
+          <text class="tm fi" x="410" y="572" text-anchor="middle">Marketing de la empresa de dulces · 28 de octubre</text>
+        </svg>
+      </div>
+    </div>
+    <p class="statement r" style="margin-top:auto">Ya colaboran entre ellos. <b>Todavía no actúan sobre los sistemas de la empresa.</b></p>
+  </div>
+</section>
+
+<!-- ======================= 03 · LA GRAN PREGUNTA ======================= -->
+<section class="slide" data-act="I · De lo aprendido a la arquitectura">
+  <div class="bd">
+    <div class="q-wrap">
+      <div class="eyebrow r">La pregunta de hoy</div>
+      <p class="q-big r">¿Qué necesita un agente para <em>actuar</em> dentro de una empresa?</p>
+      <div class="q-grid">
+        <div class="r"><div class="num-s">01</div><h4>Contexto</h4><p>Saber qué ocurre y con qué información cuenta.</p></div>
+        <div class="r"><div class="num-s">02</div><h4>Acceso</h4><p>Llegar a los sistemas donde vive la información.</p></div>
+        <div class="r"><div class="num-s">03</div><h4>Permisos</h4><p>Hacer solo lo que tiene autorizado.</p></div>
+        <div class="r"><div class="num-s">04</div><h4>Procesos</h4><p>Seguir el camino que la empresa definió.</p></div>
+        <div class="r"><div class="num-s">05</div><h4>Control</h4><p>Que una persona pueda revisar, aprobar y corregir.</p></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ======================= 04 · ANATOMÍA ======================= -->
+<section class="slide" data-act="I · De lo aprendido a la arquitectura">
+  <div class="bd">
+    <div class="anat">
+      <div>
+        <h2 class="r">Anatomía de un sistema <em>inteligente</em></h2>
+        <p class="lead r">Siete capas, siete preguntas. El modelo es solo una de ellas: el valor empresarial aparece cuando todas encajan.</p>
+        <div class="legend r">
+          <div><i style="background:var(--lime)"></i>Razonamiento</div>
+          <div><i style="background:var(--steel)"></i>Conexión</div>
+          <div><i style="background:var(--ivory)"></i>Ejecución</div>
+        </div>
+      </div>
+      <div class="stack">
+        <div class="layer r" style="--c:var(--lime)"><span class="n">01</span><h4>Modelo<small>¿Qué conviene hacer?</small></h4><p>Interpreta lenguaje, razona y genera texto o decisiones.</p></div>
+        <div class="layer r" style="--c:var(--lime)"><span class="n">02</span><h4>Arnés<small>¿Con qué contexto y en qué ciclo?</small></h4><p>Administra instrucciones, memoria, herramientas disponibles y el ciclo pensar–actuar–observar.</p></div>
+        <div class="layer r" style="--c:var(--lime)"><span class="n">03</span><h4>Orquestador<small>¿Quién hace cada parte?</small></h4><p>Divide el objetivo, delega en especialistas y consolida los resultados.</p></div>
+        <div class="layer r" style="--c:var(--steel)"><span class="n">04</span><h4>Herramientas<small>¿Qué puede hacer?</small></h4><p>Capacidades invocables con nombre, descripción y parámetros definidos.</p></div>
+        <div class="layer r" style="--c:var(--steel)"><span class="n">05</span><h4>Integración<small>¿Cómo se conecta?</small></h4><p>Contratos de comunicación entre sistemas: API, webhook, conector, MCP.</p></div>
+        <div class="layer r" style="--c:var(--ivory)"><span class="n">06</span><h4>Automatización<small>¿Qué debe ocurrir siempre igual?</small></h4><p>Procesos deterministas con disparadores, reglas y manejo de errores, por ejemplo en n8n.</p></div>
+        <div class="layer r" style="--c:var(--ivory)"><span class="n">07</span><h4>Sistemas de negocio<small>¿Dónde vive la información oficial?</small></h4><p>CRM, ERP, correo, hojas de cálculo y bases de datos.</p></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ======================= 05 · AGENTE VS REGLA ======================= -->
+<section class="slide" data-act="I · De lo aprendido a la arquitectura">
+  <div class="bd">
+    <h2 class="r">Qué decide el agente y qué resuelve <em>una regla</em></h2>
+    <p class="testq r">Prueba rápida: <b>¿la misma entrada debe producir siempre la misma salida?</b> Si la respuesta es sí, probablemente es una regla.</p>
+    <div class="split">
+      <div class="card r" style="border-color:rgba(255,138,61,.35)">
+        <div class="lbl lime">Juicio probabilístico · agente</div>
+        <h3>Conviene al agente</h3>
+        <p class="crit">Cuando la entrada es ambigua o está en lenguaje natural.</p>
+        <ul class="ul">
+          <li>Interpretar el mensaje libre de un cliente</li>
+          <li>Extraer datos de un texto sin estructura</li>
+          <li>Clasificar intención, urgencia y tono</li>
+          <li>Redactar una respuesta personalizada</li>
+          <li>Elegir qué herramienta usar en cada caso</li>
+        </ul>
+      </div>
+      <div class="card r" style="border-color:rgba(169,180,191,.35)">
+        <div class="lbl steel">Lógica determinista · workflow</div>
+        <h3>Conviene a una regla</h3>
+        <p class="crit">Cuando la lógica puede escribirse y debe repetirse igual.</p>
+        <ul class="ul" style="--b:var(--steel)">
+          <li>Validar el formato de correo y teléfono</li>
+          <li>Calcular un precio con la tabla vigente</li>
+          <li>Enrutar según monto, región o categoría</li>
+          <li>Registrar o actualizar datos en el CRM</li>
+          <li>Reintentar y alertar ante un error</li>
+        </ul>
+      </div>
+    </div>
+    <p class="statement r" style="margin-top:28px">¿Cinco agentes para lo que resuelve un nodo IF? <b>Más complejidad y más fallos, sin beneficio.</b></p>
+  </div>
+</section>
+
+<!-- ======================= 06 · MCP: EL PROBLEMA ======================= -->
+<section class="slide" data-act="II · Model Context Protocol">
+  <div class="bd">
+    <h2 class="r">MCP: un contrato común entre la IA y las <em>herramientas</em></h2>
+    <div class="cols" style="grid-template-columns:1fr 1fr;gap:120px">
+      <div>
+        <div class="lbl r" style="margin-bottom:18px">Sin un estándar</div>
+        <svg viewBox="0 0 780 420" width="780" height="420" aria-label="Integraciones a la medida entre cada aplicación y cada sistema">
+          <g>
+            <path class="lnf dr" pathLength="1" d="M230 100 L560 50"/><path class="lnf dr" pathLength="1" d="M230 100 L560 160"/><path class="lnf dr" pathLength="1" d="M230 100 L560 270"/><path class="lnf dr" pathLength="1" d="M230 100 L560 380"/>
+            <path class="lnf dr" pathLength="1" d="M230 220 L560 50"/><path class="lnf dr" pathLength="1" d="M230 220 L560 160"/><path class="lnf dr" pathLength="1" d="M230 220 L560 270"/><path class="lnf dr" pathLength="1" d="M230 220 L560 380"/>
+            <path class="lnf dr" pathLength="1" d="M230 340 L560 50"/><path class="lnf dr" pathLength="1" d="M230 340 L560 160"/><path class="lnf dr" pathLength="1" d="M230 340 L560 270"/><path class="lnf dr" pathLength="1" d="M230 340 L560 380"/>
+          </g>
+          <g>
+            <rect class="bx pop" x="30" y="70" width="200" height="60" rx="12"/><text class="tx fi" x="130" y="108" text-anchor="middle" style="font-size:22px">Asistente</text>
+            <rect class="bx pop" x="30" y="190" width="200" height="60" rx="12"/><text class="tx fi" x="130" y="228" text-anchor="middle" style="font-size:22px">IDE</text>
+            <rect class="bx pop" x="30" y="310" width="200" height="60" rx="12"/><text class="tx fi" x="130" y="348" text-anchor="middle" style="font-size:22px">Agente propio</text>
+            <rect class="bx pop" x="560" y="20" width="200" height="60" rx="12"/><text class="tx fi" x="660" y="58" text-anchor="middle" style="font-size:22px">CRM</text>
+            <rect class="bx pop" x="560" y="130" width="200" height="60" rx="12"/><text class="tx fi" x="660" y="168" text-anchor="middle" style="font-size:22px">Correo</text>
+            <rect class="bx pop" x="560" y="240" width="200" height="60" rx="12"/><text class="tx fi" x="660" y="278" text-anchor="middle" style="font-size:22px">Archivos</text>
+            <rect class="bx pop" x="560" y="350" width="200" height="60" rx="12"/><text class="tx fi" x="660" y="388" text-anchor="middle" style="font-size:22px">n8n</text>
+          </g>
+        </svg>
+        <p class="r" style="margin-top:18px;font-size:23px;color:var(--muted)"><span class="mono" style="color:var(--ivory);font-size:26px">N × M</span> &nbsp;cada combinación, una integración a la medida</p>
+      </div>
+      <div>
+        <div class="lbl lime r" style="margin-bottom:18px">Con MCP</div>
+        <svg viewBox="0 0 780 420" width="780" height="420" aria-label="Aplicaciones y sistemas conectados mediante un protocolo común">
+          <g>
+            <path class="ln dr" pathLength="1" d="M230 100 L360 100"/><path class="ln dr" pathLength="1" d="M230 220 L360 220"/><path class="ln dr" pathLength="1" d="M230 340 L360 340"/>
+            <path class="ln dr" pathLength="1" d="M420 50 L560 50"/><path class="ln dr" pathLength="1" d="M420 160 L560 160"/><path class="ln dr" pathLength="1" d="M420 270 L560 270"/><path class="ln dr" pathLength="1" d="M420 380 L560 380"/>
+          </g>
+          <path class="flow" d="M230 220 L360 220"/><path class="flow" d="M420 380 L560 380"/>
+          <rect class="bxl pop" x="360" y="20" width="60" height="390" rx="14"/>
+          <g class="fi" style="font-family:var(--mono);font-size:24px;font-weight:600" fill="#FF8A3D" text-anchor="middle"><text x="390" y="190">M</text><text x="390" y="222">C</text><text x="390" y="254">P</text></g>
+          <g>
+            <rect class="bx pop" x="30" y="70" width="200" height="60" rx="12"/><text class="tx fi" x="130" y="108" text-anchor="middle" style="font-size:22px">Asistente</text>
+            <rect class="bx pop" x="30" y="190" width="200" height="60" rx="12"/><text class="tx fi" x="130" y="228" text-anchor="middle" style="font-size:22px">IDE</text>
+            <rect class="bx pop" x="30" y="310" width="200" height="60" rx="12"/><text class="tx fi" x="130" y="348" text-anchor="middle" style="font-size:22px">Agente propio</text>
+            <rect class="bx pop" x="560" y="20" width="200" height="60" rx="12"/><text class="tx fi" x="660" y="58" text-anchor="middle" style="font-size:22px">CRM</text>
+            <rect class="bx pop" x="560" y="130" width="200" height="60" rx="12"/><text class="tx fi" x="660" y="168" text-anchor="middle" style="font-size:22px">Correo</text>
+            <rect class="bx pop" x="560" y="240" width="200" height="60" rx="12"/><text class="tx fi" x="660" y="278" text-anchor="middle" style="font-size:22px">Archivos</text>
+            <rect class="bx pop" x="560" y="350" width="200" height="60" rx="12"/><text class="tx fi" x="660" y="388" text-anchor="middle" style="font-size:22px">n8n</text>
+          </g>
+          <g class="tm fi" style="font-size:14px"><text x="300" y="20" text-anchor="middle">clientes</text><text x="490" y="20" text-anchor="middle">servidores</text></g>
+        </svg>
+        <p class="r" style="margin-top:18px;font-size:23px;color:var(--muted)"><span class="mono lime" style="font-size:26px">N + M</span> &nbsp;cada parte implementa el protocolo una vez</p>
+      </div>
+    </div>
+    <div class="cols r" style="grid-template-columns:1fr 1fr;gap:120px;margin-top:auto;border-top:1px solid var(--line2);padding-top:24px">
+      <p style="font-family:var(--serif);font-size:30px;line-height:1.3">Protocolo abierto que estandariza cómo las aplicaciones de IA se conectan con fuentes de datos y herramientas externas.</p>
+      <p style="font-size:23px;line-height:1.45;color:var(--muted)"><span class="lime">Su función real:</span> acordar cómo se descubren capacidades, cómo se invocan y cómo regresan los resultados. No es un modelo, ni un agente, ni una plataforma de automatización.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ======================= 07 · ARQUITECTURA MCP ======================= -->
+<section class="slide" data-act="II · Model Context Protocol">
+  <div class="bd">
+    <h2 class="r">Arquitectura MCP: host, cliente y <em>servidor</em></h2>
+    <svg viewBox="0 0 1680 500" width="1680" height="500" aria-label="Un host con tres clientes MCP, cada uno conectado a un servidor">
+      <!-- boundary -->
+      <path class="lnf dash fi" d="M1250 0 L1250 500"/>
+      <text class="tm fi" x="1232" y="18" text-anchor="end">mismo equipo</text>
+      <text class="tm fi" x="1268" y="18">remoto · red</text>
+      <!-- host -->
+      <rect class="bxl pop" x="0" y="40" width="660" height="440" rx="22" style="fill:rgba(255,138,61,.035)"/>
+      <text class="tm tl fi" x="32" y="80">HOST · APLICACIÓN DE IA</text>
+      <text class="tx2 fi" x="32" y="110" style="font-size:18px">p. ej., asistente de escritorio, IDE o agente propio</text>
+      <rect class="bx pop" x="40" y="190" width="220" height="150" rx="16"/>
+      <text class="tx fi" x="150" y="258" text-anchor="middle">Modelo</text>
+      <text class="tx2 fi" x="150" y="290" text-anchor="middle" style="font-size:18px">razona y elige</text>
+      <path class="ln dr" pathLength="1" d="M260 265 C 310 265, 310 175, 370 175"/>
+      <path class="ln dr" pathLength="1" d="M260 265 L370 300"/>
+      <path class="ln dr" pathLength="1" d="M260 265 C 310 265, 310 425, 370 425"/>
+      <rect class="bx pop" x="370" y="140" width="250" height="70" rx="14"/><text class="tx fi" x="495" y="183" text-anchor="middle" style="font-size:22px">Cliente MCP 1</text>
+      <rect class="bx pop" x="370" y="265" width="250" height="70" rx="14"/><text class="tx fi" x="495" y="308" text-anchor="middle" style="font-size:22px">Cliente MCP 2</text>
+      <rect class="bx pop" x="370" y="390" width="250" height="70" rx="14"/><text class="tx fi" x="495" y="433" text-anchor="middle" style="font-size:22px">Cliente MCP 3</text>
+      <!-- connections -->
+      <path class="ln fi" d="M624 175 L896 175" marker-start="url(#ah)" marker-end="url(#ah)"/>
+      <path class="ln fi" d="M624 300 L896 300" marker-start="url(#ah)" marker-end="url(#ah)"/>
+      <path class="ln fi" d="M624 425 L1336 425" marker-start="url(#ah)" marker-end="url(#ah)"/>
+      <path class="flow" d="M624 175 L896 175"/><path class="flow" d="M624 300 L896 300"/><path class="flow" d="M624 425 L1336 425"/>
+      <g class="tm fi" text-anchor="middle"><text x="760" y="162">1 : 1</text><text x="760" y="287">1 : 1</text><text x="980" y="412">1 : 1 · JSON-RPC 2.0</text></g>
+      <!-- servers -->
+      <rect class="bxs pop" x="900" y="130" width="300" height="90" rx="14"/>
+      <text class="tm ts fi" x="922" y="162">SERVIDOR MCP · LOCAL</text><text class="tx fi" x="922" y="198" style="font-size:23px">Archivos</text>
+      <rect class="bxs pop" x="900" y="255" width="300" height="90" rx="14"/>
+      <text class="tm ts fi" x="922" y="287">SERVIDOR MCP · LOCAL</text><text class="tx fi" x="922" y="323" style="font-size:23px">Base de datos</text>
+      <rect class="bxs pop" x="1340" y="380" width="340" height="90" rx="14"/>
+      <text class="tm ts fi" x="1362" y="412">SERVIDOR MCP · REMOTO</text><text class="tx fi" x="1362" y="448" style="font-size:23px">n8n</text>
+      <g class="tm fi" style="font-size:15px"><text x="1200" y="240" text-anchor="end">transporte: stdio</text><text x="1200" y="365" text-anchor="end">transporte: stdio</text><text x="1680" y="490" text-anchor="end">transporte: Streamable HTTP</text></g>
+    </svg>
+    <div class="defs" style="grid-template-columns:repeat(3,1fr);margin-top:auto">
+      <div class="r"><div class="num-s">Host</div><h4>La aplicación de IA</h4><p>Coordina al modelo y crea un cliente por cada servidor al que se conecta.</p></div>
+      <div class="r"><div class="num-s">Cliente</div><h4>Una conexión dedicada</h4><p>Vive dentro del host y mantiene una relación 1:1 con un único servidor.</p></div>
+      <div class="r"><div class="num-s">Servidor</div><h4>Quien ofrece capacidades</h4><p>Programa local o remoto que expone tools, resources y prompts.</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- ======================= 08 · PRIMITIVAS ======================= -->
+<section class="slide" data-act="II · Model Context Protocol">
+  <div class="bd">
+    <h2 class="r">Tres capacidades que un servidor puede <em>ofrecer</em></h2>
+    <div class="prim">
+      <div class="card r">
+        <svg viewBox="0 0 64 64" width="56" height="56" aria-hidden="true"><rect x="4" y="4" width="56" height="56" rx="14" fill="none" stroke="#FF8A3D" stroke-width="1.8"/><path d="M26 20 L44 32 L26 44 Z" fill="none" stroke="#FF8A3D" stroke-width="1.8" stroke-linejoin="round"/></svg>
+        <h3>Tools</h3>
+        <p class="desc">Acciones que el modelo puede invocar para hacer algo en otro sistema.</p>
+        <div class="kv"><div class="lbl">Quién decide usarla</div><div>El modelo, según la petición</div></div>
+        <div class="kv"><div class="lbl">Ejemplo</div><div class="code">registrar_oportunidad(cliente, producto, cantidad)</div></div>
+        <div class="kv"><div class="lbl">Métodos</div><div class="mono" style="font-size:20px;color:var(--steel)">tools/list · tools/call</div></div>
+      </div>
+      <div class="card r">
+        <svg viewBox="0 0 64 64" width="56" height="56" aria-hidden="true"><rect x="12" y="6" width="38" height="48" rx="6" fill="none" stroke="#A9B4BF" stroke-width="1.8"/><rect x="18" y="12" width="38" height="48" rx="6" fill="#0E1012" stroke="#A9B4BF" stroke-width="1.8"/><path d="M26 28 H48 M26 36 H48 M26 44 H40" stroke="#A9B4BF" stroke-width="1.8" stroke-linecap="round"/></svg>
+        <h3>Resources</h3>
+        <p class="desc">Datos que aportan contexto: documentos, registros o archivos para consultar.</p>
+        <div class="kv"><div class="lbl">Quién decide usarlo</div><div>La aplicación, al preparar el contexto</div></div>
+        <div class="kv"><div class="lbl">Ejemplo</div><div class="code">Catálogo de productos y política de precios vigente</div></div>
+        <div class="kv"><div class="lbl">Métodos</div><div class="mono" style="font-size:20px;color:var(--steel)">resources/list · resources/read</div></div>
+      </div>
+      <div class="card r">
+        <svg viewBox="0 0 64 64" width="56" height="56" aria-hidden="true"><rect x="4" y="10" width="56" height="44" rx="10" fill="none" stroke="#F4F1E9" stroke-width="1.8"/><path d="M16 26 L22 32 L16 38 M28 38 H46" stroke="#F4F1E9" stroke-width="1.8" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        <h3>Prompts</h3>
+        <p class="desc">Plantillas reutilizables que estructuran una interacción frecuente.</p>
+        <div class="kv"><div class="lbl">Quién decide usarlo</div><div>La persona usuaria, al elegirlo</div></div>
+        <div class="kv"><div class="lbl">Ejemplo</div><div class="code">“Preparar cotización formal para cliente corporativo”</div></div>
+        <div class="kv"><div class="lbl">Métodos</div><div class="mono" style="font-size:20px;color:var(--steel)">prompts/list · prompts/get</div></div>
+      </div>
+    </div>
+    <p class="r" style="margin-top:26px;font-size:22px;color:var(--muted)"><span class="lime">Analogía:</span> tools son verbos, resources son documentos de consulta y prompts son formularios guiados. En sentido inverso, el cliente también ofrece primitivas al servidor: <span class="mono" style="font-size:20px">sampling</span>, <span class="mono" style="font-size:20px">elicitation</span> y <span class="mono" style="font-size:20px">logging</span>.</p>
+  </div>
+</section>
+
+<!-- ======================= 09 · CICLO DE UNA LLAMADA ======================= -->
+<section class="slide" data-act="II · Model Context Protocol">
+  <div class="bd">
+    <div class="seq">
+      <div>
+        <h2 class="r" style="font-size:54px">Una llamada MCP, <em>paso a paso</em></h2>
+        <div class="steps">
+          <div class="step r"><div class="c">1</div><div><h4>Descubrimiento</h4><p>El cliente pide la lista de herramientas: nombre, descripción y esquema de entrada.</p></div></div>
+          <div class="step r"><div class="c">2</div><div><h4>Selección</h4><p>El modelo compara la petición con las descripciones y elige una herramienta.</p></div></div>
+          <div class="step r"><div class="c">3</div><div><h4>Argumentos</h4><p>El modelo genera los parámetros con el formato que exige el esquema.</p></div></div>
+          <div class="step r"><div class="c">4</div><div><h4>Ejecución</h4><p>El cliente envía la llamada; el servidor actúa sobre el sistema real.</p></div></div>
+          <div class="step r"><div class="c">5</div><div><h4>Respuesta</h4><p>El resultado regresa al modelo como contexto para continuar o responder.</p></div></div>
+        </div>
+        <p class="r" style="margin-top:22px;font-size:19px;line-height:1.4;color:var(--dim);border-top:1px solid var(--line);padding-top:14px">Antes del paso 4, el host puede pedir confirmación a la persona usuaria.</p>
+      </div>
+      <svg viewBox="0 0 1120 830" width="1120" height="830" aria-label="Diagrama de secuencia de una llamada MCP">
+        <g>
+          <rect class="bx pop" x="30" y="0" width="200" height="64" rx="12"/><text class="tx fi" x="130" y="40" text-anchor="middle" style="font-size:22px">Modelo</text>
+          <rect class="bxl pop" x="340" y="0" width="220" height="64" rx="12"/><text class="tx fi" x="450" y="40" text-anchor="middle" style="font-size:22px">Cliente MCP</text>
+          <rect class="bxs pop" x="660" y="0" width="220" height="64" rx="12"/><text class="tx fi" x="770" y="40" text-anchor="middle" style="font-size:22px">Servidor MCP</text>
+          <rect class="bx pop" x="940" y="0" width="170" height="64" rx="12"/><text class="tx fi" x="1025" y="40" text-anchor="middle" style="font-size:22px">CRM</text>
+        </g>
+        <g class="lnf dash">
+          <path class="fi" d="M130 64 V820"/><path class="fi" d="M450 64 V820"/><path class="fi" d="M770 64 V820"/><path class="fi" d="M1025 64 V820"/>
+        </g>
+        <!-- init -->
+        <g class="fi"><path class="ln dash" d="M454 120 H766" marker-start="url(#ah)" marker-end="url(#ah)" style="opacity:.6"/><text class="tm" x="610" y="106" text-anchor="middle" style="font-size:15px">inicialización · capacidades</text></g>
+        <!-- 1 -->
+        <g class="fi"><path class="lnl" d="M450 200 H766" marker-end="url(#ahl)"/><text class="tm tl" x="610" y="186" text-anchor="middle">1 · tools/list</text></g>
+        <g class="fi"><path class="ln dash" d="M770 255 H454" marker-end="url(#ah)"/><text class="tm" x="610" y="241" text-anchor="middle" style="font-size:15px">nombre · descripción · esquema</text></g>
+        <!-- 2 -->
+        <g class="fi"><path class="ln" d="M450 320 H134" marker-end="url(#ah)"/><text class="tm" x="290" y="306" text-anchor="middle" style="font-size:15px">herramientas disponibles</text></g>
+        <g class="fi"><rect x="122" y="345" width="16" height="70" rx="3" fill="#FF8A3D" opacity=".85"/><text class="tm tl" x="152" y="388">2 · elige una herramienta</text></g>
+        <!-- 3 -->
+        <g class="fi"><path class="lnl" d="M130 470 H446" marker-end="url(#ahl)"/><text class="tm tl" x="290" y="456" text-anchor="middle">3 · argumentos</text></g>
+        <!-- 4 -->
+        <g class="fi"><path class="lnl" d="M450 540 H766" marker-end="url(#ahl)"/><text class="tm tl" x="610" y="526" text-anchor="middle">4 · tools/call</text></g>
+        <g class="fi"><path class="lns" d="M770 590 H1021" marker-end="url(#ahs)"/><text class="tm ts" x="897" y="576" text-anchor="middle" style="font-size:15px">API del sistema</text></g>
+        <g class="fi"><path class="ln dash" d="M1025 640 H774" marker-end="url(#ah)"/><text class="tm" x="897" y="626" text-anchor="middle" style="font-size:15px">registro creado</text></g>
+        <!-- 5 -->
+        <g class="fi"><path class="lnl dash" d="M770 710 H454" marker-end="url(#ahl)"/><text class="tm tl" x="610" y="696" text-anchor="middle">5 · resultado</text></g>
+        <g class="fi"><path class="ln dash" d="M450 775 H134" marker-end="url(#ah)"/><text class="tm" x="290" y="761" text-anchor="middle" style="font-size:15px">resultado como contexto</text></g>
+      </svg>
+    </div>
+  </div>
+</section>
+
+<!-- ======================= 10 · API / WEBHOOK / CONECTOR / MCP ======================= -->
+<section class="slide" data-act="II · Model Context Protocol">
+  <div class="bd">
+    <h2 class="r">API, webhook, conector y MCP: <em>cuatro formas de conectar</em></h2>
+    <div class="cmp">
+      <div class="card r">
+        <svg viewBox="0 0 340 120" width="100%" height="110" aria-hidden="true">
+          <rect class="bx" x="0" y="30" width="130" height="60" rx="10"/><text class="tm" x="65" y="65" text-anchor="middle" style="fill:#F4F1E9;font-size:14px">Consumidor</text>
+          <rect class="bxs" x="210" y="30" width="130" height="60" rx="10"/><text class="tm" x="275" y="65" text-anchor="middle" style="fill:#F4F1E9;font-size:14px">Servicio</text>
+          <path class="ln" d="M134 48 H204" marker-end="url(#ah)"/><path class="ln dash" d="M206 72 H136" marker-end="url(#ah)"/>
+          <text class="tm" x="170" y="22" text-anchor="middle" style="font-size:14px">pide · responde</text>
+        </svg>
+        <h3>API</h3>
+        <p class="met">Una ventanilla: preguntas y te responden.</p>
+        <div class="row"><div class="lbl">Quién inicia</div><div>El consumidor, cuando lo necesita.</div></div>
+        <div class="row"><div class="lbl">Pensada para</div><div>Programas que conocen el contrato de antemano.</div></div>
+        <div class="row"><div class="lbl">Ejemplo</div><div>Consultar los datos de un contacto en el CRM.</div></div>
+      </div>
+      <div class="card r">
+        <svg viewBox="0 0 340 120" width="100%" height="110" aria-hidden="true">
+          <rect class="bx" x="4" y="30" width="110" height="60" rx="10"/><text class="tm" x="59" y="65" text-anchor="middle" style="fill:#F4F1E9;font-size:14px">Origen</text>
+          <circle cx="114" cy="30" r="7" fill="#FF8A3D"/>
+          <rect class="bxs" x="226" y="30" width="110" height="60" rx="10"/><text class="tm" x="281" y="65" text-anchor="middle" style="fill:#F4F1E9;font-size:14px">Receptor</text>
+          <path class="lnl" d="M118 60 H220" marker-end="url(#ahl)"/>
+          <text class="tm tl" x="170" y="22" text-anchor="middle" style="font-size:14px">ocurrió algo</text>
+        </svg>
+        <h3>Webhook</h3>
+        <p class="met">Un timbre: te avisan cuando algo ocurre.</p>
+        <div class="row"><div class="lbl">Quién inicia</div><div>El sistema de origen, al ocurrir el evento.</div></div>
+        <div class="row"><div class="lbl">Pensado para</div><div>Reaccionar a eventos sin consultar repetidamente.</div></div>
+        <div class="row"><div class="lbl">Ejemplo</div><div>El formulario avisa a n8n de una nueva solicitud.</div></div>
+      </div>
+      <div class="card r">
+        <svg viewBox="0 0 340 120" width="100%" height="110" aria-hidden="true">
+          <rect class="bx" x="4" y="30" width="100" height="60" rx="10"/><text class="tm" x="54" y="65" text-anchor="middle" style="fill:#F4F1E9;font-size:14px">n8n</text>
+          <rect class="bxl" x="140" y="40" width="60" height="40" rx="8"/><path d="M152 52 v16 M188 52 v16" stroke="#FF8A3D" stroke-width="2"/>
+          <rect class="bxs" x="236" y="30" width="104" height="60" rx="10"/><text class="tm" x="288" y="65" text-anchor="middle" style="fill:#F4F1E9;font-size:14px">Servicio</text>
+          <path class="ln" d="M104 60 H140 M200 60 H236"/>
+          <text class="tm" x="170" y="22" text-anchor="middle" style="font-size:14px">API + autenticación</text>
+        </svg>
+        <h3>Conector</h3>
+        <p class="met">Un adaptador listo para una plataforma concreta.</p>
+        <div class="row"><div class="lbl">Quién inicia</div><div>La plataforma que lo usa, según la operación.</div></div>
+        <div class="row"><div class="lbl">Pensado para</div><div>Usar un servicio sin programar su API.</div></div>
+        <div class="row"><div class="lbl">Ejemplo</div><div>El nodo de Google Sheets dentro de n8n.</div></div>
+      </div>
+      <div class="card hl r">
+        <svg viewBox="0 0 340 120" width="100%" height="110" aria-hidden="true">
+          <rect class="bxl" x="4" y="30" width="100" height="60" rx="10"/><text class="tm tl" x="54" y="66" text-anchor="middle">IA</text>
+          <rect class="bxs" x="230" y="14" width="110" height="96" rx="10"/><text class="tm" x="285" y="37" text-anchor="middle" style="fill:#F4F1E9;font-size:14px">Servidor</text>
+          <rect x="248" y="50" width="74" height="10" rx="5" fill="rgba(169,180,191,.5)"/><rect x="248" y="68" width="74" height="10" rx="5" fill="rgba(169,180,191,.5)"/><rect x="248" y="86" width="50" height="10" rx="5" fill="rgba(169,180,191,.5)"/>
+          <path class="lnl" d="M108 48 H224" marker-end="url(#ahl)"/><path class="ln dash" d="M226 74 H110" marker-end="url(#ah)"/>
+          <text class="tm tl" x="166" y="30" text-anchor="middle" style="font-size:13px">descubre · usa</text>
+        </svg>
+        <h3>MCP</h3>
+        <p class="met">Un idioma común entre la IA y las herramientas.</p>
+        <div class="row"><div class="lbl">Quién inicia</div><div>El cliente MCP, a partir de la decisión del modelo.</div></div>
+        <div class="row"><div class="lbl">Pensado para</div><div>Aplicaciones de IA que descubren capacidades al momento.</div></div>
+        <div class="row"><div class="lbl">Ejemplo</div><div>Un agente encuentra y ejecuta un workflow de n8n.</div></div>
+      </div>
+    </div>
+    <p class="statement r" style="margin-top:24px;font-size:32px">No compiten: se combinan. <b>Un servidor MCP suele llamar APIs; un conector encapsula una API; un webhook inicia un flujo.</b></p>
+  </div>
+</section>
+
+<!-- ======================= 11 · LO QUE MCP NO HACE ======================= -->
+<section class="slide" data-act="II · Model Context Protocol">
+  <div class="bd">
+    <h2 class="r">Lo que MCP <em>no</em> hace</h2>
+    <p class="lead r" style="margin-top:-12px">Estandarizar la conexión no equivale a resolver la seguridad ni el diseño del proceso.</p>
+    <div class="nots">
+      <div class="not r"><span class="k">01</span><h3>No elimina la autenticación.</h3><p>El servidor sigue necesitando credenciales para llegar a cada sistema, y una conexión remota también debe autenticarse, por ejemplo con OAuth o tokens.</p></div>
+      <div class="not r"><span class="k">02</span><h3>No reemplaza universalmente a las APIs.</h3><p>Muchos servidores MCP traducen llamadas a APIs existentes. Para integraciones fijas entre sistemas, una API o un conector siguen siendo la vía directa.</p></div>
+      <div class="not r"><span class="k">03</span><h3>No garantiza permisos adecuados.</h3><p>Una herramienta puede hacer todo lo que permita su credencial. El alcance lo definen quienes configuran servidores, cuentas y roles.</p></div>
+      <div class="not r"><span class="k">04</span><h3>No vuelve confiable lo que conecta.</h3><p>Descripciones y resultados de herramientas son información externa: pueden contener errores o instrucciones maliciosas. Se validan antes de actuar.</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- ======================= 12 · n8n ======================= -->
+<section class="slide" data-act="III · Agentes + n8n">
+  <div class="bd">
+    <h2 class="r">n8n: el motor que <em>ejecuta procesos</em></h2>
+    <p class="lead r" style="margin-top:-10px">Plataforma de automatización de flujos de trabajo que combina integraciones, lógica y componentes de IA. Puede usarse en la nube o instalarse en infraestructura propia.</p>
+    <svg viewBox="0 0 1680 380" width="1680" height="380" style="margin-top:22px" aria-label="Ejemplo conceptual de workflow">
+      <path class="ln dr" pathLength="1" d="M190 180 H360"/>
+      <path class="ln dr" pathLength="1" d="M470 180 H640"/>
+      <path class="lnl dr" pathLength="1" d="M750 180 C 860 180, 860 80, 980 80"/>
+      <path class="ln dr" pathLength="1" d="M750 180 C 860 180, 860 290, 980 290"/>
+      <path class="lnl dr" pathLength="1" d="M1090 80 H1300"/>
+      <path class="flow" d="M190 180 H360"/><path class="flow" d="M470 180 H640"/><path class="flow" d="M750 180 C 860 180, 860 80, 980 80"/><path class="flow" d="M1090 80 H1300"/>
+      <text class="tm tl fi" x="822" y="140">sí</text><text class="tm fi" x="822" y="236">no</text>
+      <!-- nodes -->
+      <g class="pop"><path d="M130 125 H160 a30 30 0 0 1 30 30 V205 a30 30 0 0 1 -30 30 H130 a50 55 0 0 1 0 -110 Z" class="bxl"/><circle cx="140" cy="180" r="12" fill="none" stroke="#FF8A3D" stroke-width="2"/><path d="M152 180 H172" stroke="#FF8A3D" stroke-width="2"/></g>
+      <text class="tx fi" x="130" y="275" text-anchor="middle" style="font-size:22px">Trigger</text><text class="tx2 fi" x="130" y="302" text-anchor="middle" style="font-size:17px">formulario recibido</text>
+      <g class="pop"><rect class="bx" x="360" y="125" width="110" height="110" rx="22"/><path d="M392 182 l12 12 l26 -28" fill="none" stroke="#F4F1E9" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></g>
+      <text class="tx fi" x="415" y="275" text-anchor="middle" style="font-size:22px">Validar</text><text class="tx2 fi" x="415" y="302" text-anchor="middle" style="font-size:17px">campos y formato</text>
+      <g class="pop"><rect class="bxs" x="640" y="125" width="110" height="110" rx="22"/><path d="M670 180 H690 M690 180 L720 158 M690 180 L720 202" fill="none" stroke="#A9B4BF" stroke-width="2.2" stroke-linecap="round"/></g>
+      <text class="tx fi" x="695" y="275" text-anchor="middle" style="font-size:22px">IF</text><text class="tx2 fi" x="695" y="302" text-anchor="middle" style="font-size:17px">¿está completo?</text>
+      <g class="pop"><rect class="bx" x="980" y="25" width="110" height="110" rx="22"/><circle cx="1035" cy="68" r="12" fill="none" stroke="#F4F1E9" stroke-width="2"/><path d="M1013 104 a22 18 0 0 1 44 0" fill="none" stroke="#F4F1E9" stroke-width="2"/></g>
+      <g class="pop"><rect class="bx" x="1300" y="25" width="110" height="110" rx="22"/><rect x="1328" y="58" width="54" height="40" rx="5" fill="none" stroke="#F4F1E9" stroke-width="2"/><path d="M1328 62 L1355 82 L1382 62" fill="none" stroke="#F4F1E9" stroke-width="2"/></g>
+      <g class="pop"><rect class="bx" x="980" y="235" width="110" height="110" rx="22"/><path d="M1016 278 a19 19 0 1 1 22 18 v10 M1035 324 v1" fill="none" stroke="#F4F1E9" stroke-width="2.2" stroke-linecap="round"/></g>
+      <text class="tx fi" x="1035" y="172" text-anchor="middle" style="font-size:22px">Registrar en CRM</text>
+      <text class="tx fi" x="1355" y="172" text-anchor="middle" style="font-size:22px">Notificar a ventas</text>
+      <text class="tx fi" x="1110" y="286" style="font-size:22px">Solicitar datos faltantes</text>
+      <text class="tx2 fi" x="1035" y="199" text-anchor="middle" style="font-size:17px">contacto y oportunidad</text>
+      <text class="tx2 fi" x="1355" y="199" text-anchor="middle" style="font-size:17px">mensaje interno</text>
+      <text class="tx2 fi" x="1110" y="316" style="font-size:17px">respuesta al cliente</text>
+    </svg>
+    <div class="defs" style="grid-template-columns:repeat(5,1fr);gap:32px;margin-top:auto">
+      <div class="r"><div class="num-s">Trigger</div><p style="margin-top:10px">Evento que inicia la ejecución: formulario, correo, horario o webhook.</p></div>
+      <div class="r"><div class="num-s">Nodo</div><p style="margin-top:10px">Un paso con una tarea concreta: transformar, decidir, consultar o enviar.</p></div>
+      <div class="r"><div class="num-s">Credencial</div><p style="margin-top:10px">Autorización guardada para conectarse a un servicio, separada de la lógica.</p></div>
+      <div class="r"><div class="num-s">Ejecución</div><p style="margin-top:10px">Registro de cada corrida: datos de entrada, salida y errores por nodo.</p></div>
+      <div class="r"><div class="num-s">Workflow de error</div><p style="margin-top:10px">Flujo que se activa cuando otro falla, para alertar o compensar.</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- ======================= 13 · ARQUITECTURA A ======================= -->
+<section class="slide" data-act="III · Agentes + n8n">
+  <div class="bd">
+    <h2 class="r"><span class="pill l" style="font-size:22px;vertical-align:middle;margin-right:18px;padding:10px 16px">Arquitectura A</span>El agente invoca a n8n <em>mediante MCP</em></h2>
+    <svg viewBox="0 0 1680 420" width="1680" height="420" aria-label="Arquitectura A">
+      <text class="tm tl fi" x="450" y="54" text-anchor="middle">decide qué y cuándo</text>
+      <text class="tm tl fi" x="1070" y="16" text-anchor="middle">ejecuta cómo, con sus credenciales</text>
+      <rect class="bx pop" x="0" y="160" width="170" height="100" rx="16"/>
+      <text class="tx fi" x="85" y="205" text-anchor="middle">Persona</text><text class="tx2 fi" x="85" y="236" text-anchor="middle" style="font-size:17px">hace una solicitud</text>
+      <path class="ln fi" d="M170 210 H246" marker-end="url(#ah)"/>
+      <rect class="bxl pop" x="250" y="70" width="400" height="280" rx="20" style="fill:rgba(255,138,61,.035)"/>
+      <text class="tm tl fi" x="276" y="104">AGENTE · HOST</text>
+      <rect class="bx pop" x="276" y="124" width="348" height="88" rx="14"/><text class="tx fi" x="300" y="162" style="font-size:22px">Modelo</text><text class="tx2 fi" x="300" y="192" style="font-size:17px">interpreta y elige la herramienta</text>
+      <rect class="bx pop" x="276" y="234" width="348" height="88" rx="14"/><text class="tx fi" x="300" y="272" style="font-size:22px">Cliente MCP</text><text class="tx2 fi" x="300" y="302" style="font-size:17px">descubre y llama herramientas</text>
+      <path class="lnl fi" d="M624 278 C 740 278, 740 100, 846 100" marker-end="url(#ahl)"/>
+      <path class="flow" d="M624 278 C 740 278, 740 100, 846 100"/>
+      <text class="tm tl fi" x="752" y="200" style="font-size:15px">MCP</text>
+      <rect class="bxd pop" x="820" y="30" width="500" height="360" rx="20"/>
+      <text class="tm fi" x="850" y="58">N8N</text>
+      <rect class="bxs pop" x="850" y="70" width="440" height="60" rx="12"/><text class="tx fi" x="872" y="108" style="font-size:21px">Servidor MCP de la instancia</text>
+      <rect class="bxl pop" x="850" y="155" width="440" height="55" rx="12"/><text class="tm tl fi" x="872" y="189" style="font-size:18px">registrar_solicitud</text><text class="tm fi" x="1270" y="189" text-anchor="end" style="font-size:14px">expuesto</text>
+      <rect class="bxl pop" x="850" y="230" width="440" height="55" rx="12"/><text class="tm tl fi" x="872" y="264" style="font-size:18px">enviar_confirmacion</text><text class="tm fi" x="1270" y="264" text-anchor="end" style="font-size:14px">expuesto</text>
+      <rect class="bxg pop" x="850" y="305" width="440" height="55" rx="12"/><text class="tm tdim fi" x="872" y="339" style="font-size:18px">conciliacion_contable</text><text class="tm tdim fi" x="1270" y="339" text-anchor="end" style="font-size:14px">no expuesto</text>
+      <path class="ln fi" d="M1290 182 H1436" marker-end="url(#ah)"/><path class="ln fi" d="M1290 257 H1436" marker-end="url(#ah)"/>
+      <text class="tm fi" x="1560" y="128" text-anchor="middle">SISTEMAS</text>
+      <rect class="bx pop" x="1440" y="150" width="240" height="64" rx="12"/><text class="tx fi" x="1560" y="190" text-anchor="middle" style="font-size:22px">CRM</text>
+      <rect class="bx pop" x="1440" y="225" width="240" height="64" rx="12"/><text class="tx fi" x="1560" y="265" text-anchor="middle" style="font-size:22px">Correo</text>
+    </svg>
+    <div class="three">
+      <div class="r"><div class="num-s">Cuándo conviene</div><h4>El inicio es abierto</h4><p>Una conversación o tarea en lenguaje natural donde no se sabe de antemano qué proceso se necesitará.</p></div>
+      <div class="r"><div class="num-s">Ventaja</div><h4>Reutiliza procesos probados</h4><p>El agente usa workflows existentes sin conocer credenciales, APIs ni detalles internos.</p></div>
+      <div class="r"><div class="num-s">Precaución</div><h4>Decide el modelo</h4><p>La invocación depende de su criterio: descripciones precisas, permisos mínimos y aprobación en acciones sensibles.</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- ======================= 14 · ARQUITECTURA B ======================= -->
+<section class="slide" data-act="III · Agentes + n8n">
+  <div class="bd">
+    <h2 class="r"><span class="pill l" style="font-size:22px;vertical-align:middle;margin-right:18px;padding:10px 16px">Arquitectura B</span>n8n coordina; el agente es <em>un paso del flujo</em></h2>
+    <svg viewBox="0 0 1680 420" width="1680" height="420" aria-label="Arquitectura B">
+      <rect class="bx pop" x="0" y="170" width="170" height="80" rx="14"/><text class="tx fi" x="85" y="206" text-anchor="middle" style="font-size:22px">Formulario</text><text class="tx2 fi" x="85" y="234" text-anchor="middle" style="font-size:17px">canal web</text>
+      <rect class="bxd pop" x="220" y="20" width="1460" height="390" rx="22"/>
+      <text class="tm fi" x="250" y="56">WORKFLOW DE N8N · DEFINE EL ORDEN, LOS LÍMITES Y LAS SALIDAS</text>
+      <path class="ln fi" d="M170 210 H256" marker-end="url(#ah)"/>
+      <rect class="bxl pop" x="260" y="150" width="180" height="120" rx="18"/><text class="tx fi" x="350" y="204" text-anchor="middle" style="font-size:22px">Trigger</text><text class="tx2 fi" x="350" y="234" text-anchor="middle" style="font-size:17px">nueva solicitud</text>
+      <path class="ln fi" d="M440 210 H486" marker-end="url(#ah)"/>
+      <rect class="bx pop" x="490" y="150" width="180" height="120" rx="18"/><text class="tx fi" x="580" y="204" text-anchor="middle" style="font-size:22px">Validar</text><text class="tx2 fi" x="580" y="234" text-anchor="middle" style="font-size:17px">campos y formato</text>
+      <path class="ln fi" d="M670 210 H716" marker-end="url(#ah)"/>
+      <text class="tm tl fi" x="890" y="128" text-anchor="middle">interpreta y clasifica dentro de límites</text>
+      <rect class="bxl pop" x="720" y="150" width="340" height="120" rx="18" style="fill:rgba(255,138,61,.08)"/>
+      <text class="tx fi" x="890" y="192" text-anchor="middle" style="font-size:23px">Agente de IA</text>
+      <g class="fi"><rect x="744" y="216" width="88" height="32" rx="16" fill="none" stroke="rgba(255,138,61,.6)"/><text class="tm tl" x="788" y="238" text-anchor="middle" style="font-size:14px">modelo</text>
+      <rect x="842" y="216" width="96" height="32" rx="16" fill="none" stroke="rgba(255,138,61,.6)"/><text class="tm tl" x="890" y="238" text-anchor="middle" style="font-size:14px">memoria</text>
+      <rect x="948" y="216" width="92" height="32" rx="16" fill="none" stroke="rgba(255,138,61,.6)"/><text class="tm tl" x="994" y="238" text-anchor="middle" style="font-size:14px">tools</text></g>
+      <path class="ln fi" d="M1060 210 H1106" marker-end="url(#ah)"/>
+      <text class="tm fi" x="1083" y="300" text-anchor="middle" style="font-size:14px">salida con</text><text class="tm fi" x="1083" y="320" text-anchor="middle" style="font-size:14px">formato fijo</text>
+      <rect class="bxs pop" x="1110" y="150" width="180" height="120" rx="18"/><text class="tx fi" x="1200" y="204" text-anchor="middle" style="font-size:22px">Enrutar</text><text class="tx2 fi" x="1200" y="234" text-anchor="middle" style="font-size:17px">según categoría</text>
+      <path class="ln fi" d="M1290 190 C 1320 190, 1320 135, 1346 135" marker-end="url(#ah)"/>
+      <path class="ln fi" d="M1290 230 C 1320 230, 1320 290, 1346 290" marker-end="url(#ah)"/>
+      <rect class="bx pop" x="1350" y="95" width="300" height="80" rx="14"/><text class="tx fi" x="1374" y="130" style="font-size:22px">Registrar en CRM</text><text class="tx2 fi" x="1374" y="158" style="font-size:17px">solicitud clara</text>
+      <rect class="bx pop" x="1350" y="250" width="300" height="80" rx="14" style="stroke:rgba(244,241,233,.55)"/><text class="tx fi" x="1374" y="285" style="font-size:22px">Revisión humana</text><text class="tx2 fi" x="1374" y="313" style="font-size:17px">ambigua o sensible</text>
+      <path class="flow" d="M170 210 H256"/><path class="flow" d="M440 210 H486"/><path class="flow" d="M670 210 H716"/><path class="flow" d="M1060 210 H1106"/>
+    </svg>
+    <div class="three">
+      <div class="r"><div class="num-s">Cuándo conviene</div><h4>El proceso está definido</h4><p>Tiene un inicio claro, pasos conocidos y salidas esperadas; la IA resuelve solo la parte ambigua.</p></div>
+      <div class="r"><div class="num-s">Ventaja</div><h4>Predecible y auditable</h4><p>El flujo controla el orden; cada ejecución queda registrada nodo por nodo.</p></div>
+      <div class="r"><div class="num-s">Precaución</div><h4>Validar la salida del agente</h4><p>Pedir un formato fijo y comprobarlo antes del siguiente paso; prever una ruta cuando no cumpla.</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- ======================= 15 · MCP DE INSTANCIA VS MCP SERVER TRIGGER ======================= -->
+<section class="slide" data-act="III · Agentes + n8n">
+  <div class="bd">
+    <h2 class="r">Dos formas de exponer n8n <em>por MCP</em></h2>
+    <div class="ways">
+      <div class="card r">
+        <div class="lbl steel">Nivel instancia</div>
+        <h3>MCP de instancia</h3>
+        <svg viewBox="0 0 760 170" width="100%" height="150" aria-hidden="true">
+          <rect class="bx" x="0" y="55" width="160" height="60" rx="12"/><text class="tm" x="80" y="91" text-anchor="middle" style="fill:#F4F1E9">Cliente MCP</text>
+          <path class="lnl" d="M160 85 H254" marker-end="url(#ahl)"/>
+          <rect class="bxd" x="230" y="4" width="530" height="162" rx="16"/>
+          <text class="tm" x="250" y="30" style="font-size:14px">INSTANCIA DE N8N</text><text class="tm tl" x="740" y="30" text-anchor="end" style="font-size:13px">habilitados para MCP</text>
+          <rect class="bxs" x="258" y="50" width="170" height="74" rx="12"/><text class="tm ts" x="343" y="84" text-anchor="middle" style="font-size:15px">MCP de</text><text class="tm ts" x="343" y="104" text-anchor="middle" style="font-size:15px">instancia</text>
+          <path class="ln" d="M428 87 C 460 87, 460 52, 486 52" marker-end="url(#ah)"/><path class="ln" d="M428 87 H486" marker-end="url(#ah)"/>
+          <rect class="bxl" x="490" y="36" width="250" height="32" rx="16"/><text class="tm tl" x="508" y="58" style="font-size:14px">cotizaciones</text>
+          <rect class="bxl" x="490" y="76" width="250" height="32" rx="16"/><text class="tm tl" x="508" y="98" style="font-size:14px">pedidos</text>
+          <rect class="bxg" x="490" y="116" width="250" height="32" rx="16"/><text class="tm tdim" x="508" y="138" style="font-size:14px">nómina · no habilitado</text>
+        </svg>
+        <div class="attr"><div class="lbl">Qué es</div><div>Un servidor MCP integrado en la instancia de n8n.</div></div>
+        <div class="attr"><div class="lbl">Qué expone</div><div>Los workflows que se habilitan explícitamente para MCP.</div></div>
+        <div class="attr"><div class="lbl">Configuración</div><div>Se activa en la instancia y se habilita workflow por workflow.</div></div>
+        <div class="attr"><div class="lbl">Autenticación</div><div>OAuth o token de acceso.</div></div>
+        <div class="attr"><div class="lbl">Uso típico</div><div>Dar a un asistente acceso controlado a procesos que ya existen.</div></div>
+      </div>
+      <div class="card r">
+        <div class="lbl lime">Nivel workflow</div>
+        <h3>Nodo MCP Server Trigger</h3>
+        <svg viewBox="0 0 760 170" width="100%" height="150" aria-hidden="true">
+          <rect class="bx" x="0" y="55" width="160" height="60" rx="12"/><text class="tm" x="80" y="91" text-anchor="middle" style="fill:#F4F1E9">Cliente MCP</text>
+          <path class="lnl" d="M160 85 H254" marker-end="url(#ahl)"/>
+          <rect class="bxd" x="230" y="4" width="530" height="162" rx="16"/>
+          <text class="tm" x="250" y="30" style="font-size:14px">UN WORKFLOW</text><text class="tm ts" x="740" y="30" text-anchor="end" style="font-size:13px">nodos de herramienta</text>
+          <rect class="bxl" x="258" y="50" width="170" height="74" rx="12"/><text class="tm tl" x="343" y="84" text-anchor="middle" style="font-size:15px">MCP Server</text><text class="tm tl" x="343" y="104" text-anchor="middle" style="font-size:15px">Trigger</text>
+          <path class="ln" d="M428 87 C 460 87, 460 52, 486 52" marker-end="url(#ah)"/><path class="ln" d="M428 87 H486" marker-end="url(#ah)"/><path class="ln" d="M428 87 C 460 87, 460 132, 486 132" marker-end="url(#ah)"/>
+          <rect class="bxs" x="490" y="36" width="250" height="32" rx="16"/><text class="tm ts" x="508" y="58" style="font-size:14px">consultar catálogo</text>
+          <rect class="bxs" x="490" y="76" width="250" height="32" rx="16"/><text class="tm ts" x="508" y="98" style="font-size:14px">calcular precio</text>
+          <rect class="bxs" x="490" y="116" width="250" height="32" rx="16"/><text class="tm ts" x="508" y="138" style="font-size:14px">crear registro</text>
+        </svg>
+        <div class="attr"><div class="lbl">Qué es</div><div>Un nodo disparador que convierte un workflow en servidor MCP.</div></div>
+        <div class="attr"><div class="lbl">Qué expone</div><div>Solo las herramientas conectadas a ese nodo.</div></div>
+        <div class="attr"><div class="lbl">Configuración</div><div>Dentro del workflow; ofrece una URL de prueba y otra de producción.</div></div>
+        <div class="attr"><div class="lbl">Autenticación</div><div>Configurable en el nodo, por ejemplo bearer o encabezado.</div></div>
+        <div class="attr"><div class="lbl">Uso típico</div><div>Diseñar un servidor MCP a medida con un conjunto acotado de herramientas.</div></div>
+      </div>
+    </div>
+    <p class="note r"><span class="pill s">Dirección inversa</span>El nodo MCP Client Tool permite que un agente dentro de n8n use herramientas de un servidor MCP externo.</p>
+  </div>
+</section>
+
+<!-- ======================= 16 · CUÁNDO USAR QUÉ ======================= -->
+<section class="slide" data-act="III · Agentes + n8n">
+  <div class="bd">
+    <h2 class="r">¿n8n, agente <em>o ambos?</em></h2>
+    <div class="mtx">
+      <svg viewBox="0 0 880 700" width="880" height="680" aria-label="Matriz ambigüedad por impacto">
+        <rect class="bx pop" x="120" y="40" width="350" height="280" rx="0" style="fill:rgba(169,180,191,.06)"/>
+        <rect class="bxl pop" x="470" y="40" width="350" height="280" rx="0" style="fill:rgba(255,138,61,.08)"/>
+        <rect class="bx pop" x="120" y="320" width="350" height="280" rx="0"/>
+        <rect class="bx pop" x="470" y="320" width="350" height="280" rx="0" style="fill:rgba(255,138,61,.03)"/>
+        <g class="fi">
+          <text class="tx" x="148" y="100" style="font-size:27px">Workflow</text>
+          <text class="tx" x="148" y="134" style="font-size:27px">+ aprobación</text>
+          <text class="tx2" x="148" y="250">Actualizar precios de lista</text><text class="tx2" x="148" y="278">con datos ya validados</text>
+        </g>
+        <g class="fi">
+          <text class="tx tl" x="498" y="100" style="font-size:27px">Agente + workflow</text>
+          <text class="tx tl" x="498" y="134" style="font-size:27px">+ persona</text>
+          <text class="tx2" x="498" y="250">Proponer una cotización</text><text class="tx2" x="498" y="278">con descuento especial</text>
+        </g>
+        <g class="fi">
+          <text class="tx" x="148" y="380" style="font-size:27px">Workflow n8n</text>
+          <text class="tx2" x="148" y="530">Copiar cada formulario</text><text class="tx2" x="148" y="558">a una hoja de control</text>
+        </g>
+        <g class="fi">
+          <text class="tx" x="498" y="380" style="font-size:27px">Agente</text>
+          <text class="tx2" x="498" y="530">Resumir y etiquetar las</text><text class="tx2" x="498" y="558">solicitudes del día</text>
+        </g>
+        <g class="fi">
+          <path class="ln" d="M120 630 H816" marker-end="url(#ah)"/>
+          <text class="tm" x="120" y="660">baja</text><text class="tm" x="820" y="660" text-anchor="end">alta</text>
+          <text class="tm" x="470" y="694" text-anchor="middle" style="fill:#F4F1E9">AMBIGÜEDAD DE LA ENTRADA</text>
+          <path class="ln" d="M90 600 V44" marker-end="url(#ah)"/>
+          <text class="tm" x="78" y="600" text-anchor="end">bajo</text><text class="tm" x="78" y="56" text-anchor="end">alto</text>
+          <text class="tm" x="30" y="320" text-anchor="middle" transform="rotate(-90 30 320)" style="fill:#F4F1E9">IMPACTO DE UN ERROR</text>
+        </g>
+      </svg>
+      <div>
+        <div class="lbl r" style="margin-bottom:16px">Tres preguntas para decidir</div>
+        <div class="qs">
+          <div class="r"><h4>¿La regla puede escribirse completa?</h4><p>→ workflow en n8n</p></div>
+          <div class="r"><h4>¿Hay que interpretar lenguaje o elegir entre opciones abiertas?</h4><p>→ agente de IA</p></div>
+          <div class="r"><h4>¿Un error cuesta dinero, reputación o datos?</h4><p>→ aprobación humana y permisos mínimos</p></div>
+        </div>
+        <p class="r" style="margin-top:26px;font-size:22px;line-height:1.45;color:var(--muted)">En la práctica empresarial, la mayoría de los sistemas útiles combinan las tres piezas.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ======================= 17 · CASO CONDUCTOR ======================= -->
+<section class="slide" data-act="IV · Aplicación empresarial">
+  <div class="bd">
+    <div class="eyebrow r" style="margin-bottom:14px">Caso conductor · arquitectura conceptual</div>
+    <h2 class="r">La misma empresa de dulces, ahora <em>conectada</em></h2>
+    <div class="case">
+      <div>
+        <p class="ctx r">La empresa de la clase anterior ya tiene su equipo de marketing. Ahora recibe solicitudes de cotización por formulario web y mensajería, y necesita convertirlas en operaciones.</p>
+        <div class="lbl r" style="margin-bottom:6px">Lo que hoy se complica</div>
+        <ul class="ul">
+          <li class="r">Solicitudes incompletas que obligan a preguntar de nuevo</li>
+          <li class="r">Respuestas que dependen de quién revisa la bandeja</li>
+          <li class="r">Datos dispersos entre correos y hojas de cálculo</li>
+          <li class="r">Seguimiento que depende de la memoria de cada vendedor</li>
+        </ul>
+        <p class="r" style="margin-top:24px;font-size:24px;line-height:1.4"><span class="lime">Objetivo:</span> responder con rapidez y consistencia, registrar cada oportunidad y no perder el seguimiento.</p>
+      </div>
+      <div>
+        <div class="msg r">
+          <div class="lbl">Nueva solicitud · formulario web</div>
+          <p class="q">“Hola, quisiera <mark>cotizar</mark> <mark>50 cajas</mark> de <mark>dulces surtidos</mark> para el <mark>14 de febrero</mark>, con entrega en <mark>Guadalajara</mark>. ¿Manejan <mark>descuento por volumen</mark>?”</p>
+        </div>
+        <div class="lbl r" style="margin-top:28px">Lo que el sistema necesita entender</div>
+        <div class="ext r">
+          <div>Intención</div><div>Cotización</div>
+          <div>Producto</div><div>Cajas de dulces surtidos</div>
+          <div>Cantidad</div><div>50 cajas</div>
+          <div>Fecha requerida</div><div>14 de febrero · entrega en Guadalajara</div>
+          <div>Descuento</div><div class="lime">Requiere aprobación humana</div>
+          <div>Por confirmar</div><div>Teléfono · tipo de empaque</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ======================= 18 · RECORRIDO ======================= -->
+<section class="slide" data-act="IV · Aplicación empresarial">
+  <div class="bd">
+    <h2 class="r">El recorrido de <em>una solicitud</em></h2>
+    <div class="jr">
+      <svg viewBox="0 0 1680 80" width="1680" height="80" aria-hidden="true">
+        <path class="ln dr" pathLength="1" d="M60 40 H1620"/>
+        <g>
+          <circle class="pop" cx="60" cy="40" r="11" fill="#0E1012" stroke="#FF8A3D" stroke-width="2"/>
+          <circle class="pop" cx="396" cy="40" r="11" fill="#0E1012" stroke="#A9B4BF" stroke-width="2"/>
+          <circle class="pop" cx="732" cy="40" r="11" fill="#0E1012" stroke="#FF8A3D" stroke-width="2"/>
+          <circle class="pop" cx="1068" cy="40" r="11" fill="#0E1012" stroke="#A9B4BF" stroke-width="2"/>
+          <circle class="pop" cx="1404" cy="40" r="11" fill="#0E1012" stroke="#F4F1E9" stroke-width="2"/>
+        </g>
+        <circle class="travel" cx="60" cy="40" r="6" fill="#FF8A3D"/>
+      </svg>
+      <div class="stations">
+        <div class="station r"><div class="num-s">01</div><h4>Captación</h4><span class="pill s">Regla</span><p>Un trigger de formulario o correo inicia el workflow y asigna un identificador.</p><div class="out"><div class="lbl">Salida</div>Solicitud con ID único</div></div>
+        <div class="station r"><div class="num-s">02</div><h4>Validación</h4><span class="pill s">Regla</span><p>Campos obligatorios, formatos y posibles duplicados.</p><div class="out"><div class="lbl">Salida</div>Válida, o devuelta con los datos faltantes</div></div>
+        <div class="station r"><div class="num-s">03</div><h4>Clasificación</h4><span class="pill l">Agente</span><p>Interpreta el tipo de pedido y la urgencia, y extrae los datos del texto.</p><div class="out"><div class="lbl">Salida</div>Estructura fija, validada antes de seguir</div></div>
+        <div class="station r"><div class="num-s">04</div><h4>CRM</h4><span class="pill s">Regla</span><p>Crea o actualiza el contacto y la oportunidad con su etapa y responsable.</p><div class="out"><div class="lbl">Salida</div>Registro único y consultable</div></div>
+        <div class="station r"><div class="num-s">05</div><h4>Seguimiento</h4><span class="pill i">Agente + persona</span><p>Borrador de cotización, aprobación humana y recordatorios programados.</p><div class="out"><div class="lbl">Salida</div>Cotización enviada o tarea asignada</div></div>
+      </div>
+      <div class="state r">
+        <div>estado: recibida</div><div>→ válida</div><div>→ clasificada</div><div>→ registrada</div><div>→ en seguimiento</div>
+      </div>
+    </div>
+    <p class="statement r" style="margin-top:auto;font-size:32px">Cada paso tiene un responsable claro: <b>una regla, un agente o una persona.</b></p>
+  </div>
+</section>
+
+<!-- ======================= 19 · AGENTES Y ORQUESTADOR ======================= -->
+<section class="slide" data-act="IV · Aplicación empresarial">
+  <div class="bd">
+    <div class="orch">
+      <div class="side">
+        <h2 class="r" style="font-size:52px">Dónde intervienen <em>los agentes</em></h2>
+        <p class="mantra r"><span>Los agentes proponen.</span><span>Los workflows ejecutan.</span><span>Las personas aprueban lo crítico.</span></p>
+        <p class="r">El precio se obtiene con una regla sobre la tabla vigente; el modelo no lo estima.</p>
+        <p class="r">Cada agente recibe solo las herramientas que necesita para su función.</p>
+      </div>
+      <svg viewBox="0 0 1160 790" width="1145" height="780" aria-label="Orquestador, agentes especializados, herramientas MCP y aprobación humana">
+        <rect class="bxl pop" x="200" y="20" width="340" height="100" rx="16"/>
+        <text class="tx fi" x="370" y="62" text-anchor="middle">Orquestador</text><text class="tx2 fi" x="370" y="94" text-anchor="middle" style="font-size:17px">delega y consolida</text>
+        <path class="lnl fi" d="M540 70 H636" marker-end="url(#ahl)"/>
+        <rect class="pop" x="640" y="20" width="250" height="100" rx="16" fill="rgba(244,241,233,.05)" stroke="#F4F1E9" stroke-width="1.8" stroke-dasharray="7 6"/>
+        <text class="tx fi" x="765" y="62" text-anchor="middle" style="font-size:22px">Aprobación</text><text class="tx fi" x="765" y="92" text-anchor="middle" style="font-size:22px">humana</text>
+        <path class="ln fi" d="M890 70 H946" marker-end="url(#ah)"/>
+        <rect class="bx pop" x="950" y="20" width="200" height="100" rx="16"/>
+        <text class="tx fi" x="1050" y="62" text-anchor="middle" style="font-size:22px">Envío al</text><text class="tx fi" x="1050" y="92" text-anchor="middle" style="font-size:22px">cliente</text>
+        <path class="ln dr" pathLength="1" d="M370 120 C 370 170, 180 170, 180 216"/>
+        <path class="ln dr" pathLength="1" d="M370 120 C 370 170, 580 170, 580 216"/>
+        <path class="ln dr" pathLength="1" d="M370 120 C 370 170, 980 170, 980 216"/>
+        <rect class="bx pop" x="20" y="220" width="320" height="110" rx="16"/><text class="tx fi" x="180" y="264" text-anchor="middle">Clasificación</text><text class="tx2 fi" x="180" y="296" text-anchor="middle" style="font-size:17px">tipo, urgencia y datos</text>
+        <rect class="bx pop" x="420" y="220" width="320" height="110" rx="16"/><text class="tx fi" x="580" y="264" text-anchor="middle">Cotización</text><text class="tx2 fi" x="580" y="296" text-anchor="middle" style="font-size:17px">borrador con precio calculado</text>
+        <rect class="bx pop" x="820" y="220" width="320" height="110" rx="16"/><text class="tx fi" x="980" y="264" text-anchor="middle">Seguimiento</text><text class="tx2 fi" x="980" y="296" text-anchor="middle" style="font-size:17px">siguiente acción y recordatorio</text>
+        <path class="lnl fi" d="M180 330 C 180 380, 150 440, 150 496" marker-end="url(#ahl)"/>
+        <path class="lnl fi" d="M580 330 C 580 380, 430 440, 430 496" marker-end="url(#ahl)"/>
+        <path class="lnl fi" d="M980 330 C 980 380, 720 440, 720 496" marker-end="url(#ahl)"/>
+        <path class="lnl fi" d="M980 330 C 980 380, 1010 440, 1010 496" marker-end="url(#ahl)"/>
+        <rect class="pop" x="20" y="395" width="1120" height="50" rx="12" fill="#241A13" stroke="rgba(255,138,61,.55)" stroke-width="1.4"/>
+        <text class="tm tl fi" x="580" y="426" text-anchor="middle">MCP · HERRAMIENTAS EXPUESTAS DESDE N8N</text>
+        <rect class="bxs pop" x="20" y="500" width="260" height="66" rx="33"/><text class="tm ts fi" x="150" y="539" text-anchor="middle">buscar_cliente</text>
+        <rect class="bxs pop" x="300" y="500" width="260" height="66" rx="33"/><text class="tm ts fi" x="430" y="539" text-anchor="middle">calcular_precio</text>
+        <rect class="bxs pop" x="580" y="500" width="280" height="66" rx="33"/><text class="tm ts fi" x="720" y="539" text-anchor="middle">registrar_oportunidad</text>
+        <rect class="bxs pop" x="880" y="500" width="260" height="66" rx="33"/><text class="tm ts fi" x="1010" y="539" text-anchor="middle" style="font-size:16px">programar_recordatorio</text>
+        <path class="ln fi" d="M150 566 V656" marker-end="url(#ah)"/><path class="ln fi" d="M430 566 V656" marker-end="url(#ah)"/><path class="ln fi" d="M720 566 V656" marker-end="url(#ah)"/><path class="ln fi" d="M1010 566 V656" marker-end="url(#ah)"/>
+        <rect class="bx pop" x="20" y="660" width="1120" height="110" rx="16"/>
+        <text class="tm fi" x="48" y="698">WORKFLOWS DE N8N EJECUTAN EN LOS SISTEMAS DE NEGOCIO</text>
+        <text class="tx fi" x="48" y="740" style="font-size:22px">CRM  ·  tabla de precios  ·  correo  ·  calendario de seguimiento</text>
+      </svg>
+    </div>
+  </div>
+</section>
+
+<!-- ======================= 20 · CONTROLES ======================= -->
+<section class="slide" data-act="IV · Aplicación empresarial">
+  <div class="bd">
+    <h2 class="r">Confianza por diseño: <em>los controles</em></h2>
+    <svg viewBox="0 0 1680 260" width="1680" height="260" style="margin-top:10px" aria-label="Una propuesta del agente atraviesa controles antes de actuar">
+      <rect class="bxl pop" x="0" y="50" width="250" height="90" rx="16"/>
+      <text class="tx fi" x="125" y="88" text-anchor="middle" style="font-size:22px">Propuesta</text><text class="tx fi" x="125" y="116" text-anchor="middle" style="font-size:22px">del agente</text>
+      <path class="ln dr" pathLength="1" d="M250 95 H976"/>
+      <path class="flow" d="M250 95 H976"/>
+      <g class="pop"><rect x="374" y="40" width="12" height="110" rx="6" fill="#A9B4BF"/></g>
+      <g class="pop"><rect x="614" y="40" width="12" height="110" rx="6" fill="#A9B4BF"/></g>
+      <g class="pop"><rect x="854" y="40" width="12" height="110" rx="6" fill="#F4F1E9"/></g>
+      <g class="tm fi" text-anchor="middle" style="font-size:15px"><text x="380" y="24">PERMISOS MÍNIMOS</text><text x="620" y="24">VALIDACIÓN</text><text x="860" y="24" style="fill:#F4F1E9">APROBACIÓN HUMANA</text></g>
+      <rect class="bx pop" x="980" y="50" width="260" height="90" rx="16"/>
+      <text class="tx fi" x="1110" y="88" text-anchor="middle" style="font-size:22px">Acción en</text><text class="tx fi" x="1110" y="116" text-anchor="middle" style="font-size:22px">el sistema</text>
+      <path class="ln fi" d="M1240 95 H1396" marker-end="url(#ah)"/>
+      <rect class="bxs pop" x="1400" y="50" width="280" height="90" rx="16"/>
+      <text class="tx fi" x="1540" y="88" text-anchor="middle" style="font-size:22px">Registro</text><text class="tx fi" x="1540" y="116" text-anchor="middle" style="font-size:22px">trazable</text>
+      <g class="fi">
+        <path class="lns dash" d="M125 140 V220 H1540 V144" style="opacity:.7" marker-end="url(#ahs)"/>
+        <path class="lns dash" d="M380 150 V220 M620 150 V220 M860 150 V220 M1110 140 V220" style="opacity:.7"/>
+        <text class="tm ts" x="250" y="248" style="font-size:15px">cada paso deja evidencia: quién, qué, cuándo y con qué resultado</text>
+      </g>
+    </svg>
+    <div class="ctrl">
+      <div class="r" style="--c:var(--ivory)"><div class="num-s" style="color:var(--ivory)">01</div><h4>Supervisión humana</h4><p>Aprobación antes de enviar cotizaciones, aplicar descuentos o contactar a clientes clave.</p></div>
+      <div class="r" style="--c:var(--steel)"><div class="num-s steel">02</div><h4>Permisos mínimos</h4><p>Cada credencial con el alcance justo: quien consulta el catálogo no puede borrar contactos.</p></div>
+      <div class="r" style="--c:var(--steel)"><div class="num-s steel">03</div><h4>Manejo de errores</h4><p>Reintentos acotados, workflow de error y escalamiento a una persona.</p></div>
+      <div class="r" style="--c:var(--lime)"><div class="num-s">04</div><h4>Seguridad</h4><p>Credenciales fuera de los prompts, entradas validadas y desconfianza ante instrucciones dentro de mensajes externos.</p></div>
+      <div class="r" style="--c:var(--steel)"><div class="num-s steel">05</div><h4>Trazabilidad</h4><p>Un ID por solicitud enlaza ejecuciones, decisiones del agente, aprobaciones y cambios en el CRM.</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- ======================= 21 · MÉTRICAS ======================= -->
+<section class="slide" data-act="IV · Aplicación empresarial">
+  <div class="bd">
+    <h2 class="r">Cómo saber si el sistema <em>funciona</em></h2>
+    <p class="lead r" style="margin-top:-14px;font-size:24px">Definir las métricas antes de automatizar, medir una línea base y comparar periodos equivalentes.</p>
+    <div class="mets">
+      <div class="met-row r"><h4>Tiempo de primera respuesta<small>Rapidez</small></h4>
+        <div class="fx"><span>Hora de primera respuesta</span><span class="op">−</span><span>Hora de recepción</span></div>
+        <p class="why">Reportar mediana y percentil 90, no solo el promedio.</p></div>
+      <div class="met-row r"><h4>Tasa de conversión<small>Efectividad comercial</small></h4>
+        <div class="fx"><span class="frac"><span>Cotizaciones aceptadas</span><span>Cotizaciones enviadas</span></span><span class="op">×</span><span>100</span></div>
+        <p class="why">Comparar contra el mismo tipo de solicitud y temporada.</p></div>
+      <div class="met-row r"><h4>Tasa de incidencias<small>Confiabilidad</small></h4>
+        <div class="fx"><span class="frac"><span>Ejecuciones con error o corrección manual</span><span>Ejecuciones totales</span></span><span class="op">×</span><span>100</span></div>
+        <p class="why">Separar errores técnicos de errores de criterio del agente.</p></div>
+      <div class="met-row r"><h4>Costo operativo por solicitud<small>Eficiencia</small></h4>
+        <div class="fx"><span class="frac"><span>Plataformas + consumo del modelo + horas humanas × costo por hora</span><span>Solicitudes procesadas</span></span></div>
+        <p class="why">Incluir el tiempo humano de revisión y aprobación.</p></div>
+      <div class="met-row r"><h4>ROI<small>Rentabilidad</small></h4>
+        <div class="fx"><span class="frac"><span>Beneficio atribuible − Costo total</span><span>Costo total</span></span><span class="op">×</span><span>100</span></div>
+        <p class="why">Beneficio atribuible: horas ahorradas valoradas más margen de ventas adicionales.</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- ======================= PARTICIPACIÓN ======================= -->
+<section class="slide" data-act="IV · Aplicación empresarial">
+  <div class="bd">
+    <h2 class="r">Tres decisiones de <em>arquitectura</em></h2>
+    <p class="lead r" style="margin-top:-12px">Responde en el chat: ¿agente, workflow, persona o una combinación?</p>
+    <div class="prim" style="margin-top:20px">
+      <div class="card r"><div class="num-s">Situación 1</div><h3 style="font-size:34px">Correo automático</h3><p class="desc">Una empresa quiere enviar un correo de confirmación cada vez que recibe una solicitud.</p><div class="kv"><div class="lbl">Pregunta</div><div>¿Necesita un agente o basta un workflow?</div></div></div>
+      <div class="card r"><div class="num-s">Situación 2</div><h3 style="font-size:34px">Consulta ambigua</h3><p class="desc">Un cliente escribe un mensaje confuso y hay que entender qué quiere realmente.</p><div class="kv"><div class="lbl">Pregunta</div><div>¿En qué paso aporta valor la IA?</div></div></div>
+      <div class="card r" style="border-color:rgba(255,138,61,.45)"><div class="num-s">Situación 3</div><h3 style="font-size:34px">Cambio de precios</h3><p class="desc">Un agente propone modificar los precios del catálogo.</p><div class="kv"><div class="lbl">Pregunta</div><div>¿Qué control debe existir antes de ejecutar?</div></div></div>
+    </div>
+    <p class="statement r" style="margin-top:28px;font-size:32px">Criterio: <b>ambigüedad de la entrada, impacto del error y quién responde por la decisión.</b></p>
+  </div>
+</section>
+
+<!-- ======================= 22 · MAPA INTEGRADOR ======================= -->
+<section class="slide" data-act="V · Integración de conocimientos">
+  <div class="bd">
+    <h2 class="r">El sistema integrador <em>en una sola vista</em></h2>
+    <svg viewBox="0 0 1680 750" width="1680" height="750" aria-label="Mapa conceptual del sistema integrador">
+      <!-- supervision band -->
+      <rect class="pop" x="600" y="0" width="1080" height="64" rx="14" fill="rgba(244,241,233,.04)" stroke="rgba(244,241,233,.55)" stroke-width="1.5" stroke-dasharray="7 6"/>
+      <text class="tx fi" x="630" y="40" style="font-size:22px">Supervisión humana</text><text class="tx2 fi" x="850" y="40" style="font-size:19px">aprueba lo crítico · resuelve excepciones · ajusta reglas</text>
+      <path class="ln dash fi" d="M800 64 V146" marker-end="url(#ah)"/><path class="ln dash fi" d="M1310 64 V156" marker-end="url(#ah)"/>
+      <!-- headers -->
+      <g class="tm fi" style="font-size:15px">
+        <text x="0" y="130">CANALES</text><text x="300" y="130">AUTOMATIZACIÓN</text><text x="640" y="130" class="tl">AGENTES</text><text x="1120" y="140">HERRAMIENTAS</text><text x="1470" y="140">SISTEMAS</text>
+      </g>
+      <!-- channels -->
+      <rect class="bx pop" x="0" y="250" width="220" height="70" rx="14"/><text class="tx fi" x="110" y="293" text-anchor="middle" style="font-size:21px">Formulario web</text>
+      <rect class="bx pop" x="0" y="350" width="220" height="70" rx="14"/><text class="tx fi" x="110" y="393" text-anchor="middle" style="font-size:21px">Correo</text>
+      <path class="ln fi" d="M220 285 C 260 285, 260 330, 296 330" marker-end="url(#ah)"/><path class="ln fi" d="M220 385 C 260 385, 260 340, 296 340" marker-end="url(#ah)"/>
+      <!-- n8n -->
+      <rect class="bxs pop" x="300" y="200" width="260" height="270" rx="18"/>
+      <text class="tx fi" x="430" y="290" text-anchor="middle">n8n</text>
+      <text class="tx2 fi" x="430" y="328" text-anchor="middle" style="font-size:18px">captación</text>
+      <text class="tx2 fi" x="430" y="354" text-anchor="middle" style="font-size:18px">validación</text>
+      <text class="tx2 fi" x="430" y="380" text-anchor="middle" style="font-size:18px">enrutamiento</text>
+      <path class="ln fi" d="M560 335 H636" marker-end="url(#ah)"/>
+      <path class="flow" d="M560 335 H636"/>
+      <!-- agents -->
+      <rect class="bxl pop" x="640" y="150" width="320" height="420" rx="20" style="fill:rgba(255,138,61,.04)"/>
+      <rect class="bxl pop" x="665" y="175" width="270" height="74" rx="14" style="fill:rgba(255,138,61,.1)"/><text class="tx fi" x="800" y="220" text-anchor="middle" style="font-size:22px">Orquestador</text>
+      <path class="ln fi" d="M800 249 V285"/>
+      <rect class="bx pop" x="665" y="290" width="270" height="64" rx="12"/><text class="tx fi" x="800" y="330" text-anchor="middle" style="font-size:20px">Clasificación</text>
+      <rect class="bx pop" x="665" y="374" width="270" height="64" rx="12"/><text class="tx fi" x="800" y="414" text-anchor="middle" style="font-size:20px">Cotización</text>
+      <rect class="bx pop" x="665" y="458" width="270" height="64" rx="12"/><text class="tx fi" x="800" y="498" text-anchor="middle" style="font-size:20px">Seguimiento</text>
+      <path class="ln fi" d="M960 360 H1006" marker-end="url(#ah)"/>
+      <!-- MCP -->
+      <rect class="bxl pop" x="1010" y="150" width="60" height="420" rx="14"/>
+      <g class="fi" style="font-family:var(--mono);font-size:24px;font-weight:600" fill="#FF8A3D" text-anchor="middle"><text x="1040" y="330">M</text><text x="1040" y="364">C</text><text x="1040" y="398">P</text></g>
+      <path class="ln fi" d="M1070 360 H1116" marker-end="url(#ah)"/>
+      <path class="flow" d="M1070 360 H1116"/>
+      <!-- tools -->
+      <rect class="bxd pop" x="1120" y="160" width="270" height="400" rx="18"/>
+      <text class="tm fi" x="1140" y="190" style="font-size:14px">WORKFLOWS DE N8N</text>
+      <rect class="bxs pop" x="1140" y="210" width="230" height="58" rx="29"/><text class="tm ts fi" x="1255" y="245" text-anchor="middle" style="font-size:15px">buscar_cliente</text>
+      <rect class="bxs pop" x="1140" y="290" width="230" height="58" rx="29"/><text class="tm ts fi" x="1255" y="325" text-anchor="middle" style="font-size:15px">calcular_precio</text>
+      <rect class="bxs pop" x="1140" y="370" width="230" height="58" rx="29"/><text class="tm ts fi" x="1255" y="405" text-anchor="middle" style="font-size:14px">registrar_oportunidad</text>
+      <rect class="bxs pop" x="1140" y="450" width="230" height="58" rx="29"/><text class="tm ts fi" x="1255" y="485" text-anchor="middle" style="font-size:13px">programar_recordatorio</text>
+      <path class="ln fi" d="M1390 360 H1456" marker-end="url(#ah)"/>
+      <!-- systems -->
+      <rect class="bx pop" x="1460" y="200" width="220" height="90" rx="14"/><text class="tx fi" x="1570" y="253" text-anchor="middle" style="font-size:22px">CRM</text>
+      <rect class="bx pop" x="1460" y="315" width="220" height="90" rx="14"/><text class="tx fi" x="1570" y="368" text-anchor="middle" style="font-size:22px">Correo</text>
+      <rect class="bx pop" x="1460" y="430" width="220" height="90" rx="14"/><text class="tx fi" x="1570" y="483" text-anchor="middle" style="font-size:22px">Precios</text>
+      <!-- trace band -->
+      <rect class="pop" x="0" y="620" width="1680" height="70" rx="14" fill="rgba(169,180,191,.07)" stroke="rgba(169,180,191,.55)" stroke-width="1.5"/>
+      <text class="tx fi" x="30" y="663" style="font-size:22px">Trazabilidad</text><text class="tx2 fi" x="200" y="663" style="font-size:19px">un ID por solicitud enlaza ejecuciones, decisiones, aprobaciones y registros</text>
+      <g class="fi"><path class="lns dash" d="M430 470 V616 M800 570 V616 M1255 560 V616 M1570 520 V616" style="opacity:.6"/></g>
+      <text class="tm fi" x="840" y="735" text-anchor="middle" style="font-size:15px">Arquitectura B para captar y validar · Arquitectura A para que los agentes usen procesos como herramientas</text>
+    </svg>
+  </div>
+</section>
+
+<!-- ======================= 23 · REFLEXIÓN ======================= -->
+<section class="slide" data-act="V · Integración de conocimientos">
+  <div class="bd">
+    <h2 class="r">Cinco preguntas para comprobar <em>comprensión</em></h2>
+    <div class="refl">
+      <div class="r"><span class="k">1</span><p>¿Qué componente permite a una aplicación de IA descubrir herramientas disponibles mediante un estándar?</p></div>
+      <div class="r"><span class="k">2</span><p>¿n8n necesita siempre un modelo de lenguaje para automatizar?</p></div>
+      <div class="r"><span class="k">3</span><p>¿Cuál es la diferencia entre un agente y un workflow determinista?</p></div>
+      <div class="r"><span class="k">4</span><p>¿Por qué un CRM es importante para un sistema de atención?</p></div>
+      <div class="r"><span class="k">5</span><p>¿Qué harías antes de permitir que un agente modifique un precio?</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- ======================= LO QUE PUDO FALTAR ======================= -->
+<section class="slide" data-act="V · Cierre del curso">
+  <div class="bd">
+    <h2 class="r">Lo que queda por <em>explorar</em></h2>
+    <p class="lead r" style="margin-top:-12px">Temas que no alcanzamos a profundizar y que conviene estudiar después del curso.</p>
+    <div class="topics">
+      <div class="r"><div class="num-s">01</div><h4>Evaluación de agentes</h4><p>Cómo medir si un agente responde bien de forma consistente, con casos de prueba y criterios definidos.</p></div>
+      <div class="r"><div class="num-s">02</div><h4>Observabilidad</h4><p>Seguir cada decisión, llamada a herramienta y costo para entender por qué un agente actuó como actuó.</p></div>
+      <div class="r"><div class="num-s">03</div><h4>Memoria y RAG</h4><p>Dar a los agentes conocimiento de la empresa sin depender de lo que el modelo “recuerda”.</p></div>
+      <div class="r"><div class="num-s">04</div><h4>Seguridad agéntica</h4><p>Inyección de instrucciones, manejo de credenciales y límites a lo que un agente puede ejecutar.</p></div>
+      <div class="r"><div class="num-s">05</div><h4>Costos y latencia</h4><p>Elegir el modelo adecuado para cada tarea: no todo necesita el modelo más grande.</p></div>
+      <div class="r"><div class="num-s">06</div><h4>Ética y gobernanza</h4><p>Privacidad de datos, transparencia con los clientes y responsabilidad sobre las decisiones automatizadas.</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- ======================= FUTURO ======================= -->
+<section class="slide" data-act="V · Cierre del curso">
+  <div class="bd">
+    <h2 class="r">Hacia dónde va la <em>IA agéntica</em></h2>
+    <p class="lead r" style="margin-top:-12px">Tendencias que vale la pena observar con criterio, no con prisa.</p>
+    <div class="nots">
+      <div class="not r"><span class="k">01</span><h3>Agentes que se comunican entre sí.</h3><p>Protocolos para que agentes de distintos proveedores colaboren, como MCP conecta herramientas.</p></div>
+      <div class="not r"><span class="k">02</span><h3>Agentes que usan interfaces.</h3><p>Sistemas capaces de operar navegadores y aplicaciones como lo haría una persona, donde no existe una API.</p></div>
+      <div class="not r"><span class="k">03</span><h3>Tareas de mayor duración.</h3><p>Agentes que trabajan durante horas en objetivos complejos, con puntos de revisión humana.</p></div>
+      <div class="not r"><span class="k">04</span><h3>Identidad y permisos para agentes.</h3><p>Cada agente con credenciales, límites y registros propios, como cualquier integrante de un equipo.</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- ======================= REFLEXIÓN ======================= -->
+<section class="slide" data-act="V · Cierre del curso">
+  <div class="bd">
+    <div class="refx">
+      <div class="eyebrow r">Penúltima sesión · una reflexión</div>
+      <p class="big r" style="margin-top:28px">Las herramientas cambiarán de nombre cada año. Lo que permanece es el <em>criterio</em>: saber qué automatizar, qué delegar a un agente y qué decisión conservar como humana.</p>
+      <p class="small r">La IA no reemplaza el juicio profesional; lo amplifica. Quien entiende el proceso, los datos y las personas detrás de cada flujo es quien convierte la tecnología en valor.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ======================= 24 · CIERRE ======================= -->
+<section class="slide closing" data-act="V · Cierre del curso">
+  <svg viewBox="0 0 1920 1080" width="1920" height="1080" style="position:absolute;inset:0;opacity:.5" aria-hidden="true">
+    <g class="lnf">
+      <path class="dr" pathLength="1" d="M1500 160 L1700 320 L1620 560 L1820 700"/>
+      <path class="dr" pathLength="1" d="M1700 320 L1860 220"/>
+      <path class="dr" pathLength="1" d="M1620 560 L1440 640 L1560 880"/>
+    </g>
+    <g fill="rgba(244,241,233,.4)"><circle class="pop" cx="1500" cy="160" r="4"/><circle class="pop" cx="1700" cy="320" r="6"/><circle class="pop" cx="1620" cy="560" r="5"/><circle class="pop" cx="1820" cy="700" r="4"/><circle class="pop" cx="1860" cy="220" r="3"/><circle class="pop" cx="1440" cy="640" r="4"/><circle class="pop" cx="1560" cy="880" r="4"/></g>
+    <circle class="pop" cx="1700" cy="320" r="10" fill="#FF8A3D"/>
+  </svg>
+  <div class="bd">
+    <blockquote class="r">Un agente inteligente no es un sistema empresarial.<span>Las conexiones, los procesos y los controles lo convierten en uno.</span></blockquote>
+    <p class="r" style="margin-top:48px;font-size:28px;color:var(--muted)">Gracias por este recorrido. Nos vemos en la última sesión del curso.</p>
+    <div class="sig r"><span>Kevin Daniel Martínez Orozco</span><span>E1577 · Top Learning</span><span>2 de noviembre de 2026</span></div>
+  </div>
+</section>
+
+<!-- ======================= 25 · FUENTES ======================= -->
+<section class="slide" data-act="Referencias">
+  <div class="bd">
+    <h2 class="r">Fuentes oficiales <em>de referencia</em></h2>
+    <div class="src">
+      <a class="r" href="https://modelcontextprotocol.io/docs/learn/architecture" target="_blank" rel="noopener"><span class="k">01</span><h4>Model Context Protocol<small>Architecture overview: participantes, capas y primitivas</small></h4><span class="u">modelcontextprotocol.io/docs/learn/architecture</span></a>
+      <a class="r" href="https://docs.n8n.io/connect/connect-to-n8n-mcp-server/" target="_blank" rel="noopener"><span class="k">02</span><h4>n8n Docs<small>Conexión con el servidor MCP de n8n (nivel instancia)</small></h4><span class="u">docs.n8n.io/connect/connect-to-n8n-mcp-server/</span></a>
+      <a class="r" href="https://docs.n8n.io/integrations/builtin/core-nodes/n8n-nodes-langchain.mcptrigger/" target="_blank" rel="noopener"><span class="k">03</span><h4>n8n Docs<small>Nodo MCP Server Trigger</small></h4><span class="u">docs.n8n.io/integrations/builtin/core-nodes/n8n-nodes-langchain.mcptrigger/</span></a>
+      <a class="r" href="https://docs.n8n.io/" target="_blank" rel="noopener"><span class="k">04</span><h4>n8n Docs<small>Documentación general de la plataforma</small></h4><span class="u">docs.n8n.io</span></a>
+    </div>
+    <p class="r" style="margin-top:auto;font-size:21px;color:var(--muted)">El caso de la empresa de dulces es una arquitectura conceptual con fines didácticos. Las capacidades de cada herramienta pueden variar según su versión y configuración; consulta siempre la documentación vigente.</p>
+  </div>
+</section>
+
+</main>
+
+<div id="progress"><i></i></div>
+<div id="help">← → navegar · F pantalla completa · O vista general</div>
+<div id="ui">
+  <button id="bPrev" title="Anterior (←)" aria-label="Anterior"><svg viewBox="0 0 24 24"><path d="M15 6l-6 6 6 6"/></svg></button>
+  <button id="bNext" title="Siguiente (→)" aria-label="Siguiente"><svg viewBox="0 0 24 24"><path d="M9 6l6 6-6 6"/></svg></button>
+  <button id="bOv" title="Vista general (O)" aria-label="Vista general"><svg viewBox="0 0 24 24"><rect x="4" y="4" width="7" height="7" rx="1.5"/><rect x="13" y="4" width="7" height="7" rx="1.5"/><rect x="4" y="13" width="7" height="7" rx="1.5"/><rect x="13" y="13" width="7" height="7" rx="1.5"/></svg></button>
+  <button id="bFs" title="Pantalla completa (F)" aria-label="Pantalla completa"><svg viewBox="0 0 24 24"><path d="M4 9V4h5M20 9V4h-5M4 15v5h5M20 15v5h-5"/></svg></button>
+</div>
+
+<script>
+(function(){
+  const deck=document.getElementById('deck');
+  const slides=[...deck.querySelectorAll('.slide')];
+  const N=slides.length; let cur=0; let ov=false;
+  const pad=n=>String(n).padStart(2,'0');
+
+  // Chrome: header + footer per slide, staggered delays
+  slides.forEach((s,i)=>{
+    const hd=document.createElement('div');hd.className='hd';
+    hd.innerHTML='<span class="act">'+(s.dataset.act||'')+'</span><span>Top Learning · E1577</span>';
+    const ft=document.createElement('div');ft.className='ft';
+    ft.innerHTML='<span>Arquitectura multiagente · MCP · n8n</span><span class="num"><b>'+pad(i+1)+'</b> / '+pad(N)+'</span>';
+    s.prepend(hd);s.appendChild(ft);
+    const els=[...s.querySelectorAll('.r,.fi,.pop,.dr,.flow')];
+    const step=Math.min(85,2600/Math.max(els.length,1));
+    els.forEach((el,k)=>{if(!el.style.getPropertyValue('--d'))el.style.setProperty('--d',Math.round(150+k*step)+'ms');});
+    s.addEventListener('click',()=>{if(ov){go(i);toggleOv(false);}});
+  });
+
+  function fit(){
+    if(ov){layoutOv();return;}
+    const s=Math.min(innerWidth/1920,innerHeight/1080);
+    deck.style.setProperty('--s',s);
+  }
+  function go(n){
+    n=Math.max(0,Math.min(N-1,n));
+    if(n===cur&&slides[cur].classList.contains('active'))return;
+    slides[cur].classList.remove('active','cur');
+    cur=n;slides[cur].classList.add('active');
+    if(ov)slides.forEach((s,i)=>s.classList.toggle('cur',i===cur));
+    document.querySelector('#progress i').style.width=((cur+1)/N*100)+'%';
+    try{history.replaceState(null,'','#'+(cur+1));}catch(e){}
+  }
+  function layoutOv(){
+    const cols=5,rows=Math.ceil(N/cols);
+    const W=innerWidth,H=innerHeight;
+    const gap=Math.max(16,W*0.014);
+    const tileW=Math.min((W-gap*(cols+1))/cols,((H-gap*(rows+1))/rows)*16/9);
+    const sc=tileW/1920,tileH=1080*sc;
+    const totalW=cols*tileW+(cols-1)*gap,totalH=rows*tileH+(rows-1)*gap;
+    const ox=(W-totalW)/2,oy=Math.max(gap,(H-totalH)/2);
+    deck.style.transform='none';deck.style.left='0';deck.style.top='0';deck.style.width=W+'px';deck.style.height=H+'px';
+    slides.forEach((s,i)=>{
+      const x=ox+(i%cols)*(tileW+gap),y=oy+Math.floor(i/cols)*(tileH+gap);
+      s.style.transform='translate('+x+'px,'+y+'px) scale('+sc+')';
+      s.classList.toggle('cur',i===cur);
+    });
+  }
+  function toggleOv(v){
+    ov=(v===undefined)?!ov:v;
+    document.body.classList.toggle('ov',ov);
+    if(ov){layoutOv();}
+    else{
+      deck.style.transform='';deck.style.left='';deck.style.top='';deck.style.width='';deck.style.height='';
+      slides.forEach(s=>{s.style.transform='';s.classList.remove('cur');});
+      const a=slides[cur];a.classList.remove('active');void a.offsetWidth;a.classList.add('active');
+      fit();
+    }
+  }
+  function fs(){
+    if(!document.fullscreenElement){(document.documentElement.requestFullscreen||function(){}).call(document.documentElement);}
+    else{document.exitFullscreen&&document.exitFullscreen();}
+  }
+
+  document.addEventListener('keydown',e=>{
+    if(e.ctrlKey||e.metaKey||e.altKey)return;
+    const k=e.key;
+    if(['ArrowRight','PageDown',' ','Enter'].includes(k)){e.preventDefault();if(!ov)go(cur+1);else go(cur+1);}
+    else if(['ArrowLeft','PageUp','Backspace'].includes(k)){e.preventDefault();go(cur-1);}
+    else if(k==='Home'){go(0);} else if(k==='End'){go(N-1);}
+    else if(k==='f'||k==='F'){fs();}
+    else if(k==='o'||k==='O'||k==='g'||k==='G'){toggleOv();}
+    else if(k==='Escape'&&ov){toggleOv(false);}
+  });
+  document.getElementById('bPrev').onclick=()=>go(cur-1);
+  document.getElementById('bNext').onclick=()=>go(cur+1);
+  document.getElementById('bOv').onclick=()=>toggleOv();
+  document.getElementById('bFs').onclick=fs;
+
+  let tx=null;
+  addEventListener('touchstart',e=>{tx=e.touches[0].clientX;},{passive:true});
+  addEventListener('touchend',e=>{if(tx===null||ov)return;const dx=e.changedTouches[0].clientX-tx;if(Math.abs(dx)>50)go(cur+(dx<0?1:-1));tx=null;});
+
+  let t;addEventListener('mousemove',()=>{document.body.classList.add('show-ui');clearTimeout(t);t=setTimeout(()=>document.body.classList.remove('show-ui'),2200);});
+  addEventListener('resize',fit);
+  addEventListener('hashchange',()=>{const n=parseInt((location.hash||'').slice(1),10);if(n>=1&&n<=N&&n-1!==cur)go(n-1);});
+  addEventListener('beforeprint',()=>{if(ov)toggleOv(false);});
+
+  fit();
+  const h=parseInt((location.hash||'').slice(1),10);
+  cur=(h>=1&&h<=N)?h-1:0;
+  slides[cur].classList.add('active');
+  document.querySelector('#progress i').style.width=((cur+1)/N*100)+'%';
+})();
+</script>
+</body>
+</html>
