@@ -1,0 +1,134 @@
+<!doctype html><html lang="es"><head><meta charset="utf-8"><style>
+@page{size:Letter;margin:0}
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:"Helvetica Neue",Arial,sans-serif;color:#0f1e36;font-size:10.2pt;line-height:1.38}
+.pg{width:8.5in;height:11in;padding:.45in .5in;position:relative;page-break-after:always;overflow:hidden}
+.pg:last-child{page-break-after:auto}
+.hdr{background:#0b2545;color:#fff;margin:-.45in -.5in 16px;padding:26px .5in 20px}
+.hdr small{color:#3ddc97;letter-spacing:2px;font-weight:700;font-size:8pt}
+.hdr h1{font-size:20pt;line-height:1.15;margin:6px 0}
+.hdr p{opacity:.85;font-size:9.5pt}
+h2{font-size:12.5pt;color:#0b2545;margin:12px 0 7px;display:flex;align-items:center;gap:8px}
+h2 .n{background:#3ddc97;color:#0b2545;border-radius:50%;width:22px;height:22px;display:inline-flex;align-items:center;justify-content:center;font-size:10pt}
+.box{border-radius:10px;padding:11px 14px;margin-bottom:9px}
+.vir{border:2px solid #3ddc97;background:#effcf6}
+.kev{border:2px solid #1d4e89;background:#eef4fb}
+.tag{display:inline-block;font-size:8pt;font-weight:800;letter-spacing:1px;padding:3px 9px;border-radius:20px;margin-bottom:6px}
+.vir .tag{background:#3ddc97;color:#0b2545}.kev .tag{background:#1d4e89;color:#fff}
+ol{padding-left:19px}li{margin:3px 0}
+b{color:#0b2545}a{color:#1d4e89;font-weight:700}
+.warn{background:#fff7e6;border-left:5px solid #f0a500;padding:9px 12px;border-radius:6px;margin:8px 0;font-size:9.4pt}
+.sec{background:#0b2545;color:#fff;border-radius:10px;padding:11px 14px;margin:8px 0}
+.sec b{color:#3ddc97}
+.flow{display:flex;align-items:center;gap:6px;margin:8px 0 4px}
+.st{flex:1;text-align:center;border-radius:8px;padding:8px 4px;font-size:8.6pt;font-weight:700}
+.arr{color:#3ddc97;font-weight:900;font-size:14pt}
+.cap{font-size:7.6pt;color:#667;text-align:center;font-style:italic;margin-bottom:6px}
+.two{display:flex;gap:12px}.two>div{flex:1}
+table{width:100%;border-collapse:collapse;font-size:9pt}
+td,th{padding:6px 8px;border-bottom:1px solid #dde4ee;vertical-align:top;text-align:left}
+th{background:#0b2545;color:#fff}
+tr:nth-child(even) td{background:#f6f8fb}
+.mock{border:1.5px dashed #9fb3c8;border-radius:8px;padding:8px;background:#fff;font-size:8.4pt}
+.btn{display:inline-block;background:#1a73e8;color:#fff;border-radius:4px;padding:2px 8px;font-weight:700}
+.code{font-family:monospace;font-size:12pt;letter-spacing:2px;background:#f1f3f4;padding:2px 8px;border-radius:4px}
+.ft{position:absolute;bottom:.3in;left:.5in;right:.5in;font-size:7.5pt;color:#8894a5;border-top:1px solid #dde4ee;padding-top:5px;display:flex;justify-content:space-between}
+</style></head><body>
+
+<div class="pg">
+<div class="hdr"><small>GUÍA RÁPIDA · ASESORÍA IA + n8n</small>
+<h1>Cómo controlar la computadora de Viridiana durante una asesoría por Google Meet</h1>
+<p>Kevin Daniel Martínez Orozco (Windows) &nbsp;→&nbsp; Viridiana Romero (Mac) · Google Meet + Chrome Remote Desktop</p></div>
+
+<h2><span class="n">1</span>¿Cómo funciona?</h2>
+<p><b>Google Meet no permite controlar la computadora de otra persona</b>: solo compartir pantalla. Por eso usaremos dos herramientas a la vez: <b>Meet</b> para hablar y <b>Chrome Remote Desktop</b> (gratuito, de Google) para que Kevin pueda mover el ratón y teclear en la Mac de Viridiana, <b>solo con su autorización</b>.</p>
+<div class="flow">
+<div class="st" style="background:#effcf6;border:2px solid #3ddc97">Viridiana genera un código</div><div class="arr">→</div>
+<div class="st" style="background:#e8f0fe;border:2px solid #1a73e8">Lo envía por el chat de Meet</div><div class="arr">→</div>
+<div class="st" style="background:#eef4fb;border:2px solid #1d4e89">Kevin lo escribe y conecta</div><div class="arr">→</div>
+<div class="st" style="background:#effcf6;border:2px solid #3ddc97">Viridiana pulsa «Compartir»</div></div>
+<p class="cap">Diagrama ilustrativo (no es captura de pantalla)</p>
+
+<h2><span class="n">2</span>Paso a paso — Viridiana</h2>
+<div class="box vir"><span class="tag">● COMPUTADORA DE VIRIDIANA (Mac)</span>
+<ol>
+<li>Abre <b>Google Chrome</b> e inicia sesión con tu cuenta de Google.</li>
+<li>Entra a <a href="https://remotedesktop.google.com/support">remotedesktop.google.com/support</a>.</li>
+<li>En el apartado <b>«Compartir esta pantalla» / «Obtener asistencia»</b>, pulsa el botón de <b>descarga</b>.</li>
+<li>Abre el archivo descargado (<b>.dmg</b>) y ejecuta el instalador de <b>Chrome Remote Desktop Host</b>. Escribe la contraseña <i>de tu Mac</i> si te la pide (solo tú; no se la dictes a nadie).</li>
+<li>macOS pedirá permisos: abre <b>Ajustes del Sistema › Privacidad y seguridad</b> y activa <b>ChromeRemoteDesktopHost</b> en <b>Accesibilidad</b> y en <b>Grabación de pantalla</b> (ver página 3).</li>
+<li>Vuelve a la página y pulsa <span class="btn">Generar código</span>. Aparece un código como <span class="code">1234 5678 9012</span>.</li>
+<li>Copia el código y pégalo en el <b>chat de Google Meet</b>. Tiene validez de unos <b>5 minutos</b> y sirve una sola vez.</li>
+<li>Cuando aparezca el aviso <i>«¿Quieres permitir que [correo de Kevin] vea y controle tu ordenador?»</i>, verifica que el correo es el de Kevin y pulsa <span class="btn">Compartir</span>.</li>
+</ol></div>
+<div class="warn">✋ <b>Tú decides siempre.</b> Si el correo que aparece no es el de Kevin, pulsa <b>Cancelar</b>. Mientras dure la sesión verás un aviso de que tu pantalla se comparte, y Chrome te preguntará periódicamente (aprox. cada 30 min) si quieres continuar.</div>
+<div class="ft"><span>Top Learning · Guía de asesoría</span><span>1 / 3</span></div>
+</div>
+
+<div class="pg">
+<h2><span class="n">3</span>Paso a paso — Kevin</h2>
+<div class="box kev"><span class="tag">● MI COMPUTADORA (Windows)</span>
+<ol>
+<li>Abre <b>Chrome</b> (o Edge) y entra a <a href="https://remotedesktop.google.com/support">remotedesktop.google.com/support</a>.</li>
+<li>En <b>«Ofrecer asistencia» / «Dar asistencia»</b>, pega el código que Viridiana envió por el chat de Meet.</li>
+<li>Pulsa <span class="btn">Conectar</span> y espera a que ella acepte con <b>«Compartir»</b>.</li>
+<li>Ya ves su escritorio. Abre el <b>panel lateral</b> (flecha en el borde derecho) para: pantalla completa, ajustar tamaño, sincronizar portapapeles, transferir archivos y enviar combinaciones de teclas.</li>
+<li><b>Teclado Mac:</b> la tecla <b>Ctrl</b> de Windows no equivale a <b>⌘ Cmd</b>. Revisa el mapeo de teclas en el panel lateral o usa la tecla Windows como Cmd. Ejemplos: copiar ⌘C, pegar ⌘V.</li>
+</ol></div>
+<div class="mock"><b>Vista esperada en el navegador de Kevin</b> (ilustración):<br>
+<div style="display:flex;gap:8px;margin-top:6px">
+<div style="flex:3;background:#dfe7f1;border-radius:6px;height:92px;display:flex;align-items:center;justify-content:center;color:#456">Escritorio de la Mac de Viridiana (n8n, Drive, Claude…)</div>
+<div style="flex:1;background:#0b2545;color:#fff;border-radius:6px;padding:6px;font-size:7.6pt">Panel lateral ◀<br>• Pantalla completa<br>• Portapapeles<br>• Archivos<br>• Teclas<br>• Desconectar</div></div></div>
+<p class="cap">Diagrama ilustrativo; la apariencia real puede variar ligeramente</p>
+
+<h2><span class="n">4</span>Durante la asesoría (Meet + escritorio remoto)</h2>
+<div class="two">
+<div class="box vir"><span class="tag">● VIRIDIANA</span><ol>
+<li>Mantén <b>Meet abierto en otra pestaña o ventana</b>; no lo cierres.</li>
+<li>Usa <b>audífonos</b> para evitar eco.</li>
+<li><b>No necesitas compartir pantalla en Meet</b>: Kevin ya la ve por Chrome Remote Desktop.</li>
+<li>Puedes mover tu ratón en cualquier momento: tú tienes prioridad.</li>
+<li>Escribe <b>tú misma</b> las contraseñas y claves cuando se pidan (Kevin aparta la vista o tú tomas el control).</li>
+</ol></div>
+<div class="box kev"><span class="tag">● KEVIN</span><ol>
+<li>Meet en una ventana y el escritorio remoto en otra (ideal: <b>dos monitores</b>; si no, alterna con <b>Alt+Tab</b>).</li>
+<li>No uses pantalla completa si necesitas ver a Viridiana en Meet.</li>
+<li>Narra en voz alta lo que haces: «Ahora abro n8n…».</li>
+<li>Configura Claude, n8n y Google Drive; pide que ella haga clic en <b>«Permitir»</b> en las ventanas de autorización (OAuth).</li>
+<li>Al terminar cada tarea, devuelve el control y valida con ella.</li>
+</ol></div></div>
+
+<div class="sec">🔒 <b>Reglas de seguridad.</b> Viridiana <b>nunca</b> comparte contigo contraseñas, claves API ni datos bancarios (ni por voz, chat ni pantalla). Ella las introduce directamente en el campo correspondiente. La conexión solo existe mientras ella la autoriza, y el código no se reutiliza.</div>
+<div class="ft"><span>Top Learning · Guía de asesoría</span><span>2 / 3</span></div>
+</div>
+
+<div class="pg">
+<h2><span class="n">5</span>Cómo finalizar y revocar el acceso</h2>
+<div class="box vir"><span class="tag">● COMPUTADORA DE VIRIDIANA (Mac)</span>
+<ol>
+<li><b>Para cortar de inmediato:</b> pulsa <span class="btn">Dejar de compartir</span> en el aviso de la sesión o en la página <a href="https://remotedesktop.google.com/support">remotedesktop.google.com/support</a>. También puedes cerrar Chrome.</li>
+<li><b>Comprueba:</b> el aviso de pantalla compartida desaparece y en la página ya no aparece una sesión activa. Kevin confirma en Meet que perdió la imagen.</li>
+<li><b>Un código usado ya no sirve.</b> Para otra sesión hay que generar uno nuevo y volver a aceptar.</li>
+<li><b>Revocación total (opcional):</b> abre de nuevo el archivo <b>.dmg</b> descargado y ejecuta el <b>desinstalador</b> de Chrome Remote Desktop Host. Después, en <b>Ajustes del Sistema › Privacidad y seguridad</b>, desactiva o elimina <b>ChromeRemoteDesktopHost</b> en Accesibilidad y Grabación de pantalla.</li>
+</ol></div>
+<div class="box kev" style="padding:8px 14px"><span class="tag">● MI COMPUTADORA (Windows)</span> Panel lateral › <b>Desconectar</b>, o cierra la pestaña. Avisa en Meet: «Ya me desconecté».</div>
+
+<h2><span class="n">6</span>Problemas frecuentes</h2>
+<table>
+<tr><th style="width:27%">Problema</th><th>Solución rápida</th></tr>
+<tr><td><b>Kevin ve la pantalla negra o no puede mover nada</b> (permisos macOS)</td><td>Ajustes del Sistema › Privacidad y seguridad › <b>Grabación de pantalla</b> y <b>Accesibilidad</b> → activar <b>ChromeRemoteDesktopHost</b>. Si ya estaba activo, desactívalo y vuélvelo a activar. Cierra Chrome por completo (⌘Q) y vuelve a abrirlo; si sigue igual, reinicia la Mac.</td></tr>
+<tr><td><b>No aparece «Generar código»</b> (componente no instalado)</td><td>Repite la descarga en remotedesktop.google.com/support, instala el .dmg y recarga la página. Usa Chrome actualizado.</td></tr>
+<tr><td><b>«Código no válido»</b> / caducado</td><td>Los códigos duran unos minutos y son de un solo uso. Genera uno nuevo y Kevin lo introduce de inmediato, sin espacios de más.</td></tr>
+<tr><td><b>La conexión falla o se corta</b></td><td>Ambos recargan la página; revisan Wi-Fi; desactivan VPN o firewall corporativo temporalmente si lo hay; nuevo código.</td></tr>
+<tr><td><b>Se ve borroso, lento o muy pequeño</b></td><td>Kevin: panel lateral › ajustar a ventana / pantalla completa. Cerrar apps pesadas. Si la Mac tiene dos monitores, Kevin elige el monitor en el panel.</td></tr>
+<tr><td><b>Eco o ruido en Meet</b></td><td>Audífonos para ambos; silenciar micrófono cuando no se habla.</td></tr>
+</table>
+
+<h2 style="font-size:10.5pt"><span class="n">i</span>Plan B (si Chrome Remote Desktop no funciona)</h2>
+<p style="font-size:9pt"><b>Zoom</b> («Solicitar control remoto») o <b>Microsoft Teams</b> («Dar control») integran control remoto en la videollamada; ambos requieren la app de escritorio y el permiso de Accesibilidad en Mac. AnyDesk/TeamViewer son gratuitos solo para uso personal.</p>
+
+<p style="font-size:8.6pt;margin-top:8px"><b>Enlaces oficiales:</b> <a href="https://remotedesktop.google.com/support">Chrome Remote Desktop – asistencia</a> · <a href="https://support.google.com/chrome/answer/1649523?hl=es">Ayuda de Chrome Remote Desktop</a> · <a href="https://support.google.com/meet/answer/9308856?hl=es">Presentar en Google Meet</a> · <a href="https://support.apple.com/es-mx/guide/mac-help/mchld6aa7d23/mac">Privacidad en Mac</a></p>
+<p style="font-size:7.4pt;color:#8894a5;margin-top:5px">Los nombres de botones pueden variar ligeramente según idioma y versión. Verificado con fuentes disponibles a noviembre de 2026.</p>
+<div class="ft"><span>Top Learning · Guía de asesoría</span><span>3 / 3</span></div>
+</div>
+</body></html>
