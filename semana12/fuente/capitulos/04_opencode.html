@@ -1,0 +1,127 @@
+<section class="chap">
+<div class="chap-head"><div class="big">04</div><div class="k">Capítulo 4</div>
+<h1 id="c04" data-toc="4|Preparación de OpenCode desde cero">Preparación de OpenCode desde cero</h1>
+<p class="d">Descargar, abrir, elegir modelo, vincular una carpeta y abrir sesiones. Si lo haces bien aquí, todo lo demás fluye.</p>
+<div class="tags"><span class="tag t-real">Realizado en clase</span><span class="tag t-ped">Adaptación pedagógica</span><span class="tag t-act">Actualización técnica</span></div></div>
+<div class="inthis"><b>En este capítulo</b><span>Paso 1 · Descargar e instalar</span><span>Paso 2 · Conocer la interfaz</span><span>Paso 3 · Elegir un modelo</span><span>Paso 4 · Crear la carpeta de trabajo</span><span>Paso 5 · Nueva sesión</span><span>Paso 6 · Modos build y plan</span><span>Paso 7 · Verificar el entorno</span><span>Checklist</span></div>
+
+<h2 id="c04-p1">Paso 1 · Descargar OpenCode</h2>
+<p><span class="tag t-real">Realizado en clase</span> Enlace compartido en el chat (00:39:21): <b><a href="https://opencode.ai/desktop">https://opencode.ai/desktop</a></b>. El profesor aclaró que la página había cambiado ligeramente y que la descarga aparece en un recuadro según tu sistema.</p>
+<ol class="steps">
+<li><b class="t">Entra al sitio oficial</b> escribiendo la dirección tú mismo o desde el enlace de esta guía. Comprueba que la barra del navegador diga <code>opencode.ai</code> y muestre el candado (HTTPS).</li>
+<li><b class="t">Identifica tu instalador.</b> <span class="tag t-act">Verificado 22-nov-2026</span> La página ofrece: macOS (Apple Silicon o Intel), Windows (x64 o ARM64) y Linux (.deb, .rpm, AppImage). La mayoría de las PC con Windows son <b>x64</b>; si tu equipo es un portátil con procesador Snapdragon, elige ARM64.</li>
+<li><b class="t">Instala.</b> «Instalar» significa copiar el programa a tu computadora y crear su acceso directo. Abre el archivo descargado y sigue el asistente.</li>
+<li><b class="t">Permisos.</b> Windows puede mostrar el Control de cuentas de usuario («¿Quieres permitir que esta aplicación haga cambios?»). Revisa que el <b>editor verificado</b> corresponda a OpenCode antes de aceptar (ver capítulo 13.9).</li>
+<li><b class="t">Comprueba que abre.</b> Busca OpenCode en el menú Inicio (Windows) o en Aplicaciones (macOS) y ábrelo.</li>
+</ol>
+<div class="box danger"><span class="bt">No ignores alertas de seguridad a ciegas</span>Si Windows SmartScreen o macOS advierten que la aplicación es desconocida, <b>no la ejecutes</b> solo para «avanzar». Verifica que la descargaste de opencode.ai y que el editor coincide. Si tienes dudas, pregunta en el muro del curso.</div>
+<p class="small"><b>Importante:</b> la app de escritorio solo funciona en computadora. Quien no tenía computadora en clase siguió la práctica en la pantalla del profesor.</p>
+
+<h2 id="c04-p2">Paso 2 · Conocer la interfaz</h2>
+<figure>
+<svg viewBox="0 0 700 300" font-family="Inter">
+<rect x="10" y="10" width="560" height="280" rx="10" fill="#fff" stroke="#9AA6BF" stroke-width="1.5"/>
+<rect x="10" y="10" width="560" height="26" rx="10" fill="#EEF2F9"/>
+<rect x="18" y="16" width="70" height="14" rx="4" fill="#fff" stroke="#C9D3E6"/><text x="53" y="26" font-size="7" text-anchor="middle" fill="#262B36">Sesión 1</text>
+<rect x="92" y="16" width="70" height="14" rx="4" fill="#fff" stroke="#C9D3E6"/><text x="127" y="26" font-size="7" text-anchor="middle" fill="#262B36">Sesión 2</text>
+<circle cx="176" cy="23" r="7" fill="#1E4FD8"/><text x="176" y="26.5" font-size="10" text-anchor="middle" fill="#fff">+</text>
+<rect x="18" y="44" width="110" height="238" rx="6" fill="#F6F8FC"/><text x="26" y="60" font-size="7.5" font-weight="700" fill="#5B6272">PROYECTO</text>
+<rect x="26" y="66" width="94" height="16" rx="4" fill="#EAF2FF"/><text x="32" y="77" font-size="7" fill="#1E4FD8">📁 clase E1601.2</text>
+<text x="32" y="98" font-size="6.5" fill="#5B6272">index.html</text><text x="32" y="110" font-size="6.5" fill="#5B6272">styles.css</text>
+<rect x="138" y="44" width="424" height="182" rx="6" fill="#FBFCFF" stroke="#E4E9F2"/>
+<text x="150" y="64" font-size="7.5" fill="#262B36">Tú: Crea una calculadora interactiva…</text>
+<text x="150" y="82" font-size="7.5" fill="#6A3FD1">Agente: Voy a crear index.html…  ✏️ write · ▶ bash</text>
+<rect x="150" y="92" width="190" height="34" rx="4" fill="#FFF7E0" stroke="#EBCB7B"/><text x="158" y="106" font-size="7" fill="#8A5A0C">¿Permitir ejecutar este comando?</text><text x="158" y="118" font-size="7" fill="#8A5A0C">[Permitir]  [Rechazar]</text>
+<rect x="138" y="234" width="424" height="48" rx="8" fill="#fff" stroke="#1E4FD8" stroke-width="1.2"/>
+<text x="150" y="252" font-size="7.5" fill="#9AA6BF">Escribe tu instrucción…</text>
+<rect x="150" y="262" width="96" height="14" rx="4" fill="#EAF2FF"/><text x="198" y="272" font-size="6.8" text-anchor="middle" fill="#1E4FD8">modelo ▾ (… free)</text>
+<rect x="252" y="262" width="54" height="14" rx="4" fill="#F1ECFF"/><text x="279" y="272" font-size="6.8" text-anchor="middle" fill="#6A3FD1">build ⇄ plan</text>
+<g font-size="9" font-weight="800" fill="#fff">
+<circle cx="176" cy="44" r="8" fill="#E8710A"/><text x="176" y="47.5" text-anchor="middle">1</text>
+<circle cx="18" cy="74" r="8" fill="#E8710A"/><text x="18" y="77.5" text-anchor="middle">2</text>
+<circle cx="562" cy="140" r="8" fill="#E8710A"/><text x="562" y="143.5" text-anchor="middle">3</text>
+<circle cx="345" cy="108" r="8" fill="#E8710A"/><text x="345" y="111.5" text-anchor="middle">4</text>
+<circle cx="138" cy="258" r="8" fill="#E8710A"/><text x="138" y="261.5" text-anchor="middle">5</text>
+<circle cx="198" cy="282" r="8" fill="#E8710A"/><text x="198" y="285.5" text-anchor="middle">6</text>
+<circle cx="279" cy="282" r="8" fill="#E8710A"/><text x="279" y="285.5" text-anchor="middle">7</text></g>
+<g font-size="8" fill="#262B36">
+<text x="584" y="40" font-weight="700">1</text><text x="594" y="40">Pestañas de sesión</text><text x="594" y="50" fill="#5B6272" font-size="7">y botón + (nueva sesión)</text>
+<text x="584" y="72" font-weight="700">2</text><text x="594" y="72">Proyecto (carpeta)</text><text x="594" y="82" fill="#5B6272" font-size="7">y sus archivos</text>
+<text x="584" y="104" font-weight="700">3</text><text x="594" y="104">Conversación con</text><text x="594" y="114" fill="#5B6272" font-size="7">el agente y sus acciones</text>
+<text x="584" y="136" font-weight="700">4</text><text x="594" y="136">Solicitudes de permiso</text><text x="594" y="146" fill="#5B6272" font-size="7">(ask / allow / deny)</text>
+<text x="584" y="168" font-weight="700">5</text><text x="594" y="168">Cuadro de texto</text><text x="594" y="178" fill="#5B6272" font-size="7">para tus instrucciones</text>
+<text x="584" y="200" font-weight="700">6</text><text x="594" y="200">Selector de modelo</text>
+<text x="584" y="222" font-weight="700">7</text><text x="594" y="222">Agente build / plan</text><text x="594" y="232" fill="#5B6272" font-size="7">(se alterna con Tab)</text>
+</g></svg>
+<figcaption><b>Figura 7.</b> Recreación esquemática de la interfaz de OpenCode de escritorio según lo descrito en clase. <span class="tag t-ped">Recreación — no es una captura real</span> La ubicación exacta de los controles puede variar entre versiones (la app recibe actualizaciones frecuentes; v2.3.1 el 18-nov-2026).</figcaption></figure>
+<p><span class="tag t-expl">Explicado en clase</span> Funciones presentadas: trabaja <b>por carpetas</b> y pide permiso antes de salir de ellas; es <b>multimodelo</b> (en la terminal se elige con <code>/models</code>); con <b>Tab</b> se cambia entre agentes; tiene <b>navegador integrado</b>; permite controlar permisos con <b>ask</b> (preguntar) y <b>deny</b> (denegar); se amplía con MCP, skills y plugins.</p>
+
+<h2 id="c04-p3">Paso 3 · Elegir un modelo</h2>
+<div class="g2">
+<div>
+<p><span class="tag t-real">Realizado en clase</span> En el cuadro de texto aparece un selector de modelo. Al desplegarlo, los modelos de OpenCode llevan la terminación <i>OpenCode</i> (el profesor veía también OpenRouter porque tenía una API conectada). Se mencionaron como gratuitos: MiniMax M3.1, modelos de NVIDIA, <b>GLM 5.3 Flash</b>, DeepSeek V4.1 Flash y MiMo.</p>
+<p><b>Recomendación de clase:</b> GLM, por ser de los más económicos: como OpenCode da un límite de uso gratuito, un modelo barato rinde más antes de llegar al tope. Pero «hay modelos más baratos que no conviene usar porque son más tontos»: busca equilibrio.</p>
+</div>
+<div class="card blue">
+<h4>Conceptos clave</h4>
+<ul class="small">
+<li><b>Modelo</b>: el «cerebro» (LLM) que piensa y escribe. <b>OpenCode</b> es el «cuerpo» (el arnés) que le da herramientas: leer, escribir, ejecutar, navegar.</li>
+<li><b>Proveedor</b>: quien ofrece el modelo (OpenCode Zen, OpenAI, Anthropic, Google, OpenRouter…).</li>
+<li><b>Software abierto</b>: el código de OpenCode es público; eso no significa que los modelos sean gratis.</li>
+<li><b>Gratis ≠ ilimitado</b>: los modelos <i>free</i> tienen límites y son temporales.</li>
+<li><b>API</b>: conectar tu propia clave cobra por uso.</li>
+</ul></div></div>
+<div class="box upd"><span class="bt">Actualización técnica · documentación de OpenCode consultada el 22-nov-2026</span>
+<ul>
+<li><b>GLM‑5.3‑Flash Free</b> figura como <b>retirado el 18-nov-2026</b>; <b>MiniMax M3.1 Flash Free</b>, el 17-nov-2026.</li>
+<li>Siguen listados como gratuitos «por tiempo limitado», entre otros: <b>DeepSeek V4.1 Flash Free</b> (su proveedor declara política de retención cero), <b>MiMo‑V2.6‑Flash Free</b>, <b>Nemotron 3.5 Lightning Free</b> y <b>Nemotron 3.5 Super VL Free</b>.</li>
+<li>Algunos modelos gratuitos se ofrecen para «recopilar retroalimentación»: <b>no introduzcas datos confidenciales</b> en ellos.</li>
+</ul>
+<b>Cómo elegir hoy:</b> abre el selector, elige un modelo marcado como <i>free</i> que siga disponible; si una tarea sale mal de forma repetida, prueba otro. Así se explicó en clase → GLM; así está documentado hoy → revisa la lista vigente.</div>
+
+<h2 id="c04-p4">Paso 4 · Crear la carpeta de trabajo</h2>
+<div class="g2">
+<div>
+<ol class="steps">
+<li>Abre el <b>Explorador de archivos</b> (Windows: tecla Windows + E) o Finder (macOS).</li>
+<li>Ve a <b>Documentos</b> (o Escritorio; donde prefieras).</li>
+<li>Clic derecho → <b>Nuevo → Carpeta</b>.</li>
+<li>Nómbrala, p. ej. <code>Clase_E1601_2</code>. El profesor usó «clase E1601.2»; el nombre no importa, solo que lo reconozcas. Evita acentos y caracteres raros para no tener problemas después con Git.</li>
+<li>Vuelve a OpenCode y pulsa la opción de proyecto (aparece como <b>«Choose project»</b>, «Project» o un icono de carpeta; la transcripción menciona también un atajo de teclado poco claro — compruébalo en tu versión).</li>
+<li>Selecciona la carpeta recién creada.</li>
+<li><b>Comprueba</b> que el nombre del proyecto cambió y que aparece la ruta de la carpeta.</li>
+</ol></div>
+<figure style="margin:0">
+<svg viewBox="0 0 300 240" font-family="Inter">
+<rect x="10" y="10" width="280" height="220" rx="10" fill="#F6F8FC" stroke="#DCE2EE"/>
+<text x="24" y="32" font-size="9" font-weight="800" fill="#0B1F4D">📁 Documentos</text>
+<rect x="34" y="42" width="240" height="140" rx="8" fill="#EAF2FF" stroke="#1E4FD8" stroke-width="1.5"/>
+<text x="46" y="62" font-size="9" font-weight="800" fill="#1E4FD8">📁 Clase_E1601_2  ← el agente vive aquí</text>
+<g font-family="JetBrains Mono" font-size="8" fill="#262B36"><text x="58" y="82">📄 index.html</text><text x="58" y="98">📄 styles.css · app.js</text><text x="58" y="114">📁 dentea/</text><text x="58" y="130">📁 .git/ (historial)</text></g>
+<text x="58" y="156" font-size="7.5" fill="#5B6272">puede leer, crear y modificar</text><text x="58" y="168" font-size="7.5" fill="#5B6272">archivos dentro de esta carpeta</text>
+<text x="34" y="200" font-size="8" fill="#C8323C" font-weight="700">📁 Otras carpetas →  pide permiso</text>
+<text x="34" y="214" font-size="7.5" fill="#5B6272">antes de salir del proyecto</text>
+</svg>
+<figcaption><b>Figura 8.</b> La carpeta de proyecto es el «espacio de trabajo» del agente.</figcaption></figure>
+</div>
+<p><b>¿Qué significa que un agente trabaje dentro de un directorio?</b> Todo lo que crea (páginas, imágenes, configuraciones) se guarda ahí; todo lo que lee para entender tu proyecto sale de ahí. Si mañana abres la misma carpeta, el trabajo sigue ahí aunque cierres la conversación. Por eso <b>una carpeta = un proyecto</b> es una buena costumbre.</p>
+
+<h2 id="c04-p5">Paso 5 · Crear una nueva sesión</h2>
+<p><span class="tag t-real">Realizado en clase</span> Una <b>sesión</b> es una conversación con el agente. Para abrir otra sin perder la carpeta, usa el botón <b>+</b> de la parte superior: la nueva sesión se abre en el mismo proyecto, «no tienen que volverla a seleccionar».</p>
+<div class="box hist"><span class="bt">Incidencia real (≈ 0:50)</span>Un estudiante había escrito ya una pregunta al agente y el selector de proyecto había desaparecido; el cuadro de texto quedó «hasta abajo». <b>Solución dada en clase:</b> abrir una sesión nueva con el <b>+</b> de arriba; en la pantalla inicial vuelve a aparecer la opción de proyecto («Project» / añadir proyecto) para elegir la carpeta.</div>
+<p>Puedes tener varias sesiones trabajando en paralelo (p. ej., la landing page en una y la instalación de GitHub en otra). También es posible enviar un mensaje mientras el agente trabaja; el profesor recomendó <b>no más de dos</b> mensajes seguidos para no confundirlo.</p>
+
+<h2 id="c04-p6">Paso 6 · Modos de trabajo: build y plan</h2>
+<p><span class="tag t-expl">Explicado en clase</span> <span class="tag t-act">Verificado en docs</span> OpenCode trae dos agentes principales: <b>build</b> (por defecto; puede crear y modificar archivos y ejecutar comandos) y <b>plan</b> (orientado a analizar y proponer sin modificar). Se alternan con <b>Tab</b>. Además existen <b>subagentes</b> que el agente principal puede invocar.</p>
+<table class="compact"><thead><tr><th>Usa <b>plan</b> cuando…</th><th>Usa <b>build</b> cuando…</th></tr></thead><tbody><tr><td>Quieres que te explique qué haría, revisar riesgos, o el proyecto ya tiene trabajo valioso.</td><td>Ya revisaste el plan y quieres que ejecute: crear archivos, instalar, corregir.</td></tr></tbody></table>
+
+<h2 id="c04-p7">Paso 7 · Verificar el entorno antes de empezar</h2>
+<ul class="check">
+<li>El nombre del proyecto en OpenCode es la carpeta correcta (no tu carpeta de Documentos completa ni el Escritorio entero).</li>
+<li>El modelo seleccionado está disponible y marcado como <i>free</i> (o sabes cuánto te cuesta).</li>
+<li>En la carpeta no hay archivos importantes que puedan sobrescribirse (si los hay, haz una copia antes).</li>
+<li>No hay contraseñas, claves API ni datos personales reales en la carpeta.</li>
+<li>Sabes cómo volver a abrir el proyecto otro día (OpenCode → proyecto → misma carpeta).</li>
+</ul>
+<div class="box ok"><span class="bt">Prueba rápida</span>Escribe en una sesión nueva: <code>Dime en qué carpeta estás trabajando y qué archivos contiene. No modifiques nada.</code> Si responde con la ruta de tu carpeta, estás listo.</div>
+</section>

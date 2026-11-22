@@ -1,0 +1,121 @@
+<section class="chap">
+<div class="chap-head"><div class="big">06</div><div class="k">Capítulo 6 · Práctica 1</div>
+<h1 id="c06" data-toc="6|Práctica 1 · Calculadora de automatizaciones">Práctica 1 · Calculadora de automatizaciones</h1>
+<p class="d">Una aplicación funcional —no solo una página bonita— para estimar si conviene automatizar un proceso. Duración sugerida: 20–40 min, según tu experiencia y los límites del modelo.</p>
+<div class="tags"><span class="tag t-real">Realizado en clase</span><span class="tag t-orig">Prompt original P02</span><span class="tag t-mej">Versiones mejoradas</span></div></div>
+<div class="inthis"><b>En este capítulo</b><span>El problema empresarial</span><span>Prompt original íntegro</span><span>Explicación línea por línea</span><span>Modelo matemático (ROI y payback)</span><span>Construcción paso a paso</span><span>Tres escenarios de prueba</span><span>Resultados observados en clase</span><span>Publicación de referencia</span></div>
+
+<h2 id="c06-prob">6.1 El problema empresarial</h2>
+<p>Toda empresa tiene procesos que consumen horas: <b>elaboración de reportes, gestión de inventario, atención de consultas, clasificación de documentos, actualización de bases de datos, procesamiento de solicitudes, gestión de correos, administración y seguimiento</b>. Antes de invertir en automatizarlos conviene responder tres preguntas: <i>¿cuánto tiempo consume?, ¿qué parte puede hacer una máquina? y ¿en cuánto tiempo se recupera lo invertido?</i> El profesor quiso que la primera práctica fuera «algo pequeño, pero que funcione, que no sea solo una landing page».</p>
+
+<h2 id="c06-orig">6.2 Prompt original</h2>
+<div class="prompt orig"><div class="ph"><span class="id">P02</span> Prompt original · chat 00:57:42 · Profesor<span class="src">Destino: OpenCode · texto literal</span></div><pre><!--RAW:P02--></pre><div class="pf">Indicación oral: pegarlo en una <b>sesión nueva</b> dentro de la misma carpeta. Los asteriscos <code>**</code> son formato Markdown (negritas); el agente los entiende, no hace falta quitarlos.</div></div>
+
+<h2 id="c06-lineas">6.3 Explicación línea por línea</h2>
+<table class="compact"><thead><tr><th style="width:24%">Elemento del prompt</th><th>Por qué está ahí</th></tr></thead><tbody>
+<tr><td>«calculadora interactiva… diseño moderno, profesional e intuitivo»</td><td>Define el <b>tipo de producto</b> (app que calcula, no texto) y el estándar visual.</td></tr>
+<tr><td>Proceso empresarial</td><td>Da contexto para estimar potencial y recomendar herramienta.</td></tr>
+<tr><td>Tiempo que dedica</td><td>Duración de cada ejecución: base de todo el cálculo de horas.</td></tr>
+<tr><td>Frecuencia</td><td>Cuántas veces ocurre (por día/semana/mes). Un proceso de 3 h que ocurre una vez al año casi nunca justifica automatizar.</td></tr>
+<tr><td>Costo por hora</td><td>Convierte horas en dinero. Debe ser el costo laboral total, no solo el salario neto.</td></tr>
+<tr><td>Número de empleados</td><td>Multiplica las horas si varias personas participan en cada ejecución.</td></tr>
+<tr><td>🤖 Potencial de automatización (%)</td><td>Ningún proceso se automatiza al 100 %; siempre queda revisión humana.</td></tr>
+<tr><td>⏱️ Tiempo ahorrado (semana/mes/año)</td><td>Distintas escalas ayudan a dimensionar: «40 h/semana» se entiende como «un puesto completo».</td></tr>
+<tr><td>💰 Ahorro económico</td><td>Traduce horas a dinero, con la advertencia de la sección 6.4.</td></tr>
+<tr><td>📊 ROI, inversión, periodo de recuperación</td><td>Compara beneficio contra costo; el <i>payback</i> dice cuándo se recupera.</td></tr>
+<tr><td>🛠️ Solución recomendada</td><td>n8n/Make/Zapier para flujos con reglas; agentes de IA para tareas con lenguaje y juicio.</td></tr>
+<tr><td>Dashboard, antes vs. después</td><td>Lo visual convence a quien decide.</td></tr>
+<tr><td><b>«supuestos transparentes y editables, sin inventar cifras»</b></td><td>La línea más importante: obliga al agente a mostrar sus supuestos y evita que presente estimaciones como datos reales.</td></tr>
+</tbody></table>
+
+<h2 id="c06-math" class="pb">6.4 Modelo matemático</h2>
+<p><span class="tag t-ped">Adaptación pedagógica</span> Estas fórmulas te permiten <b>validar</b> lo que calcule la aplicación. Hazlas al menos una vez con calculadora.</p>
+<div class="g2">
+<div class="card blue"><h4>1 · Horas actuales por semana</h4><p class="mono small">H<sub>sem</sub> = duración × ejecuciones/semana × participantes</p><p class="small">Válido si la duración es el tiempo que dedica <b>cada</b> participante en cada ejecución.</p></div>
+<div class="card blue"><h4>2 · Horas recuperables</h4><p class="mono small">H<sub>rec</sub> = H<sub>sem</sub> × % automatizable</p><p class="small">Por año: × semanas laborales (usaremos 48).</p></div>
+<div class="card lav"><h4>3 · Ahorro anual bruto</h4><p class="mono small">A<sub>bruto</sub> = H<sub>rec/año</sub> × costo laboral por hora</p></div>
+<div class="card lav"><h4>4 · Beneficio anual neto</h4><p class="mono small">B<sub>neto</sub> = ahorro monetizable + beneficios cuantificables − costos recurrentes</p><p class="small">Costos recurrentes: suscripciones, consumo de API, mantenimiento.</p></div>
+<div class="card green"><h4>5 · ROI estimado</h4><p class="mono small">ROI = (B<sub>neto acumulado</sub> − inversión) ÷ inversión × 100</p><p class="small">Indica siempre el <b>horizonte</b> (p. ej. 1 año) y si ya restaste los costos recurrentes.</p></div>
+<div class="card green"><h4>6 · Payback (meses)</h4><p class="mono small">Payback = inversión ÷ (B<sub>neto</sub> ÷ 12)</p><p class="small">Usa el flujo <b>neto</b>; con el bruto el payback parece más corto de lo real.</p></div>
+</div>
+<div class="box danger"><span class="bt">Horas liberadas ≠ dinero ahorrado</span>Si automatizas 10 horas semanales de una persona pero esa persona sigue cobrando lo mismo y no se reasigna a trabajo productivo medible, <b>no hay ahorro de efectivo</b>: hay capacidad liberada. Solo cuenta como ahorro monetario si hay reducción de costo (horas extra, subcontratación) o reasignación productiva demostrable.</div>
+<figure>
+<svg viewBox="0 0 700 220" font-family="Inter">
+<line x1="60" y1="180" x2="680" y2="180" stroke="#9AA6BF"/><line x1="60" y1="20" x2="60" y2="180" stroke="#9AA6BF"/>
+<g font-size="7.5" fill="#5B6272"><text x="52" y="183" text-anchor="end">0</text><text x="52" y="143" text-anchor="end">10 k</text><text x="52" y="103" text-anchor="end">20 k</text><text x="52" y="63" text-anchor="end">30 k</text><text x="52" y="23" text-anchor="end">40 k</text>
+<text x="60" y="194" text-anchor="middle">0</text><text x="163" y="194" text-anchor="middle">2</text><text x="267" y="194" text-anchor="middle">4</text><text x="370" y="194" text-anchor="middle">6</text><text x="473" y="194" text-anchor="middle">8</text><text x="577" y="194" text-anchor="middle">10</text><text x="680" y="194" text-anchor="middle">12 meses</text></g>
+<g stroke="#EEF2F9"><path d="M60 140H680M60 100H680M60 60H680M60 20H680"/></g>
+<line x1="60" y1="100" x2="680" y2="100" stroke="#C8323C" stroke-width="2" stroke-dasharray="6 4"/>
+<text x="676" y="94" font-size="8.5" text-anchor="end" fill="#C8323C" font-weight="700">Inversión inicial: $20 000</text>
+<polyline points="60,180 680,42.7" fill="none" stroke="#0F9D63" stroke-width="2.5"/>
+<text x="470" y="52" font-size="8.5" fill="#0F9D63" font-weight="700" text-anchor="end">Beneficio neto acumulado ($2 860/mes)</text>
+<polyline points="60,180 680,19.7" fill="none" stroke="#9AA6BF" stroke-width="1.5" stroke-dasharray="3 3"/>
+<text x="640" y="14" font-size="7.5" fill="#5B6272" text-anchor="end">bruto (sin costos recurrentes)</text>
+<circle cx="421" cy="100" r="6" fill="#6A3FD1"/>
+<line x1="421" y1="100" x2="421" y2="180" stroke="#6A3FD1" stroke-dasharray="3 3"/>
+<text x="421" y="126" font-size="9" fill="#6A3FD1" font-weight="800" text-anchor="middle">PAYBACK ≈ 7 meses</text>
+<rect x="430" y="104" width="250" height="0" />
+<text x="560" y="150" font-size="8" fill="#0F9D63" text-anchor="middle">zona de ganancia →</text>
+<text x="230" y="150" font-size="8" fill="#C8323C" text-anchor="middle">← aún recuperando la inversión</text>
+</svg>
+<figcaption><b>Figura 9.</b> ROI y payback del escenario B (reporte semanal de ventas). El payback es el punto donde la línea verde cruza la inversión. Datos ficticios.</figcaption></figure>
+
+<h2 id="c06-build">6.5 Construcción de la aplicación paso a paso</h2>
+<ol class="steps">
+<li><b class="t">Abre el proyecto</b> (tu carpeta) en OpenCode.</li>
+<li><b class="t">Selecciona el modelo</b> gratuito vigente.</li>
+<li><b class="t">Abre una sesión nueva</b> con <b>+</b>.</li>
+<li><b class="t">Pega el prompt</b> (original o versión mejorada V1) y envíalo.</li>
+<li><b class="t">Permite la creación de archivos</b> cuando lo pida; lee qué archivo va a crear (normalmente <code>index.html</code>, CSS y JS dentro de tu carpeta).</li>
+<li><b class="t">Observa qué hace</b>: lista de pasos, archivos escritos, comandos. Si pide ejecutar algo que no entiendes, pregúntale «¿qué hace este comando?» antes de aceptar.</li>
+<li><b class="t">Lee su respuesta final</b>: qué construyó y cómo abrirlo.</li>
+<li><b class="t">Ejecuta la aplicación</b>: pide «ábrela en tu navegador integrado» o haz doble clic en <code>index.html</code> de tu carpeta.</li>
+<li><b class="t">Comprueba los campos</b>: proceso, tiempo, frecuencia, costo por hora, personas.</li>
+<li><b class="t">Modifica valores</b> y verifica que los resultados cambian.</li>
+<li><b class="t">Valida un caso a mano</b> con las fórmulas de 6.4.</li>
+<li><b class="t">Identifica problemas</b>: textos encimados, gráficas vacías, cálculos raros.</li>
+<li><b class="t">Corrígelos con una sola instrucción agrupada</b>, por ejemplo: «La gráfica de ahorro no cambia al editar la frecuencia y el título se encima en móvil. Corrige ambas cosas y muéstrame la fórmula que usas para el ahorro anual».</li>
+<li><b class="t">Guarda</b>: los archivos ya están en tu carpeta; no cierres sin que el agente termine.</li>
+</ol>
+<div class="box hist"><span class="bt">Lo que pasó en clase</span>Mientras se generaba la calculadora, el profesor comentó que con el mismo modelo «a todos debe aparecernos casi el mismo diseño, tal vez cambian colores». Luego la <b>publicó con un segundo prompt</b> oral —«abre GitHub, usa un nuevo repositorio y publica esta calculadora [en GitHub] Pages» (P03, transcripción ≈ 1:10)— y compartió el enlace (chat 01:12:25). «¿Cuántos prompts fueron? Uno y dos.»</div>
+
+<h2 id="c06-v">6.6 Prompts mejorados por el subagente</h2>
+<p><span class="tag t-mej">Prompt mejorado</span> El subagente auditor (capítulo 17) produjo una versión sencilla y otra profesional avanzada que corrigen las debilidades del original: no define fórmulas, no separa ahorro bruto de neto, no pide validar con un caso de prueba. Ambas están íntegras en los <a href="#anexob1">Anexos B1</a> y <a href="#anexob2">B2</a> (sección P02). La versión avanzada especifica estructura de datos, fórmulas, supuestos por defecto editables y criterios de aceptación con casos de prueba.</p>
+
+<h2 id="c06-esc">6.7 Tres escenarios de prueba (datos ficticios)</h2>
+<p class="small">Supuestos comunes: 48 semanas laborales/año; costos en pesos mexicanos; «inversión» = desarrollo y configuración inicial; «recurrente» = suscripciones y mantenimiento anual. <span class="tag t-ped">Ejemplos didácticos, no datos reales</span></p>
+<table class="compact"><thead><tr><th>Variable</th><th>A · Poco repetitivo<br><span class="small">Conciliación mensual de proveedores</span></th><th>B · Frecuencia media<br><span class="small">Reporte semanal de ventas</span></th><th>C · Alto volumen<br><span class="small">Captura de pedidos</span></th></tr></thead><tbody>
+<tr><td>Duración por ejecución</td><td class="r">3 h</td><td class="r">2 h</td><td class="r">0.25 h (15 min)</td></tr>
+<tr><td>Frecuencia</td><td class="r">12 al año</td><td class="r">1 por semana</td><td class="r">60 por semana</td></tr>
+<tr><td>Participantes</td><td class="r">1</td><td class="r">2</td><td class="r">1</td></tr>
+<tr><td>Costo laboral por hora</td><td class="r">$250</td><td class="r">$300</td><td class="r">$200</td></tr>
+<tr><td>% automatizable</td><td class="r">50 %</td><td class="r">70 %</td><td class="r">80 %</td></tr>
+<tr><td><b>Horas actuales al año</b></td><td class="r">3 × 12 × 1 = 36</td><td class="r">2 × 1 × 2 × 48 = 192</td><td class="r">0.25 × 60 × 48 = 720</td></tr>
+<tr><td><b>Horas recuperables al año</b></td><td class="r">18</td><td class="r">134.4</td><td class="r">576</td></tr>
+<tr><td>Ahorro bruto anual</td><td class="r">$4 500</td><td class="r">$40 320</td><td class="r">$115 200</td></tr>
+<tr><td>Inversión inicial</td><td class="r">$15 000</td><td class="r">$20 000</td><td class="r">$40 000</td></tr>
+<tr><td>Costos recurrentes/año</td><td class="r">$3 000</td><td class="r">$6 000</td><td class="r">$12 000</td></tr>
+<tr><td><b>Beneficio neto anual</b></td><td class="r">$1 500</td><td class="r">$34 320</td><td class="r">$103 200</td></tr>
+<tr><td><b>Payback</b></td><td class="r">120 meses</td><td class="r">≈ 7.0 meses</td><td class="r">≈ 4.7 meses</td></tr>
+<tr><td><b>ROI a 1 año</b></td><td class="r">−90 %</td><td class="r">+71.6 %</td><td class="r">+158 %</td></tr>
+<tr><td>Veredicto</td><td><span class="tag t-pend">No conviene</span> mejor una plantilla o checklist</td><td><span class="tag t-real">Viable</span> n8n o Make con IA para redactar</td><td><span class="tag t-real">Muy viable</span> flujo con extracción por IA + revisión humana</td></tr>
+</tbody></table>
+<p class="small">Comprobación B: 34 320 ÷ 12 = 2 860 al mes; 20 000 ÷ 2 860 = 6.99 meses. ROI = (34 320 − 20 000) ÷ 20 000 = 71.6 %. Comprobación C: 103 200 ÷ 12 = 8 600; 40 000 ÷ 8 600 = 4.65 meses.</p>
+
+<h2 id="c06-obs">6.8 Resultados observados en clase</h2>
+<p><span class="tag t-demo">Demostración del profesor</span> Tras la mejora con Claude Code (capítulo 7), la calculadora pasó a ofrecer un selector «Elige tu proceso» con procesos de muchos sectores. Pruebas que se mostraron:</p>
+<ul>
+<li><b>Reposición automática de inventario:</b> la app reportó ≈ 40.8 h/semana recuperables, ≈ $381 000 al año y recuperación en 2.3 meses. Al cambiar la frecuencia a <b>una vez por semana</b>, bajó a ≈ 0.5 h/semana y ≈ $4 770/año: «con estos costos del proyecto no se paga solo». Con 4 personas en lugar de 1, el ahorro crecía mucho.</li>
+<li>Indicadores de viabilidad («muy viable», «viable con cautela», «poco viable por ahora»).</li>
+<li>Gráficas de antes/después y de <b>ahorro acumulado vs. inversión</b>.</li>
+<li>Recomendación de herramienta: p. ej. <b>gestión de reclamaciones de aseguradoras</b> → n8n (ajuste 83 %), Make 33 %, Zapier 17 %.</li>
+<li>«Motor de impresión»: vista previa para guardar el informe en PDF o imprimirlo.</li>
+<li>Modo claro/oscuro conservado.</li>
+</ul>
+<div class="box warn"><span class="bt">Antes de confiar en esos números</span>Son <b>salidas de una aplicación generada por IA</b> con supuestos que no conocemos (costo por hora, % automatizable, inversión). No son resultados financieros verificados. Para usar la calculadora en una decisión real: revisa cada supuesto, compáralo con datos de tu empresa y valida un caso a mano. El profesor también opinó que en «interpretación de estudios de imagen» un agente podría ser mejor que n8n: las recomendaciones de la app son orientativas.</div>
+
+<h2 id="c06-pub">6.9 Publicación de referencia</h2>
+<p>Enlace compartido por el profesor (chat 01:12:25): <b><a href="https://asternodelab.github.io/calculadora-automatizacion-ia/">https://asternodelab.github.io/calculadora-automatizacion-ia/</a></b></p>
+<div class="box note"><span class="bt">Estado del enlace</span><span class="tag t-pend">No verificado</span> El 22-nov-2026 no fue posible abrirlo desde el entorno donde se elaboró esta guía (la red de ese entorno no permite el dominio github.io). Se conserva como <b>referencia histórica</b>; su contenido actual puede diferir del mostrado en clase. Ábrelo tú y compáralo con la tuya.</div>
+<p>El profesor añadió que en GitHub se puede configurar un <b>dominio personalizado</b> (p. ej. <i>calculadoraautomatizaciones.com</i>) comprando el dominio; mencionó un costo aproximado de 1 000 pesos al año. <span class="tag t-pend">Verificar</span> el precio depende del registrador y la extensión.</p>
+</section>

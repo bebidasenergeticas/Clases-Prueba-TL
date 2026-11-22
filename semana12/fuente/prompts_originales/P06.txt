@@ -1,0 +1,19 @@
+Actúa como un **diseñador web senior, director creativo y desarrollador frontend experto en experiencias digitales premium**.
+
+Crea una landing page espectacular para **DENTEA**, una clínica dental moderna, elegante y de alta gama.
+
+**Diseño visual:** estética premium, minimalista y sofisticada, inspirada en Apple y las mejores clínicas odontológicas internacionales. Utiliza blanco, azul hielo, beige suave y detalles en azul profundo, con tipografía elegante, animaciones fluidas, microinteracciones y diseño completamente responsive.
+
+**Uso obligatorio de OpenCode + navegador + Google Flow:**
+
+1. Utiliza el navegador para acceder a **Google Flow** y generar imágenes originales, hiperrealistas y cinematográficas para DENTEA: instalaciones modernas, consultorios elegantes, sonrisas naturales, tratamientos odontológicos y fotografías publicitarias premium.
+2. Descarga las imágenes generadas e intégralas directamente en la landing page. No utilices imágenes genéricas si puedes producir recursos originales.
+3. Construye la web con un hero visual impresionante, servicios odontológicos, beneficios, presentación de la clínica, testimonios, preguntas frecuentes y botones para agendar citas por WhatsApp.
+4. Implementa animaciones refinadas con Framer Motion, efectos de scroll, transiciones suaves y una experiencia UX/UI de nivel internacional.
+5. Abre la página en el navegador, comprueba su funcionamiento en desktop y móvil, corrige errores y optimiza el rendimiento.
+
+**Objetivo:** que DENTEA parezca una marca odontológica de lujo, con una identidad visual memorable y una web capaz de convertir visitantes en pacientes.
+
+No inventes testimonios, certificaciones, precios ni datos de contacto. Utiliza contenido provisional claramente identificado cuando falte información.
+
+**Entrega una landing page real, funcional, visualmente extraordinaria y lista para desplegar; no solamente un diseño o mockup.**

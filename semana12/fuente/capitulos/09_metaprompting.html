@@ -1,0 +1,117 @@
+<section class="chap">
+<div class="chap-head"><div class="big">09</div><div class="k">Capítulo 9 · Práctica 4</div>
+<h1 id="c09" data-toc="9|Práctica 4 · Meta-prompting con ChatGPT">Práctica 4 · Meta-prompting con ChatGPT</h1>
+<p class="d">Usar una IA para escribir el prompt que ejecutará otra IA. La técnica que más diferencia hizo en los resultados de la clase.</p>
+<div class="tags"><span class="tag t-real">Realizado en clase</span><span class="tag t-orig">Prompt original P07</span></div></div>
+
+<h2 id="c09-que">9.1 ¿Qué es el meta-prompting?</h2>
+<figure>
+<svg viewBox="0 0 700 150" font-family="Inter">
+<defs><marker id="a9" markerWidth="8" markerHeight="8" refX="7" refY="4" orient="auto"><path d="M0 0L8 4L0 8z" fill="#6A3FD1"/></marker></defs>
+<g text-anchor="middle">
+<rect x="0" y="30" width="130" height="80" rx="10" fill="#F6F8FC" stroke="#DCE2EE"/><text x="65" y="56" font-size="10" font-weight="800" fill="#0B1F4D">1 · Tu intención</text><text x="65" y="74" font-size="8" fill="#5B6272">«Quiero una página</text><text x="65" y="86" font-size="8" fill="#5B6272">para mi negocio de…»</text>
+<rect x="160" y="30" width="150" height="80" rx="10" fill="#EAF2FF" stroke="#1E4FD8"/><text x="235" y="56" font-size="10" font-weight="800" fill="#1E4FD8">2 · Meta-prompt</text><text x="235" y="74" font-size="8" fill="#5B6272">ChatGPT (o Claude) recibe</text><text x="235" y="86" font-size="8" fill="#5B6272">el meta-prompt + tu idea</text>
+<rect x="340" y="30" width="150" height="80" rx="10" fill="#FFF3E6" stroke="#E8710A"/><text x="415" y="56" font-size="10" font-weight="800" fill="#E8710A">3 · Prompt optimizado</text><text x="415" y="74" font-size="8" fill="#5B6272">rol, objetivo, secciones,</text><text x="415" y="86" font-size="8" fill="#5B6272">restricciones, criterios</text>
+<rect x="520" y="30" width="180" height="80" rx="10" fill="#F1ECFF" stroke="#6A3FD1"/><text x="610" y="56" font-size="10" font-weight="800" fill="#6A3FD1">4 · Ejecución</text><text x="610" y="74" font-size="8" fill="#5B6272">OpenCode construye la app;</text><text x="610" y="86" font-size="8" fill="#5B6272">tú revisas y corriges</text>
+</g>
+<g stroke="#6A3FD1" stroke-width="1.6" marker-end="url(#a9)"><path d="M132 70H157M312 70H337M492 70H517"/></g>
+<path d="M610 112 Q610 140 350 140 Q65 140 65 114" fill="none" stroke="#9AA6BF" stroke-dasharray="4 3" marker-end="url(#a9)"/><text x="350" y="134" font-size="8" fill="#5B6272" text-anchor="middle">si el resultado no convence, mejora la descripción y repite</text>
+</svg>
+<figcaption><b>Figura 12.</b> Flujo de meta-prompting usado en clase: una IA mejora el prompt, otra lo ejecuta.</figcaption></figure>
+<div class="g2">
+<div class="card orange"><h4>Prompt inicial (vago)</h4><p class="mono small">Hazme una página bonita para mi negocio.</p><p class="small">El agente debe adivinar: qué negocio, para quién, qué secciones, qué estilo, qué datos usar. Resultado: genérico.</p></div>
+<div class="card green"><h4>Prompt mejorado (especificación)</h4><p class="small">Problema que resuelve · cliente objetivo · propuesta de valor · secciones · estilo visual · funciones · datos disponibles · restricciones («no inventes precios») · criterios de aceptación («botón de WhatsApp funcional, sin desbordes en móvil»).</p></div>
+</div>
+<div class="box hist"><span class="bt">Observación del profesor al final</span>Al usar el mismo modelo, las landing de dentistas «solo cambiaban colores»; la de una estudiante que hizo meta-prompting «parece de otra herramienta». <span class="tag t-op">Opinión del profesor</span> «Mucho mejor siempre en ChatGPT» para la parte de meta-prompting.</div>
+
+<h2 id="c09-orig">9.2 Prompt original de meta-prompting</h2>
+<div class="prompt orig"><div class="ph"><span class="id">P07</span> Prompt original · chat 01:41:08 · Profesor<span class="src">Destino: ChatGPT · texto literal</span></div><pre><!--RAW:P07--></pre><div class="pf">Mensajes siguientes del profesor (chat 01:41:18 y 01:41:27): <b>«Para ChatGPT»</b> · <b>«Y al ultimo de como quieren la landing page»</b>. Es decir: después de <code>PROMPT ORIGINAL:</code> cada quien describe su landing page.</div></div>
+
+<h2 id="c09-flujo">9.3 Flujo de uso paso a paso</h2>
+<div class="g2">
+<ol class="steps">
+<li>Abre ChatGPT (o Claude) en el navegador.</li>
+<li>Pega el meta-prompt completo.</li>
+<li>Debajo de <code>PROMPT ORIGINAL:</code> describe tu negocio.</li>
+<li>Explica el público objetivo.</li>
+<li>Define la propuesta de valor.</li>
+<li>Indica el estilo visual (colores, referencias, sensación).</li>
+<li>Enumera las funciones (WhatsApp, formulario, demo, planes…).</li>
+<li>Añade restricciones (no inventar precios ni testimonios).</li>
+</ol>
+<ol class="steps" start="9" style="counter-reset:s 8">
+<li>Envía.</li>
+<li>Lee el prompt optimizado: ¿conserva tu idea?, ¿añadió cosas que no pediste?</li>
+<li>Cópialo completo.</li>
+<li>Abre OpenCode, en tu carpeta, sesión nueva.</li>
+<li>Pega la versión optimizada.</li>
+<li>Pide que construya la aplicación.</li>
+<li>Revisa el resultado en navegador y móvil.</li>
+<li>Solicita correcciones agrupadas.</li>
+</ol></div>
+<div class="box note"><span class="bt">Paralelo en clase</span>Para no perder tiempo, el profesor indicó: el prompt de DENTEA se ejecuta en OpenCode mientras el meta-prompt se trabaja en ChatGPT; luego se pega la respuesta de ChatGPT en OpenCode, y mientras ambos trabajan se continúa con la teoría.</div>
+
+<h2 id="c09-comp">9.4 Ejercicio comparativo</h2>
+<table class="compact"><thead><tr><th style="width:15%">Nivel</th><th>Prompt</th><th style="width:30%">Resultado probable</th></tr></thead><tbody>
+<tr><td><b>Vago</b></td><td class="mono small">Haz una página para mi panadería.</td><td>Plantilla genérica; textos inventados (precios, dirección); sin llamada a la acción clara.</td></tr>
+<tr><td><b>Básico mejorado</b></td><td class="small">Crea una landing para «Pan de Barrio», panadería artesanal en Puebla para familias que buscan pan del día. Secciones: hero, productos, horarios, pedidos por WhatsApp, FAQ. Colores cálidos (crema, café). No inventes precios ni teléfono: usa marcadores. Que funcione bien en celular.</td><td>Estructura correcta y coherente; diseño aún estándar; datos provisionales identificables.</td></tr>
+<tr><td><b>Profesional (meta-prompting)</b></td><td class="small">Rol + objetivo de conversión + perfil del cliente + tono de marca + arquitectura de secciones con propósito de cada una + componentes e interacciones + accesibilidad + rendimiento + datos editables centralizados + restricciones + criterios de aceptación verificables + «ejecuta, prueba en móvil y corrige».</td><td>Identidad visual distintiva, contenido orientado a venta, menos errores, verificación incluida. Más tokens en un solo mensaje, pero menos iteraciones.</td></tr>
+</tbody></table>
+
+<h2 id="c09-err">9.5 Errores comunes</h2>
+<div class="g2">
+<ul>
+<li><b>Demasiadas funciones sin contexto</b>: el agente reparte esfuerzo y nada queda bien.</li>
+<li><b>No decir qué problema resuelve</b> la app.</li>
+<li><b>No especificar a quién va dirigida</b>.</li>
+<li><b>No proporcionar datos</b> (horarios, servicios): el agente inventa.</li>
+</ul>
+<ul>
+<li><b>Confundir apariencia con funcionamiento</b>: un botón bonito que no hace nada.</li>
+<li><b>No validar</b> el resultado en móvil y en los botones.</li>
+<li><b>Iteraciones redundantes</b> que gastan tokens.</li>
+<li><b>Tecnologías incompatibles</b>: el meta-prompt puede añadir frameworks, backend o pagos que tu entorno o GitHub Pages no soportan. Revisa y elimina lo que sobre.</li>
+</ul></div>
+
+<h2 id="c09-adv">9.6 Meta-prompt reutilizable (subagente)</h2>
+<p><span class="tag t-mej">Prompt mejorado</span> El subagente creó un meta-prompt con campos editables —<code>[NOMBRE_DEL_NEGOCIO]</code>, <code>[CLIENTE_OBJETIVO]</code>, <code>[PROBLEMA]</code>, <code>[PRODUCTO_O_SERVICIO]</code>, <code>[OBJETIVO_DE_LA_WEB]</code>, <code>[ESTILO_VISUAL]</code>, <code>[FUNCIONES]</code>, <code>[DATOS_DISPONIBLES]</code>, <code>[RESTRICCIONES]</code>— para repetir el método con cualquier negocio después del curso. Está íntegro en el <a href="#anexob2">Anexo B2</a> (sección P07).</p>
+<div class="box tip"><span class="bt">Consejo</span>Guarda tu prompt optimizado en un archivo <code>PROMPT.md</code> dentro de la carpeta del proyecto. Así cualquier agente (OpenCode, Claude Code, Codex) puede leerlo después como contexto.</div>
+</section>
+
+<section class="chap">
+<div class="chap-head"><div class="big">10</div><div class="k">Capítulo 10 · Práctica 5</div>
+<h1 id="c10" data-toc="10|Práctica 5 · Landing page personalizada">Práctica 5 · Landing page personalizada</h1>
+<p class="d">De DENTEA a tu propio proyecto: negocio, problema, propuesta de valor, meta-prompting, construcción y publicación.</p></div>
+<h2 id="c10-ruta">10.1 La ruta</h2>
+<ol class="steps">
+<li><b class="t">Elige un negocio</b> real o personal: tu emprendimiento, un proyecto, un servicio que quieras validar.</li>
+<li><b class="t">Identifica el problema</b> que resuelve para su cliente.</li>
+<li><b class="t">Redacta la propuesta de valor</b> en una frase: «Ayudo a [cliente] a [resultado] sin [dolor]».</li>
+<li><b class="t">Meta-prompting</b> (capítulo 9) con ChatGPT.</li>
+<li><b class="t">Construcción</b> en OpenCode en una carpeta propia.</li>
+<li><b class="t">Revisión</b>: textos, datos provisionales, botones, móvil.</li>
+<li><b class="t">Publicación</b> (capítulo 14) y enlace al muro de Top Learning, como pidió el profesor.</li>
+</ol>
+<div class="box hist"><span class="bt">Incidencia real (≈ 2:27)</span>Una estudiante contó que el agente la guiaba con preguntas («¿quieres ponerle esto?») pero no construía la página, y le pidió pagar un hosting; ella se negó y el agente sugirió publicar en Canva. <b>Lección:</b> el prompt debe decir explícitamente <i>«construye el código ahora en esta carpeta; no publiques ni contrates nada»</i>. La publicación es un paso aparte (y gratuito con GitHub Pages).</div>
+
+<h2 id="c10-stilis">10.2 Caso de estudio: Stilís, una aportación estudiantil</h2>
+<p><span class="tag t-real">Realizado en clase</span> Una estudiante construyó y publicó la landing de <b>Stilís</b>, una app de asistencia personal de estilo con el lema <b>«Tu estilo. Listo.»</b>. Usó el meta-prompting («pedí que me hiciera el metaprompting y ya se lo pasé») y el modelo gratuito de OpenCode. El profesor la mostró en pantalla: «parece de otra herramienta», con animaciones y un selector para cambiar tipos de outfit. Faltaban fotos de productos.</p>
+<div class="g2">
+<div>
+<h4>Estructura de su prompt (chat 03:15:51)</h4>
+<ul class="small">
+<li><b>Objetivo:</b> presentación, demostración y conversión antes de solicitar acceso.</li>
+<li><b>Rol:</b> director creativo, UX/UI y frontend senior.</li>
+<li><b>Marca:</b> nombre con acento obligatorio, tono cercano, sin imponer estándares de belleza, rosa mexicano como acento, estética editorial + claridad tecnológica, sin inventar logotipo.</li>
+<li><b>Ocho secciones</b>: navegación, portada, cómo funciona (3 pasos), funcionalidades, <b>demo interactiva marcada como ilustrativa</b>, cinco planes, FAQ, cierre.</li>
+<li><b>Datos honestos:</b> planes sin precios inventados, configuración editable, «Detalles próximamente», no confirmar registros que no se guardaron.</li>
+<li><b>Implementación:</b> React + TypeScript si el entorno lo permite, textos centralizados, <i>mobile first</i>, accesibilidad, <code>prefers-reduced-motion</code>.</li>
+<li><b>Criterios de aceptación</b> verificables y orden de probar y corregir.</li>
+</ul></div>
+<div>
+<div class="box sec"><span class="bt">Autoría y permiso</span>El prompt de Stilís es trabajo de una estudiante, no del profesor. Como no consta autorización para redistribuirlo, <b>esta guía no lo reproduce íntegro</b>: se conserva en el registro interno de trazabilidad. Aquí se analiza su estructura; en el Anexo B2 hay una <b>recreación didáctica</b> claramente diferenciada.</div>
+<div class="box note"><span class="bt">Publicación</span>Se desplegó en <b>Firebase Hosting</b>, no en GitHub Pages. El profesor lo aceptó: «lo pueden desplegar en cualquier otro lugar». El enlace se omite por privacidad. <span class="tag t-pend">Estado actual no verificado</span></div>
+</div></div>
+<h4>Qué demuestra el caso</h4>
+<p>Un buen meta-prompt cambia el resultado <b>con el mismo modelo gratuito</b>. Las claves fueron: identidad de marca precisa, una sección interactiva con propósito, honestidad sobre lo que aún no existe (precios, conexión real con IA) y criterios de aceptación. Es un modelo excelente para tu propio proyecto.</p>
+</section>

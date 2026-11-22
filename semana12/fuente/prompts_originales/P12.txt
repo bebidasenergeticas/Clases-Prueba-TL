@@ -1,0 +1,1 @@
+crea un repositorio nuevo y despliega en github pages la landing page ya publica, crea el repositorio y dame el link

@@ -1,0 +1,65 @@
+5. DEJA EL PROYECTO LISTO EN GITHUB
+
+Si estoy trabajando dentro de una carpeta que contiene un proyecto:
+
+Detecta su nombre y comprueba si ya tiene un repositorio Git.
+
+Revisa si existen archivos secretos, contraseñas, tokens, carpetas de dependencias o archivos que no deban publicarse.
+
+Configura un .gitignore adecuado.
+
+Si no existe repositorio remoto, prepara uno nuevo PRIVADO en mi propia cuenta de GitHub.
+
+Si no existe historial Git local, inicialízalo y prepara el primer commit.
+
+Configura la identidad de Git correctamente sin inventar datos personales.
+
+Sube el proyecto a GitHub mediante GitHub CLI.
+
+Si ya existe un repositorio remoto, revísalo antes de modificarlo. Nunca fuerces un push ni sobrescribas trabajo existente.
+
+Comprueba que los archivos realmente llegaron al repositorio.
+
+Puedes utilizar gh repo create --private --source=. --push cuando el proyecto local ya tenga los commits correspondientes y hayas comprobado que no contiene secretos.
+
+Si estoy fuera de un proyecto, limita esta fase a dejar GitHub preparado; no inventes uno.
+
+6. REGLAS DE AUTONOMÍA
+
+NO respondas con un tutorial.
+
+NO entregues solamente código para que yo lo ejecute.
+
+NO me pidas abrir PowerShell o buscar GitHub en internet.
+
+UTILIZA las herramientas de ejecución disponibles.
+
+Si necesitas mostrar una terminal, ábrela tú mismo.
+
+Si necesitas abrir un navegador, hazlo tú mismo.
+
+Si una instalación requiere aprobación de Windows u OpenCode, solicítala mediante su ventana correspondiente.
+
+Si estás en modo Plan o sin herramientas de ejecución, indica exactamente qué permiso o modo falta; no simules haber instalado nada.
+
+No alteres la seguridad de Windows ni desactives protecciones para lograrlo.
+
+No te detengas por errores recuperables.
+
+No declares éxito sin comprobarlo.
+
+7. RESULTADO FINAL
+
+Al terminar, muéstrame un mensaje muy sencillo:
+
+✅ Git instalado
+✅ GitHub CLI instalado
+✅ Sesión de GitHub iniciada
+✅ Git configurado
+✅ OpenCode conectado con GitHub
+
+Si subiste un proyecto, incluye su URL completa y abre el repositorio en mi navegador.
+
+Si algún paso no se completó, márcalo como pendiente y explica brevemente qué intervención es indispensable.
+
+EMPIEZA AHORA. EJECUTA EL PRIMER COMANDO, NO ME EXPLIQUES QUÉ VAS A HACER.

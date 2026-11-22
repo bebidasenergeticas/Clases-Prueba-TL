@@ -1,0 +1,38 @@
+<section class="chap">
+<div class="chap-head"><div class="big">05</div><div class="k">Capítulo 5</div>
+<h1 id="c05" data-toc="5|Navegador y herramientas de OpenCode">Navegador y herramientas de OpenCode</h1>
+<p class="d">La primera prueba práctica: comprobar que el agente puede abrir un navegador, y la demostración con Google Flow.</p></div>
+
+<h2 id="c05-p01">5.1 Primera prueba: «abre el navegador y busca»</h2>
+<div class="prompt orig"><div class="ph"><span class="id">P01</span> Prompt original · chat 00:51:52 · Profesor<span class="src">Destino: OpenCode</span></div><pre><!--RAW:P01--></pre><div class="pf">Indicación oral: completar con lo que cada quien quiera buscar («imágenes o lo que ustedes necesiten»).</div></div>
+<p><span class="tag t-real">Realizado en clase</span> <b>Propósito:</b> comprobar que el agente tiene acceso a su herramienta de navegador antes de pedirle tareas que la necesitan (ver vistas previas, probar botones, generar imágenes en otra herramienta). Mientras los estudiantes hacían la prueba, el profesor cambió —de forma conversacional, sin terminal— la configuración que había dejado Edge como navegador del agente.</p>
+<div class="g2">
+<div class="prompt mej"><div class="ph"><span class="id">P01·V1</span> Versión mejorada sencilla<span class="src">Adaptación pedagógica</span></div><pre>Abre tu navegador integrado y entra a https://www.wikipedia.org.
+Busca "inteligencia artificial" y dime el título de la página que abriste.
+No inicies sesión en ningún sitio ni descargues nada.
+Si no tienes navegador disponible, dime exactamente qué herramienta o permiso te falta.</pre></div>
+<div class="card"><h4>Cómo saber si funcionó</h4><ul class="small"><li>Ves una vista de navegador junto al chat o el agente describe la página.</li><li>El agente reporta el título real.</li><li>Si dice que no tiene navegador: revisa permisos o versión; puedes continuar la práctica abriendo los archivos tú mismo en Chrome.</li></ul></div></div>
+
+<h2 id="c05-tools">5.2 Herramientas del agente</h2>
+<p><span class="tag t-expl">Explicado en clase</span> La presentación listaba herramientas internas que el profesor prometió explicar en un glosario: <code>read</code>, <code>edit</code>, <code>write</code>, <code>bash</code>, <code>grep</code>, <code>glob</code>, <code>webfetch</code>.</p>
+<table class="compact"><thead><tr><th>Herramienta</th><th>Qué hace</th><th>Riesgo</th></tr></thead><tbody>
+<tr><td><code>read</code> / <code>grep</code> / <code>glob</code></td><td>Leer archivos, buscar texto, listar archivos por patrón.</td><td>Bajo (solo lectura).</td></tr>
+<tr><td><code>write</code> / <code>edit</code></td><td>Crear o modificar archivos.</td><td>Medio: puede sobrescribir.</td></tr>
+<tr><td><code>bash</code> (terminal)</td><td>Ejecutar comandos: instalar programas, iniciar servidores, Git.</td><td>Alto: revisa antes de permitir.</td></tr>
+<tr><td><code>webfetch</code></td><td>Descargar el contenido de una página web.</td><td>Bajo-medio.</td></tr>
+<tr><td>Navegador</td><td>Abrir y controlar páginas, ver vistas previas, hacer clic, capturas.</td><td>Medio: puede iniciar sesiones si le das credenciales.</td></tr>
+</tbody></table>
+<p><b>Diferencias:</b> el <b>chat de programación</b> es donde conversas; el <b>navegador</b> es una herramienta que el agente controla para ver y probar páginas; las <b>herramientas externas</b> (MCP, plugins) conectan servicios como n8n o GitHub. Una precisión de la propia clase: la diapositiva decía que OpenCode Web «no controla páginas» y que no traía navegador nativo; el profesor corrigió que <b>sí tiene navegador integrado</b> (posiblemente tercerizado, pero disponible sin salir de la app). <span class="tag t-act">Verificado</span> La página oficial de la app de escritorio menciona un navegador integrado junto al agente.</p>
+
+<h2 id="c05-flow">5.3 Demostración: Google Flow desde el navegador del agente</h2>
+<p><span class="tag t-demo">Demostración del profesor</span> El profesor considera esta prueba «la más reveladora» de la capacidad de navegación de cualquier agente: <b>automatizar una acción dentro de otra IA</b>.</p>
+<table class="compact"><thead><tr><th style="width:22%">Aspecto</th><th>Lo que respalda la transcripción</th></tr></thead><tbody>
+<tr><td>Qué pretendía</td><td>Pedir al agente: entra a Google Flow y genera un video de estilo cinematográfico, «con toda la autonomía».</td></tr>
+<tr><td>Acceso</td><td>El inicio de sesión de Google lo hizo el profesor: «contraseña siempre nos va a pedir a nosotros».</td></tr>
+<tr><td>Autorizaciones</td><td>OpenCode pidió una «pequeña autorización» antes de actuar.</td></tr>
+<tr><td>Qué observó</td><td>El agente redactó solo el prompt para Flow, cambió al modo de video y generó escenas («son tres escenas… no se ve mal»).</td></tr>
+<tr><td>No verificable</td><td>El prompt exacto que escribió el agente, la versión de Flow, el costo en créditos de la cuenta.</td></tr>
+</tbody></table>
+<div class="box warn"><span class="bt">Para repetirlo</span>Necesitas una cuenta de Google con acceso a Flow (puede requerir plan o créditos; <span class="tag t-pend">verificar</span>). El profesor sugirió usar <b>una cuenta alterna</b> si lo prefieres. Nunca escribas tu contraseña en el chat del agente: introdúcela tú en la página oficial de Google dentro del navegador. <b>Alternativa:</b> genera las imágenes tú mismo en Flow (u otra herramienta autorizada), guárdalas en la carpeta del proyecto (p. ej. <code>imagenes/</code>) y pide al agente: «usa las imágenes de la carpeta imagenes/».</div>
+<div class="box hist"><span class="bt">Por qué importa</span>«Lovable nos hacía imágenes y las pasaba a la landing page; le podemos pedir lo mismo a OpenCode: haz las imágenes en Google Flow y pásalas a la landing que estás haciendo en código.» Esa idea se reutiliza en el prompt de DENTEA (capítulo 8).</div>
+</section>

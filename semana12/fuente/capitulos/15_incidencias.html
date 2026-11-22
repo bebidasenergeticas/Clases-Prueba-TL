@@ -1,0 +1,95 @@
+<section class="chap">
+<div class="chap-head"><div class="big">15</div><div class="k">Capítulo 15</div>
+<h1 id="c15" data-toc="15|Incidencias reales y soluciones">Incidencias reales y soluciones</h1>
+<p class="d">Las dudas que efectivamente surgieron en la sesión (A–O), con causa, solución, prompt de reparación y cómo comprobar que quedó resuelto.</p></div>
+<p class="small">Cada causa se marca como <span class="tag t-real">confirmada</span> (la transcripción lo muestra) o <span class="tag t-pend">hipótesis</span> (probable, no demostrada).</p>
+
+<div class="faq"><div class="fq"><span class="l">A</span>«No encuentro dónde seleccionar la carpeta del proyecto»</div><div class="fb">
+<span class="k">Observado</span><p>Tras escribir una pregunta, el cuadro de texto quedó abajo y no aparecía el selector (≈ 0:50).</p>
+<span class="k">Causa</span><p><span class="tag t-real">confirmada</span> El selector aparece en la pantalla inicial de una sesión; al iniciar la conversación ya no se muestra.</p>
+<span class="k">Solución</span><p>Pulsa <b>+</b> (arriba) para una sesión nueva → opción <i>Project / Choose project</i> → elige la carpeta.</p>
+<span class="k">No hagas</span><p>No crees la carpeta dentro de la carpeta de instalación de OpenCode.</p>
+<span class="k">Comprobar</span><p>El nombre del proyecto muestra tu carpeta. Pregunta: «¿en qué carpeta trabajas?».</p></div></div>
+
+<div class="faq"><div class="fq"><span class="l">B</span>«OpenCode sigue trabajando, pero ya veo mi aplicación»</div><div class="fb">
+<span class="k">Observado</span><p>Dos estudiantes veían su landing en el panel de resultados mientras el agente seguía activo (≈ 2:36, 2:43).</p>
+<span class="k">Causa</span><p><span class="tag t-pend">hipótesis</span> El agente continúa optimizando, corrigiendo o esperando un proceso (servidor local).</p>
+<span class="k">Solución</span><p>Puedes continuar: abre otra sesión con <b>+</b> o envía el siguiente prompt; el profesor: «él va a dejar en segundo plano lo de la página y dará prioridad a este prompt». Máximo dos mensajes seguidos.</p>
+<span class="k">Prompt</span><p class="mono small">¿En qué paso estás? Resume qué falta y si la página ya está completa en la carpeta.</p>
+<span class="k">Comprobar</span><p>Los archivos existen en la carpeta y la página abre.</p></div></div>
+
+<div class="faq"><div class="fq"><span class="l">C</span>«Me pide pagar alojamiento»</div><div class="fb">
+<span class="k">Observado</span><p>Un agente pidió pagar hosting; ante la negativa propuso Canva (≈ 2:27).</p>
+<span class="k">Causa</span><p><span class="tag t-real">confirmada</span> El prompt no indicaba dónde publicar; el agente eligió por su cuenta.</p>
+<span class="k">Solución</span><p>No pagues. Termina primero el código en local; publica con GitHub Pages (gratuito para repos públicos).</p>
+<span class="k">Prompt</span><p class="mono small">No contrates ni sugieras servicios de pago. Termina la página en esta carpeta; la publicaremos después en GitHub Pages.</p>
+<span class="k">Comprobar</span><p>No se te pidió ningún método de pago.</p></div></div>
+
+<div class="faq"><div class="fq"><span class="l">D</span>«No sé dónde pegar el prompt de GitHub»</div><div class="fb">
+<span class="k">Observado</span><p>«¿Este último es para OpenCode?», «¿en GitHub?» (2:33, 3:04).</p>
+<span class="k">Causa</span><p><span class="tag t-real">confirmada</span> Se trabajaba con dos sitios a la vez.</p>
+<span class="k">Solución</span><p><b>Todos los prompts van en OpenCode</b> (sesión nueva o la de tu landing). En github.com solo creas la cuenta e inicias sesión.</p>
+<span class="k">Comprobar</span><p>El agente responde con pasos de instalación o verificación.</p></div></div>
+
+<div class="faq"><div class="fq"><span class="l">E</span>«Mi código no llega al correo»</div><div class="fb">
+<span class="k">Observado</span><p>Dos estudiantes esperaban el código por email (2:34, 2:58).</p>
+<span class="k">Causa</span><p><span class="tag t-real">confirmada</span> El código de dispositivo de GitHub CLI se muestra en pantalla (OpenCode o PowerShell), no por correo. (El código de verificación de <i>registro</i> de la cuenta sí llega por correo: son cosas distintas.)</p>
+<span class="k">Solución</span><p>Busca un código <code>XXXX-XXXX</code> en la respuesta del agente o en la ventana de PowerShell.</p>
+<span class="k">Prompt</span><p class="mono small">Muéstrame aquí en el chat el código de un solo uso de GitHub CLI y abre https://github.com/login/device en mi navegador.</p>
+<span class="k">Comprobar</span><p>La página acepta el código y muestra «Authorize».</p></div></div>
+
+<div class="faq"><div class="fq"><span class="l">F</span>«El código de autorización caducó»</div><div class="fb">
+<span class="k">Observado</span><p>«Ya caducó porque te da un tiempo» (2:45).</p>
+<span class="k">Causa</span><p><span class="tag t-real">confirmada</span> Los códigos de dispositivo expiran en minutos.</p>
+<span class="k">Solución</span><p>Pide uno nuevo y úsalo de inmediato (P10 o su versión mejorada).</p>
+<span class="k">Prompt</span><p class="mono small">El código caducó. Cancela el intento anterior, genera un código nuevo, muéstramelo y abre la página de dispositivo. Espera a que te diga "listo".</p>
+<span class="k">No hagas</span><p>No reutilices un código viejo ni uses un código que te envíe otra persona (GitHub lo advierte: «Never use a code sent by someone else»).</p></div></div>
+
+<div class="faq"><div class="fq"><span class="l">G</span>«Me abrió una ventana de PowerShell»</div><div class="fb">
+<span class="k">Observado</span><p>Ventana «Windows PowerShell 5.1 · Autorización de GitHub CLI» con cursor parpadeando (2:55).</p>
+<span class="k">Causa</span><p><span class="tag t-real">confirmada</span> El prompt P11 pidió abrir una terminal visible para el login.</p>
+<span class="k">Solución</span><p>No la cierres. Lee el código y la URL que muestra; abre la URL en el navegador (copiar con clic derecho/Ctrl+C) y sigue el flujo del capítulo 13.8. Si pregunta algo con opciones, se elige con flechas y Enter.</p>
+<span class="k">Comprobar</span><p>La ventana muestra «Logged in as…» o se cierra tras autorizar.</p></div></div>
+
+<div class="faq"><div class="fq"><span class="l">H</span>«Me aparece una solicitud de permisos de un editor desconocido»</div><div class="fb">
+<span class="k">Observado</span><p>Ventana para «hacer cambios en tu equipo» con un nombre de persona desconocido (2:51). La estudiante rechazó.</p>
+<span class="k">Causa</span><p><span class="tag t-pend">no determinable</span> Con la evidencia disponible no se puede saber qué programa era.</p>
+<span class="k">Solución</span><p>Rechazar fue correcto. Pregunta al agente qué intentó ejecutar y desde qué ruta; reinstala desde la fuente oficial (winget o cli.github.com).</p>
+<span class="k">No hagas</span><p>No autorices ventanas cuyo editor no reconozcas. Ver 13.9.</p></div></div>
+
+<div class="faq"><div class="fq"><span class="l">I</span>«El agente quiere publicar en Netlify en lugar de GitHub Pages»</div><div class="fb">
+<span class="k">Observado</span><p>«Mi recomendación: empezar con Netlify Drop… ¿Quieres que la publique en Netlify?» (2:48). El profesor: «los agentes son así: cuando se les complica, ya no lo quieren hacer».</p>
+<span class="k">Causa</span><p><span class="tag t-real">confirmada</span> El login de GitHub había quedado a medias; el agente buscó un atajo.</p>
+<span class="k">Solución</span><p>Responde «no» y pide terminar la autenticación de GitHub (P11 mejorado).</p>
+<span class="k">Prompt</span><p class="mono small">No cambies de plataforma. Quiero GitHub Pages. Dime exactamente qué paso de la conexión con GitHub falló y resolvámoslo.</p></div></div>
+
+<div class="faq"><div class="fq"><span class="l">J</span>«No sé si ya se conectó mi cuenta de GitHub»</div><div class="fb">
+<span class="k">Causa</span><p><span class="tag t-real">confirmada</span> No había una verificación objetiva al final.</p>
+<span class="k">Solución</span><p>Pide al agente (o ejecuta) <code>gh auth status</code> y <code>gh api user --jq .login</code>.</p>
+<span class="k">Comprobar</span><p>Aparece <b>tu</b> usuario. «You are not logged into any GitHub hosts» = no conectado.</p></div></div>
+
+<div class="faq"><div class="fq"><span class="l">K</span>«Ya se publicó la página, pero el agente sigue trabajando»</div><div class="fb">
+<span class="k">Observado</span><p>Enlace visible, agente «detectando un fallo real» (3:11).</p>
+<span class="k">Causa</span><p><span class="tag t-real">confirmada</span> Estaba corrigiendo un error del código tras la primera publicación.</p>
+<span class="k">Solución</span><p>Déjalo terminar; al acabar volverá a publicar. Si necesitas cerrar, puedes interrumpirlo («nunca hay problema de interrumpirlo») y retomarlo otro día.</p>
+<span class="k">Comprobar</span><p>Recarga el enlace (Ctrl+F5) y verifica los cambios.</p></div></div>
+
+<div class="faq"><div class="fq"><span class="l">L</span>«Se terminó mi límite gratuito»</div><div class="fb">
+<span class="k">Observado</span><p>Una estudiante alcanzó el límite (3:12).</p>
+<span class="k">Causa</span><p><span class="tag t-real">confirmada</span> Los modelos gratuitos tienen cuotas. El profesor indicó que «se restablece cada ciertas horas» <span class="tag t-pend">verificar periodo exacto</span>.</p>
+<span class="k">Solución</span><p>Espera el restablecimiento o cambia a otro modelo gratuito vigente. Tu trabajo está en la carpeta: no se pierde. Se hará repaso en la siguiente clase.</p>
+<span class="k">No hagas</span><p>No conectes una API de pago con prisa y sin límite de gasto.</p></div></div>
+
+<div class="faq"><div class="fq"><span class="l">M</span>«¿Puedo trabajar con Claude Code en lugar de OpenCode?»</div><div class="fb">
+<span class="k">Observado</span><p>Pregunta en el chat (3:04–3:05).</p>
+<span class="k">Respuesta</span><p><span class="tag t-real">confirmada</span> Sí: «directamente en Claude Code, sin OpenCode», diciéndoselo de forma conversacional e indicando qué repositorio es. En Claude, GitHub se conecta desde la sección de conexiones/conectores iniciando sesión; «es mucho más fácil». Requiere suscripción de Claude.</p>
+<span class="k">Prompt</span><p class="mono small">Conéctate a mi repositorio de GitHub "dentea", revisa el proyecto y dime qué contiene antes de hacer cambios.</p></div></div>
+
+<div class="faq"><div class="fq"><span class="l">N</span>«¿Puedo conectar dos agentes a la misma carpeta?»</div><div class="fb">
+<span class="k">Respuesta</span><p><span class="tag t-real">confirmada</span> Sí (capítulo 7): misma carpeta o mismo repositorio. Evita que editen el mismo archivo a la vez; asigna responsabilidades.</p></div></div>
+
+<div class="faq"><div class="fq"><span class="l">O</span>«¿Cómo continúo otro día sin perder el proyecto?»</div><div class="fb">
+<span class="k">Respuesta</span><p>Tu trabajo vive en la <b>carpeta</b> (y en el repositorio si ya lo subiste). Abre OpenCode → elige la misma carpeta → sesión nueva. Si se borró la conversación, «hacer un nuevo chat y ahí mismo meter el prompt».</p>
+<span class="k">Prompt</span><p class="mono small">Lee esta carpeta y el archivo NOTAS_AGENTES.md (si existe). Resume en qué estado quedó el proyecto y qué faltaba. No modifiques nada todavía.</p>
+<span class="k">Comprobar</span><p>El agente describe correctamente tu proyecto.</p></div></div>
+</section>
