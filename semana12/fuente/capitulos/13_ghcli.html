@@ -1,0 +1,144 @@
+<section class="chap">
+<div class="chap-head"><div class="big">13</div><div class="k">Capítulo 13 · Práctica 7</div>
+<h1 id="c13" data-toc="13|Práctica 7 · Git y GitHub CLI con OpenCode">Práctica 7 · Instalar Git y GitHub CLI con OpenCode</h1>
+<p class="d">El tramo con más incidencias de la clase. Aquí está todo: prompts originales, qué falló, por qué, y el procedimiento seguro y reproducible.</p>
+<div class="tags"><span class="tag t-real">Realizado en clase</span><span class="tag t-orig">P09 · P10 · P11</span><span class="tag t-act">Comandos verificados</span></div></div>
+<div class="inthis"><b>En este capítulo</b><span>Objetivo de la práctica</span><span>Primer prompt (P09)</span><span>Problemas reales</span><span>Prompt correctivo (P10)</span><span>Prompt reforzado en dos partes (P11)</span><span>Por qué P11 intentaba corregir P09</span><span>Comandos explicados uno a uno</span><span>Flujo de autenticación correcto</span><span>Ventanas de permisos de Windows</span></div>
+
+<h2 id="c13-obj">13.1 Qué estábamos intentando conseguir</h2>
+<p>Conectar OpenCode con la cuenta de GitHub de cada estudiante para que, a partir de ese momento, bastara una frase («crea un repositorio y publícalo») para publicar cualquier proyecto. Para eso la computadora necesita:</p>
+<div class="g3">
+<div class="card"><h4>Git</h4><p class="small">Guarda el historial y sube los archivos.</p></div>
+<div class="card"><h4>GitHub CLI (<code>gh</code>)</h4><p class="small">Programa oficial de GitHub para la terminal: inicia sesión, crea repositorios, configura Pages.</p></div>
+<div class="card"><h4>Una sesión autorizada</h4><p class="small">Tu cuenta autoriza a <code>gh</code> desde el navegador; el agente nunca ve tu contraseña.</p></div>
+</div>
+<p><span class="tag t-expl">Explicado en clase</span> Orden indicado: 1) iniciar sesión en github.com en el navegador normal; 2) pegar el prompt en una sesión de OpenCode (nueva o la misma); 3) esperar a que el agente instale y pida la autorización. El profesor no lo hizo en su pantalla porque ya tenía todo instalado.</p>
+
+<h2 id="c13-p09">13.2 Primer prompt original (P09)</h2>
+<div class="prompt orig"><div class="ph"><span class="id">P09</span> Prompt original · chat 02:32:16 (repetido 02:42:53) · Profesor<span class="src">Destino: OpenCode · texto literal</span></div><pre><!--RAW:P09--></pre><div class="pf">Comentario oral: «lo último no me agradó tanto, lo de no publiques código sin mi autorización, pero ahorita le vamos dando autorizaciones».</div></div>
+<table class="compact"><thead><tr><th style="width:24%">Bloque</th><th>Qué pide</th><th style="width:34%">Valoración</th></tr></thead><tbody>
+<tr><td>Detección del sistema</td><td>Ver SO y si Git y <code>gh</code> existen.</td><td>Correcto: evita reinstalar.</td></tr>
+<tr><td>Instalación</td><td><code>winget install --id GitHub.cli --source winget</code></td><td><span class="tag t-act">Verificado</span> WinGet es método oficial en Windows. No instala Git si falta.</td></tr>
+<tr><td>No romper configuración</td><td>«sin modificar configuraciones existentes que ya funcionen»</td><td>Buena salvaguarda.</td></tr>
+<tr><td>Inicio de sesión</td><td><code>gh auth login --web --git-protocol https</code></td><td><span class="tag t-act">Verificado</span> Flags válidos. Pero es <b>interactivo</b>: muestra un código y espera; si el agente lo ejecuta en una terminal oculta, el estudiante no ve el código.</td></tr>
+<tr><td>Pausa humana</td><td>Detenerse solo para autorizar; nunca pedir contraseñas ni tokens.</td><td>Excelente seguridad.</td></tr>
+<tr><td>Verificación</td><td><code>gh auth status</code>, <code>gh auth setup-git</code>, versiones.</td><td>Correcto.</td></tr>
+<tr><td>Límites</td><td>No publicar, crear repos ni cambiar permisos sin autorización.</td><td>Seguro, pero bloquea el siguiente paso si no se autoriza después.</td></tr>
+</tbody></table>
+
+<h2 id="c13-probs">13.3 Los problemas que aparecieron</h2>
+<table class="compact"><thead><tr><th style="width:26%">Incidente (≈ tiempo)</th><th>Causa probable</th><th style="width:36%">Solución didáctica y segura</th></tr></thead><tbody>
+<tr><td>«¿Dónde pego el prompt? ¿En GitHub?» (2:33, 3:04)</td><td>Confusión entre el sitio de GitHub y el agente.</td><td>Los prompts van <b>siempre en OpenCode</b>. En github.com solo se inicia sesión.</td></tr>
+<tr><td>Instalación que «sigue trabajando» en segundo plano</td><td>winget descarga e instala; puede tardar o esperar permisos.</td><td>Esperar; preguntar «¿en qué paso vas?». Revisar si hay una ventana de permisos detrás de OpenCode.</td></tr>
+<tr><td>Ventanas que no aparecen</td><td>Se abren detrás de OpenCode o en otro navegador (p. ej. Edge).</td><td>Minimizar OpenCode y revisar la barra de tareas.</td></tr>
+<tr><td>«El código no me llega al correo» (2:34)</td><td>Confusión: el <b>código de dispositivo</b> de <code>gh</code> se muestra en la terminal/OpenCode, no se envía por correo.</td><td>Buscar el código de 8 caracteres (formato <code>XXXX-XXXX</code>) en la respuesta del agente o en la ventana de PowerShell.</td></tr>
+<tr><td>«El código caducó» (2:45)</td><td>El código de dispositivo vence en pocos minutos.</td><td>Pedir uno nuevo (P10) y usarlo de inmediato.</td></tr>
+<tr><td>«No ha terminado de iniciar sesión»</td><td>El proceso <code>gh auth login</code> se interrumpió o quedó esperando.</td><td>Cancelar y reiniciar el login con código nuevo; verificar con <code>gh auth status</code>.</td></tr>
+<tr><td>Ventana de PowerShell 5.1 «Autorización de GitHub CLI» (2:55)</td><td>El prompt P11 pidió abrir una ventana visible con <code>Start-Process</code>.</td><td>Es esperado. Copiar la URL que muestra y el código; continuar en el navegador.</td></tr>
+<tr><td>Solicitud de permisos con un nombre de persona desconocido (2:51)</td><td>No determinable con la evidencia disponible.</td><td><b>Rechazar</b> estuvo bien. Ver 13.9.</td></tr>
+<tr><td>«Mi recomendación: empezar con Netlify Drop…» (2:48)</td><td>Ante la dificultad, el agente propuso otra plataforma.</td><td>Responder: «No cambies de plataforma. Usa GitHub Pages; dime qué paso falló».</td></tr>
+<tr><td>«Te pide pagar hosting»</td><td>El agente sugirió un servicio de pago.</td><td>GitHub Pages es gratuito para repos públicos; no contratar nada.</td></tr>
+</tbody></table>
+
+<h2 id="c13-p10">13.4 Prompt correctivo (P10)</h2>
+<div class="prompt orig"><div class="ph"><span class="id">P10</span> Prompt original · chat 02:48:19 · Profesor<span class="src">Destino: OpenCode · texto literal</span></div><pre><!--RAW:P10--></pre><div class="pf">Contexto oral: «este mini prompt es por si les hace falta el código, con un nuevo código… para que les abra la ventana de dónde lo deben colocar».</div></div>
+<p><b>Qué resolvía:</b> el código caducado y la dificultad para encontrar dónde introducirlo. <b>Limitación:</b> un agente no siempre puede «dejar abierta» una ventana de la terminal interactiva, pero sí puede abrir la página <code>https://github.com/login/device</code> en el navegador y mostrar el código en el chat.</p>
+
+<h2 id="c13-p11" class="pb">13.5 Prompt reforzado en dos partes (P11)</h2>
+<p><span class="tag t-orig">Prompt original</span> El profesor indicó: «van a ser dos partes, lo van a tener que pegar todo junto». El primer mensaje del chat se corta a mitad de palabra («prepara el pr»); su longitud es de <b>exactamente 4 000 caracteres</b>, lo que sugiere un límite de longitud del chat de Meet <span class="tag t-pend">inferencia</span>. El segundo mensaje repite desde el punto 5 completo, así que los puntos 1–4 provienen solo de la parte A y del 5 al 7 de la parte B. Se reproducen tal cual, sin rellenar el corte.</p>
+<div class="prompt orig"><div class="ph"><span class="id">P11·A</span> Parte A · chat 02:53:02 · Profesor<span class="src">Texto literal · CORTADO en la fuente</span></div><pre><!--RAW:P11a--></pre><div class="pf">⚠ El mensaje original termina aquí, cortado. La parte B retoma desde «5. DEJA EL PROYECTO LISTO EN GITHUB» (sin el formato de viñetas).</div></div>
+<div class="prompt orig"><div class="ph"><span class="id">P11·B</span> Parte B · chat 02:53:18 · Profesor<span class="src">Texto literal · continuación</span></div><pre><!--RAW:P11b--></pre></div>
+<table class="compact"><thead><tr><th style="width:22%">Bloque de P11</th><th>Propósito</th></tr></thead><tbody>
+<tr><td>Modo ejecución inmediata</td><td>Evitar que el agente responda con un tutorial en lugar de ejecutar.</td></tr>
+<tr><td>1 · Instala todo</td><td>Añade Git (P09 no lo instalaba), flags de aceptación de acuerdos y refresco del PATH.</td></tr>
+<tr><td>2 · Ventanas de inicio</td><td>Abrir una PowerShell <b>visible</b> con <code>Start-Process</code> para que el estudiante vea el código; usa <code>--clipboard</code> para copiarlo.</td></tr>
+<tr><td>3 · Interacciones humanas</td><td>Lista exacta de lo que hace el estudiante (A–D) y reglas de no pedir credenciales.</td></tr>
+<tr><td>4 · Verificación</td><td>Seis comprobaciones; «no digas que quedó conectado si no lo está».</td></tr>
+<tr><td>5 · Proyecto en GitHub</td><td>Revisar secretos, <code>.gitignore</code>, repositorio <b>privado</b>, no forzar push.</td></tr>
+<tr><td>6 · Autonomía</td><td>Usar herramientas reales; declarar permisos faltantes; no desactivar seguridad.</td></tr>
+<tr><td>7 · Resultado</td><td>Resumen con ✅ y pendientes.</td></tr>
+</tbody></table>
+<div class="box warn"><span class="bt">Dos detalles técnicos a vigilar</span><ul><li><b>Repositorio privado + GitHub Pages:</b> la parte B pide crear el repositorio PRIVADO; con cuenta gratuita, Pages <b>no publica</b> repos privados. Por eso después se usó P12 («ya pública»). Para publicar, el repositorio debe ser público (sin secretos).</li><li>La autenticación es un proceso interactivo: si el agente lo lanza en una herramienta sin pantalla, el código no se ve. La ventana visible lo resolvió en la pantalla compartida.</li></ul></div>
+
+<h2 id="c13-aud">13.6 Auditoría: por qué P11 corregía a P09</h2>
+<div class="g2">
+<div class="card orange"><h4>Fallos de P09 en la práctica</h4><ul class="small"><li>No instalaba Git si faltaba.</li><li>El código de dispositivo quedaba oculto en una terminal no interactiva.</li><li>Sin instrucción para códigos caducados.</li><li>Sin refresco del PATH tras instalar.</li><li>Sin pasos para crear el repositorio: el agente improvisaba (Netlify).</li></ul></div>
+<div class="card green"><h4>Lo que añadió P11</h4><ul class="small"><li>Git + gh con aceptación de acuerdos.</li><li>Ventana visible y página de dispositivo abierta automáticamente.</li><li><code>--clipboard</code> (existe: «Copy one-time OAuth device code to clipboard»).</li><li>Verificación de identidad (<code>gh api user --jq .login</code>).</li><li>Revisión de secretos y <code>.gitignore</code>.</li></ul></div>
+</div>
+<p>Pendientes que ni P11 resuelve y que corrigen las versiones del subagente (Anexos B1/B2, secciones P09–P11): pedir explícitamente un código nuevo si caduca; separar «instalar y autenticar» de «publicar»; configurar <code>git config user.name/user.email</code> sin inventar datos (usar los de la cuenta o preguntar); decidir público/privado según si se usará Pages; y una prueba final que no dependa de la palabra del agente.</p>
+
+<h2 id="c13-cmd">13.7 Tutorial técnico reproducible: los comandos</h2>
+<p><span class="tag t-act">Verificado en cli.github.com/manual · 22-nov-2026</span> Puedes <b>delegar</b> todo al agente; si quieres hacerlo tú, abre PowerShell (Windows) o Terminal (macOS).</p>
+<table class="compact"><thead><tr><th style="width:30%">Comando</th><th>Qué hace</th><th style="width:30%">Respuesta esperada / error típico</th></tr></thead><tbody>
+<tr><td><code>git --version</code></td><td>Comprueba que Git está instalado.</td><td><i>git version 2.x</i>. «no se reconoce» → no instalado o PATH sin refrescar (cierra y abre la terminal).</td></tr>
+<tr><td><code>gh --version</code></td><td>Comprueba GitHub CLI.</td><td><i>gh version 2.x</i>. Mismo error → instalar o refrescar.</td></tr>
+<tr><td><code>winget install --id Git.Git -e --source winget</code></td><td>Instala Git en Windows.</td><td>Puede pedir permiso de administrador (verifica el editor).</td></tr>
+<tr><td><code>winget install --id GitHub.cli -e --source winget</code></td><td>Instala GitHub CLI en Windows. En macOS: <code>brew install gh</code>.</td><td>«No se encontró winget» → instalar «App Installer» desde Microsoft Store o usar el MSI oficial.</td></tr>
+<tr><td><code>gh auth login --web --git-protocol https</code></td><td>Inicia sesión abriendo el navegador con un código de un solo uso. Añade <code>--clipboard</code> para copiar el código.</td><td>Muestra «First copy your one-time code: XXXX-XXXX». Caduca en minutos.</td></tr>
+<tr><td><code>gh auth status</code></td><td>Muestra si hay sesión y con qué cuenta.</td><td>«Logged in to github.com account <i>usuario</i>». Si no: «You are not logged into any GitHub hosts».</td></tr>
+<tr><td><code>gh auth setup-git</code></td><td>Configura Git para usar las credenciales de <code>gh</code> al hacer push.</td><td>Sin salida = correcto.</td></tr>
+<tr><td><code>gh api user --jq .login</code></td><td>Pregunta a GitHub quién eres.</td><td>Tu nombre de usuario. Error 401 → sesión inválida.</td></tr>
+<tr><td><code>gh repo list --limit 5</code></td><td>Lista hasta 5 de tus repositorios (solo lectura).</td><td>Lista o vacío si aún no tienes repos (eso no es error).</td></tr>
+</tbody></table>
+<pre class="cmd"><span class="c"># Comprobación completa (solo lectura, segura de ejecutar)</span>
+<span class="p">PS&gt;</span> git --version
+<span class="p">PS&gt;</span> gh --version
+<span class="p">PS&gt;</span> gh auth status
+<span class="p">PS&gt;</span> gh api user --jq .login</pre>
+<div class="box sec"><span class="bt">Nunca</span>Ejecutes <code>gh auth token</code> ni pidas al agente que «muestre el token»: imprime tu credencial. No uses <code>--insecure-storage</code>. No compartas capturas de la terminal con el código de dispositivo visible.</div>
+
+<h2 id="c13-flujo">13.8 Flujo correcto de autenticación</h2>
+<figure>
+<svg viewBox="0 0 700 260" font-family="Inter">
+<defs><marker id="a13" markerWidth="8" markerHeight="8" refX="7" refY="4" orient="auto"><path d="M0 0L8 4L0 8z" fill="#5B6272"/></marker></defs>
+<g font-size="9" font-weight="800" text-anchor="middle">
+<rect x="10" y="10" width="160" height="22" rx="6" fill="#EAF2FF"/><text x="90" y="25" fill="#1E4FD8">OpenCode / terminal</text>
+<rect x="270" y="10" width="160" height="22" rx="6" fill="#F1ECFF"/><text x="350" y="25" fill="#6A3FD1">Tú (humano)</text>
+<rect x="530" y="10" width="160" height="22" rx="6" fill="#E8F8F0"/><text x="610" y="25" fill="#0F9D63">github.com (oficial)</text></g>
+<g stroke="#DCE2EE" stroke-dasharray="3 3"><path d="M90 34V250M350 34V250M610 34V250"/></g>
+<g font-size="8" fill="#262B36">
+<circle cx="90" cy="50" r="8" fill="#1E4FD8"/><text x="90" y="53" fill="#fff" text-anchor="middle" font-weight="800">1</text><text x="104" y="53">inicia gh auth login --web</text>
+<circle cx="90" cy="76" r="8" fill="#1E4FD8"/><text x="90" y="79" fill="#fff" text-anchor="middle" font-weight="800">2</text><text x="104" y="79">genera código XXXX-XXXX</text>
+<circle cx="610" cy="102" r="8" fill="#0F9D63"/><text x="610" y="105" fill="#fff" text-anchor="middle" font-weight="800">3</text><text x="460" y="105">abre github.com/login/device</text>
+<circle cx="350" cy="128" r="8" fill="#6A3FD1"/><text x="350" y="131" fill="#fff" text-anchor="middle" font-weight="800">4</text><text x="364" y="131">inicia sesión (si hace falta) y 2FA</text>
+<circle cx="350" cy="154" r="8" fill="#6A3FD1"/><text x="350" y="157" fill="#fff" text-anchor="middle" font-weight="800">5</text><text x="364" y="157">pega el código (Ctrl+V) → Continue</text>
+<circle cx="350" cy="180" r="8" fill="#6A3FD1"/><text x="350" y="183" fill="#fff" text-anchor="middle" font-weight="800">6</text><text x="364" y="183">revisa permisos → Authorize (verde)</text>
+<circle cx="610" cy="206" r="8" fill="#0F9D63"/><text x="610" y="209" fill="#fff" text-anchor="middle" font-weight="800">7</text><text x="470" y="209">«Congratulations…»</text>
+<circle cx="90" cy="232" r="8" fill="#1E4FD8"/><text x="90" y="235" fill="#fff" text-anchor="middle" font-weight="800">8</text><text x="104" y="235">gh auth status · gh api user → ✅</text>
+</g>
+<g stroke="#5B6272" stroke-width="1.1" marker-end="url(#a13)" fill="none"><path d="M98 82 600 98M600 108 360 124M360 186 600 202M600 212 100 228"/></g>
+</svg>
+<figcaption><b>Figura 15.</b> Flujo de autorización por código de dispositivo de GitHub CLI.</figcaption></figure>
+<ol class="steps">
+<li>OpenCode inicia el proceso (con el prompt V1 del Anexo B1).</li>
+<li>GitHub CLI genera un <b>código temporal</b>; el agente debe mostrártelo en el chat.</li>
+<li>Se abre (o abres tú) <b>https://github.com/login/device</b>. Comprueba el dominio exacto.</li>
+<li>Si te lo pide, inicia sesión <b>en la página oficial</b>.</li>
+<li>Escribe o pega el código y pulsa <b>Continue</b>.</li>
+<li>Lee los permisos que solicita «GitHub CLI» y pulsa <b>Authorize</b> (botón verde) si estás de acuerdo.</li>
+<li>GitHub confirma que el dispositivo está conectado.</li>
+<li>Vuelve a OpenCode y escribe «ya autoricé, continúa y verifica».</li>
+<li>El agente ejecuta <code>gh auth status</code>.</li>
+<li>Y confirma la identidad con <code>gh api user --jq .login</code>: debe ser <b>tu</b> usuario.</li>
+</ol>
+<div class="box hist"><span class="bt">Así se resolvió en clase (pantalla compartida, ≈ 2:57–3:00)</span>La estudiante tenía abierta una ventana «Windows PowerShell 5.1 · Autorización de GitHub CLI» y el navegador pidiendo iniciar sesión otra vez. El profesor le indicó: minimizar PowerShell; si no aparece la página, <b>copiar la URL https que muestra PowerShell</b> (clic derecho o Ctrl+C) y abrirla en Chrome; usar el código que aparecía en la PowerShell; <b>Continue → Authorize</b> en verde. Conclusión dicha en voz alta: «El código no llega por correo».</div>
+
+<h2 id="c13-uac">13.9 Seguridad: ventanas de permisos de Windows</h2>
+<div class="g2">
+<div>
+<p>Una estudiante vio una ventana que pedía permiso para «hacer cambios en tu equipo» con el nombre de <b>una persona que no conocía</b>, y la rechazó. El profesor: «estuvo bien… hay que tener cuidado cuando no conocemos el nombre». Lo esperable es ver como editor algo relacionado con lo que se instala (GitHub, Git, Microsoft para winget, OpenCode).</p>
+<h4>Cómo revisar una ventana de Control de cuentas de usuario</h4>
+<ol>
+<li><b>Lee el nombre del programa.</b> ¿Coincide con lo que pediste instalar?</li>
+<li><b>Mira el «Editor comprobado».</b> Si dice «Desconocido» o un nombre ajeno, desconfía.</li>
+<li><b>Mostrar más detalles</b>: revisa la ruta del archivo (¿viene de Descargas? ¿de una carpeta temporal rara?).</li>
+<li><b>Relaciona con la operación</b>: ¿el agente acaba de decir que iba a instalar algo?</li>
+<li><b>Si dudas, rechaza.</b> Pregunta al agente: «¿qué programa intentaste ejecutar y desde qué ruta?».</li>
+<li>Consulta la documentación oficial del programa.</li>
+</ol></div>
+<div>
+<div class="box danger"><span class="bt">Nunca</span><ul><li>Autorices automáticamente cualquier ventana para «avanzar».</li><li>Desactives el antivirus, SmartScreen o el Control de cuentas.</li><li>Ejecutes scripts que te pase alguien sin saber qué hacen.</li></ul></div>
+<div class="box note"><span class="bt">Matiz sobre una indicación de clase</span>Ante otra ventana, se recomendó pulsar «select» para ver qué pasaba. Es razonable <b>solo si</b> la ventana corresponde claramente a la operación en curso (p. ej. PowerShell de GitHub CLI). Aplica primero la lista de la izquierda.</div>
+<div class="box tip"><span class="bt">Sobre la terminal</span>«Si les aparece la terminal, no se me espanten, no es nada malo»: PowerShell solo es otra forma de dar órdenes a la computadora. Lo que importa es <b>qué</b> comando se ejecuta.</div>
+</div></div>
+</section>

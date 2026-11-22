@@ -1,0 +1,93 @@
+# MISIÓN: INSTALAR Y CONECTAR GITHUB AUTOMÁTICAMENTE
+
+Actúa como un agente DevOps con capacidad de ejecutar comandos, instalar software y abrir ventanas en Windows.
+
+**MODO EJECUCIÓN INMEDIATA. NO QUIERO UN TUTORIAL NI UN PLAN. QUIERO QUE REALMENTE EJECUTES TODO.**
+
+Soy un estudiante sin conocimientos técnicos. Tu misión es dejar GitHub instalado, autenticado y funcionando, interviniendo yo únicamente para autorizar permisos e iniciar sesión en ventanas oficiales.
+
+## 1. INSTALA TODO AHORA
+
+Utiliza tus herramientas de terminal para ejecutar acciones reales.
+
+- Detecta Windows y comprueba si Git, GitHub CLI y winget existen.
+- Si falta Git, ejecuta:
+  `winget install --id Git.Git -e --source winget --accept-package-agreements --accept-source-agreements`
+- Si falta GitHub CLI, ejecuta:
+  `winget install --id GitHub.cli -e --source winget --accept-package-agreements --accept-source-agreements`
+- Verifica ambos ejecutables. Si Windows no reconoce los comandos después de instalarlos, actualiza el entorno de la terminal o abre una nueva sesión de PowerShell.
+- Si winget falla, utiliza exclusivamente instaladores oficiales, diagnostica el problema y aplica una alternativa segura.
+- Si Windows solicita permisos de administrador, muestra la ventana correspondiente para que yo los autorice.
+
+NO te detengas después de explicar un comando. EJECÚTALO.
+
+## 2. ABRE LAS VENTANAS DE INICIO DE SESIÓN
+
+Esta parte es OBLIGATORIA.
+
+No intentes completar una autenticación interactiva dentro de una herramienta de ejecución que no permita introducir datos.
+
+Si es necesario, utiliza PowerShell y `Start-Process` para abrir una ventana REAL Y VISIBLE en mi escritorio, manteniéndola abierta durante la autenticación.
+
+Ejecuta:
+
+`gh auth login --hostname github.com --git-protocol https --web --clipboard`
+
+El objetivo es abrir automáticamente el navegador predeterminado y permitir la autorización mediante el flujo oficial de GitHub.
+
+Si el navegador no se abre automáticamente, ábrelo tú mismo en:
+
+https://github.com/login/device
+
+Muestra claramente el código temporal que proporciona GitHub CLI. Cuando sea posible, cópialo al portapapeles.
+
+## 3. GUÍA MIS ÚNICAS INTERACCIONES
+
+Explícame únicamente esto, cuando corresponda:
+
+**A.** Si GitHub solicita iniciar sesión, introduce tu correo o usuario y contraseña directamente en la página oficial de GitHub.
+
+**B.** Si solicita un código de verificación de dos factores, introdúcelo en GitHub.
+
+**C.** Si aparece la pantalla Device Activation, pega el código temporal utilizando Ctrl + V.
+
+**D.** Pulsa el botón de autorización de GitHub CLI después de revisar los permisos.
+
+IMPORTANTE:
+- Todas las contraseñas deben introducirse exclusivamente en las páginas oficiales de GitHub o interfaces seguras del sistema.
+- Nunca me pidas escribir contraseñas, códigos 2FA ni tokens en el chat de OpenCode.
+- No leas, captures, almacenes ni imprimas credenciales.
+- No me obligues a buscar aplicaciones, ejecutar comandos o navegar manualmente por menús si puedes abrirlos tú.
+- Mantén abierta la ventana de PowerShell hasta completar la autenticación.
+
+## 4. CONTINÚA AUTOMÁTICAMENTE
+
+Mientras espero la autorización, conserva el proceso y después comprueba si se completó.
+
+Ejecuta y verifica:
+
+`gh auth status`
+
+`gh auth setup-git`
+
+`gh api user --jq .login`
+
+`git --version`
+
+`gh --version`
+
+`gh repo list --limit 5`
+
+Si alguna comprobación falla, identifica la causa, corrígela y repite la verificación.
+
+No digas que quedó conectado si realmente no lo está.
+
+## 5. DEJA EL PROYECTO LISTO EN GITHUB
+
+Si estoy trabajando dentro de una carpeta que contiene un proyecto:
+
+- Detecta su nombre y comprueba si ya tiene un repositorio Git.
+- Revisa si existen archivos secretos, contraseñas, tokens, carpetas de dependencias o archivos que no deban publicarse.
+- Configura un `.gitignore` adecuado.
+- Si no existe repositorio remoto, prepara uno nuevo PRIVADO en mi propia cuenta de GitHub.
+- Si no existe historial Git local, inicialízalo y prepara el pr

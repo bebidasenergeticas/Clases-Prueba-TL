@@ -1,0 +1,13 @@
+Crea una **calculadora interactiva de automatización de procesos con inteligencia artificial**, con un diseño moderno, profesional e intuitivo.
+
+El usuario podrá ingresar un proceso empresarial, el tiempo que dedica, su frecuencia, costo por hora y número de empleados involucrados.
+
+La calculadora deberá analizar:
+
+- 🤖 **Potencial de automatización:** porcentaje estimado del proceso que puede automatizarse con IA.
+- ⏱️ **Tiempo ahorrado:** horas recuperadas por semana, mes y año.
+- 💰 **Ahorro económico:** reducción estimada de costos operativos.
+- 📊 **ROI:** inversión estimada, periodo de recuperación y rentabilidad.
+- 🛠️ **Solución recomendada:** herramientas como n8n, Make, Zapier o agentes de IA.
+
+Incluye un **dashboard visual con gráficos interactivos**, comparación antes vs. después y recomendaciones personalizadas. Los cálculos deben utilizar supuestos transparentes y editables, sin inventar cifras como si fueran datos reales.

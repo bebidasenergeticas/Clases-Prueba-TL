@@ -1,0 +1,81 @@
+<section class="chap">
+<div class="chap-head"><div class="big">08</div><div class="k">Capítulo 8 · Práctica 3</div>
+<h1 id="c08" data-toc="8|Práctica 3 · Landing page DENTEA">Práctica 3 · Landing page DENTEA</h1>
+<p class="d">Una landing page odontológica premium construida por todos con el mismo prompt, para comparar OpenCode con plataformas como Lovable.</p>
+<div class="tags"><span class="tag t-real">Realizado en clase</span><span class="tag t-orig">Prompt original P06</span></div></div>
+
+<h2 id="c08-ctx">8.1 Contexto</h2>
+<p>En una clase anterior el grupo había creado una landing de dentistas con Lovable. Esta vez el profesor propuso repetirla con OpenCode «para comparar qué tan mal o bueno puede ser para una landing page», y después que cada quien hiciera la suya (capítulos 9–10) y la publicara (capítulo 14). <b>DENTEA</b> es un nombre de ejercicio: una clínica ficticia.</p>
+
+<h2 id="c08-orig">8.2 Prompt original completo</h2>
+<div class="prompt orig"><div class="ph"><span class="id">P06</span> Prompt original · chat 01:39:17 · Profesor<span class="src">Destino: OpenCode · texto literal</span></div><pre><!--RAW:P06--></pre></div>
+<div class="box warn"><span class="bt">Aviso dado en clase (≈ 1:40)</span>«El prompt les va a pedir iniciar sesión en Google Flow. Si pueden, pongan su contraseña; si no, díganle que esa parte de las imágenes no la haga.» Se sugirió usar una cuenta alterna. <b>Recomendación de esta guía:</b> la contraseña se escribe solo en la página oficial de Google, nunca en el chat del agente.</div>
+
+<h2 id="c08-anal">8.3 Anatomía del prompt</h2>
+<table class="compact"><thead><tr><th style="width:18%">Componente</th><th>En DENTEA</th><th style="width:30%">Observación técnica</th></tr></thead><tbody>
+<tr><td>Rol</td><td>Diseñador web senior, director creativo, desarrollador frontend.</td><td>Orienta estilo y nivel de exigencia.</td></tr>
+<tr><td>Objetivo</td><td>Marca odontológica de lujo que convierta visitantes en pacientes.</td><td>Claro y medible (botón de cita).</td></tr>
+<tr><td>Diseño</td><td>Minimalista tipo Apple; blanco, azul hielo, beige, azul profundo; responsive.</td><td>Paleta concreta = menos ambigüedad.</td></tr>
+<tr><td>Secciones</td><td>Hero, servicios, beneficios, presentación, testimonios, FAQ, WhatsApp.</td><td>Estructura completa de landing.</td></tr>
+<tr><td>Tecnología</td><td>Framer Motion.</td><td>Framer Motion es una librería de <b>React</b>: obliga a un proyecto con dependencias y compilación. Si quieres HTML simple, pide animaciones con CSS.</td></tr>
+<tr><td>Herramientas</td><td>Navegador + Google Flow obligatorio.</td><td>Depende de la cuenta del estudiante; conviene un plan B.</td></tr>
+<tr><td>Restricciones</td><td>No inventar testimonios, certificaciones, precios ni contacto.</td><td>Excelente práctica; choca con «testimonios» → usar texto provisional marcado.</td></tr>
+<tr><td>Validación</td><td>Probar en desktop y móvil, corregir, optimizar.</td><td>Falta definir criterios concretos (qué es «funcional»).</td></tr>
+<tr><td>Entregable</td><td>Landing real y lista para desplegar.</td><td>No especifica dónde se desplegará (base path de GitHub Pages).</td></tr>
+</tbody></table>
+
+<figure>
+<svg viewBox="0 0 700 230" font-family="Inter">
+<rect x="200" y="6" width="300" height="218" rx="10" fill="#fff" stroke="#9AA6BF" stroke-width="1.3"/>
+<g font-size="8" font-weight="700" text-anchor="middle">
+<rect x="210" y="14" width="280" height="14" rx="3" fill="#EEF2F9"/><text x="350" y="24" fill="#262B36">Navegación · logo · «Agendar cita»</text>
+<rect x="210" y="32" width="280" height="44" rx="4" fill="#CFE0FF"/><text x="350" y="52" fill="#0B1F4D">HERO · titular + imagen + botón principal</text><text x="350" y="66" font-weight="500" font-size="7" fill="#1E4FD8">propuesta de valor en 5 segundos</text>
+<rect x="210" y="80" width="136" height="30" rx="4" fill="#EAF2FF"/><text x="278" y="98" fill="#1E4FD8">Servicios</text>
+<rect x="354" y="80" width="136" height="30" rx="4" fill="#EAF2FF"/><text x="422" y="98" fill="#1E4FD8">Beneficios</text>
+<rect x="210" y="114" width="280" height="22" rx="4" fill="#F6F8FC"/><text x="350" y="129" fill="#262B36">Presentación de la clínica</text>
+<rect x="210" y="140" width="280" height="22" rx="4" fill="#FFF7E0"/><text x="350" y="155" fill="#8A5A0C">Testimonios (provisionales, marcados)</text>
+<rect x="210" y="166" width="280" height="22" rx="4" fill="#F1ECFF"/><text x="350" y="181" fill="#6A3FD1">Preguntas frecuentes</text>
+<rect x="210" y="192" width="280" height="24" rx="4" fill="#0F9D63"/><text x="350" y="208" fill="#fff">CTA final · Agendar por WhatsApp · pie</text>
+</g>
+<circle cx="478" cy="200" r="11" fill="#25D366"/><text x="478" y="204" font-size="10" text-anchor="middle" fill="#fff">✆</text>
+<g font-size="8" fill="#5B6272">
+<text x="10" y="54">1 · Captar atención</text><text x="10" y="98">2 · Explicar qué ofreces</text><text x="10" y="129">3 · Generar confianza</text><text x="10" y="155">4 · Prueba social</text><text x="10" y="181">5 · Resolver objeciones</text><text x="10" y="208" font-weight="700" fill="#0F9D63">6 · Convertir</text>
+<text x="515" y="52">Imágenes: Google Flow</text><text x="515" y="64">o carpeta imagenes/</text>
+<text x="515" y="150">Nunca opiniones falsas</text><text x="515" y="162">presentadas como reales</text>
+<text x="515" y="200">Enlace wa.me con mensaje</text><text x="515" y="212">prellenado</text>
+</g></svg>
+<figcaption><b>Figura 11.</b> Estructura de una landing page de conversión, aplicada a DENTEA.</figcaption></figure>
+
+<h2 id="c08-v">8.4 Prompts mejorados</h2>
+<p><span class="tag t-mej">Prompt mejorado</span> Las versiones del subagente (sencilla y avanzada) están en los <a href="#anexob1">Anexos B1</a> y <a href="#anexob2">B2</a>, sección P06. La avanzada añade: arquitectura (HTML/CSS/JS estático o React+Vite), accesibilidad (contraste, teclado, <code>alt</code>), rendimiento (imágenes optimizadas, carga diferida), control de dependencias, SEO básico (título, descripción, Open Graph), enlace <code>wa.me</code> con número provisional, testimonios marcados como ficticios, pruebas visuales y preparación para GitHub Pages.</p>
+
+<h2 id="c08-tut">8.5 Tutorial de construcción</h2>
+<ol class="steps">
+<li>Usa tu carpeta de clase o crea una subcarpeta <code>dentea</code> (recomendado: un proyecto por carpeta facilita publicarlo después).</li>
+<li>Abre OpenCode y elige el modelo.</li>
+<li>Abre una sesión nueva y pega el prompt (original o V1).</li>
+<li><b>Opcional:</b> cambia primero a <b>plan</b> y pide «explícame tu plan antes de construir».</li>
+<li>Revisa las solicitudes de acceso: navegador, Google Flow, instalación de paquetes (<code>npm install</code>).</li>
+<li>Autoriza solo lo legítimo; si no quieres usar Flow: «omite Google Flow y usa marcadores de imagen».</li>
+<li>Espera: con modelos gratuitos tarda (en clase varios estudiantes seguían esperando a los 15–30 min).</li>
+<li>Abre el proyecto en el navegador integrado o pide la dirección local (p. ej. <code>http://localhost:5173</code>).</li>
+<li>Prueba la navegación: cada enlace del menú debe llevar a su sección.</li>
+<li>Prueba los botones: «Agendar por WhatsApp» debe abrir <code>wa.me/…</code> con el mensaje prellenado.</li>
+<li>Revisa en computadora.</li>
+<li>Revisa en móvil: pide «muéstrala en tamaño de celular» o reduce la ventana.</li>
+<li>Anota los errores (texto encimado, imágenes rotas, animaciones bruscas).</li>
+<li>Solicita una mejora agrupada.</li>
+<li>Cuando esté lista, pasa al capítulo 14 para publicarla.</li>
+</ol>
+<div class="box tip"><span class="bt">Si la página ya se ve pero el agente «sigue trabajando»</span>Pasó en clase. La página ya existe en tu carpeta; el agente puede estar optimizando o corrigiendo. Puedes abrir otra sesión con <b>+</b> para el siguiente paso; no pierdes lo hecho (ver incidencia B y K, capítulo 15).</div>
+
+<h2 id="c08-obs">8.6 Observaciones reales de la revisión (≈ 2:25)</h2>
+<table class="compact"><thead><tr><th>Elemento</th><th>Lo que se observó</th><th>Estado</th></tr></thead><tbody>
+<tr><td>Diseño</td><td>«Bonita, minimalista, no saturada de información»; comparable a la de Lovable.</td><td><span class="tag t-real">Visto</span></td></tr>
+<tr><td>Imágenes</td><td>«Nos hacen falta las fotos; las podemos crear nosotros».</td><td><span class="tag t-pend">Pendiente</span></td></tr>
+<tr><td>Secciones</td><td>Titular («un espacio diseñado para que llegar al dentista se sienta bien»), testimonios y preguntas frecuentes.</td><td><span class="tag t-real">Visto</span></td></tr>
+<tr><td>Botón WhatsApp</td><td>Se probó: abría WhatsApp con «Hola, quiero agendar una cita en DENTEA…» hacia un número inventado.</td><td><span class="tag t-real">Probado</span></td></tr>
+<tr><td>Diversidad de diseños</td><td>Al usar el mismo modelo y prompt, las landing de los estudiantes solo cambiaban colores.</td><td><span class="tag t-expl">Observado</span></td></tr>
+</tbody></table>
+<div class="box warn"><span class="bt">Testimonios</span>Si el diseño necesita testimonios y no tienes reales, deben aparecer como <b>«Testimonio ilustrativo — reemplazar por opinión real con autorización»</b>. Publicar opiniones inventadas como auténticas es engañoso y puede tener consecuencias legales y de reputación.</div>
+</section>

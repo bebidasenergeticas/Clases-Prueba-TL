@@ -1,0 +1,79 @@
+<section class="chap">
+<div class="chap-head"><div class="big">14</div><div class="k">Capítulo 14 · Práctica 8</div>
+<h1 id="c14" data-toc="14|Práctica 8 · Publicar en GitHub Pages">Práctica 8 · Publicar en GitHub Pages</h1>
+<p class="d">Del archivo local al enlace público: repositorio, despliegue y comprobación real.</p>
+<div class="tags"><span class="tag t-real">Realizado en clase</span><span class="tag t-orig">P12</span><span class="tag t-act">Verificado en docs.github.com</span></div></div>
+
+<h2 id="c14-orig">14.1 Prompt original</h2>
+<div class="prompt orig"><div class="ph"><span class="id">P12</span> Prompt original · chat 03:01:41 (repetido 03:05:05) · Profesor<span class="src">Destino: OpenCode · texto literal</span></div><pre><!--RAW:P12--></pre><div class="pf">Indicación oral: pegarlo «donde hicimos la landing page», en la misma conversación de DENTEA o de la landing personal. Puede pedir un nombre de repositorio: «ustedes le pueden inventar uno».</div></div>
+<p><b>Lectura del prompt:</b> «despliega en GitHub Pages la landing page ya pública» significa «publícala para que ya sea pública». Es breve porque se apoya en el contexto de la conversación (el agente sabe cuál es la landing). Su debilidad: no pide comprobar secretos, no dice qué hacer si hay que compilar, ni exige verificar que el enlace abre. La versión mejorada del subagente está en los Anexos B1/B2 (P12); abajo, un resumen de lo que debe hacer.</p>
+
+<h2 id="c14-dif">14.2 Diferencias fundamentales</h2>
+<figure>
+<svg viewBox="0 0 700 170" font-family="Inter">
+<defs><marker id="a14" markerWidth="8" markerHeight="8" refX="7" refY="4" orient="auto"><path d="M0 0L8 4L0 8z" fill="#5B6272"/></marker></defs>
+<g text-anchor="middle" font-size="8.5">
+<rect x="0" y="40" width="120" height="70" rx="9" fill="#F6F8FC" stroke="#9AA6BF"/><text x="60" y="64" font-weight="800" fill="#0B1F4D">Carpeta local</text><text x="60" y="80" fill="#5B6272">código fuente</text><text x="60" y="92" fill="#5B6272">(React/Vite o HTML)</text>
+<rect x="150" y="40" width="120" height="70" rx="9" fill="#EAF2FF" stroke="#1E4FD8"/><text x="210" y="64" font-weight="800" fill="#1E4FD8">Repositorio</text><text x="210" y="80" fill="#5B6272">main · público</text><text x="210" y="92" fill="#5B6272">sin secretos</text>
+<rect x="300" y="10" width="150" height="60" rx="9" fill="#FFF3E6" stroke="#E8710A"/><text x="375" y="32" font-weight="800" fill="#E8710A">Opción A · rama</text><text x="375" y="48" fill="#262B36">publica la raíz o /docs</text><text x="375" y="60" fill="#262B36">(HTML ya listo)</text>
+<rect x="300" y="84" width="150" height="72" rx="9" fill="#F1ECFF" stroke="#6A3FD1"/><text x="375" y="104" font-weight="800" fill="#6A3FD1">Opción B · GitHub Actions</text><text x="375" y="120" fill="#262B36">compila (npm run build)</text><text x="375" y="132" fill="#262B36">y publica la carpeta dist/</text><text x="375" y="146" fill="#5B6272" font-size="7.5">(o rama gh-pages)</text>
+<rect x="480" y="40" width="100" height="70" rx="9" fill="#E8F8F0" stroke="#0F9D63"/><text x="530" y="64" font-weight="800" fill="#0F9D63">GitHub Pages</text><text x="530" y="80" fill="#262B36">sirve archivos</text><text x="530" y="92" fill="#262B36">estáticos</text>
+<rect x="600" y="40" width="100" height="70" rx="9" fill="#0B1F4D"/><text x="650" y="64" font-weight="800" fill="#fff">🌐 Enlace</text><text x="650" y="80" fill="#BFD3FF" font-size="7.5">usuario.github.io</text><text x="650" y="92" fill="#BFD3FF" font-size="7.5">/repositorio/</text>
+</g>
+<g stroke="#5B6272" stroke-width="1.3" marker-end="url(#a14)" fill="none"><path d="M121 75H147M271 66 297 44M271 84 297 112M451 40 478 66M451 120 478 92M581 75H597"/></g>
+</svg>
+<figcaption><b>Figura 16.</b> Cómo funciona GitHub Pages: publicar desde una rama o compilar con GitHub Actions.</figcaption></figure>
+<table class="compact"><tbody>
+<tr><td style="width:25%"><b>Archivo local</b></td><td>Solo está en tu computadora.</td></tr>
+<tr><td><b>Repositorio</b></td><td>Almacena y versiona el código en GitHub.</td></tr>
+<tr><td><b>GitHub Pages</b></td><td><span class="tag t-act">Docs</span> «Servicio de alojamiento de sitios estáticos que toma HTML, CSS y JavaScript de un repositorio, opcionalmente los procesa con un build, y publica un sitio». En cuentas gratuitas, solo repositorios públicos.</td></tr>
+<tr><td><b>App con backend</b></td><td>Si necesita servidor, base de datos o claves API privadas, Pages no basta: requiere otro servicio (Firebase, Render, etc.). Nunca pongas claves API en el código de una página pública.</td></tr>
+<tr><td><b>Dominio personalizado</b></td><td>Dirección propia (tumarca.com) que compras y apuntas a Pages desde la configuración del repositorio.</td></tr>
+</tbody></table>
+
+<h2 id="c14-pasos">14.3 Publicación paso a paso</h2>
+<div class="g2">
+<ol class="steps">
+<li>Comprueba que la app funciona <b>en local</b>.</li>
+<li>Identifica la <b>carpeta correcta</b> del proyecto (p. ej. <code>dentea/</code>).</li>
+<li>Revisa los archivos que se subirán.</li>
+<li>Comprueba que <b>no hay secretos</b> (<code>.env</code>, claves, contraseñas).</li>
+<li>Prepara <code>.gitignore</code> (<code>node_modules/</code>, <code>.env</code>, <code>dist/</code> si usas Actions).</li>
+<li>Inicializa Git si no existe (<code>git init</code>).</li>
+<li>Crea el primer commit.</li>
+<li>Elige visibilidad: <b>público</b> para Pages gratis.</li>
+<li>Crea el repositorio remoto: <code>gh repo create NOMBRE --public --source=. --push</code>.</li>
+<li>Sube el proyecto (incluido en el paso anterior con <code>--push</code>).</li>
+</ol>
+<ol class="steps" start="11" style="counter-reset:s 10">
+<li>Configura Pages: <i>Settings → Pages</i> (o el agente vía <code>gh api</code>).</li>
+<li>Origen: <b>rama</b> (<code>main</code>, carpeta raíz) para HTML simple; <b>GitHub Actions</b> si hay que compilar (Vite: ajustar <code>base: '/NOMBRE/'</code>).</li>
+<li>Espera el despliegue (de segundos a pocos minutos).</li>
+<li>Abre el enlace <code>https://USUARIO.github.io/NOMBRE/</code>.</li>
+<li>Verifica que coincide con la versión local.</li>
+<li>Prueba botones e interacciones.</li>
+<li>Comprueba que cargan imágenes y estilos (si falta el estilo, suele ser el <i>base path</i>).</li>
+<li>Ábrelo en tu celular.</li>
+<li>Identifica errores (404, página en blanco).</li>
+<li>Corrige, commit + push, y vuelve a verificar.</li>
+</ol></div>
+<div class="box ok"><span class="bt">Prueba de verdad</span>Una publicación está terminada cuando <b>el enlace abre en otro dispositivo</b> (tu celular con datos móviles, o alguien del grupo). Que el agente diga «listo» no basta.</div>
+
+<h2 id="c14-casos">14.4 Casos reales de la clase</h2>
+<p><span class="tag t-real">Realizado en clase</span> Al final de la sesión se compartieron en el chat <b>dos enlaces de DENTEA publicados en GitHub Pages</b> por estudiantes (03:07 y 03:12) y uno en Firebase. El profesor abrió uno en vivo: el agente seguía «detectando un fallo real» y corrigiendo, pero la página ya era visible con el enlace que mostraba el navegador de OpenCode, arriba a la derecha. Indicación: dejar que termine para que se publique la versión corregida.</p>
+<div class="box sec"><span class="bt">Privacidad</span>Los enlaces contienen el nombre de usuario de cada estudiante; se omiten en esta guía distribuible y constan solo en el registro interno. Su estado actual <span class="tag t-pend">no se verificó</span> (el entorno de elaboración no permite abrir github.io).</div>
+
+<h2 id="c14-fb">14.5 Publicación en Firebase</h2>
+<p>Una estudiante publicó en <b>Firebase Hosting</b> (de Google), que también sirve sitios estáticos y ofrece funciones adicionales (bases de datos, autenticación). No es un fallo: es una alternativa válida, y el profesor la aceptó. La diferencia práctica es que la integración con los agentes vista en clase se configuró para GitHub.</p>
+
+<h2 id="c14-upd">14.6 Actualizaciones posteriores</h2>
+<p>Una vez conectado, en la misma conversación (o en una nueva dentro de la carpeta) puedes pedir: corregir una sección, añadir un botón, cambiar colores, ajustar el diseño móvil, solucionar un error, guardar cambios y <b>actualizar la versión publicada</b>. El profesor: «cuando hagas un cambio y le digas "quiero que ahora no se trate de dentista sino de otra cosa", ya lo va a poder hacer».</p>
+<div class="prompt mej"><div class="ph"><span class="id">UPD·V1</span> Actualizar el sitio publicado<span class="src">Prompt mejorado · OpenCode</span></div><pre>Quiero actualizar mi sitio ya publicado en GitHub Pages (repositorio de esta carpeta).
+Cambios: [describe aquí los cambios, todos juntos].
+1. Aplica los cambios y pruébalos en local (escritorio y móvil).
+2. Antes de subir: muéstrame la lista de archivos modificados y confirma que no hay claves ni datos privados. Espera mi "OK".
+3. Con mi OK: haz commit con un mensaje claro y push a main. No uses push forzado ni borres archivos que no te pedí.
+4. Espera el despliegue y abre la URL pública; confirma que se ven los cambios (si no, revisa el estado del despliegue y corrige).
+5. Dame la URL y un resumen de qué cambió.</pre></div>
+<p class="small">Versión avanzada con verificación del estado de despliegue y reversión segura: Anexo B2.</p>
+</section>

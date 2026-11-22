@@ -1,0 +1,74 @@
+<section class="chap">
+<div class="chap-head"><div class="big">17</div><div class="k">Capítulo 17 · Anexo maestro</div>
+<h1 id="c17" data-toc="17|Biblioteca de prompts: anexo maestro">Biblioteca de prompts: anexo maestro</h1>
+<p class="d">Inventario completo de los prompts de la sesión, auditoría y fichas de uso. Las versiones mejoradas íntegras están en los Anexos B1 (sencillas) y B2 (avanzadas).</p>
+<div class="tags"><span class="tag t-orig">Originales</span><span class="tag t-mej">Mejorados por el subagente</span></div></div>
+
+<h2 id="c17-sub">17.1 Cómo se elaboró</h2>
+<p>Los prompts se auditaron con un subagente especializado (<b>PROMPT_AUDITOR_E1601</b>) que leyó completos el chat y la transcripción. Modelo solicitado: Claude Sonnet 5.5 con esfuerzo alto. El subagente se identificó como <b>Sonnet 5.5</b>; el nivel de esfuerzo se solicitó como alto en la configuración de la tarea, aunque el propio subagente no pudo confirmarlo desde dentro. Verificó comandos en documentación primaria (cli.github.com, docs.github.com, código fuente de GitHub CLI) el 22-nov-2026 y comprobó por programa que los 14 bloques de texto literal coinciden exactamente con el chat.</p>
+<div class="g3">
+<div class="card"><div class="kpi">16</div><b>familias de prompts</b><br><span class="small">P01–P16 (P14–P16 añadidas por el auditor)</span></div>
+<div class="card"><div class="kpi">9</div><b>con texto literal</b><br><span class="small">8 íntegros + P11 parcial (cortado)</span></div>
+<div class="card"><div class="kpi">32+</div><b>versiones mejoradas</b><br><span class="small">16 sencillas y 16 avanzadas, más meta-prompt reutilizable y prompt de actualización</span></div>
+</div>
+
+<h2 id="c17-ind">17.2 Índice de prompts</h2>
+<table class="compact"><thead><tr><th>ID</th><th>Nombre</th><th>Momento</th><th>Destino</th><th>Fuente / estado</th><th>Original en</th></tr></thead><tbody>
+<tr><td><b>P01</b></td><td>Abrir navegador desde OpenCode</td><td>chat 00:51:52</td><td>OpenCode</td><td><span class="tag t-orig">íntegro</span></td><td>Cap. 5.1</td></tr>
+<tr><td><b>P02</b></td><td>Calculadora de automatización</td><td>chat 00:57:42</td><td>OpenCode</td><td><span class="tag t-orig">íntegro</span></td><td>Cap. 6.2</td></tr>
+<tr><td><b>P03</b></td><td>Publicación de la calculadora</td><td>≈ 1:10</td><td>OpenCode</td><td><span class="tag t-op">instrucción oral</span></td><td>Cap. 6.5</td></tr>
+<tr><td><b>P04</b></td><td>Coordinación OpenCode + Claude Code</td><td>≈ 1:16–1:19</td><td>Claude Code / OpenCode</td><td><span class="tag t-op">oral</span></td><td>Cap. 7.3</td></tr>
+<tr><td><b>P05</b></td><td>Mejora de la calculadora y subagentes</td><td>≈ 1:18–1:21</td><td>Claude Code</td><td><span class="tag t-op">oral</span></td><td>Cap. 7.3</td></tr>
+<tr><td><b>P06</b></td><td>Landing page DENTEA</td><td>chat 01:39:17</td><td>OpenCode</td><td><span class="tag t-orig">íntegro</span></td><td>Cap. 8.2</td></tr>
+<tr><td><b>P07</b></td><td>Meta-prompting para landing pages</td><td>chat 01:41:08 (+01:41:18, 01:41:27)</td><td>ChatGPT</td><td><span class="tag t-orig">íntegro</span></td><td>Cap. 9.2</td></tr>
+<tr><td><b>P08</b></td><td>Agente de voz (xAI)</td><td>≈ 1:58</td><td>Consola xAI</td><td><span class="tag t-op">oral</span></td><td>Cap. 11.2</td></tr>
+<tr><td><b>P09</b></td><td>Instalación inicial de GitHub CLI</td><td>chat 02:32:16 y 02:42:53</td><td>OpenCode</td><td><span class="tag t-orig">íntegro</span></td><td>Cap. 13.2</td></tr>
+<tr><td><b>P10</b></td><td>Regeneración del código de dispositivo</td><td>chat 02:48:19</td><td>OpenCode</td><td><span class="tag t-orig">íntegro</span></td><td>Cap. 13.4</td></tr>
+<tr><td><b>P11</b></td><td>Instalación reforzada «MISIÓN»</td><td>chat 02:53:02 + 02:53:18</td><td>OpenCode</td><td><span class="tag t-pend">parcial (cortado)</span></td><td>Cap. 13.5</td></tr>
+<tr><td><b>P12</b></td><td>Crear repositorio y desplegar en Pages</td><td>chat 03:01:41 (repetido)</td><td>OpenCode</td><td><span class="tag t-orig">íntegro</span></td><td>Cap. 14.1</td></tr>
+<tr><td><b>P13</b></td><td>Landing Stilís (aportación estudiantil)</td><td>chat 03:15:51</td><td>OpenCode</td><td><span class="tag t-orig">íntegro · no reproducido</span></td><td>Registro interno</td></tr>
+<tr><td><b>P14</b></td><td>Prueba de Google Flow desde OpenCode</td><td>≈ 0:55</td><td>OpenCode</td><td><span class="tag t-op">oral</span></td><td>Cap. 5.3</td></tr>
+<tr><td><b>P15</b></td><td>«¿Qué me hace falta para desplegar?»</td><td>≈ 2:45</td><td>OpenCode</td><td><span class="tag t-op">oral</span></td><td>Cap. 15</td></tr>
+<tr><td><b>P16</b></td><td>Reconexión de un repositorio desde Claude Code</td><td>≈ 3:02–3:05</td><td>Claude Code</td><td><span class="tag t-op">oral</span></td><td>Cap. 15 (M)</td></tr>
+</tbody></table>
+<p class="small">Los prompts orales no tenían texto escrito: sus versiones en los anexos son <b>nuevas</b>, no recuperadas.</p>
+
+<h2 id="c17-aud">17.3 Auditoría resumida (escala 1–5)</h2>
+<table class="compact"><thead><tr><th>ID</th><th class="c">Claridad</th><th class="c">Seguridad</th><th class="c">Ejecutabilidad</th><th class="c">Verificabilidad</th><th class="c">Media</th><th>Hallazgo principal</th></tr></thead><tbody>
+<tr><td>P01</td><td class="c">2</td><td class="c">4</td><td class="c">4</td><td class="c">2</td><td class="c">3.00</td><td>Sin objetivo de búsqueda ni criterio de éxito.</td></tr>
+<tr><td>P02</td><td class="c">4</td><td class="c">4</td><td class="c">4</td><td class="c">2</td><td class="c">3.50</td><td>Buen alcance; sin fórmulas ni casos de prueba.</td></tr>
+<tr><td>P03</td><td class="c">2</td><td class="c">2</td><td class="c">3</td><td class="c">1</td><td class="c">2.00</td><td>Publica sin revisar secretos ni verificar URL.</td></tr>
+<tr><td>P04</td><td class="c">2</td><td class="c">3</td><td class="c">3</td><td class="c">2</td><td class="c">2.50</td><td>Roles difusos; riesgo de edición simultánea.</td></tr>
+<tr><td>P05</td><td class="c">3</td><td class="c">3</td><td class="c">4</td><td class="c">3</td><td class="c">3.25</td><td>«Animaciones 3D» sin criterio; subagentes útiles.</td></tr>
+<tr><td>P06</td><td class="c">4</td><td class="c">2</td><td class="c">3</td><td class="c">3</td><td class="c">3.00</td><td>Flow obligatorio implica credenciales; Framer Motion exige React.</td></tr>
+<tr><td>P07</td><td class="c">3</td><td class="c">3</td><td class="c">3</td><td class="c">2</td><td class="c">2.75</td><td>Puede añadir tecnologías ajenas; sin plantilla de datos.</td></tr>
+<tr><td>P08</td><td class="c">3</td><td class="c">2</td><td class="c">4</td><td class="c">2</td><td class="c">2.75</td><td>Sin base de conocimiento: el agente inventa precios.</td></tr>
+<tr><td>P09</td><td class="c">4</td><td class="c">4</td><td class="c">3</td><td class="c">4</td><td class="c">3.75</td><td>Seguro; login interactivo oculto; no instala Git.</td></tr>
+<tr><td>P10</td><td class="c">2</td><td class="c">3</td><td class="c">2</td><td class="c">1</td><td class="c">2.00</td><td>Depende del contexto; «deja abierta la ventana» no siempre posible.</td></tr>
+<tr><td>P11</td><td class="c">3</td><td class="c">3</td><td class="c">3</td><td class="c">4</td><td class="c">3.25</td><td>Cortado; instrucciones frágiles; repo privado choca con Pages.</td></tr>
+<tr><td>P12</td><td class="c">2</td><td class="c">2</td><td class="c">3</td><td class="c">1</td><td class="c">2.00</td><td>No verifica secretos ni que la URL responda.</td></tr>
+<tr><td>P13</td><td class="c">4</td><td class="c">4</td><td class="c">4</td><td class="c">4</td><td class="c">4.00</td><td>El mejor estructurado de la sesión.</td></tr>
+</tbody></table>
+<p class="small">Auditoría completa (incluidas P14–P16): archivo <code>02_AUDITORIA_DE_PROMPTS.md</code>.</p>
+
+<h2 id="c17-fichas">17.4 Fichas de uso</h2>
+<p class="small">Para cada prompt: qué hace, qué preparar, resultado esperado, comprobación, fallo típico y seguridad. Versión sencilla → Anexo B1; avanzada → Anexo B2 (mismos encabezados «P0X — …»).</p>
+<table class="compact"><thead><tr><th style="width:6%">ID</th><th style="width:19%">Qué hace / cómo usarlo</th><th style="width:15%">Preparar</th><th style="width:17%">Resultado y comprobación</th><th style="width:22%">Si falla</th><th>Seguridad</th></tr></thead><tbody>
+<tr><td>P01</td><td>Prueba el navegador del agente. Sesión nueva en tu carpeta.</td><td>OpenCode con modelo.</td><td>Reporta el título real de la página.</td><td>Revisar permisos/versión; seguir abriendo archivos en Chrome.</td><td>No iniciar sesión ni descargar.</td></tr>
+<tr><td>P02</td><td>Crea la calculadora. Sesión nueva.</td><td>Carpeta vacía.</td><td>Calculadora que abre; caso de prueba cuadra a mano.</td><td>Pedir fórmulas visibles y corregir en un solo mensaje.</td><td>Sin backend ni envío de datos.</td></tr>
+<tr><td>P03</td><td>Publica la calculadora en Pages.</td><td>P09/P11 completado.</td><td>URL que responde 200 y abre en el celular.</td><td>Ver incidencias C, I, K.</td><td>Revisar secretos; pedir confirmación.</td></tr>
+<tr><td>P04</td><td>Pone dos agentes sobre el mismo proyecto.</td><td>Claude Code + carpeta/repo.</td><td>Ambos describen el mismo proyecto.</td><td>Asignar archivos y turnos.</td><td>No editar el mismo archivo a la vez.</td></tr>
+<tr><td>P05</td><td>Mejora la app con subagentes.</td><td>Proyecto funcional y respaldado.</td><td>Mejoras visibles sin romper cálculos.</td><td>Revertir al commit anterior.</td><td>Validar datos del catálogo.</td></tr>
+<tr><td>P06</td><td>Construye DENTEA.</td><td>Carpeta <code>dentea</code>; opcional cuenta para Flow.</td><td>Landing navegable; WhatsApp abre <code>wa.me</code>.</td><td>Omitir Flow; usar marcadores de imagen.</td><td>Contraseña solo en la web oficial; testimonios ficticios marcados.</td></tr>
+<tr><td>P07</td><td>Mejora tu descripción en ChatGPT.</td><td>Idea de negocio clara.</td><td>Prompt optimizado fiel a tu idea.</td><td>Quitar tecnologías o funciones que no pediste.</td><td>No compartir datos confidenciales.</td></tr>
+<tr><td>P08</td><td>Crea un agente de voz demo.</td><td>Cuenta en la consola de xAI.</td><td>Responde e interrumpe con baja latencia.</td><td>Revisar permiso de micrófono.</td><td>No difundir datos que «diga»; avisar que es IA.</td></tr>
+<tr><td>P09</td><td>Instala gh y autentica.</td><td>Cuenta GitHub con sesión iniciada.</td><td><code>gh auth status</code> con tu usuario.</td><td>Ver E, F, G, J.</td><td>Nunca contraseñas/tokens en el chat.</td></tr>
+<tr><td>P10</td><td>Pide un código nuevo.</td><td>Proceso de login en curso.</td><td>Código visible y página de dispositivo abierta.</td><td>Usarlo en menos de 15 min.</td><td>No usar códigos de terceros.</td></tr>
+<tr><td>P11</td><td>Instalación y login robustos (dos partes).</td><td>Windows; permisos de instalación.</td><td>Resumen ✅ verificado.</td><td>Usar V1/V2 del Anexo (más cortas y por fases).</td><td>Revisar editores de UAC; no desactivar protecciones.</td></tr>
+<tr><td>P12</td><td>Crea repo y publica.</td><td>Landing funcionando; gh conectado.</td><td>Enlace público que abre en otro dispositivo.</td><td>Repo privado → hacerlo público sin secretos; base path.</td><td>Confirmar antes de publicar.</td></tr>
+<tr><td>P13</td><td>Ejemplo de meta-prompt bien estructurado.</td><td>—</td><td>Ver recreación didáctica (Anexo B2).</td><td>—</td><td>Respetar autoría estudiantil.</td></tr>
+<tr><td>P14–P16</td><td>Flow, diagnóstico de despliegue y reconexión de repo.</td><td>Según caso.</td><td>Ver Anexos.</td><td>Ver cap. 15.</td><td>Ídem.</td></tr>
+</tbody></table>
+<div class="box tip"><span class="bt">Archivos editables</span>Toda la biblioteca se entrega también en Markdown (<code>auditoria_prompts/01…05</code>) para copiar sin problemas de formato de PDF.</div>
+</section>
+

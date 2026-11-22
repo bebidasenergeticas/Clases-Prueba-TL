@@ -1,0 +1,74 @@
+<section class="chap">
+<div class="chap-head"><div class="big">11</div><div class="k">Capítulo 11 · Demostración complementaria</div>
+<h1 id="c11" data-toc="11|Agentes de voz">Agentes de voz</h1>
+<p class="d">La demostración con la consola de xAI: crear conversacionalmente un agente que atiende llamadas, y por qué hay que verificar lo que dice.</p>
+<div class="tags"><span class="tag t-demo">Demostración del profesor</span><span class="tag t-expl">Teoría oficial</span></div></div>
+
+<h2 id="c11-que">11.1 Qué es un agente de voz</h2>
+<p><span class="tag t-expl">Explicado en clase</span> Agentes que <b>escuchan y responden por voz en tiempo real</b>, conversan de forma natural, usan herramientas y atienden llamadas telefónicas. Se presentaron dos opciones: <b>OpenAI Realtime</b> y <b>xAI (Grok Voice)</b>.</p>
+<table class="compact"><thead><tr><th style="width:22%">Concepto</th><th>Explicación</th></tr></thead><tbody>
+<tr><td>Chat vs. voz</td><td>En chat el usuario lee y escribe; en voz hay que transcribir, razonar y sintetizar en milisegundos, y gestionar silencios e interrupciones.</td></tr>
+<tr><td>Transcripción (STT)</td><td>Convertir el audio del usuario en texto.</td></tr>
+<tr><td>Síntesis de voz (TTS)</td><td>Convertir la respuesta en audio. Los modelos «voz a voz» integran ambos pasos.</td></tr>
+<tr><td>Latencia</td><td>Tiempo entre que el usuario deja de hablar y el agente responde. Baja latencia = conversación natural.</td></tr>
+<tr><td>Interrupciones</td><td>El usuario puede cortar al agente y este se detiene y escucha, «como una persona».</td></tr>
+<tr><td>Herramientas</td><td>Durante la llamada puede consultar Google Calendar, agendar citas o leer un CRM mediante funciones o MCP.</td></tr>
+<tr><td>Telefonía</td><td>Llamadas entrantes y salientes (SIP). Según la clase, xAI incluye número y constructor sin código; también se mencionó Twilio como proveedor de números.</td></tr>
+<tr><td>Transferencia a humanos</td><td>Escalar la llamada cuando el caso lo requiere (en la demo se desactivó para no derivar).</td></tr>
+</tbody></table>
+
+<h2 id="c11-demo">11.2 La demostración reconstruida</h2>
+<p>Enlace compartido (chat 01:57:15): <b>https://console.x.ai/</b>. «No es práctica oficial», pero se puede probar; según el profesor, no se necesitaba pago para la demo. <span class="tag t-pend">Verificar condiciones actuales</span></p>
+<ol class="steps">
+<li><b class="t">Crear un agente nuevo</b> en la sección de agentes de voz de la consola.</li>
+<li><b class="t">Describirlo conversacionalmente</b> (P08, instrucción oral): atender a clientes de un grupo de IA de una empresa llamada Top Learning, con soporte y dudas; empresa de Guadalajara; todos hablan español; consultar la página web; responder preguntas sobre IA y el curso; <b>sin transferir a humanos</b> para la demo.</li>
+<li><b class="t">Esperar la configuración</b> y conceder permiso de micrófono (hubo un problema inicial porque Meet y la consola no podían usar el micrófono a la vez).</li>
+<li><b class="t">Probar por voz</b>: el agente saludó, explicó en qué podía ayudar, consultó la web y describió el diplomado.</li>
+<li><b class="t">Interrumpirlo a propósito</b> para mostrar que se detiene y que la latencia es muy baja.</li>
+<li><b class="t">Pedir costos y contacto</b>: el agente dio un precio y un número de WhatsApp.</li>
+</ol>
+<div class="box danger"><span class="bt">Datos no verificados</span>Durante la demo el agente <b>dijo un precio y un número de teléfono</b>. Esta guía <b>no los reproduce</b>: no son información institucional confirmada y podrían ser incorrectos, desactualizados o inventados. Para información oficial de Top Learning consulta los canales oficiales.</div>
+<p>Comparación expresada en clase <span class="tag t-op">Opinión del profesor</span>: la voz de OpenAI suena algo más natural y su ecosistema de herramientas es amplio, con curva de aprendizaje media-alta; xAI tiene curva baja-media, número telefónico incluido, constructor sin código y cobro por minuto.</p>
+
+<h2 id="c11-confianza">11.3 Por qué no debemos confiar automáticamente en un agente que habla con naturalidad</h2>
+<div class="g2">
+<div>
+<p>Una voz fluida y segura <b>parece</b> confiable, pero el modelo puede:</p>
+<ul>
+<li><b>Alucinar</b>: inventar cifras, fechas o teléfonos con total seguridad.</li>
+<li><b>Leer mal o información vieja</b> de una página web.</li>
+<li><b>Mezclar</b> datos de distintos programas o niveles.</li>
+<li><b>Comprometer</b> a la empresa (prometer un descuento que no existe).</li>
+</ul>
+<p>En voz el riesgo es mayor porque el cliente no tiene un texto que revisar y la respuesta se percibe como oficial.</p>
+</div>
+<div class="card green"><h4>Ejemplo de verificación y escalamiento</h4>
+<p class="small"><b>Instrucción para el agente:</b> «Para precios, fechas, promociones y datos de contacto responde solo con la información de la base de conocimiento aprobada (archivo <code>info_oficial.pdf</code>, actualizado el [fecha]). Si no está ahí o hay duda, di: <i>"Prefiero no darte un dato incorrecto; te comunico con un asesor"</i> y transfiere. Nunca dictes números de teléfono que no estén en la lista aprobada.»</p>
+<p class="small"><b>Control humano:</b> revisar semanalmente transcripciones de llamadas; probar 10 preguntas frecuentes antes de publicar; avisar al usuario que habla con una IA.</p></div></div>
+
+<h2 id="c11-casos">11.4 Casos de uso e integración conceptual con n8n</h2>
+<figure>
+<svg viewBox="0 0 700 120" font-family="Inter">
+<defs><marker id="a11" markerWidth="8" markerHeight="8" refX="7" refY="4" orient="auto"><path d="M0 0L8 4L0 8z" fill="#5B6272"/></marker></defs>
+<g text-anchor="middle" font-size="8.5">
+<rect x="0" y="30" width="110" height="60" rx="9" fill="#F1ECFF" stroke="#6A3FD1"/><text x="55" y="54" font-weight="800" fill="#6A3FD1">📞 Agente de voz</text><text x="55" y="70" fill="#262B36">recibe la llamada,</text><text x="55" y="81" fill="#262B36">entiende el pedido</text>
+<rect x="140" y="30" width="100" height="60" rx="9" fill="#F6F8FC" stroke="#9AA6BF"/><text x="190" y="54" font-weight="800" fill="#262B36">Webhook</text><text x="190" y="70" fill="#5B6272">envía los datos</text><text x="190" y="81" fill="#5B6272">recopilados</text>
+<rect x="270" y="30" width="120" height="60" rx="9" fill="#EAF2FF" stroke="#1E4FD8"/><text x="330" y="54" font-weight="800" fill="#1E4FD8">n8n + modelo IA</text><text x="330" y="70" fill="#262B36">clasifica el mensaje</text><text x="330" y="81" fill="#262B36">o el riesgo</text>
+<rect x="420" y="10" width="130" height="44" rx="9" fill="#E8F8F0" stroke="#0F9D63"/><text x="485" y="30" font-weight="800" fill="#0F9D63">CRM / base de datos</text><text x="485" y="44" fill="#262B36">dashboard hecho con OpenCode</text>
+<rect x="420" y="66" width="130" height="44" rx="9" fill="#FFF3E6" stroke="#E8710A"/><text x="485" y="86" font-weight="800" fill="#E8710A">WhatsApp / correo</text><text x="485" y="100" fill="#262B36">cotización y enlace de pago</text>
+<rect x="580" y="38" width="120" height="44" rx="9" fill="#0B1F4D"/><text x="640" y="58" font-weight="800" fill="#fff">👤 Humano</text><text x="640" y="72" fill="#BFD3FF">si el monto es alto</text>
+</g>
+<g stroke="#5B6272" stroke-width="1.3" marker-end="url(#a11)"><path d="M111 60H137M241 60H267M391 52 417 34M391 68 417 86M551 50 577 56"/></g>
+</svg>
+<figcaption><b>Figura 13.</b> Arquitectura de sistema autónomo explicada con el ejemplo de una dulcería que recibe pedidos por teléfono. <span class="tag t-expl">Conceptual — no se implementó en clase</span></figcaption></figure>
+<p>Otros casos de la presentación: <b>ventas</b> (el agente de voz hace la primera llamada, se califica al prospecto por chat y n8n guarda el contacto en el CRM — que puede ser una hoja de cálculo); <b>soporte</b> (dudas frecuentes leyendo manuales PDF y escalamiento); <b>operaciones internas</b> (n8n monitorea correos de facturación, extrae datos del PDF y actualiza contabilidad). El profesor sugirió usar Claude Code para construir los flujos de n8n y el CRM, y la consola de xAI para el agente de voz.</p>
+
+<h2 id="c11-seg">11.5 Seguridad y ética en voz (presentación oficial)</h2>
+<ul class="done">
+<li>Avisar que es una inteligencia artificial y responder con honestidad si lo preguntan.</li>
+<li>Pedir consentimiento de grabación.</li>
+<li>No clonar voces sin autorización (p. ej. con ElevenLabs, visto en semanas previas).</li>
+<li>Human-in-the-loop en transacciones financieras y envíos masivos.</li>
+</ul>
+<div class="box note"><span class="bt">Alcance</span>Esto fue una demostración. Poner un agente telefónico en producción requiere configuración de números, pruebas, avisos legales de privacidad y monitoreo: se verá en módulos posteriores.</div>
+</section>

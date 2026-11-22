@@ -1,0 +1,17 @@
+Actúa como un ingeniero DevOps experto en GitHub, Windows y automatización. Quiero que instales y configures GitHub CLI (`gh`) en mi computadora para poder trabajar contigo directamente desde GitHub.
+
+**Contexto:** Soy principiante absoluto, sin conocimientos técnicos. Haz todo lo posible automáticamente mediante la terminal.
+
+1. Detecta el sistema operativo y verifica si Git y GitHub CLI están instalados.
+2. Instala las herramientas que falten mediante los métodos oficiales. En Windows, utiliza `winget install --id GitHub.cli --source winget`. Documentación: https://cli.github.com/
+3. Configura Git y GitHub CLI correctamente, sin modificar configuraciones existentes que ya funcionen.
+4. Ejecuta `gh auth login --web --git-protocol https` para abrir el inicio de sesión en el navegador.
+5. **Detente únicamente cuando necesite iniciar sesión o autorizar GitHub.** Explícame en español qué botón debo presionar. Nunca me solicites contraseñas ni tokens.
+6. Una vez autorizado, continúa automáticamente y ejecuta `gh auth status`, `gh auth setup-git`, `git --version` y `gh --version` para comprobar que todo funciona.
+7. Verifica que puedes consultar mis repositorios autorizados, sin modificar, eliminar ni publicar ninguno.
+8. Si surge un error, diagnostícalo y corrígelo automáticamente cuando sea seguro hacerlo.
+9. Al terminar, entrega un resumen sencillo indicando qué instalaste, qué configuraste y si GitHub está conectado correctamente.
+
+**Objetivo final:** Dejar mi computadora preparada para que OpenCode pueda crear proyectos, administrar repositorios, hacer commits y trabajar con GitHub mediante instrucciones en lenguaje natural, sin que yo necesite utilizar comandos.
+
+No publiques código, crees repositorios ni cambies permisos sin mi autorización. No declares completado ningún paso sin verificarlo.

@@ -1,0 +1,54 @@
+<section class="chap">
+<div class="chap-head"><div class="big">03</div><div class="k">Capítulo 3</div>
+<h1 id="c03" data-toc="3|Ecosistema de herramientas">Ecosistema de herramientas</h1>
+<p class="d">Qué es cada herramienta mencionada, qué se enseñó, qué se demostró y qué no se practicó. Separamos hechos verificables de opiniones.</p></div>
+
+<div class="box upd"><span class="bt">Actualización técnica · 22-nov-2026</span>Las herramientas de IA cambian cada semana. Precios, cuotas gratuitas y modelos mencionados el 15 de noviembre <b>no deben tomarse como vigentes</b> sin revisar el sitio oficial. Ejemplo real: el modelo gratuito <b>GLM‑5.3‑Flash Free</b> recomendado en clase aparece en la documentación de OpenCode como <b>retirado el 18-nov-2026</b>, tres días después de la sesión.</div>
+
+<h2 id="c03-comp">3.1 Comparativa de agentes de programación</h2>
+<figure>
+<svg viewBox="0 0 700 200" font-family="Inter">
+<text x="350" y="14" text-anchor="middle" font-size="9" fill="#5B6272">Ubicación según la «pirámide» expresada por el profesor (opinión) y el grado de autonomía</text>
+<path d="M350 26 L640 190 L60 190 Z" fill="#F6F8FC" stroke="#DCE2EE"/>
+<path d="M350 26 L466 92 L234 92 Z" fill="#F1ECFF" stroke="#CBB8F6"/>
+<path d="M234 92 L466 92 L524 125 L176 125 Z" fill="#EAF2FF" stroke="#BCD2FA"/>
+<g text-anchor="middle" font-weight="800" font-size="10">
+<text x="350" y="66" fill="#6A3FD1">Claude Code · Codex</text><text x="350" y="80" font-size="7.5" font-weight="500" fill="#5B6272">agentes profesionales (de pago)</text>
+<text x="350" y="108" fill="#1E4FD8">OpenCode · Cursor</text><text x="350" y="120" font-size="7.5" font-weight="500" fill="#5B6272">agente abierto multimodelo · editor con IA</text>
+<text x="350" y="160" fill="#262B36">GitHub Copilot</text><text x="350" y="174" font-size="7.5" font-weight="500" fill="#5B6272">copiloto para quien ya programa</text>
+</g>
+<g font-size="8" fill="#5B6272"><text x="660" y="40">más autonomía ▲</text><text x="660" y="185">más asistencia ▼</text></g>
+</svg>
+<figcaption><b>Figura 6.</b> Jerarquía expresada en clase. <span class="tag t-op">Opinión del profesor</span> No es un ranking oficial ni un benchmark.</figcaption></figure>
+<table class="compact"><thead><tr><th>Herramienta</th><th>Empresa</th><th>Enfoque</th><th>Dónde se usa</th><th>Opción gratuita (según clase)</th><th>Perfil ideal</th></tr></thead><tbody>
+<tr><td><b>OpenCode</b></td><td>Proyecto de código abierto (equipo de OpenCode)</td><td>Agente abierto y multimodelo; agentes <i>build</i> y <i>plan</i> + subagentes</td><td>Terminal, app de escritorio, web local</td><td>Software gratuito; modelos <i>free</i> temporales y con límites</td><td>Quien busca libertad de modelos y bajo costo</td></tr>
+<tr><td><b>Cursor</b></td><td><b>Anysphere</b></td><td>Editor basado en VS Code centrado en IA</td><td>App de escritorio; agentes en la nube</td><td>Plan Hobby muy limitado</td><td>Quien prefiere un editor visual todo en uno</td></tr>
+<tr><td><b>GitHub Copilot</b></td><td>GitHub (Microsoft)</td><td>Autocompletado, chat, modo agente y <i>coding agent</i></td><td>VS Code, Visual Studio, JetBrains, github.com</td><td>Plan Free con límites (se mencionaron 2 000 sugerencias/mes)</td><td>Programadores y equipos que ya usan GitHub</td></tr>
+<tr><td><b>Codex</b></td><td>OpenAI</td><td>Agente que lee, edita, ejecuta y verifica; tareas en paralelo</td><td>App, CLI, extensión de IDE, nube (requiere repositorio)</td><td>Incluido en planes de ChatGPT con límites</td><td>Usuarios de ChatGPT que delegan tareas</td></tr>
+<tr><td><b>Claude Code</b></td><td>Anthropic</td><td>Agente que lee el proyecto, edita, ejecuta comandos, crea commits y PR; subagentes, skills, hooks, MCP</td><td>Terminal, VS Code, JetBrains, escritorio, web, móvil</td><td>Sin plan gratuito documentado; Pro, Max, Team, Enterprise o API</td><td>Proyectos complejos con agentes coordinados</td></tr>
+</tbody></table>
+<div class="box danger"><span class="bt">Corrección importante</span>En la transcripción se escucha que Cursor «es de Microsoft» y que fue comprado por la empresa de IA de Elon Musk. <b>Esto no es correcto:</b> Cursor es un producto de <b>Anysphere</b>. Lo que sí es cierto es que Cursor permite elegir modelos de distintos proveedores (Anthropic, OpenAI, xAI, etc.). Cualquier noticia sobre adquisiciones debe verificarse en fuentes oficiales.</div>
+
+<h2 id="c03-fichas">3.2 Fichas por herramienta</h2>
+<div class="g2">
+<div class="card"><h4>OpenCode <span class="tag t-real">Practicado</span></h4><p><b>Qué es:</b> agente de programación de código abierto; su código es público y auditable. <b>Problema que resuelve:</b> acceso a un agente completo sin pagar el software, con modelos gratuitos o el proveedor que elijas (más de 70 proveedores, según observó una estudiante). <b>Clave:</b> trabaja por carpetas y pide permiso antes de salir de ellas. <b>Verificar:</b> modelos gratuitos y planes en opencode.ai.</p></div>
+<div class="card"><h4>Claude Code <span class="tag t-demo">Demostrado</span></h4><p><b>Qué es:</b> agente de Anthropic. En clase se abrió la app de escritorio, se creó un «nuevo entorno local» sobre la misma carpeta de OpenCode y se lanzaron subagentes. <b>Para qué:</b> cambios complejos, diseño, revisión. <b>Requiere:</b> suscripción o API. <b>No se practicó</b> por todos.</p></div>
+<div class="card"><h4>Codex <span class="tag t-expl">Explicado</span></h4><p>Equivalente de OpenAI a Claude Code. El profesor lo considera muy rápido para navegador. Las tareas en la nube requieren un repositorio de GitHub. <b>No se demostró</b> en esta sesión.</p></div>
+<div class="card"><h4>Cursor <span class="tag t-expl">Explicado</span></h4><p>Editor «arnés» de IA. El profesor no lo usó en clase porque «a la mitad se acaba el uso gratis». Útil para quien quiere ver y editar archivos con apoyo visual.</p></div>
+<div class="card"><h4>GitHub Copilot <span class="tag t-expl">Explicado</span></h4><p>Sirve sobre todo cuando <b>ya tienes código</b> y quieres corregir o añadir pequeños cambios. <span class="tag t-op">Opinión</span> «No es para no programadores»; pero puede venir en evaluaciones.</p></div>
+<div class="card"><h4>GitHub <span class="tag t-real">Practicado</span></h4><p>Plataforma donde se guardan repositorios de código y desde donde se publicó con GitHub Pages. Ver capítulos 12–14.</p></div>
+<div class="card"><h4>n8n · Make · Zapier <span class="tag t-expl">Explicado</span></h4><p>Plataformas de automatización por flujos (nivel 2). En el curso se profundiza en <b>n8n</b>. En clase se omitió la diapositiva de n8n por haberse visto antes. La calculadora recomendaba entre estas herramientas.</p></div>
+<div class="card"><h4>Microsoft Copilot Studio <span class="tag t-expl">Explicado</span></h4><p>Plataforma <i>low-code</i> para agentes conversacionales con <b>RAG</b> (responder con tus archivos), acciones mediante conectores y Power Automate, y publicación multicanal (web, Teams). <span class="tag t-op">Opinión</span> Conviene si trabajas en el ecosistema Microsoft.</p></div>
+<div class="card"><h4>xAI · agentes de voz <span class="tag t-demo">Demostrado</span></h4><p>Consola para crear agentes que hablan en tiempo real, con interrupciones y baja latencia. Se comparó con OpenAI Realtime. Ver capítulo 11.</p></div>
+<div class="card"><h4>Google Flow <span class="tag t-demo">Demostrado</span></h4><p>Herramienta de Google para generar video e imágenes con IA. El profesor la usa como «prueba de fuego» del navegador de cualquier agente. <span class="tag t-pend">Verificar</span> disponibilidad y planes de tu cuenta; no fue posible consultar su sitio desde el entorno de elaboración de esta guía.</p></div>
+</div>
+
+<h2 id="c03-elegir">3.3 ¿Cuál elegir?</h2>
+<p><span class="tag t-expl">Explicado en clase</span> «No hay un ganador absoluto. Elige por presupuesto, privacidad y proyecto.» Una estrategia que el profesor usa y recomendó:</p>
+<ol class="steps">
+<li><b class="t">Base con OpenCode</b> y un modelo gratuito o barato: estructura, primeros archivos, comandos repetitivos.</li>
+<li><b class="t">Cambios pesados con un agente más potente</b> (Claude Code o Codex) cuando tengas acceso: diseño fino, lógica compleja, revisión de seguridad.</li>
+<li><b class="t">Un solo lugar común</b>: la misma carpeta o el mismo repositorio, para que ambos lean el mismo proyecto (capítulo 7).</li>
+</ol>
+<div class="box warn"><span class="bt">Cuidado con las API de pago</span>OpenCode permite conectar proveedores con tu propia clave API. El profesor relató haber gastado ≈ 25 % de un plan anual de API en un solo día por un error, y advirtió que elegir por accidente un modelo caro puede agotar 100 USD en un par de aplicaciones de prueba. Con una <b>suscripción</b> el peor caso es agotar el límite semanal; con una <b>API</b>, el gasto puede seguir hasta donde llegue tu saldo. Si conectas una API: fija límites de gasto, usa claves con presupuesto y no compartas la clave.</div>
+</section>
