@@ -108,7 +108,8 @@ order by c.relname;
 -- estas politicas les aplican igual: cada usuario anonimo ve SOLO sus filas. El usuario
 -- anonimo pierde su cuenta si borra datos del navegador o cambia de dispositivo.
 -- Para distinguirlos: (select (auth.jwt() ->> 'is_anonymous')::boolean). Ejemplo OPCIONAL,
--- no ejecutado por defecto: politica RESTRICTIVE que exija usuario permanente en orders.
+-- no ejecutado por defecto (probado a mano el 23/11/2026 en PostgreSQL local: permanente OK, anonimo rechazado con 42501;
+-- ver evidencias_qa/supabase_sql_pruebas.md). Politica RESTRICTIVE que exija usuario permanente en orders:
 --   create policy orders_solo_permanentes on public.orders as restrictive
 --     for insert to authenticated
 --     with check (coalesce((select (auth.jwt() ->> 'is_anonymous')::boolean), false) = false);
