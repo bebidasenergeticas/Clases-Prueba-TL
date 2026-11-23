@@ -1,0 +1,385 @@
+{
+  "_aviso": "DEMO — SIMULACIÓN ACADÉMICA. Menú ficticio creado el 23/11/2026 para las guías de la biblioteca E1601.2 de Top Learning. Puerto A&M es un restaurante imaginario: nombres, precios, costos, horarios y reglas NO son datos reales de ningún negocio. Es la referencia única de menú para todas las guías (dashboard, landing, soul.md, Supabase).",
+  "version": "1.0",
+  "fecha_creacion": "2026-11-23",
+  "moneda": "MXN",
+  "restaurante": {
+    "nombre": "Puerto A&M",
+    "estilo": "Cocina costera mexicana (DEMO)",
+    "ubicacion": "No definida (restaurante ficticio)"
+  },
+  "reglas_demo": {
+    "horario_demo": "Martes a domingo, de 13:00 a 22:00 (DEMO)",
+    "dias_cerrado_demo": [
+      "lunes"
+    ],
+    "max_personas_por_solicitud_demo": 10,
+    "anticipacion_minima_demo": "2 horas",
+    "formato_folio_demo": "DEMO-AAAAMMDD-###",
+    "pagos": "No se procesa dinero en el demo. Ninguna solicitud implica cobro.",
+    "estados_de_solicitud": [
+      "solicitud DEMO (borrador, aún no guardada)",
+      "solicitud DEMO registrada (solo si el backend devolvió un folio)"
+    ],
+    "alergias_y_dietas": "El menú demo NO es una fuente confiable de alérgenos. El campo contiene_demo es ilustrativo. Ante cualquier alergia real, el asistente debe decir que no puede garantizar nada y que debe confirmarse con una persona del restaurante.",
+    "bebidas_alcoholicas": "Solo para personas mayores de edad."
+  },
+  "categorias": [
+    {
+      "id": "crudos",
+      "nombre": "Crudos y ceviches"
+    },
+    {
+      "id": "mar",
+      "nombre": "Del mar"
+    },
+    {
+      "id": "tacos",
+      "nombre": "Tacos"
+    },
+    {
+      "id": "postres",
+      "nombre": "Postres"
+    },
+    {
+      "id": "bebidas",
+      "nombre": "Bebidas"
+    }
+  ],
+  "platillos": [
+    {
+      "id": "PAM-C01",
+      "categoria": "crudos",
+      "nombre": "Tostadas de atún",
+      "descripcion": "Tres tostadas con atún marinado en limón, aguacate, cebolla morada y aderezo de chipotle suave.",
+      "porcion": "3 piezas",
+      "precio_mxn": 145,
+      "costo_demo_mxn": 52,
+      "contiene_demo": [
+        "pescado",
+        "cítricos"
+      ],
+      "etiquetas": [
+        "recomendado",
+        "para-compartir"
+      ],
+      "disponible": true
+    },
+    {
+      "id": "PAM-C02",
+      "categoria": "crudos",
+      "nombre": "Ceviche de pescado del día",
+      "descripcion": "Pescado blanco curado en limón con pepino, cilantro, chile serrano y camote dulce.",
+      "porcion": "1 copa",
+      "precio_mxn": 165,
+      "costo_demo_mxn": 58,
+      "contiene_demo": [
+        "pescado",
+        "cítricos"
+      ],
+      "etiquetas": [
+        "clásico"
+      ],
+      "disponible": true
+    },
+    {
+      "id": "PAM-C03",
+      "categoria": "crudos",
+      "nombre": "Aguachile verde de camarón",
+      "descripcion": "Camarón en salsa verde de limón, chile, pepino y cilantro; picante medio.",
+      "porcion": "1 plato",
+      "precio_mxn": 185,
+      "costo_demo_mxn": 68,
+      "contiene_demo": [
+        "crustáceos",
+        "cítricos"
+      ],
+      "etiquetas": [
+        "picante",
+        "recomendado"
+      ],
+      "disponible": true
+    },
+    {
+      "id": "PAM-C04",
+      "categoria": "crudos",
+      "nombre": "Coctel de camarón",
+      "descripcion": "Camarón cocido en salsa fresca de jitomate y limón con aguacate y galletas saladas.",
+      "porcion": "1 copa",
+      "precio_mxn": 175,
+      "costo_demo_mxn": 62,
+      "contiene_demo": [
+        "crustáceos"
+      ],
+      "etiquetas": [
+        "clásico"
+      ],
+      "disponible": true
+    },
+    {
+      "id": "PAM-C05",
+      "categoria": "crudos",
+      "nombre": "Ceviche mixto para compartir",
+      "descripcion": "Pescado, camarón y pulpo en limón con pepino, mango y chile; ideal para 2 a 3 personas.",
+      "porcion": "para 2 a 3 personas",
+      "precio_mxn": 295,
+      "costo_demo_mxn": 105,
+      "contiene_demo": [
+        "pescado",
+        "crustáceos",
+        "moluscos",
+        "cítricos"
+      ],
+      "etiquetas": [
+        "para-compartir",
+        "recomendado"
+      ],
+      "disponible": true
+    },
+    {
+      "id": "PAM-M01",
+      "categoria": "mar",
+      "nombre": "Filete de pescado a la plancha",
+      "descripcion": "Filete de pescado blanco a la plancha con mantequilla de ajo, arroz blanco y verduras salteadas.",
+      "porcion": "1 plato",
+      "precio_mxn": 245,
+      "costo_demo_mxn": 88,
+      "contiene_demo": [
+        "pescado",
+        "lácteos"
+      ],
+      "etiquetas": [
+        "ligero"
+      ],
+      "disponible": true
+    },
+    {
+      "id": "PAM-M02",
+      "categoria": "mar",
+      "nombre": "Pescado zarandeado para dos",
+      "descripcion": "Pescado entero marinado en adobo suave y asado a las brasas, con tortillas y salsas de la casa.",
+      "porcion": "para 2 personas",
+      "precio_mxn": 520,
+      "costo_demo_mxn": 190,
+      "contiene_demo": [
+        "pescado"
+      ],
+      "etiquetas": [
+        "para-compartir",
+        "especialidad"
+      ],
+      "disponible": true
+    },
+    {
+      "id": "PAM-M03",
+      "categoria": "mar",
+      "nombre": "Camarones al ajillo",
+      "descripcion": "Camarones salteados en aceite de ajo y guajillo, con arroz y ensalada fresca.",
+      "porcion": "1 plato",
+      "precio_mxn": 265,
+      "costo_demo_mxn": 98,
+      "contiene_demo": [
+        "crustáceos"
+      ],
+      "etiquetas": [
+        "picante-suave"
+      ],
+      "disponible": true
+    },
+    {
+      "id": "PAM-M04",
+      "categoria": "mar",
+      "nombre": "Pulpo a la parrilla",
+      "descripcion": "Pulpo tierno a la parrilla sobre puré de camote con salsa de chile de árbol y limón.",
+      "porcion": "1 plato",
+      "precio_mxn": 320,
+      "costo_demo_mxn": 120,
+      "contiene_demo": [
+        "moluscos"
+      ],
+      "etiquetas": [
+        "especialidad"
+      ],
+      "disponible": true
+    },
+    {
+      "id": "PAM-M05",
+      "categoria": "mar",
+      "nombre": "Arroz marinero",
+      "descripcion": "Arroz caldoso con camarón, pescado, pulpo y jitomate asado; sabor intenso a mar.",
+      "porcion": "1 plato",
+      "precio_mxn": 285,
+      "costo_demo_mxn": 100,
+      "contiene_demo": [
+        "pescado",
+        "crustáceos",
+        "moluscos"
+      ],
+      "etiquetas": [
+        "reconfortante"
+      ],
+      "disponible": true
+    },
+    {
+      "id": "PAM-T01",
+      "categoria": "tacos",
+      "nombre": "Tacos de pescado",
+      "descripcion": "Tres tacos de pescado capeado con col morada, salsa de chipotle y limón.",
+      "porcion": "3 piezas",
+      "precio_mxn": 155,
+      "costo_demo_mxn": 48,
+      "contiene_demo": [
+        "pescado",
+        "gluten",
+        "huevo"
+      ],
+      "etiquetas": [
+        "recomendado"
+      ],
+      "disponible": true
+    },
+    {
+      "id": "PAM-T02",
+      "categoria": "tacos",
+      "nombre": "Tacos gobernador de camarón",
+      "descripcion": "Tres tacos de camarón con queso gratinado, chile poblano y jitomate, en tortilla de maíz.",
+      "porcion": "3 piezas",
+      "precio_mxn": 175,
+      "costo_demo_mxn": 60,
+      "contiene_demo": [
+        "crustáceos",
+        "lácteos"
+      ],
+      "etiquetas": [
+        "clásico"
+      ],
+      "disponible": true
+    },
+    {
+      "id": "PAM-T03",
+      "categoria": "tacos",
+      "nombre": "Tacos de hongos y rajas",
+      "descripcion": "Tres tacos de hongos salteados con rajas de poblano y crema de aguacate.",
+      "porcion": "3 piezas",
+      "precio_mxn": 135,
+      "costo_demo_mxn": 38,
+      "contiene_demo": [
+        "lácteos"
+      ],
+      "etiquetas": [
+        "vegetariano"
+      ],
+      "disponible": true
+    },
+    {
+      "id": "PAM-P01",
+      "categoria": "postres",
+      "nombre": "Flan de coco",
+      "descripcion": "Flan cremoso de coco con caramelo ligero.",
+      "porcion": "1 rebanada",
+      "precio_mxn": 85,
+      "costo_demo_mxn": 22,
+      "contiene_demo": [
+        "huevo",
+        "lácteos"
+      ],
+      "etiquetas": [
+        "vegetariano"
+      ],
+      "disponible": true
+    },
+    {
+      "id": "PAM-P02",
+      "categoria": "postres",
+      "nombre": "Mango con chile y helado de limón",
+      "descripcion": "Mango fresco con chile en polvo suave y una bola de helado de limón.",
+      "porcion": "1 plato",
+      "precio_mxn": 80,
+      "costo_demo_mxn": 20,
+      "contiene_demo": [
+        "lácteos"
+      ],
+      "etiquetas": [
+        "vegetariano",
+        "refrescante"
+      ],
+      "disponible": true
+    },
+    {
+      "id": "PAM-B01",
+      "categoria": "bebidas",
+      "nombre": "Agua fresca de jamaica",
+      "descripcion": "Agua fresca de flor de jamaica, servida con hielo.",
+      "porcion": "vaso grande",
+      "precio_mxn": 45,
+      "costo_demo_mxn": 8,
+      "contiene_demo": [],
+      "etiquetas": [
+        "sin-alcohol"
+      ],
+      "disponible": true
+    },
+    {
+      "id": "PAM-B02",
+      "categoria": "bebidas",
+      "nombre": "Limonada de pepino y menta",
+      "descripcion": "Limonada natural con pepino y menta fresca.",
+      "porcion": "vaso grande",
+      "precio_mxn": 55,
+      "costo_demo_mxn": 12,
+      "contiene_demo": [],
+      "etiquetas": [
+        "sin-alcohol",
+        "recomendado"
+      ],
+      "disponible": true
+    },
+    {
+      "id": "PAM-B03",
+      "categoria": "bebidas",
+      "nombre": "Agua mineral con limón",
+      "descripcion": "Agua mineral con rodaja de limón y hielo.",
+      "porcion": "botella",
+      "precio_mxn": 40,
+      "costo_demo_mxn": 10,
+      "contiene_demo": [],
+      "etiquetas": [
+        "sin-alcohol"
+      ],
+      "disponible": true
+    },
+    {
+      "id": "PAM-B04",
+      "categoria": "bebidas",
+      "nombre": "Cerveza artesanal de la casa",
+      "descripcion": "Cerveza clara estilo lager de la casa (DEMO). Solo para personas mayores de edad.",
+      "porcion": "botella",
+      "precio_mxn": 75,
+      "costo_demo_mxn": 28,
+      "contiene_demo": [
+        "gluten",
+        "alcohol"
+      ],
+      "etiquetas": [
+        "alcohol",
+        "mayores-de-edad"
+      ],
+      "disponible": true
+    },
+    {
+      "id": "PAM-B05",
+      "categoria": "bebidas",
+      "nombre": "Café de olla",
+      "descripcion": "Café con canela y piloncillo, servido caliente.",
+      "porcion": "taza",
+      "precio_mxn": 50,
+      "costo_demo_mxn": 10,
+      "contiene_demo": [],
+      "etiquetas": [
+        "sin-alcohol",
+        "caliente"
+      ],
+      "disponible": true
+    }
+  ]
+}

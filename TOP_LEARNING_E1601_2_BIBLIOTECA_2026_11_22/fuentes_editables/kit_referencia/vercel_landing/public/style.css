@@ -1,0 +1,8 @@
+:root { --bg:#f6fbfc; --fg:#12303a; --accent:#0b6e8a; }
+@media (prefers-color-scheme: dark) { :root { --bg:#0f2127; --fg:#e8f4f7; --accent:#5fc3dc; } }
+body { margin:0; font:16px/1.5 system-ui, sans-serif; background:var(--bg); color:var(--fg); }
+header, main { max-width: 40rem; margin: 0 auto; padding: 1rem; }
+h1 { color: var(--accent); margin-bottom: 0; }
+#log { border:1px solid var(--accent); border-radius:8px; min-height:6rem; padding:.5rem; }
+#log p { margin:.25rem 0; } .u { font-weight:600; }
+input { width:70%; padding:.5rem; } button { padding:.5rem 1rem; }

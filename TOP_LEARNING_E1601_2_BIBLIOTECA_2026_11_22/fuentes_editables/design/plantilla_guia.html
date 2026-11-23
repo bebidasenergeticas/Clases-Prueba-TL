@@ -1,0 +1,431 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Muestra del sistema visual · Top Learning E1601.2</title>
+<meta name="description" content="Muestra de todos los componentes del sistema visual de las guías PDF de Top Learning (E1601.2). Contenido de ejemplo sobre el restaurante ficticio Puerto A&M.">
+<meta name="keywords" content="Top Learning, E1601.2, sistema visual, plantilla, Puerto A&M, vibe coding">
+</head>
+<body data-guide-title="Muestra del sistema visual · Top Learning E1601.2">
+
+<!-- ============================ PORTADA ============================ -->
+<section class="cover" data-guide-number="00">
+  <div class="cover-top">
+    <span class="brand">Top Learning</span>
+    <span>Biblioteca de clase · E1601.2</span>
+  </div>
+  <div class="cover-main">
+    <p class="kicker">Guía de muestra · Sistema visual</p>
+    <h1 class="cover-title">Del prompt al producto: guía de referencia</h1>
+    <p class="cover-subtitle">Plantilla con todos los componentes editoriales: pasos, prompts para copiar, terminal, errores, tablas, esquemas y evaluación.</p>
+  </div>
+  <dl class="cover-meta">
+    <div><dt>Grupo</dt><dd>E1601.2 — Inteligencia Artificial</dd></div>
+    <div><dt>Módulo</dt><dd>Vibe Coding y Análisis de Datos · Semana 13/28, Nivel 1</dd></div>
+    <div><dt>Profesor</dt><dd>Kevin Daniel Martínez Orozco —<br>Profesor de IA Aplicada y Automatización</dd></div>
+    <div><dt>Número de guía</dt><dd>Guía 00 de 05 (plantilla)</dd></div>
+    <div><dt>Fecha de la clase</dt><dd>Fecha de la clase: 22/11/2026</dd></div>
+    <div><dt>Verificación técnica</dt><dd>Verificación técnica: 23/11/2026</dd></div>
+  </dl>
+</section>
+
+<!-- ============================ CONTENIDO ============================ -->
+<section class="toc-page">
+  <h1 class="toc-title">Contenido</h1>
+  <nav class="toc" data-auto aria-label="Tabla de contenido"></nav>
+</section>
+
+<!-- ============================ CÓMO USAR ============================ -->
+<section class="chapter unnumbered" id="como-usar">
+  <header class="chapter-head">
+    <p class="chapter-kicker">Antes de empezar</p>
+    <h1 class="chapter-title">Cómo usar esta guía</h1>
+    <p class="lead">Cada bloque de esta guía tiene una función precisa. Aprende a reconocerlos en dos minutos y podrás <strong>retomar la clase en el punto exacto donde te perdiste</strong>.</p>
+  </header>
+
+  <h2 class="no-toc">Etiquetas de contenido</h2>
+  <p>Cada fragmento lleva una etiqueta que dice <em>de dónde viene</em>. Nunca dependen solo del color: siempre incluyen texto.</p>
+  <table class="table">
+    <thead><tr><th style="width:52mm">Etiqueta</th><th>Qué significa</th></tr></thead>
+    <tbody>
+      <tr><td><span class="tag en-clase"></span></td><td>Ocurrió realmente durante la sesión del 22/11/2026.</td></tr>
+      <tr><td><span class="tag prompt-mejorado"></span></td><td>Prompt recuperado del chat y mejorado después de la clase.</td></tr>
+      <tr><td><span class="tag complemento"></span></td><td>Material adicional del profesor; no es documentación oficial de la plataforma.</td></tr>
+      <tr><td><span class="tag actualizacion"></span></td><td>Dato tomado de documentación oficial reciente, con URL y fecha de verificación.</td></tr>
+      <tr><td><span class="tag demo"></span></td><td>Dato o resultado de práctica ficticia (<span class="sim-badge">Simulación académica</span>).</td></tr>
+      <tr><td><span class="tag pendiente"></span></td><td>No se pudo comprobar; verifícalo antes de depender de ello.</td></tr>
+      <tr><td><span class="tag aclaracion"></span></td><td>Precisión técnica añadida después de la clase, con fuente primaria.</td></tr>
+      <tr><td><span class="tag reconstruccion"></span></td><td>Reconstruido para enseñar mejor; no sucedió literalmente así en vivo.</td></tr>
+    </tbody>
+  </table>
+
+  <aside class="callout key-warning">
+    <p class="callout-title">NUNCA pegues una API key en un chat, en el frontend ni en GitHub.</p>
+    <p>Una API key es como la llave de tu casa: quien la tenga puede gastar tu saldo y leer tus datos. <strong>Solo vive en el backend</strong>, dentro de una variable de entorno. Si alguna vez la expones, <strong>revócala de inmediato</strong> en el panel del proveedor y crea otra.</p>
+  </aside>
+</section>
+
+<!-- ============================ CAPÍTULO 1 ============================ -->
+<section class="chapter" id="capitulo-arquitectura">
+  <header class="chapter-head">
+    <p class="chapter-kicker">Parte 1 · Concepto</p>
+    <h1 class="chapter-title">Cómo se conectan las piezas de tu aplicación</h1>
+    <p class="lead">Antes de escribir un solo prompt necesitas un mapa mental: <strong>quién habla con quién</strong> y dónde vive cada secreto.</p>
+    <div class="chapter-meta">
+      <span><b>Tiempo estimado</b> 25 min</span>
+      <span><b>Dificultad</b> Básica</span>
+      <span><b>Necesitas</b> Navegador y cuenta gratuita</span>
+    </div>
+  </header>
+
+  <h2>El problema: una página bonita que no responde</h2>
+  <p><span class="tag en-clase"></span>En clase se construyó la landing del restaurante ficticio <strong>Puerto A&amp;M</strong>. Se veía bien, pero el chat del asistente no contestaba al publicarla. La causa no estaba en el diseño: <strong>faltaba un backend</strong>, es decir, un programa en un servidor que guarda la clave y llama al modelo de lenguaje por ti.</p>
+  <p>Un <strong>frontend</strong> es lo que ve y toca la persona en su navegador. Un <strong>backend</strong> es el programa que corre en otro lugar y hace el trabajo sensible. Un <strong>endpoint</strong> es la dirección concreta del backend a la que el frontend le pide algo, por ejemplo <code>/api/chat</code>.</p>
+
+  <figure class="figure">
+    <img src="../../recursos_visuales/diagramas/arquitectura_general.svg" alt="Diagrama de arquitectura: navegador, frontend, backend seguro con candado, OpenRouter y Supabase, con la API key guardada en variables de entorno del backend.">
+    <figcaption>Arquitectura general de la práctica. La clave de API solo existe en el backend.<span class="credit">Diagrama original · Top Learning E1601.2</span></figcaption>
+  </figure>
+
+  <h2>Por qué importa la separación</h2>
+  <p>Todo lo que viaja al navegador puede leerse: basta abrir las herramientas del desarrollador. Por eso la regla es sencilla y sin excepciones.</p>
+  <div class="comparison">
+    <div class="compare-col good">
+      <h4>Correcto</h4>
+      <div class="compare-body"><ul>
+        <li>El navegador llama a <code>/api/chat</code>.</li>
+        <li>El backend lee <code>OPENROUTER_API_KEY</code> de su entorno.</li>
+        <li>La clave nunca aparece en el código publicado.</li>
+      </ul></div>
+    </div>
+    <div class="compare-col bad">
+      <h4>Incorrecto</h4>
+      <div class="compare-body"><ul>
+        <li>La clave escrita dentro de <code>script.js</code>.</li>
+        <li>La clave pegada en un chat o en un prompt.</li>
+        <li>Un archivo <code>.env</code> subido a GitHub.</li>
+      </ul></div>
+    </div>
+  </div>
+
+  <aside class="callout info">
+    <p class="callout-title">Dato útil</p>
+    <p>GitHub Pages solo sirve archivos estáticos (HTML, CSS, JavaScript). <strong>No ejecuta Python ni FastAPI</strong> y tampoco protege claves.</p>
+  </aside>
+
+  <h2>Prueba el concepto en 6 pasos</h2>
+  <ol class="steps">
+    <li>
+      <p class="step-title">Abre la carpeta del proyecto</p>
+      <p>En el Explorador de archivos entra a la carpeta <code>puerto-am</code> que creaste en la práctica anterior.</p>
+      <p class="expect">una carpeta con <code>index.html</code>, <code>styles.css</code> y <code>script.js</code>.</p>
+    </li>
+    <li>
+      <p class="step-title">Abre PowerShell en esa carpeta</p>
+      <p>Haz clic derecho en un espacio vacío con <kbd>Shift</kbd> presionada y elige <span class="ui">Abrir ventana de PowerShell aquí</span>.</p>
+    </li>
+    <li>
+      <p class="step-title">Comprueba que Python responde</p>
+      <p>Escribe el comando de abajo y pulsa <kbd>Enter</kbd>.</p>
+      <div class="terminal">
+        <div class="term-bar">Windows PowerShell</div>
+<pre><span class="p">PS C:\Users\alumno\puerto-am&gt;</span> <span class="k">python --version</span>
+<span class="o">Python 3.12.x</span></pre>
+      </div>
+      <p class="expect">un número de versión de Python 3.</p>
+    </li>
+    <li>
+      <p class="step-title">Crea y activa un entorno virtual</p>
+      <p>Aísla las librerías de este proyecto para no mezclarlas con otras.</p>
+      <div class="terminal">
+        <div class="term-bar">Windows PowerShell</div>
+<pre><span class="p">PS&gt;</span> <span class="k">python -m venv .venv</span>
+<span class="p">PS&gt;</span> <span class="k">.\.venv\Scripts\Activate.ps1</span>
+<span class="o">(.venv) PS&gt;</span></pre>
+      </div>
+    </li>
+    <li>
+      <p class="step-title">Crea el archivo de variables de entorno</p>
+      <p>Crea <code>.env</code> con el nombre de la variable <strong>y el valor vacío</strong>. Lo llenarás después, solo en tu computadora.</p>
+      <pre class="code" data-file=".env"><span class="c"># Solo en tu equipo. Nunca se sube a GitHub (ver .gitignore).</span>
+OPENROUTER_API_KEY=</pre>
+    </li>
+    <li>
+      <p class="step-title">Protege el archivo con .gitignore</p>
+      <p>Añade una línea para que Git ignore <code>.env</code>.</p>
+      <pre class="code" data-file=".gitignore">.env
+.venv/
+__pycache__/</pre>
+      <p class="expect">que <code>git status</code> no liste <code>.env</code>.</p>
+    </li>
+  </ol>
+
+  <h2>Prompt listo para copiar</h2>
+  <p><span class="tag prompt-mejorado"></span>Versión mejorada del prompt de clase: ahora declara rol, restricciones de seguridad y criterio de aceptación.</p>
+  <div class="prompt-box" id="P-DEMO-01">
+    <div class="prompt-head">
+      <span class="prompt-id">P-DEMO-01</span>
+      <span class="prompt-title">Backend seguro mínimo para el chat de Puerto A&amp;M</span>
+      <span class="prompt-meta"><b>Herramienta:</b> OpenCode / Claude Code &nbsp;·&nbsp; <b>Dificultad:</b> <span class="diff d2"></span> &nbsp;·&nbsp; <b>Tiempo:</b> 10 min</span>
+    </div>
+<pre>Actúa como desarrollador backend senior que enseña a principiantes.
+Estoy en Windows con PowerShell. El proyecto ya tiene index.html,
+styles.css y script.js (landing del restaurante ficticio Puerto A&amp;M).
+
+OBJETIVO
+Crear un backend FastAPI con un único endpoint POST /api/chat que reciba
+{"message": "..."} y devuelva {"reply": "..."} usando OpenRouter.
+
+REGLAS DE SEGURIDAD (no negociables)
+1. La API key se lee de la variable de entorno OPENROUTER_API_KEY.
+2. Nunca escribas la clave en el código, en ejemplos ni en logs.
+3. Si la variable no existe, responde HTTP 500 con un mensaje claro.
+4. Limita el mensaje del usuario a 500 caracteres.
+
+ENTREGABLES
+- main.py con comentarios en español.
+- requirements.txt.
+- Instrucciones para ejecutarlo en PowerShell y probarlo con curl.
+
+CRITERIO DE ACEPTACIÓN
+Al ejecutar uvicorn, abrir /docs y probar el endpoint debe devolver
+un texto de respuesta. Explica cada archivo en una frase.</pre>
+    <p class="prompt-foot">Copia todo el bloque, incluida la primera línea. No agregues tu API key: el prompt nunca la necesita.</p>
+  </div>
+
+  <h3>Prueba observable y resultado esperado</h3>
+  <div class="two-col">
+    <div class="callout tip"><p class="callout-title">Prueba</p><p>Abre <code>http://127.0.0.1:8000/docs</code> y ejecuta <span class="ui">Try it out</span> con el mensaje “Hola”.</p></div>
+    <div class="callout note"><p class="callout-title">Resultado esperado</p><p>Respuesta con código <code>200</code> y un campo <code>reply</code> con texto.</p></div>
+  </div>
+
+  <h2>Errores frecuentes</h2>
+  <div class="error-card" id="E-DEMO-01">
+    <div class="error-head"><span class="error-id">E-DEMO-01</span><span class="error-title">El chat muestra “Failed to fetch”</span></div>
+    <dl>
+      <div><dt class="e-error">Error</dt><dd>En la consola del navegador aparece <code>TypeError: Failed to fetch</code> al enviar un mensaje.</dd></div>
+      <div><dt class="e-cause">Causa probable</dt><dd>El backend no está encendido, escucha en otro puerto o el navegador bloquea la petición por CORS.</dd></div>
+      <div><dt class="e-test">Prueba</dt><dd>Abre <code>http://127.0.0.1:8000/docs</code> en otra pestaña. Si no carga, el backend está apagado.</dd></div>
+      <div><dt class="e-fix">Reparación</dt><dd>Enciende el backend con <code>uvicorn main:app --reload</code> y repite la prueba. Si carga pero el chat falla, pídele a tu asistente que revise la configuración CORS.</dd></div>
+    </dl>
+  </div>
+  <div class="error-card" id="E-DEMO-02">
+    <div class="error-head"><span class="error-id">E-DEMO-02</span><span class="error-title">Respuesta 401 al llamar al modelo</span></div>
+    <dl>
+      <div><dt class="e-error">Error</dt><dd>El backend responde <code>401 Unauthorized</code> desde el proveedor.</dd></div>
+      <div><dt class="e-cause">Causa probable</dt><dd>La variable <code>OPENROUTER_API_KEY</code> está vacía, mal copiada o fue revocada.</dd></div>
+      <div><dt class="e-test">Prueba</dt><dd>Comprueba <em>solo si existe</em> la variable, sin imprimirla:
+        <div class="terminal" style="margin:2mm 0 0"><pre><span class="p">PS&gt;</span> <span class="k">if ($env:OPENROUTER_API_KEY) { "definida" } else { "vacía" }</span></pre></div></dd></div>
+      <div><dt class="e-fix">Reparación</dt><dd>Genera una clave nueva en el panel del proveedor, guárdala en <code>.env</code> y reinicia el servidor.</dd></div>
+    </dl>
+  </div>
+
+  <h2>Qué plataforma aloja qué</h2>
+  <table class="table">
+    <caption>Comparación rápida de lugares donde puede “vivir” tu proyecto</caption>
+    <thead><tr><th>Lugar</th><th>Qué sirve</th><th>¿Ejecuta Python?</th><th>¿Protege claves?</th></tr></thead>
+    <tbody>
+      <tr><td>Tu computadora (localhost)</td><td>Todo, solo para ti</td><td class="ok">Sí</td><td class="warn">Solo en tu equipo</td></tr>
+      <tr><td>GitHub Pages</td><td>Archivos estáticos</td><td class="no">No</td><td class="no">No</td></tr>
+      <tr><td>Vercel</td><td>Estáticos y funciones</td><td class="warn">Según configuración <span class="tag pendiente"></span></td><td class="ok">Variables de entorno</td></tr>
+    </tbody>
+  </table>
+  <div class="sources">
+    <span class="label">Fuente oficial</span>
+    <a class="src" href="https://docs.github.com/en/pages">docs.github.com/en/pages</a> <span class="verified">verificado 23/11/2026</span>
+  </div>
+</section>
+
+<!-- ============================ CAPÍTULO 2 ============================ -->
+<section class="chapter" id="capitulo-datos">
+  <header class="chapter-head">
+    <p class="chapter-kicker">Parte 2 · Datos y memoria</p>
+    <h1 class="chapter-title">Datos del restaurante, KPIs y memoria del asistente</h1>
+    <p class="lead">Un dashboard enseña números; un asistente con memoria recuerda la conversación. Ambos dependen de <strong>datos bien estructurados</strong>.</p>
+  </header>
+
+  <h2>Indicadores del tablero <span class="sim-badge">Simulación académica</span></h2>
+  <p>Las cifras siguientes pertenecen al ejercicio ficticio de <strong>Puerto A&amp;M</strong>; no representan un negocio real.</p>
+  <div class="kpi-grid">
+    <div class="kpi"><span class="kpi-value">$184,520</span><span class="kpi-label">Ingreso</span><span class="kpi-note">Σ cantidad × precio</span></div>
+    <div class="kpi"><span class="kpi-value">1,236</span><span class="kpi-label">Pedidos únicos</span><span class="kpi-note">IDs distintos válidos</span></div>
+    <div class="kpi"><span class="kpi-value">$149</span><span class="kpi-label">Ticket promedio</span><span class="kpi-note">Ingreso ÷ pedidos</span></div>
+    <div class="kpi"><span class="kpi-value">62.4%</span><span class="kpi-label">Margen bruto</span><span class="kpi-note">Utilidad ÷ ingreso</span></div>
+  </div>
+
+  <h2>Esquema de memoria en cinco tablas</h2>
+  <figure class="figure">
+    <img src="../../recursos_visuales/diagramas/modelo_datos_memoria.svg" alt="Modelo de datos con cinco tablas: conversations, messages, orders, order_items y reservations, con claves primarias y foráneas.">
+    <figcaption>Modelo de datos de la memoria del asistente (ejemplo demostrativo).<span class="credit">Diagrama original · Top Learning E1601.2</span></figcaption>
+  </figure>
+
+  <h3>Código de ejemplo: leer los últimos mensajes</h3>
+  <pre class="code" data-file="memoria.py"><span class="k">def</span> ultimos_mensajes(cliente, sesion_id: str, n: int = 6):
+    <span class="c"># Siempre filtra por la sesión del usuario ANTES de llamar al modelo.</span>
+    respuesta = (
+        cliente.table(<span class="s">"messages"</span>)
+        .select(<span class="s">"role, content"</span>)
+        .eq(<span class="s">"conversation_id"</span>, sesion_id)
+        .order(<span class="s">"created_at"</span>, desc=<span class="k">True</span>)
+        .limit(n)
+        .execute()
+    )
+    <span class="k">return</span> list(reversed(respuesta.data))</pre>
+  <p class="small muted">Líneas de código de máximo 90 caracteres para que no se corten al imprimir.</p>
+
+  <h3>Cronología de la práctica</h3>
+  <ol class="timeline approx">
+    <li><span class="t-time">00:00</span><span class="t-title">Teoría de vibe coding</span><p>Qué es y por qué cambia la forma de construir software.</p></li>
+    <li><span class="t-time">00:20</span><span class="t-title">Dashboard desde Excel</span><p>Primer tablero con datos simulados de Puerto A&amp;M.</p></li>
+    <li><span class="t-time">00:40</span><span class="t-title">Landing page</span><p>Página del restaurante y chat simulado.</p></li>
+    <li><span class="t-time">01:05</span><span class="t-title">OpenRouter</span><p>Primera llamada real a un modelo desde el backend.</p></li>
+  </ol>
+  <p class="small muted">Los minutos son aproximados.</p>
+
+  <h2>Captura real con marco de navegador</h2>
+  <figure class="screenshot">
+    <div class="shot-frame">
+      <div class="browser-bar"><span class="dots"></span><span class="url">https://ejemplo.invalid/pagina</span></div>
+      <img src="assets/placeholder_captura.png" alt="Imagen de marcador que indica dónde va una captura real de pantalla.">
+    </div>
+    <figcaption><span class="shot-badge">Captura real</span>Aquí iría la descripción de lo que se ve y qué botón pulsar.<span class="credit">Fuente: página pública oficial · capturada el 23/11/2026</span></figcaption>
+  </figure>
+
+  <figure class="figure schematic">
+    <img src="../../recursos_visuales/diagramas/esquema_openrouter_crear_api_key.svg" alt="Esquema genérico de la pantalla para crear una API key en OpenRouter.">
+    <figcaption>Dónde se crea la clave (esquema genérico).<span class="credit">Esquema original · sin logos de marcas</span></figcaption>
+  </figure>
+
+  <h2>Ejercicio graduado</h2>
+  <div class="exercise" id="X-DEMO-01">
+    <div class="exercise-head"><span class="exercise-id">X-DEMO-01</span><span class="exercise-title">Cambia el KPI y verifica el resultado</span><span class="exercise-level">Nivel 1 · 15 min</span></div>
+    <div class="exercise-body"><dl>
+      <dt>Estado inicial</dt><dd>Tienes el dashboard local funcionando con el Excel simulado.</dd>
+      <dt>Acciones</dt><dd>Pide a tu asistente que agregue el KPI “Ticket promedio” usando <code>ingreso ÷ pedidos únicos</code>.</dd>
+      <dt>Salida esperada</dt><dd>Una tarjeta nueva con el valor calculado y su fórmula visible.</dd>
+      <dt>Diagnóstico</dt><dd>Si el número es absurdo, revisa que los pedidos no se cuenten por fila sino por ID único.</dd>
+    </dl></div>
+  </div>
+
+  <h2>Comparación en tres columnas</h2>
+  <div class="comparison c3">
+    <div class="compare-col neutral"><h4>Vista previa</h4><div class="compare-body"><p>Cada <em>commit</em> en una rama genera una URL de prueba.</p></div></div>
+    <div class="compare-col neutral"><h4>Producción</h4><div class="compare-body"><p>La rama principal se publica en el dominio definitivo.</p></div></div>
+    <div class="compare-col neutral"><h4>Local</h4><div class="compare-body"><p>Solo existe en tu computadora mientras el servidor corre.</p></div></div>
+  </div>
+
+  <div class="callout warning">
+    <p class="callout-title">Cuidado con las cifras de la clase</p>
+    <p>Precios, límites y planes cambian. Cita la URL oficial y la fecha de verificación; no los trates como permanentes.</p>
+  </div>
+  <div class="callout danger">
+    <p class="callout-title">No desactives RLS para “que funcione”</p>
+    <p>La seguridad por filas (RLS) protege los datos de cada usuario. Si algo falla, corrige la política; no la apagues.</p>
+  </div>
+  <div class="callout tip">
+    <p class="callout-title">Atajo</p>
+    <p>Si te perdiste, ve directo a la página “Si te atoras, haz esto” al final de la guía.</p>
+  </div>
+</section>
+
+<!-- ============================ ÍNDICES ============================ -->
+<section class="chapter unnumbered" id="indices">
+  <header class="chapter-head">
+    <p class="chapter-kicker">Referencia rápida</p>
+    <h1 class="chapter-title">Índices de prompts, errores y ejercicios</h1>
+  </header>
+  <nav class="toc-mini" data-auto="prompts"></nav>
+  <nav class="toc-mini" data-auto="errors"></nav>
+  <nav class="toc-mini" data-auto="exercises"></nav>
+
+  <h2 class="no-toc">Checklist de dominio</h2>
+  <div class="checklist-box">
+    <h3>Puedo… (marca con lápiz al imprimir)</h3>
+    <ul class="checklist">
+      <li>Explicar con mis palabras qué hace el frontend y qué hace el backend.</li>
+      <li>Decir dónde vive la API key y dónde <strong>nunca</strong> debe estar.</li>
+      <li>Ejecutar el backend en local y probar <code>/docs</code>.</li>
+      <li>Distinguir “respuesta generada” de “pedido guardado”.</li>
+    </ul>
+  </div>
+</section>
+
+<!-- ============================ MINI EVALUACIÓN ============================ -->
+<section class="chapter unnumbered" id="evaluacion">
+  <header class="chapter-head">
+    <p class="chapter-kicker">Comprueba lo aprendido</p>
+    <h1 class="chapter-title">Mini evaluación</h1>
+  </header>
+  <ol class="quiz">
+    <li><p class="q">¿Dónde debe guardarse la API key de OpenRouter?</p>
+      <ul class="options"><li>En <code>script.js</code>, para que el chat funcione.</li><li>En una variable de entorno del backend.</li><li>En el README del repositorio.</li></ul></li>
+    <li><p class="q">¿Qué ejecuta GitHub Pages?</p>
+      <ul class="options"><li>Python y FastAPI.</li><li>Solo archivos estáticos.</li><li>Bases de datos PostgreSQL.</li></ul></li>
+    <li><p class="q">Una respuesta del asistente que dice “tu reserva está confirmada”, ¿garantiza que exista una reserva guardada?</p>
+      <ul class="options"><li>Sí, siempre.</li><li>No: debe existir un registro en la tabla <code>reservations</code>.</li></ul></li>
+    <li><p class="q">¿Cuál es la acción correcta si expones una clave por accidente?</p>
+      <ul class="options"><li>Borrar el mensaje y seguir usándola.</li><li>Revocarla y crear una nueva.</li></ul></li>
+  </ol>
+  <div class="answers">
+    <h3>Soluciones</h3>
+    <ol>
+      <li><strong>B.</strong> Solo el backend debe conocerla.</li>
+      <li><strong>B.</strong> GitHub Pages es hosting estático.</li>
+      <li><strong>B.</strong> Respuesta generativa no es lo mismo que dato guardado.</li>
+      <li><strong>B.</strong> Una clave expuesta debe considerarse comprometida.</li>
+    </ol>
+  </div>
+</section>
+
+<!-- ============================ GLOSARIO ============================ -->
+<section class="chapter unnumbered" id="glosario">
+  <header class="chapter-head">
+    <p class="chapter-kicker">Referencia</p>
+    <h1 class="chapter-title">Glosario</h1>
+  </header>
+  <dl class="glossary">
+    <div><dt>API <span class="en">(Application Programming Interface)</span></dt><dd>Puerta por la que un programa le pide cosas a otro.</dd></div>
+    <div><dt>API key</dt><dd>Contraseña de un programa. Identifica quién hace la petición y quién paga. Es secreta.</dd></div>
+    <div><dt>Backend</dt><dd>Parte del sistema que corre en un servidor y guarda secretos y lógica.</dd></div>
+    <div><dt>Endpoint</dt><dd>Dirección concreta del backend, por ejemplo <code>/api/chat</code>.</dd></div>
+    <div><dt>FastAPI</dt><dd>Librería de Python para crear backends con pocas líneas.</dd></div>
+    <div><dt>Frontend</dt><dd>Lo que ve y usa la persona en su navegador.</dd></div>
+    <div><dt>localhost</dt><dd>Tu propia computadora vista como servidor; nadie más puede abrir ese enlace.</dd></div>
+    <div><dt>Prompt</dt><dd>Instrucción escrita para un modelo de lenguaje.</dd></div>
+    <div><dt>RLS <span class="en">(Row Level Security)</span></dt><dd>Reglas de PostgreSQL que limitan qué filas puede ver cada usuario.</dd></div>
+    <div><dt>soul.md</dt><dd>Convención del proyecto: un archivo Markdown con el system prompt que el backend inyecta. No es un estándar ni reemplaza la autenticación.</dd></div>
+    <div><dt>Variable de entorno</dt><dd>Valor que el sistema guarda fuera del código, ideal para secretos.</dd></div>
+  </dl>
+</section>
+
+<!-- ============================ SI TE ATORAS ============================ -->
+<section class="rescue">
+  <div class="rescue-head">
+    <p class="rescue-kicker">Página de rescate</p>
+    <h2 id="si-te-atoras">Si te atoras, haz esto</h2>
+    <p>Respira. Casi siempre el problema es uno de cuatro. Sigue el orden: cada paso descarta una causa.</p>
+  </div>
+  <div class="rescue-block"><span class="meta">Paso 1 · 2 minutos</span><h3>¿Responde la interfaz?</h3>
+    <ol><li>Recarga la página con <kbd>Ctrl</kbd> + <kbd>F5</kbd>.</li><li>Si no carga, revisa que el servidor siga encendido en PowerShell.</li></ol></div>
+  <div class="rescue-block"><span class="meta">Paso 2 · 3 minutos</span><h3>¿Llega la petición al backend?</h3>
+    <p>Abre <code>/docs</code> del backend. Si responde allí pero no desde la página, el problema es la conexión entre ambos (URL o CORS).</p></div>
+  <div class="rescue-block"><span class="meta">Paso 3 · 3 minutos</span><h3>¿Existe la variable con la clave?</h3>
+    <p>Comprueba que exista sin imprimirla. Si está vacía, créala otra vez y reinicia el servidor.</p></div>
+  <div class="rescue-block"><span class="meta">Plan B</span><h3>Pide ayuda con un mensaje útil</h3>
+    <ul><li>Qué intentabas hacer y en qué paso estás.</li><li>El texto <strong>exacto</strong> del error (sin claves ni datos personales).</li><li>Una captura sin información sensible.</li></ul></div>
+</section>
+
+<!-- ============================ CRÉDITOS ============================ -->
+<section class="credits">
+  <h2 id="creditos">Créditos y aviso</h2>
+  <p><strong>Autoría:</strong> Kevin Daniel Martínez Orozco — Profesor de Inteligencia Artificial Aplicada y Automatización. Grupo E1601.2 — Inteligencia Artificial, Top Learning.</p>
+  <p><strong>Fechas:</strong> clase del 22/11/2026; verificación técnica del 23/11/2026.</p>
+  <h3>Aviso</h3>
+  <p>Esta guía es material de apoyo educativo. Restaurante, menú, ventas, clientes y reservas de <strong>Puerto A&amp;M</strong> son una <strong>simulación académica</strong>. Los precios, límites y pantallas de las plataformas cambian; consulta siempre la documentación oficial citada. Los esquemas ilustrativos están rotulados y pueden diferir de la interfaz real.</p>
+  <p>Las plataformas mencionadas pertenecen a sus respectivos titulares; no hay patrocinio ni respaldo de su parte. El material complementario del profesor no equivale a material oficial autorizado por Top Learning, salvo indicación expresa.</p>
+  <div class="brand-foot"><span>Top Learning</span><span>E1601.2 · Inteligencia Artificial</span><span>23/11/2026</span></div>
+</section>
+
+</body>
+</html>

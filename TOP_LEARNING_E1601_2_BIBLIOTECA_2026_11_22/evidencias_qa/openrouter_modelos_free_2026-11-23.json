@@ -1,0 +1,334 @@
+{
+ "fuente": "https://openrouter.ai/api/v1/models",
+ "consultado": "2026-11-23 (HTTP date header: Mon, 23 Nov 2026 07:44:58 GMT; cache CDN age 103 s)",
+ "criterio": "pricing.prompt == 0 y pricing.completion == 0",
+ "total_modelos_catalogo": 477,
+ "total_gratis": 15,
+ "nota": "Lista efimera: la disponibilidad cambia; verificar en tiempo real.",
+ "modelos": [
+  {
+   "id": "inclusionai/ling-3.2-flash:free",
+   "name": "inclusionAI: Ling 3.2 Flash (free)",
+   "context_length": 1048576,
+   "modality": "text+image->text",
+   "pricing": {
+    "prompt": "0",
+    "completion": "0"
+   },
+   "max_completion_tokens": 262144,
+   "supports_tools": true,
+   "created": "2026-11-13",
+   "expiration_date": null,
+   "endpoints": [
+    "/api/v1/chat/completions",
+    "/api/v1/completions",
+    "/api/v1/messages",
+    "/api/v1/responses"
+   ],
+   "tipo_id": ":free"
+  },
+  {
+   "id": "particle-ai/particle-1:free",
+   "name": "Particle AI: Particle-1 (free)",
+   "context_length": 1048576,
+   "modality": "text+image->text",
+   "pricing": {
+    "prompt": "0",
+    "completion": "0"
+   },
+   "max_completion_tokens": 131072,
+   "supports_tools": true,
+   "created": "2026-10-28",
+   "expiration_date": null,
+   "endpoints": [
+    "/api/v1/chat/completions",
+    "/api/v1/completions",
+    "/api/v1/messages",
+    "/api/v1/responses"
+   ],
+   "tipo_id": ":free"
+  },
+  {
+   "id": "google/lyria-3-pro-preview",
+   "name": "Google: Lyria 3 Pro Preview",
+   "context_length": 1048576,
+   "modality": "text+image->text+audio",
+   "pricing": {
+    "prompt": "0",
+    "completion": "0"
+   },
+   "max_completion_tokens": 65536,
+   "supports_tools": false,
+   "created": "2026-03-30",
+   "expiration_date": null,
+   "endpoints": [
+    "/api/v1/chat/completions",
+    "/api/v1/completions",
+    "/api/v1/messages",
+    "/api/v1/responses"
+   ],
+   "tipo_id": "preview_sin_sufijo",
+   "nota": "Modelo de audio (salida text+audio) en preview con prompt/completion=0; NO tiene sufijo :free. Fuente docs api_reference/models.md: modelos preview/experimentales pueden fijar precio 0. No recomendarlo para el chat de texto."
+  },
+  {
+   "id": "google/lyria-3-clip-preview",
+   "name": "Google: Lyria 3 Clip Preview",
+   "context_length": 1048576,
+   "modality": "text+image->text+audio",
+   "pricing": {
+    "prompt": "0",
+    "completion": "0"
+   },
+   "max_completion_tokens": 65536,
+   "supports_tools": false,
+   "created": "2026-03-30",
+   "expiration_date": null,
+   "endpoints": [
+    "/api/v1/chat/completions",
+    "/api/v1/completions",
+    "/api/v1/messages",
+    "/api/v1/responses"
+   ],
+   "tipo_id": "preview_sin_sufijo",
+   "nota": "Modelo de audio (salida text+audio) en preview con prompt/completion=0; NO tiene sufijo :free. Fuente docs api_reference/models.md: modelos preview/experimentales pueden fijar precio 0. No recomendarlo para el chat de texto."
+  },
+  {
+   "id": "baidu/ernie-5.5-flash-preview:free",
+   "name": "Baidu: ERNIE-5.5-Flash-Preview (free)",
+   "context_length": 1024000,
+   "modality": "text->text",
+   "pricing": {
+    "prompt": "0",
+    "completion": "0"
+   },
+   "max_completion_tokens": 921600,
+   "supports_tools": true,
+   "created": "2026-11-10",
+   "expiration_date": null,
+   "endpoints": [
+    "/api/v1/chat/completions",
+    "/api/v1/completions",
+    "/api/v1/messages",
+    "/api/v1/responses"
+   ],
+   "tipo_id": ":free"
+  },
+  {
+   "id": "nvidia/nemotron-3.5-super-vl:free",
+   "name": "NVIDIA: Nemotron 3.5 Super VL (free)",
+   "context_length": 1000000,
+   "modality": "text+image+video->text",
+   "pricing": {
+    "prompt": "0",
+    "completion": "0"
+   },
+   "max_completion_tokens": 131072,
+   "supports_tools": true,
+   "created": "2026-10-15",
+   "expiration_date": null,
+   "endpoints": [
+    "/api/v1/chat/completions",
+    "/api/v1/completions",
+    "/api/v1/messages",
+    "/api/v1/responses"
+   ],
+   "tipo_id": ":free"
+  },
+  {
+   "id": "nvidia/nemotron-3.5-lightning:free",
+   "name": "NVIDIA: Nemotron 3.5 Lightning (free)",
+   "context_length": 1000000,
+   "modality": "text->text",
+   "pricing": {
+    "prompt": "0",
+    "completion": "0"
+   },
+   "max_completion_tokens": 65536,
+   "supports_tools": true,
+   "created": "2026-08-11",
+   "expiration_date": null,
+   "endpoints": [
+    "/api/v1/chat/completions",
+    "/api/v1/completions",
+    "/api/v1/messages",
+    "/api/v1/responses"
+   ],
+   "tipo_id": ":free"
+  },
+  {
+   "id": "nvidia/nemotron-3-ultra-550b-a55b:free",
+   "name": "NVIDIA: Nemotron 3 Ultra (free)",
+   "context_length": 1000000,
+   "modality": "text->text",
+   "pricing": {
+    "prompt": "0",
+    "completion": "0"
+   },
+   "max_completion_tokens": 65536,
+   "supports_tools": true,
+   "created": "2026-06-04",
+   "expiration_date": null,
+   "endpoints": [
+    "/api/v1/chat/completions",
+    "/api/v1/completions",
+    "/api/v1/messages",
+    "/api/v1/responses"
+   ],
+   "tipo_id": ":free"
+  },
+  {
+   "id": "dots-studio/dots-3-note-preview:free",
+   "name": "Dots Studio: Dots3-Note Preview (free)",
+   "context_length": 512000,
+   "modality": "text+image->text",
+   "pricing": {
+    "prompt": "0",
+    "completion": "0"
+   },
+   "max_completion_tokens": 460800,
+   "supports_tools": true,
+   "created": "2026-08-14",
+   "expiration_date": "2026-12-31",
+   "endpoints": [
+    "/api/v1/chat/completions",
+    "/api/v1/completions",
+    "/api/v1/messages",
+    "/api/v1/responses"
+   ],
+   "tipo_id": ":free",
+   "nota": "Tiene expiration_date en el catalogo: dejara de estar disponible."
+  },
+  {
+   "id": "liquid/lfm-3-1.7b:free",
+   "name": "LiquidAI: LFM3-1.7B (free)",
+   "context_length": 262144,
+   "modality": "text->text",
+   "pricing": {
+    "prompt": "0",
+    "completion": "0"
+   },
+   "max_completion_tokens": 8192,
+   "supports_tools": true,
+   "created": "2026-11-06",
+   "expiration_date": null,
+   "endpoints": [
+    "/api/v1/chat/completions",
+    "/api/v1/completions",
+    "/api/v1/messages",
+    "/api/v1/responses"
+   ],
+   "tipo_id": ":free"
+  },
+  {
+   "id": "recursive/flint-v1.0:free",
+   "name": "Recursive: Flint (free)",
+   "context_length": 262144,
+   "modality": "text->text",
+   "pricing": {
+    "prompt": "0",
+    "completion": "0"
+   },
+   "max_completion_tokens": 235929,
+   "supports_tools": true,
+   "created": "2026-10-21",
+   "expiration_date": null,
+   "endpoints": [
+    "/api/v1/chat/completions",
+    "/api/v1/completions",
+    "/api/v1/messages",
+    "/api/v1/responses"
+   ],
+   "tipo_id": ":free"
+  },
+  {
+   "id": "google/gemma-4-26b-a4b-it:free",
+   "name": "Google: Gemma 4 26B A4B  (free)",
+   "context_length": 262144,
+   "modality": "text+image+video->text",
+   "pricing": {
+    "prompt": "0",
+    "completion": "0"
+   },
+   "max_completion_tokens": 32768,
+   "supports_tools": true,
+   "created": "2026-04-03",
+   "expiration_date": null,
+   "endpoints": [
+    "/api/v1/chat/completions",
+    "/api/v1/completions",
+    "/api/v1/messages",
+    "/api/v1/responses"
+   ],
+   "tipo_id": ":free"
+  },
+  {
+   "id": "google/gemma-4-31b-it:free",
+   "name": "Google: Gemma 4 31B (free)",
+   "context_length": 262144,
+   "modality": "text+image+video->text",
+   "pricing": {
+    "prompt": "0",
+    "completion": "0"
+   },
+   "max_completion_tokens": 32768,
+   "supports_tools": true,
+   "created": "2026-04-02",
+   "expiration_date": null,
+   "endpoints": [
+    "/api/v1/chat/completions",
+    "/api/v1/completions",
+    "/api/v1/messages",
+    "/api/v1/responses"
+   ],
+   "tipo_id": ":free"
+  },
+  {
+   "id": "nvidia/nemotron-3-nano-omni-30b-a3b-reasoning:free",
+   "name": "NVIDIA: Nemotron 3 Nano Omni (free)",
+   "context_length": 256000,
+   "modality": "text+image+audio+video->text",
+   "pricing": {
+    "prompt": "0",
+    "completion": "0"
+   },
+   "max_completion_tokens": 65536,
+   "supports_tools": true,
+   "created": "2026-04-28",
+   "expiration_date": null,
+   "endpoints": [
+    "/api/v1/chat/completions",
+    "/api/v1/completions",
+    "/api/v1/messages",
+    "/api/v1/responses"
+   ],
+   "tipo_id": ":free"
+  },
+  {
+   "id": "openrouter/free",
+   "name": "Free Models Router",
+   "context_length": 200000,
+   "modality": "text+image->text",
+   "pricing": {
+    "prompt": "0",
+    "completion": "0"
+   },
+   "max_completion_tokens": null,
+   "supports_tools": true,
+   "created": "2026-02-01",
+   "expiration_date": null,
+   "endpoints": [
+    "/api/v1/chat/completions",
+    "/api/v1/completions",
+    "/api/v1/messages",
+    "/api/v1/responses"
+   ],
+   "tipo_id": "router"
+  }
+ ],
+ "resumen": {
+  "con_sufijo_free": 12,
+  "router_openrouter_free": 1,
+  "preview_precio_cero_sin_free": 2
+ },
+ "nota_modalidades": "GET /api/v1/models devuelve por defecto SOLO modelos con salida de texto (docs api_reference/models.md). Con ?output_modalities=all el catalogo tiene 743 entradas; muchas de imagen/video/rerank muestran prompt/completion='0' porque se cobran por otra unidad (imagen, segundo de video), asi que NO son gratis. Entradas :free no-texto (imagen/voz/embeddings/rerank/decisions), no utiles para el chat: ['recraft/recraft-v4.1-flash-v2:free', 'perplexity/pplx-decider-flash-v1.3:free', 'perplexity/pplx-decider-v1.3:free', 'heygen/heygen-voice-1-turbo:free', 'nvidia/nemotron-3.5-embed-1b:free', 'nvidia/nemotron-3.5-embed-8b:free', 'nvidia/nemotron-3.5-rerank-8b:free', 'respan/span-01-lite:free', 'fish-audio/s2.1-pro-free:free', 'nvidia/nemotron-3-embed-1b:free']"
+}

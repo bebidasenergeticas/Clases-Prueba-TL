@@ -1,0 +1,220 @@
+<!doctype html>
+<html lang="es-MX">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Puerto A&amp;M | Business Intelligence (DEMO)</title>
+<style>
+  :root{
+    --petroleo:#0E4A5C; --petroleo-osc:#0A3542; --grafito:#2B2F33; --gris:#6B7378;
+    --calido:#FBF8F2; --tarjeta:#FFFFFF; --linea:#E6E0D3; --oro:#C9A24B; --ok:#2F7D5B; --mal:#B4492F;
+  }
+  *{box-sizing:border-box}
+  body{margin:0;font-family:"Segoe UI",system-ui,-apple-system,Roboto,sans-serif;background:var(--calido);color:var(--grafito);display:flex;min-height:100vh}
+  aside{width:230px;background:linear-gradient(180deg,var(--petroleo),var(--petroleo-osc));color:#EAF2F4;padding:24px 18px;flex-shrink:0;display:flex;flex-direction:column;gap:18px}
+  .marca{font-size:20px;font-weight:700;letter-spacing:.3px}
+  .marca small{display:block;color:var(--oro);font-weight:600;font-size:11px;letter-spacing:1.6px;margin-top:4px;text-transform:uppercase}
+  nav a{display:block;color:#CFE0E5;text-decoration:none;padding:9px 12px;border-radius:8px;font-size:14px}
+  nav a.act{background:rgba(255,255,255,.1);border-left:3px solid var(--oro);color:#fff}
+  .pie{margin-top:auto;font-size:11px;color:#9DB8C0;line-height:1.5}
+  main{flex:1;padding:24px 28px;min-width:0}
+  .aviso{background:#FFF6DD;border:1px solid var(--oro);color:#6B5314;padding:8px 14px;border-radius:8px;font-size:13px;font-weight:600;margin-bottom:16px}
+  header.top{display:flex;flex-wrap:wrap;gap:12px;align-items:flex-end;justify-content:space-between;margin-bottom:14px}
+  h1{margin:0;font-size:24px;color:var(--petroleo)}
+  .sub{color:var(--gris);font-size:13px;margin-top:2px}
+  .filtros{display:flex;flex-wrap:wrap;gap:10px;align-items:flex-end;margin-bottom:16px}
+  .filtros label{font-size:11px;text-transform:uppercase;letter-spacing:.8px;color:var(--gris);display:flex;flex-direction:column;gap:4px}
+  select,input[type=date],input[type=text]{padding:8px 10px;border:1px solid var(--linea);border-radius:8px;background:#fff;font:inherit;font-size:14px;color:var(--grafito)}
+  button{font:inherit;font-size:14px;font-weight:600;border:0;border-radius:8px;padding:9px 16px;cursor:pointer;background:var(--petroleo);color:#fff}
+  button.sec{background:#fff;color:var(--petroleo);border:1px solid var(--petroleo)}
+  button:disabled{opacity:.6;cursor:wait}
+  .estado{font-size:13px;min-height:18px;margin-bottom:10px}
+  .estado.err{color:var(--mal);font-weight:600}.estado.ok{color:var(--ok)}
+  .kpis{display:grid;grid-template-columns:repeat(auto-fit,minmax(170px,1fr));gap:12px;margin-bottom:16px}
+  .kpi{background:var(--tarjeta);border:1px solid var(--linea);border-top:3px solid var(--oro);border-radius:12px;padding:14px 16px;animation:subir .4s ease both}
+  .kpi h3{margin:0;font-size:11px;text-transform:uppercase;letter-spacing:.9px;color:var(--gris);font-weight:600}
+  .kpi .v{font-size:24px;font-weight:700;color:var(--petroleo);margin-top:6px;font-variant-numeric:tabular-nums}
+  .kpi .n{font-size:12px;color:var(--gris);margin-top:2px}
+  .pos{color:var(--ok)!important}.neg{color:var(--mal)!important}
+  @keyframes subir{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:none}}
+  .grid{display:grid;grid-template-columns:3fr 2fr;gap:14px;margin-bottom:16px}
+  .card{background:var(--tarjeta);border:1px solid var(--linea);border-radius:12px;padding:16px}
+  .card h2{margin:0 0 10px;font-size:15px;color:var(--petroleo)}
+  .chart{position:relative;height:290px}
+  .lista{margin:0;padding:0;list-style:none;font-size:14px}
+  .lista li{display:flex;justify-content:space-between;gap:8px;padding:6px 0;border-bottom:1px dashed var(--linea)}
+  .meta{margin:8px 0}.meta .bar{height:8px;background:#EFE9DB;border-radius:6px;overflow:hidden}
+  .meta .bar i{display:block;height:100%;background:var(--petroleo)}
+  .meta .et{display:flex;justify-content:space-between;font-size:13px;margin-bottom:3px}
+  table{width:100%;border-collapse:collapse;font-size:13px}
+  th{text-align:left;color:var(--gris);font-size:11px;text-transform:uppercase;letter-spacing:.7px;padding:6px 8px;border-bottom:2px solid var(--linea)}
+  td{padding:6px 8px;border-bottom:1px solid var(--linea)} td.num{text-align:right;font-variant-numeric:tabular-nums}
+  .tw{overflow-x:auto}
+  .chat{display:flex;flex-direction:column;gap:10px}
+  .msgs{min-height:70px;max-height:260px;overflow:auto;display:flex;flex-direction:column;gap:8px}
+  .m{padding:9px 12px;border-radius:10px;font-size:14px;line-height:1.45;white-space:pre-wrap}
+  .m.u{background:var(--petroleo);color:#fff;align-self:flex-end;max-width:85%}
+  .m.a{background:#F3EEE2;align-self:flex-start;max-width:92%}
+  .m.e{background:#FDECE7;border:1px solid var(--mal);color:#7A2D1A;align-self:stretch}
+  .fila{display:flex;gap:8px}.fila input{flex:1}
+  @media (max-width:900px){
+    body{flex-direction:column} aside{width:auto;flex-direction:row;align-items:center;padding:12px 16px} nav,.pie{display:none}
+    main{padding:16px}.grid{grid-template-columns:1fr}
+  }
+</style>
+</head>
+<body>
+<aside>
+  <div class="marca">Puerto A&amp;M<small>Business Intelligence</small></div>
+  <nav><a class="act" href="#">Resumen</a><a href="#ventas">Ventas</a><a href="#asistente">Asistente</a></nav>
+  <div class="pie">Referencia de la clase E1601.2.<br>Datos 100&nbsp;% ficticios.</div>
+</aside>
+<main>
+  <div class="aviso">SIMULACIÓN ACADÉMICA — no son datos reales de Puerto A&amp;M</div>
+  <header class="top">
+    <div><h1>Resumen de ventas</h1><div class="sub" id="sub">Cargando…</div></div>
+    <div><button id="btnRefresh">Actualizar datos</button></div>
+  </header>
+  <div class="filtros">
+    <label>Desde<input type="date" id="fDesde"></label>
+    <label>Hasta<input type="date" id="fHasta"></label>
+    <label>Categoría<select id="fCategoria"><option value="">Todas</option></select></label>
+    <label>Producto<select id="fProducto"><option value="">Todos</option></select></label>
+    <label>Canal<select id="fCanal"><option value="">Todos</option></select></label>
+    <button class="sec" id="btnLimpiar">Limpiar</button>
+  </div>
+  <div class="estado" id="estado" role="status"></div>
+  <section class="kpis" id="kpis"></section>
+  <section class="grid">
+    <div class="card"><h2>Ventas vs. costos por mes (MXN)</h2><div class="chart"><canvas id="cMes"></canvas></div></div>
+    <div class="card"><h2>Ventas por categoría (MXN)</h2><div class="chart"><canvas id="cCat"></canvas></div></div>
+  </section>
+  <section class="grid">
+    <div class="card"><h2>Productos más vendidos (unidades)</h2><ul class="lista" id="top"></ul></div>
+    <div class="card"><h2>Cumplimiento de metas (ventas)</h2><div id="metas"></div></div>
+  </section>
+  <section class="card" id="ventas" style="margin-bottom:16px">
+    <h2>Últimas líneas de venta <span class="sub" id="totVentas"></span></h2>
+    <div class="tw"><table><thead><tr><th>Fecha</th><th>Pedido</th><th>Producto</th><th>Cant.</th><th>Importe</th><th>Canal</th><th>Estado</th></tr></thead><tbody id="tbody"></tbody></table></div>
+  </section>
+  <section class="card chat" id="asistente">
+    <h2>Asistente financiero</h2>
+    <div class="sub">El servidor calcula las cifras; la IA solo las explica. Si no hay IA configurada, lo dirá.</div>
+    <div class="msgs" id="msgs" aria-live="polite"></div>
+    <form class="fila" id="chatForm"><input type="text" id="pregunta" maxlength="1000" placeholder="Ej.: ¿Cómo va el margen bruto?" autocomplete="off"><button id="btnChat">Preguntar</button></form>
+  </section>
+</main>
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.js"></script>
+<script>
+const $ = id => document.getElementById(id);
+const mxn = n => n == null ? "N/A" : n.toLocaleString("es-MX", {style:"currency", currency:"MXN"});
+const num = n => n == null ? "N/A" : n.toLocaleString("es-MX");
+const pct = (n, d=1) => n == null ? "N/A" : (n*100).toLocaleString("es-MX", {minimumFractionDigits:d, maximumFractionDigits:d}) + " %";
+const MESES = ["ene","feb","mar","abr","may","jun","jul","ago","sep","oct","nov","dic"];
+const mesTxt = m => MESES[+m.slice(5)-1] + " " + m.slice(0,4);
+let charts = {}, opcionesCargadas = false;
+
+function estado(txt, cls){ const e=$("estado"); e.textContent = txt||""; e.className = "estado " + (cls||""); }
+function params(){
+  const p = new URLSearchParams();
+  [["desde","fDesde"],["hasta","fHasta"],["categoria","fCategoria"],["producto","fProducto"],["canal","fCanal"]]
+    .forEach(([k,id]) => { if ($(id).value) p.set(k, $(id).value); });
+  return p;
+}
+async function api(url, opts){
+  const r = await fetch(url, opts);
+  let cuerpo = null; try { cuerpo = await r.json(); } catch(_) {}
+  if (!r.ok) { const e = new Error((cuerpo && cuerpo.detail) || ("Error HTTP " + r.status)); e.status = r.status; throw e; }
+  return cuerpo;
+}
+function poblar(id, items){ const s=$(id); items.forEach(v => { const o=document.createElement("option"); o.value=v; o.textContent=v; s.appendChild(o); }); }
+
+function tarjeta(titulo, valor, nota, cls){
+  const d = document.createElement("div"); d.className = "kpi";
+  const h = document.createElement("h3"); h.textContent = titulo;
+  const v = document.createElement("div"); v.className = "v" + (cls ? " "+cls : ""); v.textContent = valor;
+  const n = document.createElement("div"); n.className = "n"; n.textContent = nota || "";
+  d.append(h, v, n); return d;
+}
+function pintarKpis(k){
+  const c = k.crecimiento_mensual, m = k.cumplimiento_metas.total, cont = $("kpis"); cont.replaceChildren();
+  cont.append(
+    tarjeta("Ventas totales", mxn(k.ventas_totales), "Solo estado Completada"),
+    tarjeta("Pedidos", num(k.pedidos), "Pedidos únicos"),
+    tarjeta("Ticket promedio", mxn(k.ticket_promedio), "Ventas ÷ pedidos"),
+    tarjeta("Unidades vendidas", num(k.unidades_vendidas), "Piezas / porciones"),
+    tarjeta("Costos", mxn(k.costos), "Cantidad × costo unitario"),
+    tarjeta("Utilidad bruta", mxn(k.utilidad_bruta), "Ventas − costos"),
+    tarjeta("Margen bruto", pct(k.margen_bruto), "Utilidad ÷ ventas"),
+    tarjeta("Crecimiento mensual", c.valor == null ? "N/A" : pct(c.valor), c.valor == null ? (c.nota||"") : mesTxt(c.mes_actual)+" vs "+mesTxt(c.mes_anterior), c.valor == null ? "" : (c.valor >= 0 ? "pos" : "neg")),
+    tarjeta("Más vendido", k.top_productos[0] ? k.top_productos[0].producto : "N/A", k.top_productos[0] ? num(k.top_productos[0].unidades)+" unidades" : ""),
+    tarjeta("Cumplimiento de metas", m ? pct(m.cumplimiento_ventas) : "N/A", m ? mxn(m.ventas_real)+" de "+mxn(m.meta_ventas) : (k.cumplimiento_metas.nota||""), m ? (m.cumplimiento_ventas >= 1 ? "pos" : "neg") : "")
+  );
+}
+function grafica(id, cfg){ if (charts[id]) charts[id].destroy(); charts[id] = new Chart($(id), cfg); }
+function pintarGraficas(k){
+  if (typeof Chart === "undefined") { estado("No se pudo cargar Chart.js (¿sin internet?). Los indicadores sí funcionan.", "err"); return; }
+  Chart.defaults.font.family = '"Segoe UI",system-ui,sans-serif';
+  const meses = k.serie_mensual.map(s => mesTxt(s.mes));
+  grafica("cMes", {type:"bar", data:{labels:meses, datasets:[
+    {label:"Ventas", data:k.serie_mensual.map(s=>s.ventas), backgroundColor:"#0E4A5C", borderRadius:6},
+    {label:"Costos", data:k.serie_mensual.map(s=>s.costos), backgroundColor:"#C9A24B", borderRadius:6},
+    {label:"Utilidad bruta", type:"line", data:k.serie_mensual.map(s=>s.utilidad_bruta), borderColor:"#2B2F33", backgroundColor:"#2B2F33", tension:.3}
+  ]}, options:{responsive:true, maintainAspectRatio:false, plugins:{tooltip:{callbacks:{label:c=>c.dataset.label+": "+mxn(c.parsed.y)}}}, scales:{y:{ticks:{callback:v=>"$"+v.toLocaleString("es-MX")}}}}});
+  grafica("cCat", {type:"bar", data:{labels:k.ventas_por_categoria.map(c=>c.categoria), datasets:[{label:"Ventas", data:k.ventas_por_categoria.map(c=>c.ventas), backgroundColor:"#0E4A5C", borderRadius:6}]},
+    options:{indexAxis:"y", responsive:true, maintainAspectRatio:false, plugins:{legend:{display:false}, tooltip:{callbacks:{label:c=>mxn(c.parsed.x)}}}, scales:{x:{ticks:{callback:v=>"$"+v.toLocaleString("es-MX")}}}}});
+}
+function pintarListas(k){
+  const ul = $("top"); ul.replaceChildren();
+  k.top_productos.forEach((p,i) => { const li=document.createElement("li"); const a=document.createElement("span"), b=document.createElement("strong"); a.textContent=(i+1)+". "+p.producto; b.textContent=num(p.unidades)+" u · "+mxn(p.ventas); li.append(a,b); ul.appendChild(li); });
+  if (!k.top_productos.length) ul.textContent = "Sin ventas en el periodo.";
+  const mt = $("metas"); mt.replaceChildren();
+  if (k.cumplimiento_metas.nota && !k.cumplimiento_metas.por_mes.length) mt.textContent = k.cumplimiento_metas.nota;
+  if (k.cumplimiento_metas.comparable === false) mt.textContent = k.cumplimiento_metas.nota;
+  else k.cumplimiento_metas.por_mes.forEach(x => {
+    const d=document.createElement("div"); d.className="meta";
+    const et=document.createElement("div"); et.className="et"; const a=document.createElement("span"), b=document.createElement("strong");
+    a.textContent = mesTxt(x.mes)+" · "+mxn(x.ventas_real)+(x.meta_ventas!=null?" / "+mxn(x.meta_ventas):" (sin meta)"); b.textContent = pct(x.cumplimiento_ventas); et.append(a,b);
+    const bar=document.createElement("div"); bar.className="bar"; const i=document.createElement("i"); i.style.width=Math.min(100,(x.cumplimiento_ventas||0)*100)+"%"; bar.appendChild(i);
+    d.append(et,bar); mt.appendChild(d);
+  });
+}
+async function pintarTabla(){
+  const p = params(); p.set("limite","12"); p.set("orden","desc"); const v = await api("/api/ventas?"+p);
+  $("totVentas").textContent = "(" + v.total + " líneas con estos filtros, todos los estados)";
+  const tb = $("tbody"); tb.replaceChildren();
+  v.items.forEach(x => { const tr=document.createElement("tr");
+    [x.fecha, x.id_pedido, x.producto, num(x.cantidad), mxn(x.importe), x.canal, x.estado].forEach((t,i)=>{ const td=document.createElement("td"); if(i===3||i===4) td.className="num"; td.textContent=t; tr.appendChild(td); }); tb.appendChild(tr); });
+}
+async function cargar(){
+  try {
+    const k = await api("/api/kpis?" + params());
+    if (!opcionesCargadas) { poblar("fCategoria", k.opciones.categorias); poblar("fProducto", k.opciones.productos); poblar("fCanal", k.opciones.canales); opcionesCargadas = true; }
+    pintarKpis(k); pintarGraficas(k); pintarListas(k);
+    const ex = k.excluidas; const adv = (k.calidad.advertencias||[]).join(" · ");
+    $("sub").textContent = "Excel leído: " + new Date(k.leido_en).toLocaleString("es-MX") + " · Excluidas (no suman): " + (ex.Cancelada?ex.Cancelada.lineas:0) + " canceladas, " + (ex.Devuelta?ex.Devuelta.lineas:0) + " devueltas";
+    estado(adv, adv ? "err" : "");
+    await pintarTabla();
+  } catch (e) { estado(e.message, "err"); $("sub").textContent = "Sin datos"; }
+}
+["fDesde","fHasta","fCategoria","fProducto","fCanal"].forEach(id => $(id).addEventListener("change", cargar));
+$("btnLimpiar").onclick = () => { ["fDesde","fHasta","fCategoria","fProducto","fCanal"].forEach(id => $(id).value = ""); cargar(); };
+$("btnRefresh").onclick = async () => {
+  const b = $("btnRefresh"); b.disabled = true; estado("Leyendo el Excel…");
+  try { const r = await api("/api/refresh", {method:"POST"}); await cargar(); estado("Datos actualizados (" + r.lineas + " líneas leídas).", "ok"); }
+  catch (e) { estado((e.status === 423 ? "Archivo bloqueado. " : "") + e.message, "err"); }
+  finally { b.disabled = false; }
+};
+function burbuja(txt, cls){ const d=document.createElement("div"); d.className="m "+cls; d.textContent=txt; $("msgs").appendChild(d); $("msgs").scrollTop=1e9; }
+$("chatForm").onsubmit = async ev => {
+  ev.preventDefault(); const q = $("pregunta").value.trim(); if (!q) return;
+  burbuja(q, "u"); $("pregunta").value = ""; $("btnChat").disabled = true;
+  const body = Object.fromEntries(params().entries()); body.pregunta = q;
+  try { const r = await api("/api/chat", {method:"POST", headers:{"Content-Type":"application/json"}, body:JSON.stringify(body)}); burbuja(r.respuesta, "a"); }
+  catch (e) { burbuja(e.message, "e"); }
+  finally { $("btnChat").disabled = false; }
+};
+cargar();
+</script>
+</body>
+</html>

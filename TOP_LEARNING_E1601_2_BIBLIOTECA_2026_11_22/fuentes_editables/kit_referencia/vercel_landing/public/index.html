@@ -1,0 +1,32 @@
+<!doctype html>
+<html lang="es-MX">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Puerto A&amp;M (DEMO)</title>
+  <link rel="stylesheet" href="/style.css">
+</head>
+<body>
+  <header>
+    <h1>Puerto A&amp;M</h1>
+    <p>Restaurante ficticio - SIMULACION ACADEMICA</p>
+  </header>
+  <main>
+    <section>
+      <h2>Menu (demo)</h2>
+      <ul><li>Ceviche de pescado - $120</li><li>Tacos de camaron - $110</li><li>Caldo de mariscos - $150</li></ul>
+    </section>
+    <section id="chat">
+      <h2>Asistente</h2>
+      <div id="log" role="log" aria-live="polite"></div>
+      <form id="form">
+        <label for="msg">Tu mensaje</label>
+        <input id="msg" maxlength="500" autocomplete="off" required>
+        <button type="submit">Enviar</button>
+      </form>
+      <p id="status" role="status"></p>
+    </section>
+  </main>
+  <script src="/app.js"></script>
+</body>
+</html>

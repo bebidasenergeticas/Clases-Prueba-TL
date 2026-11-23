@@ -1,0 +1,2 @@
+# Probado el 23/11/2026 con supabase-py 2.34.1 (Python 3.13). Instalar: pip install -r requirements.txt
+supabase==2.34.1
