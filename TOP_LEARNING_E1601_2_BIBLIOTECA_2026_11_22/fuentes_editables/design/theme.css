@@ -205,8 +205,8 @@ h2 {
   font-size: 17pt;
   line-height: 1.2;
   letter-spacing: -0.01em;
-  margin: 10mm 0 3.5mm;
-  padding-top: 0;
+  margin: 8mm 0 3.5mm;
+  padding-top: 2.4mm;
   bookmark-level: 2;
   bookmark-label: content();
   position: relative;
@@ -246,6 +246,11 @@ h4 {
 }
 h5 { font-size: 10pt; font-weight: 700; margin: 4mm 0 1.4mm; }
 
+/* Marcadores PDF: solo capítulos (h1), secciones (h2) y subsecciones (h3) de contenido */
+h4, h5, h6 { bookmark-level: none; }
+.no-toc, .rescue-block h3, .answers h3, .answers h4, .checklist-box h3,
+nav.toc-mini h3, .credits h3, .compare-col h4, .exercise-body h3 { bookmark-level: none; }
+
 /* El primer encabezado dentro de un contenedor no debe añadir aire superior */
 .chapter-head + h2, .chapter > h2:first-child { margin-top: 2mm; }
 
@@ -269,7 +274,7 @@ h5 { font-size: 10pt; font-weight: 700; margin: 4mm 0 1.4mm; }
 .cover-art {  /* ilustración abstracta de nodos y rejilla (SVG original) */
   position: absolute;
   right: 0; top: 0;
-  width: 210mm; height: 104mm;
+  width: 210mm; height: 96mm;
 }
 .cover-top {
   position: relative;
@@ -291,7 +296,7 @@ h5 { font-size: 10pt; font-weight: 700; margin: 4mm 0 1.4mm; }
 .cover-main {
   position: absolute;
   left: 22mm; right: 22mm;
-  top: 116mm;
+  top: 112mm;
 }
 .cover .kicker {
   font-size: 9pt;
@@ -569,9 +574,9 @@ nav.toc-mini.exercises .id { color: var(--teal); }
 .callout-title {
   font: 700 9.8pt/1.3 var(--font-display);
   color: var(--midnight);
-  margin: 0 0 1.4mm;
-  min-height: 6.2mm;
-  padding-top: 1.2mm;
+  margin: 0 0 0.6mm;
+  min-height: 5.6mm;
+  padding-top: 0.9mm;
   break-after: avoid;
 }
 .callout p, .callout li { font-size: 9.4pt; line-height: 1.5; }
@@ -716,7 +721,8 @@ table.prompt-table td { padding: 0; }
 table.prompt-table td pre { margin: 0; padding: 4mm 5mm; font: 400 8.3pt/1.55 var(--font-mono);
   white-space: pre-wrap; overflow-wrap: anywhere; overflow-wrap: anywhere; background: #fff;
   border-left: 1.6mm solid var(--violet-soft); }
-table.prompt-table tfoot td { background: var(--violet-soft); padding: 2mm 5mm; font-size: 7.8pt; color: var(--ink-soft); }
+table.prompt-table td.prompt-foot { background: var(--violet-soft); border-top: 0.6pt solid #D6CEF6; padding: 0; }
+table.prompt-table td.prompt-foot .prompt-foot { margin: 0; padding: 2mm 5mm; font-size: 7.8pt; color: var(--ink-soft); background: transparent; border: 0; }
 table.prompt-table .prompt-head { background: var(--violet); }
 table.prompt-table .prompt-cont { display: none; }
 
@@ -738,7 +744,9 @@ pre.code {
   border-left: 1.6mm solid var(--violet-bright);
   box-decoration-break: clone;
   tab-size: 2;
+  break-inside: avoid;
 }
+pre.code.split, .terminal.split, .exercise.split { break-inside: auto; }
 pre.code[data-file] { padding-top: 8mm; position: relative; }
 pre.code[data-file]::before {
   content: attr(data-file);
@@ -760,6 +768,7 @@ pre.code .secret { color: #FF9A8F; background: rgba(255,120,100,0.14); }
   background: #0E1633;
   border: 0.8pt solid #2A3566;
   box-decoration-break: clone;
+  break-inside: avoid;
 }
 .term-bar {
   display: flex; align-items: center; gap: 2.2mm;
@@ -911,6 +920,9 @@ figcaption .credit { display: block; color: var(--ink-mute); font-size: 7.6pt; m
   break-after: avoid;
 }
 .figure.schematic > img, .figure.schematic > svg { border-top-left-radius: 0; border-top-right-radius: 0; }
+/* Esquemas SVG que ya traen el rótulo dentro de la imagen: usar class="figure schematic inline-label" */
+.figure.schematic.inline-label::before { display: none; }
+.figure.schematic.inline-label > img, .figure.schematic.inline-label > svg { border-top-left-radius: 2mm; border-top-right-radius: 2mm; }
 /* Captura real: marco tipo navegador */
 .screenshot {
   margin: 6mm 0;
@@ -1141,6 +1153,7 @@ ol.timeline li p { margin: 0; font-size: 9pt; color: var(--ink-soft); }
 .rescue-head .rescue-kicker { font: 700 7.6pt/1 var(--font-text); letter-spacing: 0.2em; text-transform: uppercase; color: var(--orange-bright); margin: 0 0 3mm; }
 .rescue-head h1, .rescue-head h2 { color: #fff; font: 800 24pt/1.12 var(--font-display); letter-spacing: -0.015em; margin: 0; padding: 0; }
 .rescue-head h2::after, .rescue-head h2::before { display: none; }
+.rescue-head h2 { string-set: chapter content(); bookmark-level: 1; bookmark-label: content(); }
 .rescue-head p { color: #D9D6EE; margin: 3mm 0 0; font-size: 10pt; }
 .rescue-block { margin: 0 0 4.2mm; padding: 3.6mm 5mm 3mm; background: #fff; border: 0.6pt solid var(--rule); border-left: 1.6mm solid var(--orange); border-radius: 1.6mm; break-inside: avoid; }
 .rescue-block h3 { margin: 0 0 1.6mm; font-size: 10.6pt; color: var(--midnight); }
@@ -1156,7 +1169,8 @@ ol.timeline li p { margin: 0; font-size: 9pt; color: var(--ink-soft); }
 .sources .label { font: 700 6.6pt/1 var(--font-text); letter-spacing: 0.12em; text-transform: uppercase; color: var(--blue); margin-right: 2mm; }
 a.src { font-family: var(--font-mono); font-size: 7.6pt; color: var(--blue); word-break: break-all; text-decoration: underline; }
 .verified { font-size: 7.4pt; color: var(--ink-mute); font-weight: 600; white-space: nowrap; }
-.verified::before { content: "\2713 "; color: var(--teal); font-weight: 800; }
+.verified { margin-left: 1.6mm; }
+.verified::before { content: "\2713  "; color: var(--teal); font-weight: 800; }
 ul.sources-list { list-style: none; padding: 0; margin: 3mm 0; }
 ul.sources-list li { padding: 1.6mm 0; border-bottom: 0.5pt solid var(--rule); font-size: 8.6pt; break-inside: avoid; }
 blockquote {
@@ -1171,7 +1185,7 @@ blockquote cite::before { content: "\2014  "; }
   page: closing;
   break-before: page;
   position: relative;
-  width: 210mm; height: 296.4mm;
+  width: 210mm; height: 296.8mm;
   box-sizing: border-box;
   padding: 34mm 24mm 22mm;
   color: #E4E1F5;
@@ -1181,6 +1195,7 @@ blockquote cite::before { content: "\2014  "; }
 }
 .credits h2 { color: #fff; font-size: 24pt; margin: 0 0 6mm; letter-spacing: -0.015em; }
 .credits h2::before { display: none; }
+.credits h2 { string-set: chapter content(); bookmark-level: 1; bookmark-label: content(); }
 .credits h2::after { background: var(--orange-bright); }
 .credits h3 { color: var(--teal-bright); font-size: 8.6pt; letter-spacing: 0.16em; text-transform: uppercase; margin: 8mm 0 2mm; }
 .credits p, .credits li { font-size: 9.2pt; line-height: 1.55; color: #D9D6EE; }

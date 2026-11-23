@@ -100,7 +100,7 @@ def cover_art_svg() -> str:
     import random
     rnd = random.Random(1601)
     pts = []
-    cols, rows = 9, 5
+    cols, rows = 9, 4
     for r in range(rows):
         for c in range(cols):
             x = 18 + c * 22 + rnd.uniform(-5, 5) + (r % 2) * 7
@@ -122,7 +122,7 @@ def cover_art_svg() -> str:
             dots.append(f'<circle cx="{x}" cy="{y}" r="1.5" fill="#FF9A3C"/>')
         else:
             dots.append(f'<circle cx="{x}" cy="{y}" r="0.9" fill="#C9B8FF" fill-opacity="0.8"/>')
-    return ('<svg class="cover-art" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 210 104" '
+    return ('<svg class="cover-art" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 210 96" '
             'preserveAspectRatio="xMaxYMin slice" role="img" aria-label="Ilustración abstracta de nodos conectados">'
             + "".join(lines) + "".join(dots) + "</svg>")
 
@@ -165,6 +165,18 @@ def ensure_document(soup: BeautifulSoup, src: Path):
     meta("dcterms.modified", PRODUCTION_DATE)
     meta("generator", "Top Learning · build.py + WeasyPrint")
     return head, body
+
+
+def mark_splittable_code(soup, limit=26):
+    """Bloques de código/terminal muy largos pueden partirse entre páginas (class .split)."""
+    for pre in soup.select("pre.code, .terminal pre"):
+        box = pre if "code" in pre.get("class", []) else pre.find_parent(class_="terminal")
+        if box is None:
+            continue
+        txt = pre.get_text()
+        n = sum(max(1, -(-len(l) // 88)) for l in txt.split("\n"))
+        if n > limit and "split" not in box.get("class", []):
+            box["class"] = box.get("class", []) + ["split"]
 
 
 def fill_tags(soup):
@@ -263,7 +275,7 @@ def build_toc(soup, depth: int):
         cls = el.get("class", [])
         if el.name == "h1" and "chapter-title" in cls:
             entries.append((1, el["id"], el.get("data-num", ""), text_of(el)))
-        elif el.name == "h2" and el.find_parent(class_="rescue-head"):
+        elif el.name == "h2" and (el.find_parent(class_="rescue-head") or el.find_parent(class_="credits")):
             if not el.get("id"):
                 continue
             entries.append((1, el["id"], "", text_of(el)))
@@ -500,6 +512,7 @@ def main():
     ensure_document(soup, src)
     ids = IdGen(soup)
     fill_tags(soup)
+    mark_splittable_code(soup)
     enrich_cover(soup)
     assign_ids_and_numbers(soup, ids)
     assign_component_ids(soup, ids)

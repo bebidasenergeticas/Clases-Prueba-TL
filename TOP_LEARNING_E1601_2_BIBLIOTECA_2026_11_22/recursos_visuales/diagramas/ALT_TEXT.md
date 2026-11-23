@@ -14,6 +14,48 @@ Cada SVG incluye `<title>` y `<desc>` equivalentes. Úsalo como `alt` en `<img>`
 
 **Descripción:** Diagrama de izquierda a derecha. En la zona pública están el navegador y el frontend (HTML, CSS y JavaScript). El frontend envía la petición POST /api/chat al backend seguro, que está en la zona privada con un candado y lee la API key de las variables de entorno. El backend llama a OpenRouter con la clave para obtener la respuesta del modelo y a Supabase para leer y guardar la memoria. La clave nunca llega al navegador ni a GitHub.
 
+## esquema_github_new_repository.svg
+
+**Título:** Esquema: crear un repositorio nuevo en GitHub (New repository)
+
+**Descripción:** Formulario genérico con propietario y nombre del repositorio, descripción opcional, opciones público o privado, casilla para añadir un README, listas desplegables de plantilla .gitignore y licencia, y el botón Create repository. Los números 1 a 6 se explican en la lista de la derecha. Ilustración esquemática; la interfaz puede variar.
+
+## esquema_github_settings_pages.svg
+
+**Título:** Esquema: activar GitHub Pages en Settings → Pages
+
+**Descripción:** Pantalla genérica de ajustes de un repositorio con menú lateral y la opción Pages resaltada. En el área principal, la sección Build and deployment con la fuente Deploy from a branch, selectores de rama y carpeta, botón Save y un aviso con la dirección donde queda publicado el sitio estático. Los números 1 a 6 se explican a la derecha. Ilustración esquemática; la interfaz puede variar.
+
+## esquema_openrouter_crear_api_key.svg
+
+**Título:** Esquema: crear una API key en OpenRouter
+
+**Descripción:** Pantalla genérica con menú lateral con la opción de claves de API, botón para crear clave, ventana con campos de nombre y límite opcional y botón de confirmar, y un panel que muestra la clave una sola vez con botón de copiar. Los números 1 a 6 se explican en la lista de la derecha. Ilustración esquemática; la interfaz puede variar.
+
+## esquema_supabase_new_project.svg
+
+**Título:** Esquema: crear un proyecto nuevo en Supabase (New project)
+
+**Descripción:** Formulario genérico con organización, nombre del proyecto, contraseña de la base de datos con opción de generarla, región y el botón Create new project. Los números 1 a 6 se explican en la lista de la derecha. Ilustración esquemática; la interfaz puede variar.
+
+## esquema_supabase_sql_editor.svg
+
+**Título:** Esquema: SQL Editor de Supabase
+
+**Descripción:** Pantalla genérica con barra lateral estrecha que incluye SQL Editor resaltado, pestaña de consulta nueva, área de edición con un comentario de ejemplo, botón Run y un panel de resultados inferior que muestra el mensaje de éxito o de error. Los números 1 a 5 se explican en la lista de la derecha. Ilustración esquemática; la interfaz puede variar.
+
+## esquema_vercel_environment_variables.svg
+
+**Título:** Esquema: variables de entorno en un proyecto de Vercel (Environment Variables)
+
+**Descripción:** Pantalla genérica de ajustes de proyecto con pestañas superiores y la pestaña Settings resaltada, menú lateral con Environment Variables, formulario con Key, Value, selección de entornos Production, Preview y Development y botón Save, más un aviso de volver a desplegar. Los números 1 a 7 se explican a la derecha. Ilustración esquemática; la interfaz puede variar.
+
+## esquema_vercel_import_project.svg
+
+**Título:** Esquema: importar un proyecto desde GitHub en Vercel (Import project)
+
+**Descripción:** Dos paneles apilados. Arriba, el menú Add New con la opción Project y una lista de repositorios con un botón Import. Abajo, la pantalla de configuración con nombre del proyecto, framework preset, directorio raíz, variables de entorno y el botón Deploy. Los números 1 a 7 se explican en la lista de la derecha. Ilustración esquemática; la interfaz puede variar.
+
 ## excel_fastapi_dashboard_asistente.svg
 
 **Título:** Flujo local: Excel, FastAPI, dashboard y asistente

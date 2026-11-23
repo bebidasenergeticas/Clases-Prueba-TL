@@ -1,0 +1,101 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 560" width="800" height="560" role="img" aria-labelledby="t d">
+<title id="t">Esquema: crear una API key en OpenRouter</title>
+<desc id="d">Pantalla genérica con menú lateral con la opción de claves de API, botón para crear clave, ventana con campos de nombre y límite opcional y botón de confirmar, y un panel que muestra la clave una sola vez con botón de copiar. Los números 1 a 6 se explican en la lista de la derecha. Ilustración esquemática; la interfaz puede variar.</desc>
+<rect x="0" y="0" width="800" height="560" fill="#FFFFFF"/>
+<rect x="16" y="14" width="510" height="500" rx="12" fill="#FFFFFF" stroke="#C6C2D4" stroke-width="1.8"/>
+<path d="M16 52 V26 Q16 14 28 14 H514 Q526 14 526 26 V52 Z" fill="#ECE8DC"/>
+<line x1="16" y1="52" x2="526" y2="52" stroke="#C6C2D4" stroke-width="1.4" stroke-linecap="round"/>
+<circle cx="34" cy="33" r="4.5" fill="#C9C2AD"/>
+<circle cx="49" cy="33" r="4.5" fill="#C9C2AD"/>
+<circle cx="64" cy="33" r="4.5" fill="#C9C2AD"/>
+<rect x="86" y="22" width="420" height="22" rx="11" fill="#FFFFFF" stroke="#C6C2D4" stroke-width="1.2"/>
+<text x="100" y="38" font-family="'JetBrains Mono', 'DejaVu Sans Mono', monospace" font-size="11.5" font-weight="500" fill="#5B627D" text-anchor="start">https://‹sitio-del-proveedor›/…</text>
+<rect x="17" y="53" width="116" height="460" rx="0" fill="#F4F2F8"/>
+<text x="34" y="89" font-family="Inter, 'Helvetica Neue', Arial, sans-serif" font-size="12.5" font-weight="500" fill="#2A2F45" text-anchor="start">Modelos</text>
+<text x="34" y="123" font-family="Inter, 'Helvetica Neue', Arial, sans-serif" font-size="12.5" font-weight="500" fill="#2A2F45" text-anchor="start">Chat</text>
+<rect x="24" y="138" width="100" height="28" rx="6" fill="#ECE8FB" stroke="#5B3FD9" stroke-width="1.4"/>
+<text x="34" y="157" font-family="Inter, 'Helvetica Neue', Arial, sans-serif" font-size="12.5" font-weight="700" fill="#43299F" text-anchor="start">Claves de API</text>
+<text x="34" y="191" font-family="Inter, 'Helvetica Neue', Arial, sans-serif" font-size="12.5" font-weight="500" fill="#2A2F45" text-anchor="start">Créditos</text>
+<text x="34" y="225" font-family="Inter, 'Helvetica Neue', Arial, sans-serif" font-size="12.5" font-weight="500" fill="#2A2F45" text-anchor="start">Ajustes</text>
+<circle cx="140" cy="152" r="11.5" fill="#B8500A" stroke="#FFFFFF" stroke-width="2"/>
+<text x="140" y="157" font-family="Inter, 'Helvetica Neue', Arial, sans-serif" font-size="14" font-weight="800" fill="#FFFFFF" text-anchor="middle">1</text>
+<text x="150" y="86" font-family="Inter, 'Helvetica Neue', Arial, sans-serif" font-size="18" font-weight="800" fill="#0B1230" text-anchor="start">Claves de API</text>
+<rect x="396" y="66" width="112" height="30" rx="7" fill="#5B3FD9" stroke="#5B3FD9" stroke-width="1.6"/>
+<text x="452.0" y="85.375" font-family="Inter, 'Helvetica Neue', Arial, sans-serif" font-size="12.5" font-weight="700" fill="#FFFFFF" text-anchor="middle">+ Crear clave</text>
+<circle cx="396" cy="66" r="11.5" fill="#B8500A" stroke="#FFFFFF" stroke-width="2"/>
+<text x="396" y="71" font-family="Inter, 'Helvetica Neue', Arial, sans-serif" font-size="14" font-weight="800" fill="#FFFFFF" text-anchor="middle">2</text>
+<rect x="150" y="110" width="358" height="44" rx="6" fill="#F4F2F8" stroke="#C6C2D4" stroke-width="1.2"/>
+<text x="164" y="137" font-family="Inter, 'Helvetica Neue', Arial, sans-serif" font-size="12.5" font-weight="500" fill="#5B627D" text-anchor="start">Aún no tienes claves</text>
+<rect x="156" y="176" width="230" height="258" rx="10" fill="#FFFFFF" stroke="#C6C2D4" stroke-width="1.8"/>
+<text x="172" y="202" font-family="Inter, 'Helvetica Neue', Arial, sans-serif" font-size="15" font-weight="800" fill="#0B1230" text-anchor="start">Crear clave</text>
+<text x="172" y="228" font-family="Inter, 'Helvetica Neue', Arial, sans-serif" font-size="12.5" font-weight="700" fill="#2A2F45" text-anchor="start">Nombre</text>
+<rect x="172" y="234" width="198" height="28" rx="6" fill="#FFFFFF" stroke="#C6C2D4" stroke-width="1.5"/>
+<text x="182" y="252.5" font-family="Inter, 'Helvetica Neue', Arial, sans-serif" font-size="12.5" font-weight="500" fill="#2A2F45" text-anchor="start">puerto-am-demo</text>
+<circle cx="372" cy="226" r="11.5" fill="#B8500A" stroke="#FFFFFF" stroke-width="2"/>
+<text x="372" y="231" font-family="Inter, 'Helvetica Neue', Arial, sans-serif" font-size="14" font-weight="800" fill="#FFFFFF" text-anchor="middle">3</text>
+<text x="172" y="288" font-family="Inter, 'Helvetica Neue', Arial, sans-serif" font-size="12.5" font-weight="700" fill="#2A2F45" text-anchor="start">Límite de crédito</text>
+<rect x="172" y="294" width="198" height="28" rx="6" fill="#FFFFFF" stroke="#C6C2D4" stroke-width="1.5"/>
+<text x="182" y="312.5" font-family="Inter, 'Helvetica Neue', Arial, sans-serif" font-size="12.5" font-weight="500" fill="#5B627D" text-anchor="start">‹opcional›</text>
+<text x="172" y="337" font-family="Inter, 'Helvetica Neue', Arial, sans-serif" font-size="11.5" font-weight="400" fill="#5B627D" text-anchor="start">si el panel lo ofrece</text>
+<circle cx="372" cy="286" r="11.5" fill="#B8500A" stroke="#FFFFFF" stroke-width="2"/>
+<text x="372" y="291" font-family="Inter, 'Helvetica Neue', Arial, sans-serif" font-size="14" font-weight="800" fill="#FFFFFF" text-anchor="middle">4</text>
+<rect x="172" y="384" width="88" height="30" rx="7" fill="#FFFFFF" stroke="#C6C2D4" stroke-width="1.6"/>
+<text x="216.0" y="403.375" font-family="Inter, 'Helvetica Neue', Arial, sans-serif" font-size="12.5" font-weight="700" fill="#2A2F45" text-anchor="middle">Cancelar</text>
+<rect x="276" y="384" width="94" height="30" rx="7" fill="#5B3FD9" stroke="#5B3FD9" stroke-width="1.6"/>
+<text x="323.0" y="403.375" font-family="Inter, 'Helvetica Neue', Arial, sans-serif" font-size="12.5" font-weight="700" fill="#FFFFFF" text-anchor="middle">Crear</text>
+<circle cx="370" cy="384" r="11.5" fill="#B8500A" stroke="#FFFFFF" stroke-width="2"/>
+<text x="370" y="389" font-family="Inter, 'Helvetica Neue', Arial, sans-serif" font-size="14" font-weight="800" fill="#FFFFFF" text-anchor="middle">5</text>
+<rect x="400" y="176" width="124" height="258" rx="10" fill="#F4F2F8" stroke="#C6C2D4" stroke-width="1.4" stroke-dasharray="5 4"/>
+<text x="408" y="196" font-family="Inter, 'Helvetica Neue', Arial, sans-serif" font-size="10.5" font-weight="800" fill="#5B627D" text-anchor="start" letter-spacing="0.8">DESPUÉS</text>
+<text x="408" y="212" font-family="Inter, 'Helvetica Neue', Arial, sans-serif" font-size="10.5" font-weight="800" fill="#5B627D" text-anchor="start" letter-spacing="0.8">de crear</text>
+<rect x="408" y="226" width="108" height="54" rx="6" fill="#FFFFFF" stroke="#C6C2D4" stroke-width="1.2"/>
+<text x="414" y="246" font-family="'JetBrains Mono', 'DejaVu Sans Mono', monospace" font-size="10.5" font-weight="600" fill="#2A2F45" text-anchor="start">sk-or-v1-</text>
+<text x="414" y="262" font-family="'JetBrains Mono', 'DejaVu Sans Mono', monospace" font-size="10.5" font-weight="600" fill="#5B627D" text-anchor="start">XXXXXXXX…</text>
+<rect x="408" y="290" width="108" height="28" rx="7" fill="#FFFFFF" stroke="#C6C2D4" stroke-width="1.6"/>
+<text x="462.0" y="308.2" font-family="Inter, 'Helvetica Neue', Arial, sans-serif" font-size="12" font-weight="700" fill="#2A2F45" text-anchor="middle">Copiar</text>
+<circle cx="516" cy="290" r="11.5" fill="#B8500A" stroke="#FFFFFF" stroke-width="2"/>
+<text x="516" y="295" font-family="Inter, 'Helvetica Neue', Arial, sans-serif" font-size="14" font-weight="800" fill="#FFFFFF" text-anchor="middle">6</text>
+<text x="408" y="340" font-family="Inter, 'Helvetica Neue', Arial, sans-serif" font-size="10.5" font-weight="600" fill="#7F1710" text-anchor="start">Valor de ejemplo</text>
+<text x="408" y="353" font-family="Inter, 'Helvetica Neue', Arial, sans-serif" font-size="10.5" font-weight="600" fill="#7F1710" text-anchor="start">falso. Nunca</text>
+<text x="408" y="366" font-family="Inter, 'Helvetica Neue', Arial, sans-serif" font-size="10.5" font-weight="600" fill="#7F1710" text-anchor="start">muestres tu clave</text>
+<text x="408" y="379" font-family="Inter, 'Helvetica Neue', Arial, sans-serif" font-size="10.5" font-weight="600" fill="#7F1710" text-anchor="start">real.</text>
+<text x="544" y="36" font-family="Inter, 'Helvetica Neue', Arial, sans-serif" font-size="11.5" font-weight="800" fill="#43299F" text-anchor="start" letter-spacing="1">QUÉ HACER EN CADA PUNTO</text>
+<circle cx="556" cy="62" r="11.5" fill="#B8500A" stroke="#FFFFFF" stroke-width="2"/>
+<text x="556" y="67" font-family="Inter, 'Helvetica Neue', Arial, sans-serif" font-size="14" font-weight="800" fill="#FFFFFF" text-anchor="middle">1</text>
+<text x="576" y="62" font-family="Inter, 'Helvetica Neue', Arial, sans-serif" font-size="13.5" font-weight="700" fill="#0B1230" text-anchor="start">Abre las claves</text>
+<text x="576" y="80" font-family="Inter, 'Helvetica Neue', Arial, sans-serif" font-size="12.5" font-weight="400" fill="#454D6B" text-anchor="start">En el menú de tu cuenta busca la</text>
+<text x="576" y="96" font-family="Inter, 'Helvetica Neue', Arial, sans-serif" font-size="12.5" font-weight="400" fill="#454D6B" text-anchor="start">opción de claves de API (Keys).</text>
+<circle cx="556" cy="128" r="11.5" fill="#B8500A" stroke="#FFFFFF" stroke-width="2"/>
+<text x="556" y="133" font-family="Inter, 'Helvetica Neue', Arial, sans-serif" font-size="14" font-weight="800" fill="#FFFFFF" text-anchor="middle">2</text>
+<text x="576" y="128" font-family="Inter, 'Helvetica Neue', Arial, sans-serif" font-size="13.5" font-weight="700" fill="#0B1230" text-anchor="start">Crear clave</text>
+<text x="576" y="146" font-family="Inter, 'Helvetica Neue', Arial, sans-serif" font-size="12.5" font-weight="400" fill="#454D6B" text-anchor="start">Pulsa el botón para crear una</text>
+<text x="576" y="162" font-family="Inter, 'Helvetica Neue', Arial, sans-serif" font-size="12.5" font-weight="400" fill="#454D6B" text-anchor="start">nueva clave.</text>
+<circle cx="556" cy="194" r="11.5" fill="#B8500A" stroke="#FFFFFF" stroke-width="2"/>
+<text x="556" y="199" font-family="Inter, 'Helvetica Neue', Arial, sans-serif" font-size="14" font-weight="800" fill="#FFFFFF" text-anchor="middle">3</text>
+<text x="576" y="194" font-family="Inter, 'Helvetica Neue', Arial, sans-serif" font-size="13.5" font-weight="700" fill="#0B1230" text-anchor="start">Ponle nombre</text>
+<text x="576" y="212" font-family="Inter, 'Helvetica Neue', Arial, sans-serif" font-size="12.5" font-weight="400" fill="#454D6B" text-anchor="start">Usa un nombre que te recuerde</text>
+<text x="576" y="228" font-family="Inter, 'Helvetica Neue', Arial, sans-serif" font-size="12.5" font-weight="400" fill="#454D6B" text-anchor="start">para qué es, por ejemplo</text>
+<text x="576" y="244" font-family="Inter, 'Helvetica Neue', Arial, sans-serif" font-size="12.5" font-weight="400" fill="#454D6B" text-anchor="start">puerto-am-demo.</text>
+<circle cx="556" cy="276" r="11.5" fill="#B8500A" stroke="#FFFFFF" stroke-width="2"/>
+<text x="556" y="281" font-family="Inter, 'Helvetica Neue', Arial, sans-serif" font-size="14" font-weight="800" fill="#FFFFFF" text-anchor="middle">4</text>
+<text x="576" y="276" font-family="Inter, 'Helvetica Neue', Arial, sans-serif" font-size="13.5" font-weight="700" fill="#0B1230" text-anchor="start">Límite opcional</text>
+<text x="576" y="294" font-family="Inter, 'Helvetica Neue', Arial, sans-serif" font-size="12.5" font-weight="400" fill="#454D6B" text-anchor="start">Si el panel lo ofrece, fija un tope</text>
+<text x="576" y="310" font-family="Inter, 'Helvetica Neue', Arial, sans-serif" font-size="12.5" font-weight="400" fill="#454D6B" text-anchor="start">de gasto bajo para practicar.</text>
+<circle cx="556" cy="342" r="11.5" fill="#B8500A" stroke="#FFFFFF" stroke-width="2"/>
+<text x="556" y="347" font-family="Inter, 'Helvetica Neue', Arial, sans-serif" font-size="14" font-weight="800" fill="#FFFFFF" text-anchor="middle">5</text>
+<text x="576" y="342" font-family="Inter, 'Helvetica Neue', Arial, sans-serif" font-size="13.5" font-weight="700" fill="#0B1230" text-anchor="start">Confirma</text>
+<text x="576" y="360" font-family="Inter, 'Helvetica Neue', Arial, sans-serif" font-size="12.5" font-weight="400" fill="#454D6B" text-anchor="start">Pulsa Crear. Aparecerá la clave.</text>
+<circle cx="556" cy="392" r="11.5" fill="#B8500A" stroke="#FFFFFF" stroke-width="2"/>
+<text x="556" y="397" font-family="Inter, 'Helvetica Neue', Arial, sans-serif" font-size="14" font-weight="800" fill="#FFFFFF" text-anchor="middle">6</text>
+<text x="576" y="392" font-family="Inter, 'Helvetica Neue', Arial, sans-serif" font-size="13.5" font-weight="700" fill="#0B1230" text-anchor="start">Cópiala y guárdala</text>
+<text x="576" y="410" font-family="Inter, 'Helvetica Neue', Arial, sans-serif" font-size="12.5" font-weight="400" fill="#454D6B" text-anchor="start">Pásala a tu archivo .env o a las</text>
+<text x="576" y="426" font-family="Inter, 'Helvetica Neue', Arial, sans-serif" font-size="12.5" font-weight="400" fill="#454D6B" text-anchor="start">variables de entorno.</text>
+<text x="576" y="442" font-family="Inter, 'Helvetica Neue', Arial, sans-serif" font-size="12.5" font-weight="400" fill="#454D6B" text-anchor="start">Normalmente no vuelve a</text>
+<text x="576" y="458" font-family="Inter, 'Helvetica Neue', Arial, sans-serif" font-size="12.5" font-weight="400" fill="#454D6B" text-anchor="start">mostrarse completa. No la pegues</text>
+<text x="576" y="474" font-family="Inter, 'Helvetica Neue', Arial, sans-serif" font-size="12.5" font-weight="400" fill="#454D6B" text-anchor="start">en chats.</text>
+<rect x="126.380859375" y="527.0" width="289.23828125" height="22" rx="11.0" fill="#FDEBD9" stroke="#B8500A" stroke-width="1.2"/>
+<text x="271.0" y="542.025" font-family="Inter, 'Helvetica Neue', Arial, sans-serif" font-size="11.5" font-weight="700" fill="#7A3200" text-anchor="middle">Ilustración esquemática; la interfaz puede variar</text>
+<rect x="150" y="450" width="252" height="50" rx="8" fill="#FCE9E7" stroke="#B3261E" stroke-width="1.4"/>
+<text x="162" y="470" font-family="Inter, 'Helvetica Neue', Arial, sans-serif" font-size="12" font-weight="700" fill="#7F1710" text-anchor="start">NUNCA pegues la clave en un chat, en</text>
+<text x="162" y="485" font-family="Inter, 'Helvetica Neue', Arial, sans-serif" font-size="12" font-weight="700" fill="#7F1710" text-anchor="start">el frontend ni en GitHub.</text>
+</svg>

@@ -1,0 +1,75 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 580" width="800" height="580" role="img" aria-labelledby="t d">
+<title id="t">Esquema: crear un proyecto nuevo en Supabase (New project)</title>
+<desc id="d">Formulario genérico con organización, nombre del proyecto, contraseña de la base de datos con opción de generarla, región y el botón Create new project. Los números 1 a 6 se explican en la lista de la derecha. Ilustración esquemática; la interfaz puede variar.</desc>
+<rect x="0" y="0" width="800" height="580" fill="#FFFFFF"/>
+<rect x="16" y="14" width="510" height="520" rx="12" fill="#FFFFFF" stroke="#C6C2D4" stroke-width="1.8"/>
+<path d="M16 52 V26 Q16 14 28 14 H514 Q526 14 526 26 V52 Z" fill="#ECE8DC"/>
+<line x1="16" y1="52" x2="526" y2="52" stroke="#C6C2D4" stroke-width="1.4" stroke-linecap="round"/>
+<circle cx="34" cy="33" r="4.5" fill="#C9C2AD"/>
+<circle cx="49" cy="33" r="4.5" fill="#C9C2AD"/>
+<circle cx="64" cy="33" r="4.5" fill="#C9C2AD"/>
+<rect x="86" y="22" width="420" height="22" rx="11" fill="#FFFFFF" stroke="#C6C2D4" stroke-width="1.2"/>
+<text x="100" y="38" font-family="'JetBrains Mono', 'DejaVu Sans Mono', monospace" font-size="11.5" font-weight="500" fill="#5B627D" text-anchor="start">https://‹panel-de-supabase›/new/‹organización›</text>
+<text x="38" y="86" font-family="Inter, 'Helvetica Neue', Arial, sans-serif" font-size="17" font-weight="800" fill="#0B1230" text-anchor="start">Create a new project</text>
+<text x="38" y="118" font-family="Inter, 'Helvetica Neue', Arial, sans-serif" font-size="12.5" font-weight="700" fill="#2A2F45" text-anchor="start">Organization</text>
+<rect x="38" y="124" width="300" height="28" rx="6" fill="#FFFFFF" stroke="#C6C2D4" stroke-width="1.5"/>
+<text x="48" y="142.5" font-family="Inter, 'Helvetica Neue', Arial, sans-serif" font-size="12.5" font-weight="500" fill="#5B627D" text-anchor="start">‹tu organización›</text>
+<path d="M316 136.0 l5 5 l5 -5" fill="none" stroke="#5B627D" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+<circle cx="346" cy="116" r="11.5" fill="#B8500A" stroke="#FFFFFF" stroke-width="2"/>
+<text x="346" y="121" font-family="Inter, 'Helvetica Neue', Arial, sans-serif" font-size="14" font-weight="800" fill="#FFFFFF" text-anchor="middle">1</text>
+<text x="38" y="178" font-family="Inter, 'Helvetica Neue', Arial, sans-serif" font-size="12.5" font-weight="700" fill="#2A2F45" text-anchor="start">Project name</text>
+<rect x="38" y="184" width="300" height="28" rx="6" fill="#FFFFFF" stroke="#C6C2D4" stroke-width="1.5"/>
+<text x="48" y="202.5" font-family="Inter, 'Helvetica Neue', Arial, sans-serif" font-size="12.5" font-weight="500" fill="#2A2F45" text-anchor="start">puerto-am-demo</text>
+<circle cx="346" cy="176" r="11.5" fill="#B8500A" stroke="#FFFFFF" stroke-width="2"/>
+<text x="346" y="181" font-family="Inter, 'Helvetica Neue', Arial, sans-serif" font-size="14" font-weight="800" fill="#FFFFFF" text-anchor="middle">2</text>
+<text x="38" y="238" font-family="Inter, 'Helvetica Neue', Arial, sans-serif" font-size="12.5" font-weight="700" fill="#2A2F45" text-anchor="start">Database password</text>
+<rect x="38" y="244" width="300" height="28" rx="6" fill="#FFFFFF" stroke="#C6C2D4" stroke-width="1.5"/>
+<text x="48" y="262.5" font-family="Inter, 'Helvetica Neue', Arial, sans-serif" font-size="12.5" font-weight="500" fill="#2A2F45" text-anchor="start">••••••••••••••••</text>
+<rect x="356" y="244" width="136" height="28" rx="7" fill="#FFFFFF" stroke="#C6C2D4" stroke-width="1.6"/>
+<text x="424.0" y="262.025" font-family="Inter, 'Helvetica Neue', Arial, sans-serif" font-size="11.5" font-weight="700" fill="#2A2F45" text-anchor="middle">Generate a password</text>
+<circle cx="498" cy="242" r="11.5" fill="#B8500A" stroke="#FFFFFF" stroke-width="2"/>
+<text x="498" y="247" font-family="Inter, 'Helvetica Neue', Arial, sans-serif" font-size="14" font-weight="800" fill="#FFFFFF" text-anchor="middle">3</text>
+<text x="38" y="296.0" font-family="Inter, 'Helvetica Neue', Arial, sans-serif" font-size="11.5" font-weight="600" fill="#7F1710" text-anchor="start">Guárdala en un gestor de contraseñas. No la pegues en</text>
+<text x="38" y="310.5" font-family="Inter, 'Helvetica Neue', Arial, sans-serif" font-size="11.5" font-weight="600" fill="#7F1710" text-anchor="start">chats ni en tu repositorio.</text>
+<text x="38" y="336" font-family="Inter, 'Helvetica Neue', Arial, sans-serif" font-size="12.5" font-weight="700" fill="#2A2F45" text-anchor="start">Region</text>
+<rect x="38" y="342" width="300" height="28" rx="6" fill="#FFFFFF" stroke="#C6C2D4" stroke-width="1.5"/>
+<text x="48" y="360.5" font-family="Inter, 'Helvetica Neue', Arial, sans-serif" font-size="12.5" font-weight="500" fill="#5B627D" text-anchor="start">‹región cercana›</text>
+<path d="M316 354.0 l5 5 l5 -5" fill="none" stroke="#5B627D" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+<circle cx="346" cy="334" r="11.5" fill="#B8500A" stroke="#FFFFFF" stroke-width="2"/>
+<text x="346" y="339" font-family="Inter, 'Helvetica Neue', Arial, sans-serif" font-size="14" font-weight="800" fill="#FFFFFF" text-anchor="middle">4</text>
+<line x1="38" y1="404" x2="504" y2="404" stroke="#C6C2D4" stroke-width="1.2" stroke-linecap="round"/>
+<rect x="336" y="420" width="168" height="34" rx="7" fill="#5B3FD9" stroke="#5B3FD9" stroke-width="1.6"/>
+<text x="420.0" y="441.55" font-family="Inter, 'Helvetica Neue', Arial, sans-serif" font-size="13" font-weight="700" fill="#FFFFFF" text-anchor="middle">Create new project</text>
+<circle cx="336" cy="420" r="11.5" fill="#B8500A" stroke="#FFFFFF" stroke-width="2"/>
+<text x="336" y="425" font-family="Inter, 'Helvetica Neue', Arial, sans-serif" font-size="14" font-weight="800" fill="#FFFFFF" text-anchor="middle">5</text>
+<text x="38" y="430.0" font-family="Inter, 'Helvetica Neue', Arial, sans-serif" font-size="11.5" font-weight="400" fill="#5B627D" text-anchor="start">Tras crear el proyecto, espera a que termine</text>
+<text x="38" y="444.5" font-family="Inter, 'Helvetica Neue', Arial, sans-serif" font-size="11.5" font-weight="400" fill="#5B627D" text-anchor="start">la preparación.</text>
+<text x="544" y="36" font-family="Inter, 'Helvetica Neue', Arial, sans-serif" font-size="11.5" font-weight="800" fill="#43299F" text-anchor="start" letter-spacing="1">QUÉ HACER EN CADA PUNTO</text>
+<circle cx="556" cy="62" r="11.5" fill="#B8500A" stroke="#FFFFFF" stroke-width="2"/>
+<text x="556" y="67" font-family="Inter, 'Helvetica Neue', Arial, sans-serif" font-size="14" font-weight="800" fill="#FFFFFF" text-anchor="middle">1</text>
+<text x="576" y="62" font-family="Inter, 'Helvetica Neue', Arial, sans-serif" font-size="13.5" font-weight="700" fill="#0B1230" text-anchor="start">Organización</text>
+<text x="576" y="80" font-family="Inter, 'Helvetica Neue', Arial, sans-serif" font-size="12.5" font-weight="400" fill="#454D6B" text-anchor="start">Elige tu organización de la lista.</text>
+<circle cx="556" cy="112" r="11.5" fill="#B8500A" stroke="#FFFFFF" stroke-width="2"/>
+<text x="556" y="117" font-family="Inter, 'Helvetica Neue', Arial, sans-serif" font-size="14" font-weight="800" fill="#FFFFFF" text-anchor="middle">2</text>
+<text x="576" y="112" font-family="Inter, 'Helvetica Neue', Arial, sans-serif" font-size="13.5" font-weight="700" fill="#0B1230" text-anchor="start">Nombre</text>
+<text x="576" y="130" font-family="Inter, 'Helvetica Neue', Arial, sans-serif" font-size="12.5" font-weight="400" fill="#454D6B" text-anchor="start">Por ejemplo puerto-am-demo.</text>
+<circle cx="556" cy="162" r="11.5" fill="#B8500A" stroke="#FFFFFF" stroke-width="2"/>
+<text x="556" y="167" font-family="Inter, 'Helvetica Neue', Arial, sans-serif" font-size="14" font-weight="800" fill="#FFFFFF" text-anchor="middle">3</text>
+<text x="576" y="162" font-family="Inter, 'Helvetica Neue', Arial, sans-serif" font-size="13.5" font-weight="700" fill="#0B1230" text-anchor="start">Contraseña de la base</text>
+<text x="576" y="180" font-family="Inter, 'Helvetica Neue', Arial, sans-serif" font-size="12.5" font-weight="400" fill="#454D6B" text-anchor="start">Genera una segura y guárdala en</text>
+<text x="576" y="196" font-family="Inter, 'Helvetica Neue', Arial, sans-serif" font-size="12.5" font-weight="400" fill="#454D6B" text-anchor="start">un lugar privado.</text>
+<circle cx="556" cy="228" r="11.5" fill="#B8500A" stroke="#FFFFFF" stroke-width="2"/>
+<text x="556" y="233" font-family="Inter, 'Helvetica Neue', Arial, sans-serif" font-size="14" font-weight="800" fill="#FFFFFF" text-anchor="middle">4</text>
+<text x="576" y="228" font-family="Inter, 'Helvetica Neue', Arial, sans-serif" font-size="13.5" font-weight="700" fill="#0B1230" text-anchor="start">Región</text>
+<text x="576" y="246" font-family="Inter, 'Helvetica Neue', Arial, sans-serif" font-size="12.5" font-weight="400" fill="#454D6B" text-anchor="start">Elige una cercana a tus usuarios.</text>
+<circle cx="556" cy="278" r="11.5" fill="#B8500A" stroke="#FFFFFF" stroke-width="2"/>
+<text x="556" y="283" font-family="Inter, 'Helvetica Neue', Arial, sans-serif" font-size="14" font-weight="800" fill="#FFFFFF" text-anchor="middle">5</text>
+<text x="576" y="278" font-family="Inter, 'Helvetica Neue', Arial, sans-serif" font-size="13.5" font-weight="700" fill="#0B1230" text-anchor="start">Crear</text>
+<text x="576" y="296" font-family="Inter, 'Helvetica Neue', Arial, sans-serif" font-size="12.5" font-weight="400" fill="#454D6B" text-anchor="start">Pulsa Create new project y espera</text>
+<text x="576" y="312" font-family="Inter, 'Helvetica Neue', Arial, sans-serif" font-size="12.5" font-weight="400" fill="#454D6B" text-anchor="start">a que termine.</text>
+<text x="544" y="400.0" font-family="Inter, 'Helvetica Neue', Arial, sans-serif" font-size="12" font-weight="600" fill="#454D6B" text-anchor="start">Planes y límites cambian: consulta la</text>
+<text x="544" y="415.5" font-family="Inter, 'Helvetica Neue', Arial, sans-serif" font-size="12" font-weight="600" fill="#454D6B" text-anchor="start">página oficial con la fecha de</text>
+<text x="544" y="431.0" font-family="Inter, 'Helvetica Neue', Arial, sans-serif" font-size="12" font-weight="600" fill="#454D6B" text-anchor="start">verificación de la guía.</text>
+<rect x="126.380859375" y="547.0" width="289.23828125" height="22" rx="11.0" fill="#FDEBD9" stroke="#B8500A" stroke-width="1.2"/>
+<text x="271.0" y="562.025" font-family="Inter, 'Helvetica Neue', Arial, sans-serif" font-size="11.5" font-weight="700" fill="#7A3200" text-anchor="middle">Ilustración esquemática; la interfaz puede variar</text>
+</svg>

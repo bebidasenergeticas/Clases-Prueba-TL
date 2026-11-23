@@ -216,7 +216,7 @@ def modelo_datos_memoria():
     y1, y2 = 92, 340
     _table(s, ax, y1, W, "messages", [("PK", "id", "uuid"), ("FK", "conversation_id", "uuid"), ("", "role", "text"), ("", "body", "text"), ("", "created_at", "timestamptz")])
     _table(s, bx, y1, W, "conversations", [("PK", "id", "uuid"), ("FK", "owner_id", "uuid"), ("", "channel", "text"), ("", "created_at", "timestamptz"), ("", "updated_at", "timestamptz")], hdr=VIOD)
-    _table(s, cx, y1, W, "reservations", [("PK", "id", "uuid"), ("FK", "owner_id", "uuid"), ("FK", "conversation_id", "uuid"), ("", "personas", "integer"), ("", "fecha · hora", "date · time"), ("", "estado", "text")])
+    _table(s, cx, y1, W, "reservations", [("PK", "id", "uuid"), ("FK", "owner_id", "uuid"), ("FK", "conversation_id", "uuid"), ("", "personas", "integer"), ("", "fecha", "date"), ("", "hora", "time"), ("", "estado", "text")])
     _table(s, bx, y2, W, "orders", [("PK", "id", "uuid"), ("FK", "owner_id", "uuid"), ("FK", "conversation_id", "uuid"), ("", "estado", "text"), ("", "total", "numeric")], hdr=VIOD)
     _table(s, cx, y2, W, "order_items", [("PK", "id", "uuid"), ("FK", "order_id", "uuid"), ("", "producto", "text"), ("", "cantidad", "integer"), ("", "precio_unitario", "numeric")])
     # auth.users fantasma

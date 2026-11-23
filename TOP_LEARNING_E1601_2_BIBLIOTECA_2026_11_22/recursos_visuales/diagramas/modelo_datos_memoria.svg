@@ -44,7 +44,7 @@
 <rect x="284" y="230" width="232" height="25" rx="0" fill="#F7F4FD"/>
 <text x="328" y="247" font-family="'JetBrains Mono', 'DejaVu Sans Mono', monospace" font-size="13" font-weight="600" fill="#171D33" text-anchor="start">updated_at</text>
 <text x="508" y="247" font-family="'JetBrains Mono', 'DejaVu Sans Mono', monospace" font-size="12" font-weight="500" fill="#5F6784" text-anchor="end">timestamptz</text>
-<rect x="552" y="92" width="236" height="190" rx="10" fill="#FFFFFF" stroke="#5B3FD9" stroke-width="2"/>
+<rect x="552" y="92" width="236" height="215" rx="10" fill="#FFFFFF" stroke="#5B3FD9" stroke-width="2"/>
 <path d="M552 126 V102 Q552 92 562 92 H778 Q788 92 788 102 V126 Z" fill="#5B3FD9"/>
 <text x="564" y="115" font-family="'JetBrains Mono', 'DejaVu Sans Mono', monospace" font-size="15.5" font-weight="700" fill="#FFFFFF" text-anchor="start">reservations</text>
 <rect x="554" y="130" width="232" height="25" rx="0" fill="#F7F4FD"/>
@@ -64,10 +64,13 @@
 <text x="598" y="222" font-family="'JetBrains Mono', 'DejaVu Sans Mono', monospace" font-size="13" font-weight="600" fill="#171D33" text-anchor="start">personas</text>
 <text x="778" y="222" font-family="'JetBrains Mono', 'DejaVu Sans Mono', monospace" font-size="12" font-weight="500" fill="#5F6784" text-anchor="end">integer</text>
 <rect x="554" y="230" width="232" height="25" rx="0" fill="#F7F4FD"/>
-<text x="598" y="247" font-family="'JetBrains Mono', 'DejaVu Sans Mono', monospace" font-size="13" font-weight="600" fill="#171D33" text-anchor="start">fecha · hora</text>
-<text x="778" y="247" font-family="'JetBrains Mono', 'DejaVu Sans Mono', monospace" font-size="12" font-weight="500" fill="#5F6784" text-anchor="end">date · time</text>
-<text x="598" y="272" font-family="'JetBrains Mono', 'DejaVu Sans Mono', monospace" font-size="13" font-weight="600" fill="#171D33" text-anchor="start">estado</text>
-<text x="778" y="272" font-family="'JetBrains Mono', 'DejaVu Sans Mono', monospace" font-size="12" font-weight="500" fill="#5F6784" text-anchor="end">text</text>
+<text x="598" y="247" font-family="'JetBrains Mono', 'DejaVu Sans Mono', monospace" font-size="13" font-weight="600" fill="#171D33" text-anchor="start">fecha</text>
+<text x="778" y="247" font-family="'JetBrains Mono', 'DejaVu Sans Mono', monospace" font-size="12" font-weight="500" fill="#5F6784" text-anchor="end">date</text>
+<text x="598" y="272" font-family="'JetBrains Mono', 'DejaVu Sans Mono', monospace" font-size="13" font-weight="600" fill="#171D33" text-anchor="start">hora</text>
+<text x="778" y="272" font-family="'JetBrains Mono', 'DejaVu Sans Mono', monospace" font-size="12" font-weight="500" fill="#5F6784" text-anchor="end">time</text>
+<rect x="554" y="280" width="232" height="25" rx="0" fill="#F7F4FD"/>
+<text x="598" y="297" font-family="'JetBrains Mono', 'DejaVu Sans Mono', monospace" font-size="13" font-weight="600" fill="#171D33" text-anchor="start">estado</text>
+<text x="778" y="297" font-family="'JetBrains Mono', 'DejaVu Sans Mono', monospace" font-size="12" font-weight="500" fill="#5F6784" text-anchor="end">text</text>
 <rect x="282" y="340" width="236" height="165" rx="10" fill="#FFFFFF" stroke="#43299F" stroke-width="2"/>
 <path d="M282 374 V350 Q282 340 292 340 H508 Q518 340 518 350 V374 Z" fill="#43299F"/>
 <text x="294" y="363" font-family="'JetBrains Mono', 'DejaVu Sans Mono', monospace" font-size="15.5" font-weight="700" fill="#FFFFFF" text-anchor="start">orders</text>

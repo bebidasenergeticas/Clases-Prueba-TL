@@ -1,0 +1,92 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 560" width="800" height="560" role="img" aria-labelledby="t d">
+<title id="t">Esquema: crear un repositorio nuevo en GitHub (New repository)</title>
+<desc id="d">Formulario genérico con propietario y nombre del repositorio, descripción opcional, opciones público o privado, casilla para añadir un README, listas desplegables de plantilla .gitignore y licencia, y el botón Create repository. Los números 1 a 6 se explican en la lista de la derecha. Ilustración esquemática; la interfaz puede variar.</desc>
+<rect x="0" y="0" width="800" height="560" fill="#FFFFFF"/>
+<rect x="16" y="14" width="510" height="500" rx="12" fill="#FFFFFF" stroke="#C6C2D4" stroke-width="1.8"/>
+<path d="M16 52 V26 Q16 14 28 14 H514 Q526 14 526 26 V52 Z" fill="#ECE8DC"/>
+<line x1="16" y1="52" x2="526" y2="52" stroke="#C6C2D4" stroke-width="1.4" stroke-linecap="round"/>
+<circle cx="34" cy="33" r="4.5" fill="#C9C2AD"/>
+<circle cx="49" cy="33" r="4.5" fill="#C9C2AD"/>
+<circle cx="64" cy="33" r="4.5" fill="#C9C2AD"/>
+<rect x="86" y="22" width="420" height="22" rx="11" fill="#FFFFFF" stroke="#C6C2D4" stroke-width="1.2"/>
+<text x="100" y="38" font-family="'JetBrains Mono', 'DejaVu Sans Mono', monospace" font-size="11.5" font-weight="500" fill="#5B627D" text-anchor="start">https://github.com/new</text>
+<text x="38" y="86" font-family="Inter, 'Helvetica Neue', Arial, sans-serif" font-size="17" font-weight="800" fill="#0B1230" text-anchor="start">Create a new repository</text>
+<text x="38" y="104" font-family="Inter, 'Helvetica Neue', Arial, sans-serif" font-size="12" font-weight="400" fill="#5B627D" text-anchor="start">Un repositorio contiene los archivos de tu proyecto.</text>
+<text x="38" y="132" font-family="Inter, 'Helvetica Neue', Arial, sans-serif" font-size="12.5" font-weight="700" fill="#2A2F45" text-anchor="start">Owner</text>
+<rect x="38" y="138" width="110" height="28" rx="6" fill="#FFFFFF" stroke="#C6C2D4" stroke-width="1.5"/>
+<text x="48" y="156.5" font-family="Inter, 'Helvetica Neue', Arial, sans-serif" font-size="12.5" font-weight="500" fill="#5B627D" text-anchor="start">‹tu usuario›</text>
+<path d="M126 150.0 l5 5 l5 -5" fill="none" stroke="#5B627D" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+<text x="154" y="160" font-family="Inter, 'Helvetica Neue', Arial, sans-serif" font-size="18" font-weight="400" fill="#5B627D" text-anchor="start">/</text>
+<text x="168" y="132" font-family="Inter, 'Helvetica Neue', Arial, sans-serif" font-size="12.5" font-weight="700" fill="#2A2F45" text-anchor="start">Repository name *</text>
+<rect x="168" y="138" width="250" height="28" rx="6" fill="#FFFFFF" stroke="#C6C2D4" stroke-width="1.5"/>
+<text x="178" y="156.5" font-family="Inter, 'Helvetica Neue', Arial, sans-serif" font-size="12.5" font-weight="500" fill="#2A2F45" text-anchor="start">puerto-am-demo</text>
+<circle cx="424" cy="130" r="11.5" fill="#B8500A" stroke="#FFFFFF" stroke-width="2"/>
+<text x="424" y="135" font-family="Inter, 'Helvetica Neue', Arial, sans-serif" font-size="14" font-weight="800" fill="#FFFFFF" text-anchor="middle">1</text>
+<text x="38" y="196" font-family="Inter, 'Helvetica Neue', Arial, sans-serif" font-size="12.5" font-weight="700" fill="#2A2F45" text-anchor="start">Description (optional)</text>
+<rect x="38" y="202" width="380" height="28" rx="6" fill="#FFFFFF" stroke="#C6C2D4" stroke-width="1.5"/>
+<circle cx="424" cy="194" r="11.5" fill="#B8500A" stroke="#FFFFFF" stroke-width="2"/>
+<text x="424" y="199" font-family="Inter, 'Helvetica Neue', Arial, sans-serif" font-size="14" font-weight="800" fill="#FFFFFF" text-anchor="middle">2</text>
+<circle cx="48" cy="268" r="8" fill="#FFFFFF" stroke="#5B3FD9" stroke-width="1.8"/>
+<circle cx="48" cy="268" r="4" fill="#5B3FD9"/>
+<text x="64" y="272.5" font-family="Inter, 'Helvetica Neue', Arial, sans-serif" font-size="12.5" font-weight="500" fill="#2A2F45" text-anchor="start">Public</text>
+<circle cx="48" cy="296" r="8" fill="#FFFFFF" stroke="#C6C2D4" stroke-width="1.8"/>
+<text x="64" y="300.5" font-family="Inter, 'Helvetica Neue', Arial, sans-serif" font-size="12.5" font-weight="500" fill="#2A2F45" text-anchor="start">Private</text>
+<circle cx="146" cy="268" r="11.5" fill="#B8500A" stroke="#FFFFFF" stroke-width="2"/>
+<text x="146" y="273" font-family="Inter, 'Helvetica Neue', Arial, sans-serif" font-size="14" font-weight="800" fill="#FFFFFF" text-anchor="middle">3</text>
+<rect x="38" y="320" width="440" height="0" rx="10" fill="none"/>
+<rect x="40" y="328" width="16" height="16" rx="4" fill="#5B3FD9" stroke="#5B3FD9" stroke-width="1.6"/>
+<path d="M43.5 336 l3.5 3.8 l6 -7" fill="none" stroke="#FFFFFF" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/>
+<text x="64" y="340.5" font-family="Inter, 'Helvetica Neue', Arial, sans-serif" font-size="12.5" font-weight="500" fill="#2A2F45" text-anchor="start">Add a README file</text>
+<circle cx="206" cy="336" r="11.5" fill="#B8500A" stroke="#FFFFFF" stroke-width="2"/>
+<text x="206" y="341" font-family="Inter, 'Helvetica Neue', Arial, sans-serif" font-size="14" font-weight="800" fill="#FFFFFF" text-anchor="middle">4</text>
+<text x="38" y="366" font-family="Inter, 'Helvetica Neue', Arial, sans-serif" font-size="12.5" font-weight="700" fill="#2A2F45" text-anchor="start">Add .gitignore</text>
+<rect x="38" y="372" width="200" height="28" rx="6" fill="#FFFFFF" stroke="#C6C2D4" stroke-width="1.5"/>
+<text x="48" y="390.5" font-family="Inter, 'Helvetica Neue', Arial, sans-serif" font-size="12.5" font-weight="500" fill="#5B627D" text-anchor="start">‹.gitignore template: None›</text>
+<path d="M216 384.0 l5 5 l5 -5" fill="none" stroke="#5B627D" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+<circle cx="244" cy="364" r="11.5" fill="#B8500A" stroke="#FFFFFF" stroke-width="2"/>
+<text x="244" y="369" font-family="Inter, 'Helvetica Neue', Arial, sans-serif" font-size="14" font-weight="800" fill="#FFFFFF" text-anchor="middle">5</text>
+<text x="266" y="366" font-family="Inter, 'Helvetica Neue', Arial, sans-serif" font-size="12.5" font-weight="700" fill="#2A2F45" text-anchor="start">Add license</text>
+<rect x="266" y="372" width="200" height="28" rx="6" fill="#FFFFFF" stroke="#C6C2D4" stroke-width="1.5"/>
+<text x="276" y="390.5" font-family="Inter, 'Helvetica Neue', Arial, sans-serif" font-size="12.5" font-weight="500" fill="#5B627D" text-anchor="start">‹License: None›</text>
+<path d="M444 384.0 l5 5 l5 -5" fill="none" stroke="#5B627D" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+<line x1="38" y1="430" x2="504" y2="430" stroke="#C6C2D4" stroke-width="1.2" stroke-linecap="round"/>
+<rect x="336" y="446" width="168" height="34" rx="7" fill="#5B3FD9" stroke="#5B3FD9" stroke-width="1.6"/>
+<text x="420.0" y="467.55" font-family="Inter, 'Helvetica Neue', Arial, sans-serif" font-size="13" font-weight="700" fill="#FFFFFF" text-anchor="middle">Create repository</text>
+<circle cx="336" cy="446" r="11.5" fill="#B8500A" stroke="#FFFFFF" stroke-width="2"/>
+<text x="336" y="451" font-family="Inter, 'Helvetica Neue', Arial, sans-serif" font-size="14" font-weight="800" fill="#FFFFFF" text-anchor="middle">6</text>
+<text x="38" y="456.0" font-family="Inter, 'Helvetica Neue', Arial, sans-serif" font-size="11.5" font-weight="400" fill="#5B627D" text-anchor="start">Los rótulos reales están en inglés o en tu</text>
+<text x="38" y="470.5" font-family="Inter, 'Helvetica Neue', Arial, sans-serif" font-size="11.5" font-weight="400" fill="#5B627D" text-anchor="start">idioma, según tu cuenta.</text>
+<text x="544" y="36" font-family="Inter, 'Helvetica Neue', Arial, sans-serif" font-size="11.5" font-weight="800" fill="#43299F" text-anchor="start" letter-spacing="1">QUÉ HACER EN CADA PUNTO</text>
+<circle cx="556" cy="62" r="11.5" fill="#B8500A" stroke="#FFFFFF" stroke-width="2"/>
+<text x="556" y="67" font-family="Inter, 'Helvetica Neue', Arial, sans-serif" font-size="14" font-weight="800" fill="#FFFFFF" text-anchor="middle">1</text>
+<text x="576" y="62" font-family="Inter, 'Helvetica Neue', Arial, sans-serif" font-size="13.5" font-weight="700" fill="#0B1230" text-anchor="start">Nombre del repositorio</text>
+<text x="576" y="80" font-family="Inter, 'Helvetica Neue', Arial, sans-serif" font-size="12.5" font-weight="400" fill="#454D6B" text-anchor="start">Sin espacios ni tildes; por ejemplo</text>
+<text x="576" y="96" font-family="Inter, 'Helvetica Neue', Arial, sans-serif" font-size="12.5" font-weight="400" fill="#454D6B" text-anchor="start">puerto-am-demo.</text>
+<circle cx="556" cy="128" r="11.5" fill="#B8500A" stroke="#FFFFFF" stroke-width="2"/>
+<text x="556" y="133" font-family="Inter, 'Helvetica Neue', Arial, sans-serif" font-size="14" font-weight="800" fill="#FFFFFF" text-anchor="middle">2</text>
+<text x="576" y="128" font-family="Inter, 'Helvetica Neue', Arial, sans-serif" font-size="13.5" font-weight="700" fill="#0B1230" text-anchor="start">Descripción (opcional)</text>
+<text x="576" y="146" font-family="Inter, 'Helvetica Neue', Arial, sans-serif" font-size="12.5" font-weight="400" fill="#454D6B" text-anchor="start">Una frase que explique el</text>
+<text x="576" y="162" font-family="Inter, 'Helvetica Neue', Arial, sans-serif" font-size="12.5" font-weight="400" fill="#454D6B" text-anchor="start">proyecto.</text>
+<circle cx="556" cy="194" r="11.5" fill="#B8500A" stroke="#FFFFFF" stroke-width="2"/>
+<text x="556" y="199" font-family="Inter, 'Helvetica Neue', Arial, sans-serif" font-size="14" font-weight="800" fill="#FFFFFF" text-anchor="middle">3</text>
+<text x="576" y="194" font-family="Inter, 'Helvetica Neue', Arial, sans-serif" font-size="13.5" font-weight="700" fill="#0B1230" text-anchor="start">Público o privado</text>
+<text x="576" y="212" font-family="Inter, 'Helvetica Neue', Arial, sans-serif" font-size="12.5" font-weight="400" fill="#454D6B" text-anchor="start">Público lo puede ver cualquiera.</text>
+<text x="576" y="228" font-family="Inter, 'Helvetica Neue', Arial, sans-serif" font-size="12.5" font-weight="400" fill="#454D6B" text-anchor="start">Privado solo tú. Nunca subas</text>
+<text x="576" y="244" font-family="Inter, 'Helvetica Neue', Arial, sans-serif" font-size="12.5" font-weight="400" fill="#454D6B" text-anchor="start">claves a ninguno.</text>
+<circle cx="556" cy="276" r="11.5" fill="#B8500A" stroke="#FFFFFF" stroke-width="2"/>
+<text x="556" y="281" font-family="Inter, 'Helvetica Neue', Arial, sans-serif" font-size="14" font-weight="800" fill="#FFFFFF" text-anchor="middle">4</text>
+<text x="576" y="276" font-family="Inter, 'Helvetica Neue', Arial, sans-serif" font-size="13.5" font-weight="700" fill="#0B1230" text-anchor="start">README</text>
+<text x="576" y="294" font-family="Inter, 'Helvetica Neue', Arial, sans-serif" font-size="12.5" font-weight="400" fill="#454D6B" text-anchor="start">Marcarlo crea un archivo inicial de</text>
+<text x="576" y="310" font-family="Inter, 'Helvetica Neue', Arial, sans-serif" font-size="12.5" font-weight="400" fill="#454D6B" text-anchor="start">presentación.</text>
+<circle cx="556" cy="342" r="11.5" fill="#B8500A" stroke="#FFFFFF" stroke-width="2"/>
+<text x="556" y="347" font-family="Inter, 'Helvetica Neue', Arial, sans-serif" font-size="14" font-weight="800" fill="#FFFFFF" text-anchor="middle">5</text>
+<text x="576" y="342" font-family="Inter, 'Helvetica Neue', Arial, sans-serif" font-size="13.5" font-weight="700" fill="#0B1230" text-anchor="start">.gitignore</text>
+<text x="576" y="360" font-family="Inter, 'Helvetica Neue', Arial, sans-serif" font-size="12.5" font-weight="400" fill="#454D6B" text-anchor="start">Una plantilla evita subir archivos</text>
+<text x="576" y="376" font-family="Inter, 'Helvetica Neue', Arial, sans-serif" font-size="12.5" font-weight="400" fill="#454D6B" text-anchor="start">como .env o carpetas temporales.</text>
+<circle cx="556" cy="408" r="11.5" fill="#B8500A" stroke="#FFFFFF" stroke-width="2"/>
+<text x="556" y="413" font-family="Inter, 'Helvetica Neue', Arial, sans-serif" font-size="14" font-weight="800" fill="#FFFFFF" text-anchor="middle">6</text>
+<text x="576" y="408" font-family="Inter, 'Helvetica Neue', Arial, sans-serif" font-size="13.5" font-weight="700" fill="#0B1230" text-anchor="start">Crear</text>
+<text x="576" y="426" font-family="Inter, 'Helvetica Neue', Arial, sans-serif" font-size="12.5" font-weight="400" fill="#454D6B" text-anchor="start">Pulsa Create repository.</text>
+<rect x="126.380859375" y="527.0" width="289.23828125" height="22" rx="11.0" fill="#FDEBD9" stroke="#B8500A" stroke-width="1.2"/>
+<text x="271.0" y="542.025" font-family="Inter, 'Helvetica Neue', Arial, sans-serif" font-size="11.5" font-weight="700" fill="#7A3200" text-anchor="middle">Ilustración esquemática; la interfaz puede variar</text>
+</svg>
