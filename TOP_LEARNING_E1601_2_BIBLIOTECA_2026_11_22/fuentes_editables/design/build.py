@@ -486,7 +486,7 @@ def near_blank_pages(pngs, texts):
         body = im.crop((int(w * 0.08), int(h * 0.10), int(w * 0.92), int(h * 0.90)))
         sd = ImageStat.Stat(body).stddev[0]
         t = texts[i] if i < len(texts) else ""
-        if sd < 3 or len(t.strip()) < 60:
+        if sd < 3 or (len(t.strip()) < 60 and sd < 14):
             flagged.append((i + 1, round(sd, 1), len(t.strip())))
     return flagged
 

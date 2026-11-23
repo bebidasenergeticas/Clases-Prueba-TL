@@ -407,7 +407,7 @@ def flujo_turno_memoria():
 
 # =========================================================================
 def arquitectura_4_niveles():
-    s = Svg(800, 580,
+    s = Svg(800, 584,
             "Arquitectura progresiva de cuatro niveles",
             "Escalera ascendente de cuatro niveles. Nivel 1: Excel y dashboard local. Nivel 2: landing local con chat simulado. "
             "Nivel 3: landing y API backend segura desplegada. Nivel 4: memoria y datos persistentes en Supabase con reglas de acceso (RLS). "
@@ -421,15 +421,15 @@ def arquitectura_4_niveles():
     w = 560
     for i, (n, t, b, where, c, cs) in enumerate(lv):
         x = 16 + i * 56
-        y = 462 - i * 108
+        y = 470 - i * 108
         s.rect(x, y, w, 92, cs, c, 2.4, 14)
         s.circle(x + 32, y + 46, 20, c)
         s.text(x + 32, y + 53, n, 21, 800, WHITE, "middle")
         s.text(x + 66, y + 28, t, 16.5, 800, MID)
         s.para(x + 66, y + 49, b, w - 90, 13.5, 400, INK, lh=17.5)
         s.text(x + 66, y + 82, where, 12.5, 700, c)
-    s.para(16, 90, "Subir de nivel es AGREGAR una capacidad, no rehacerlo todo.", 330, 14, 700, MID, lh=19)
-    s.para(16, 134, "Cada nivel puede explicarse, probarse y detenerse ahí con un resultado útil.", 330, 13.5, 400, SOFT, lh=18)
+    s.para(16, 92, "Subir de nivel es AGREGAR una capacidad, no rehacerlo todo.", 160, 14, 700, MID, lh=19)
+    s.para(16, 168, "Cada nivel puede explicarse, probarse y detenerse ahí con un resultado útil.", 160, 13, 400, SOFT, lh=17)
     s.rect(414, 60, 370, 70, "none", MUTE, 1.8, 12, "7 5")
     s.text(428, 84, "OPCIONAL FUTURO · n8n", 12.5, 800, MUTE, spacing=0.8)
     s.para(428, 104, "Automatizaciones con webhooks. NO se implementó en esta práctica.", 345, 13, 500, MUTE, lh=17)
