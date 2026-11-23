@@ -1,0 +1,156 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 624" width="800" height="624" role="img" aria-labelledby="t d">
+<title id="t">Modelo de datos de la memoria: conversations, messages, orders, order_items y reservations</title>
+<desc id="d">Cinco tablas de PostgreSQL. conversations tiene id (clave primaria) y owner_id, que apunta a auth.users. messages tiene conversation_id que apunta a conversations. reservations y orders también apuntan a conversations mediante conversation_id y tienen owner_id. order_items tiene order_id que apunta a orders. Todas las tablas llevan seguridad por filas (RLS). Los datos son una simulación académica de Puerto A&amp;M.</desc>
+<rect x="0" y="0" width="800" height="624" fill="#FFFFFF"/>
+<text x="16" y="30" font-family="Inter, 'Helvetica Neue', Arial, sans-serif" font-size="20" font-weight="800" fill="#0B1230" text-anchor="start">Modelo de datos: memoria, pedidos y reservas</text>
+<text x="16" y="50" font-family="Inter, 'Helvetica Neue', Arial, sans-serif" font-size="12.5" font-weight="500" fill="#454D6B" text-anchor="start">Esquema ilustrativo; el SQL probado está en fuentes_editables/sql/ · datos de Puerto A&amp;M = simulación académica</text>
+<rect x="12" y="92" width="236" height="165" rx="10" fill="#FFFFFF" stroke="#5B3FD9" stroke-width="2"/>
+<path d="M12 126 V102 Q12 92 22 92 H238 Q248 92 248 102 V126 Z" fill="#5B3FD9"/>
+<text x="24" y="115" font-family="'JetBrains Mono', 'DejaVu Sans Mono', monospace" font-size="15.5" font-weight="700" fill="#FFFFFF" text-anchor="start">messages</text>
+<rect x="14" y="130" width="232" height="25" rx="0" fill="#F7F4FD"/>
+<rect x="20" y="133" width="30" height="19" rx="4" fill="#B8500A"/>
+<text x="35" y="147" font-family="Inter, 'Helvetica Neue', Arial, sans-serif" font-size="11.5" font-weight="800" fill="#FFFFFF" text-anchor="middle">PK</text>
+<text x="58" y="147" font-family="'JetBrains Mono', 'DejaVu Sans Mono', monospace" font-size="13" font-weight="600" fill="#171D33" text-anchor="start">id</text>
+<text x="238" y="147" font-family="'JetBrains Mono', 'DejaVu Sans Mono', monospace" font-size="12" font-weight="500" fill="#5F6784" text-anchor="end">uuid</text>
+<rect x="20" y="158" width="30" height="19" rx="4" fill="#0A7C78"/>
+<text x="35" y="172" font-family="Inter, 'Helvetica Neue', Arial, sans-serif" font-size="11.5" font-weight="800" fill="#FFFFFF" text-anchor="middle">FK</text>
+<text x="58" y="172" font-family="'JetBrains Mono', 'DejaVu Sans Mono', monospace" font-size="13" font-weight="600" fill="#171D33" text-anchor="start">conversation_id</text>
+<text x="238" y="172" font-family="'JetBrains Mono', 'DejaVu Sans Mono', monospace" font-size="12" font-weight="500" fill="#5F6784" text-anchor="end">uuid</text>
+<rect x="14" y="180" width="232" height="25" rx="0" fill="#F7F4FD"/>
+<text x="58" y="197" font-family="'JetBrains Mono', 'DejaVu Sans Mono', monospace" font-size="13" font-weight="600" fill="#171D33" text-anchor="start">role</text>
+<text x="238" y="197" font-family="'JetBrains Mono', 'DejaVu Sans Mono', monospace" font-size="12" font-weight="500" fill="#5F6784" text-anchor="end">text</text>
+<text x="58" y="222" font-family="'JetBrains Mono', 'DejaVu Sans Mono', monospace" font-size="13" font-weight="600" fill="#171D33" text-anchor="start">body</text>
+<text x="238" y="222" font-family="'JetBrains Mono', 'DejaVu Sans Mono', monospace" font-size="12" font-weight="500" fill="#5F6784" text-anchor="end">text</text>
+<rect x="14" y="230" width="232" height="25" rx="0" fill="#F7F4FD"/>
+<text x="58" y="247" font-family="'JetBrains Mono', 'DejaVu Sans Mono', monospace" font-size="13" font-weight="600" fill="#171D33" text-anchor="start">created_at</text>
+<text x="238" y="247" font-family="'JetBrains Mono', 'DejaVu Sans Mono', monospace" font-size="12" font-weight="500" fill="#5F6784" text-anchor="end">timestamptz</text>
+<rect x="282" y="92" width="236" height="165" rx="10" fill="#FFFFFF" stroke="#43299F" stroke-width="2"/>
+<path d="M282 126 V102 Q282 92 292 92 H508 Q518 92 518 102 V126 Z" fill="#43299F"/>
+<text x="294" y="115" font-family="'JetBrains Mono', 'DejaVu Sans Mono', monospace" font-size="15.5" font-weight="700" fill="#FFFFFF" text-anchor="start">conversations</text>
+<rect x="284" y="130" width="232" height="25" rx="0" fill="#F7F4FD"/>
+<rect x="290" y="133" width="30" height="19" rx="4" fill="#B8500A"/>
+<text x="305" y="147" font-family="Inter, 'Helvetica Neue', Arial, sans-serif" font-size="11.5" font-weight="800" fill="#FFFFFF" text-anchor="middle">PK</text>
+<text x="328" y="147" font-family="'JetBrains Mono', 'DejaVu Sans Mono', monospace" font-size="13" font-weight="600" fill="#171D33" text-anchor="start">id</text>
+<text x="508" y="147" font-family="'JetBrains Mono', 'DejaVu Sans Mono', monospace" font-size="12" font-weight="500" fill="#5F6784" text-anchor="end">uuid</text>
+<rect x="290" y="158" width="30" height="19" rx="4" fill="#0A7C78"/>
+<text x="305" y="172" font-family="Inter, 'Helvetica Neue', Arial, sans-serif" font-size="11.5" font-weight="800" fill="#FFFFFF" text-anchor="middle">FK</text>
+<text x="328" y="172" font-family="'JetBrains Mono', 'DejaVu Sans Mono', monospace" font-size="13" font-weight="600" fill="#171D33" text-anchor="start">owner_id</text>
+<text x="508" y="172" font-family="'JetBrains Mono', 'DejaVu Sans Mono', monospace" font-size="12" font-weight="500" fill="#5F6784" text-anchor="end">uuid</text>
+<rect x="284" y="180" width="232" height="25" rx="0" fill="#F7F4FD"/>
+<text x="328" y="197" font-family="'JetBrains Mono', 'DejaVu Sans Mono', monospace" font-size="13" font-weight="600" fill="#171D33" text-anchor="start">channel</text>
+<text x="508" y="197" font-family="'JetBrains Mono', 'DejaVu Sans Mono', monospace" font-size="12" font-weight="500" fill="#5F6784" text-anchor="end">text</text>
+<text x="328" y="222" font-family="'JetBrains Mono', 'DejaVu Sans Mono', monospace" font-size="13" font-weight="600" fill="#171D33" text-anchor="start">created_at</text>
+<text x="508" y="222" font-family="'JetBrains Mono', 'DejaVu Sans Mono', monospace" font-size="12" font-weight="500" fill="#5F6784" text-anchor="end">timestamptz</text>
+<rect x="284" y="230" width="232" height="25" rx="0" fill="#F7F4FD"/>
+<text x="328" y="247" font-family="'JetBrains Mono', 'DejaVu Sans Mono', monospace" font-size="13" font-weight="600" fill="#171D33" text-anchor="start">updated_at</text>
+<text x="508" y="247" font-family="'JetBrains Mono', 'DejaVu Sans Mono', monospace" font-size="12" font-weight="500" fill="#5F6784" text-anchor="end">timestamptz</text>
+<rect x="552" y="92" width="236" height="190" rx="10" fill="#FFFFFF" stroke="#5B3FD9" stroke-width="2"/>
+<path d="M552 126 V102 Q552 92 562 92 H778 Q788 92 788 102 V126 Z" fill="#5B3FD9"/>
+<text x="564" y="115" font-family="'JetBrains Mono', 'DejaVu Sans Mono', monospace" font-size="15.5" font-weight="700" fill="#FFFFFF" text-anchor="start">reservations</text>
+<rect x="554" y="130" width="232" height="25" rx="0" fill="#F7F4FD"/>
+<rect x="560" y="133" width="30" height="19" rx="4" fill="#B8500A"/>
+<text x="575" y="147" font-family="Inter, 'Helvetica Neue', Arial, sans-serif" font-size="11.5" font-weight="800" fill="#FFFFFF" text-anchor="middle">PK</text>
+<text x="598" y="147" font-family="'JetBrains Mono', 'DejaVu Sans Mono', monospace" font-size="13" font-weight="600" fill="#171D33" text-anchor="start">id</text>
+<text x="778" y="147" font-family="'JetBrains Mono', 'DejaVu Sans Mono', monospace" font-size="12" font-weight="500" fill="#5F6784" text-anchor="end">uuid</text>
+<rect x="560" y="158" width="30" height="19" rx="4" fill="#0A7C78"/>
+<text x="575" y="172" font-family="Inter, 'Helvetica Neue', Arial, sans-serif" font-size="11.5" font-weight="800" fill="#FFFFFF" text-anchor="middle">FK</text>
+<text x="598" y="172" font-family="'JetBrains Mono', 'DejaVu Sans Mono', monospace" font-size="13" font-weight="600" fill="#171D33" text-anchor="start">owner_id</text>
+<text x="778" y="172" font-family="'JetBrains Mono', 'DejaVu Sans Mono', monospace" font-size="12" font-weight="500" fill="#5F6784" text-anchor="end">uuid</text>
+<rect x="554" y="180" width="232" height="25" rx="0" fill="#F7F4FD"/>
+<rect x="560" y="183" width="30" height="19" rx="4" fill="#0A7C78"/>
+<text x="575" y="197" font-family="Inter, 'Helvetica Neue', Arial, sans-serif" font-size="11.5" font-weight="800" fill="#FFFFFF" text-anchor="middle">FK</text>
+<text x="598" y="197" font-family="'JetBrains Mono', 'DejaVu Sans Mono', monospace" font-size="13" font-weight="600" fill="#171D33" text-anchor="start">conversation_id</text>
+<text x="778" y="197" font-family="'JetBrains Mono', 'DejaVu Sans Mono', monospace" font-size="12" font-weight="500" fill="#5F6784" text-anchor="end">uuid</text>
+<text x="598" y="222" font-family="'JetBrains Mono', 'DejaVu Sans Mono', monospace" font-size="13" font-weight="600" fill="#171D33" text-anchor="start">personas</text>
+<text x="778" y="222" font-family="'JetBrains Mono', 'DejaVu Sans Mono', monospace" font-size="12" font-weight="500" fill="#5F6784" text-anchor="end">integer</text>
+<rect x="554" y="230" width="232" height="25" rx="0" fill="#F7F4FD"/>
+<text x="598" y="247" font-family="'JetBrains Mono', 'DejaVu Sans Mono', monospace" font-size="13" font-weight="600" fill="#171D33" text-anchor="start">fecha · hora</text>
+<text x="778" y="247" font-family="'JetBrains Mono', 'DejaVu Sans Mono', monospace" font-size="12" font-weight="500" fill="#5F6784" text-anchor="end">date · time</text>
+<text x="598" y="272" font-family="'JetBrains Mono', 'DejaVu Sans Mono', monospace" font-size="13" font-weight="600" fill="#171D33" text-anchor="start">estado</text>
+<text x="778" y="272" font-family="'JetBrains Mono', 'DejaVu Sans Mono', monospace" font-size="12" font-weight="500" fill="#5F6784" text-anchor="end">text</text>
+<rect x="282" y="340" width="236" height="165" rx="10" fill="#FFFFFF" stroke="#43299F" stroke-width="2"/>
+<path d="M282 374 V350 Q282 340 292 340 H508 Q518 340 518 350 V374 Z" fill="#43299F"/>
+<text x="294" y="363" font-family="'JetBrains Mono', 'DejaVu Sans Mono', monospace" font-size="15.5" font-weight="700" fill="#FFFFFF" text-anchor="start">orders</text>
+<rect x="284" y="378" width="232" height="25" rx="0" fill="#F7F4FD"/>
+<rect x="290" y="381" width="30" height="19" rx="4" fill="#B8500A"/>
+<text x="305" y="395" font-family="Inter, 'Helvetica Neue', Arial, sans-serif" font-size="11.5" font-weight="800" fill="#FFFFFF" text-anchor="middle">PK</text>
+<text x="328" y="395" font-family="'JetBrains Mono', 'DejaVu Sans Mono', monospace" font-size="13" font-weight="600" fill="#171D33" text-anchor="start">id</text>
+<text x="508" y="395" font-family="'JetBrains Mono', 'DejaVu Sans Mono', monospace" font-size="12" font-weight="500" fill="#5F6784" text-anchor="end">uuid</text>
+<rect x="290" y="406" width="30" height="19" rx="4" fill="#0A7C78"/>
+<text x="305" y="420" font-family="Inter, 'Helvetica Neue', Arial, sans-serif" font-size="11.5" font-weight="800" fill="#FFFFFF" text-anchor="middle">FK</text>
+<text x="328" y="420" font-family="'JetBrains Mono', 'DejaVu Sans Mono', monospace" font-size="13" font-weight="600" fill="#171D33" text-anchor="start">owner_id</text>
+<text x="508" y="420" font-family="'JetBrains Mono', 'DejaVu Sans Mono', monospace" font-size="12" font-weight="500" fill="#5F6784" text-anchor="end">uuid</text>
+<rect x="284" y="428" width="232" height="25" rx="0" fill="#F7F4FD"/>
+<rect x="290" y="431" width="30" height="19" rx="4" fill="#0A7C78"/>
+<text x="305" y="445" font-family="Inter, 'Helvetica Neue', Arial, sans-serif" font-size="11.5" font-weight="800" fill="#FFFFFF" text-anchor="middle">FK</text>
+<text x="328" y="445" font-family="'JetBrains Mono', 'DejaVu Sans Mono', monospace" font-size="13" font-weight="600" fill="#171D33" text-anchor="start">conversation_id</text>
+<text x="508" y="445" font-family="'JetBrains Mono', 'DejaVu Sans Mono', monospace" font-size="12" font-weight="500" fill="#5F6784" text-anchor="end">uuid</text>
+<text x="328" y="470" font-family="'JetBrains Mono', 'DejaVu Sans Mono', monospace" font-size="13" font-weight="600" fill="#171D33" text-anchor="start">estado</text>
+<text x="508" y="470" font-family="'JetBrains Mono', 'DejaVu Sans Mono', monospace" font-size="12" font-weight="500" fill="#5F6784" text-anchor="end">text</text>
+<rect x="284" y="478" width="232" height="25" rx="0" fill="#F7F4FD"/>
+<text x="328" y="495" font-family="'JetBrains Mono', 'DejaVu Sans Mono', monospace" font-size="13" font-weight="600" fill="#171D33" text-anchor="start">total</text>
+<text x="508" y="495" font-family="'JetBrains Mono', 'DejaVu Sans Mono', monospace" font-size="12" font-weight="500" fill="#5F6784" text-anchor="end">numeric</text>
+<rect x="552" y="340" width="236" height="165" rx="10" fill="#FFFFFF" stroke="#5B3FD9" stroke-width="2"/>
+<path d="M552 374 V350 Q552 340 562 340 H778 Q788 340 788 350 V374 Z" fill="#5B3FD9"/>
+<text x="564" y="363" font-family="'JetBrains Mono', 'DejaVu Sans Mono', monospace" font-size="15.5" font-weight="700" fill="#FFFFFF" text-anchor="start">order_items</text>
+<rect x="554" y="378" width="232" height="25" rx="0" fill="#F7F4FD"/>
+<rect x="560" y="381" width="30" height="19" rx="4" fill="#B8500A"/>
+<text x="575" y="395" font-family="Inter, 'Helvetica Neue', Arial, sans-serif" font-size="11.5" font-weight="800" fill="#FFFFFF" text-anchor="middle">PK</text>
+<text x="598" y="395" font-family="'JetBrains Mono', 'DejaVu Sans Mono', monospace" font-size="13" font-weight="600" fill="#171D33" text-anchor="start">id</text>
+<text x="778" y="395" font-family="'JetBrains Mono', 'DejaVu Sans Mono', monospace" font-size="12" font-weight="500" fill="#5F6784" text-anchor="end">uuid</text>
+<rect x="560" y="406" width="30" height="19" rx="4" fill="#0A7C78"/>
+<text x="575" y="420" font-family="Inter, 'Helvetica Neue', Arial, sans-serif" font-size="11.5" font-weight="800" fill="#FFFFFF" text-anchor="middle">FK</text>
+<text x="598" y="420" font-family="'JetBrains Mono', 'DejaVu Sans Mono', monospace" font-size="13" font-weight="600" fill="#171D33" text-anchor="start">order_id</text>
+<text x="778" y="420" font-family="'JetBrains Mono', 'DejaVu Sans Mono', monospace" font-size="12" font-weight="500" fill="#5F6784" text-anchor="end">uuid</text>
+<rect x="554" y="428" width="232" height="25" rx="0" fill="#F7F4FD"/>
+<text x="598" y="445" font-family="'JetBrains Mono', 'DejaVu Sans Mono', monospace" font-size="13" font-weight="600" fill="#171D33" text-anchor="start">producto</text>
+<text x="778" y="445" font-family="'JetBrains Mono', 'DejaVu Sans Mono', monospace" font-size="12" font-weight="500" fill="#5F6784" text-anchor="end">text</text>
+<text x="598" y="470" font-family="'JetBrains Mono', 'DejaVu Sans Mono', monospace" font-size="13" font-weight="600" fill="#171D33" text-anchor="start">cantidad</text>
+<text x="778" y="470" font-family="'JetBrains Mono', 'DejaVu Sans Mono', monospace" font-size="12" font-weight="500" fill="#5F6784" text-anchor="end">integer</text>
+<rect x="554" y="478" width="232" height="25" rx="0" fill="#F7F4FD"/>
+<text x="598" y="495" font-family="'JetBrains Mono', 'DejaVu Sans Mono', monospace" font-size="13" font-weight="600" fill="#171D33" text-anchor="start">precio_unitario</text>
+<text x="778" y="495" font-family="'JetBrains Mono', 'DejaVu Sans Mono', monospace" font-size="12" font-weight="500" fill="#5F6784" text-anchor="end">numeric</text>
+<rect x="12" y="340" width="236" height="165" rx="10" fill="#FFFFFF" stroke="#5F6784" stroke-width="2" stroke-dasharray="6 4"/>
+<path d="M12 374 V350 Q12 340 22 340 H238 Q248 340 248 350 V374 Z" fill="#5F6784"/>
+<text x="24" y="363" font-family="'JetBrains Mono', 'DejaVu Sans Mono', monospace" font-size="15.5" font-weight="700" fill="#FFFFFF" text-anchor="start">auth.users</text>
+<rect x="14" y="378" width="232" height="25" rx="0" fill="#F7F4FD"/>
+<rect x="20" y="381" width="30" height="19" rx="4" fill="#B8500A"/>
+<text x="35" y="395" font-family="Inter, 'Helvetica Neue', Arial, sans-serif" font-size="11.5" font-weight="800" fill="#FFFFFF" text-anchor="middle">PK</text>
+<text x="58" y="395" font-family="'JetBrains Mono', 'DejaVu Sans Mono', monospace" font-size="13" font-weight="600" fill="#171D33" text-anchor="start">id</text>
+<text x="238" y="395" font-family="'JetBrains Mono', 'DejaVu Sans Mono', monospace" font-size="12" font-weight="500" fill="#5F6784" text-anchor="end">uuid</text>
+<text x="58" y="420" font-family="'JetBrains Mono', 'DejaVu Sans Mono', monospace" font-size="13" font-weight="600" fill="#171D33" text-anchor="start">Gestionada por</text>
+<text x="238" y="420" font-family="'JetBrains Mono', 'DejaVu Sans Mono', monospace" font-size="12" font-weight="500" fill="#5F6784" text-anchor="end"></text>
+<rect x="14" y="428" width="232" height="25" rx="0" fill="#F7F4FD"/>
+<text x="58" y="445" font-family="'JetBrains Mono', 'DejaVu Sans Mono', monospace" font-size="13" font-weight="600" fill="#171D33" text-anchor="start">Supabase Auth.</text>
+<text x="238" y="445" font-family="'JetBrains Mono', 'DejaVu Sans Mono', monospace" font-size="12" font-weight="500" fill="#5F6784" text-anchor="end"></text>
+<text x="58" y="470" font-family="'JetBrains Mono', 'DejaVu Sans Mono', monospace" font-size="13" font-weight="600" fill="#171D33" text-anchor="start">owner_id apunta</text>
+<text x="238" y="470" font-family="'JetBrains Mono', 'DejaVu Sans Mono', monospace" font-size="12" font-weight="500" fill="#5F6784" text-anchor="end"></text>
+<rect x="14" y="478" width="232" height="25" rx="0" fill="#F7F4FD"/>
+<text x="58" y="495" font-family="'JetBrains Mono', 'DejaVu Sans Mono', monospace" font-size="13" font-weight="600" fill="#171D33" text-anchor="start">aquí desde 4 tablas</text>
+<text x="238" y="495" font-family="'JetBrains Mono', 'DejaVu Sans Mono', monospace" font-size="12" font-weight="500" fill="#5F6784" text-anchor="end"></text>
+<path d="M248.0 172.0 L280.0 172.0" fill="none" stroke="#0A7C78" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/>
+<polygon points="280.0,172.0 270.0,166.5 270.0,177.5" fill="#0A7C78"/>
+<rect x="244.49609375" y="144.5" width="41.0078125" height="19" rx="9.5" fill="#FFFFFF" stroke="#0A7C78" stroke-width="1.2"/>
+<text x="265.0" y="158.025" font-family="Inter, 'Helvetica Neue', Arial, sans-serif" font-size="11.5" font-weight="700" fill="#0A7C78" text-anchor="middle">N : 1</text>
+<path d="M552.0 198.0 L520.0 198.0" fill="none" stroke="#0A7C78" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/>
+<polygon points="520.0,198.0 530.0,203.5 530.0,192.5" fill="#0A7C78"/>
+<rect x="514.49609375" y="170.5" width="41.0078125" height="19" rx="9.5" fill="#FFFFFF" stroke="#0A7C78" stroke-width="1.2"/>
+<text x="535.0" y="184.025" font-family="Inter, 'Helvetica Neue', Arial, sans-serif" font-size="11.5" font-weight="700" fill="#0A7C78" text-anchor="middle">N : 1</text>
+<path d="M400.0 338.0 L400.0 266.0" fill="none" stroke="#0A7C78" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/>
+<polygon points="400.0,266.0 394.5,276.0 405.5,276.0" fill="#0A7C78"/>
+<rect x="379.49609375" y="293.0" width="41.0078125" height="19" rx="9.5" fill="#FFFFFF" stroke="#0A7C78" stroke-width="1.2"/>
+<text x="400.0" y="306.525" font-family="Inter, 'Helvetica Neue', Arial, sans-serif" font-size="11.5" font-weight="700" fill="#0A7C78" text-anchor="middle">N : 1</text>
+<path d="M552.0 414.0 L520.0 414.0" fill="none" stroke="#0A7C78" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/>
+<polygon points="520.0,414.0 530.0,419.5 530.0,408.5" fill="#0A7C78"/>
+<rect x="514.49609375" y="386.5" width="41.0078125" height="19" rx="9.5" fill="#FFFFFF" stroke="#0A7C78" stroke-width="1.2"/>
+<text x="535.0" y="400.025" font-family="Inter, 'Helvetica Neue', Arial, sans-serif" font-size="11.5" font-weight="700" fill="#0A7C78" text-anchor="middle">N : 1</text>
+<rect x="12" y="538" width="776" height="62" rx="10" fill="#F3EEE1"/>
+<rect x="24" y="550" width="30" height="19" rx="4" fill="#B8500A"/>
+<text x="39" y="564" font-family="Inter, 'Helvetica Neue', Arial, sans-serif" font-size="11.5" font-weight="800" fill="#FFFFFF" text-anchor="middle">PK</text>
+<text x="62" y="564" font-family="Inter, 'Helvetica Neue', Arial, sans-serif" font-size="13" font-weight="500" fill="#171D33" text-anchor="start">Clave primaria: identifica una fila de forma única.</text>
+<rect x="24" y="576" width="30" height="19" rx="4" fill="#0A7C78"/>
+<text x="39" y="590" font-family="Inter, 'Helvetica Neue', Arial, sans-serif" font-size="11.5" font-weight="800" fill="#FFFFFF" text-anchor="middle">FK</text>
+<text x="62" y="590" font-family="Inter, 'Helvetica Neue', Arial, sans-serif" font-size="13" font-weight="500" fill="#171D33" text-anchor="start">Clave foránea: apunta a la PK de otra tabla (la flecha va hacia la tabla referenciada).</text>
+<text x="788" y="564" font-family="Inter, 'Helvetica Neue', Arial, sans-serif" font-size="12.5" font-weight="700" fill="#0A7C78" text-anchor="end">RLS activado</text>
+<text x="788" y="590" font-family="Inter, 'Helvetica Neue', Arial, sans-serif" font-size="12.5" font-weight="600" fill="#454D6B" text-anchor="end">en todas las tablas</text>
+</svg>

@@ -1,0 +1,91 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 566" width="800" height="566" role="img" aria-labelledby="t d">
+<title id="t">Comparación: localhost, GitHub Pages y Vercel</title>
+<desc id="d">Tabla visual de tres columnas. Localhost: solo tu computadora, ejecuta el backend mientras el servidor esté encendido, las claves viven en un archivo .env local. GitHub Pages: sitio estático público, no ejecuta Python ni FastAPI y no protege claves. Vercel: URL pública con despliegues de vista previa y producción, permite variables de entorno y funciones de servidor según la configuración del proyecto.</desc>
+<rect x="0" y="0" width="800" height="566" fill="#FFFFFF"/>
+<text x="16" y="30" font-family="Inter, 'Helvetica Neue', Arial, sans-serif" font-size="20" font-weight="800" fill="#0B1230" text-anchor="start">¿Dónde vive tu proyecto?</text>
+<text x="16" y="50" font-family="Inter, 'Helvetica Neue', Arial, sans-serif" font-size="13.5" font-weight="500" fill="#454D6B" text-anchor="start">Tres lugares, tres capacidades distintas</text>
+<rect x="170" y="70" width="196" height="72" rx="12" fill="#5B3FD9"/>
+<text x="268.0" y="102" font-family="Inter, 'Helvetica Neue', Arial, sans-serif" font-size="18" font-weight="800" fill="#FFFFFF" text-anchor="middle">Localhost</text>
+<text x="268.0" y="124" font-family="Inter, 'Helvetica Neue', Arial, sans-serif" font-size="13" font-weight="500" fill="#F2EFFF" text-anchor="middle">tu computadora</text>
+<rect x="378" y="70" width="196" height="72" rx="12" fill="#B8500A"/>
+<text x="476.0" y="102" font-family="Inter, 'Helvetica Neue', Arial, sans-serif" font-size="18" font-weight="800" fill="#FFFFFF" text-anchor="middle">GitHub Pages</text>
+<text x="476.0" y="124" font-family="Inter, 'Helvetica Neue', Arial, sans-serif" font-size="13" font-weight="500" fill="#F2EFFF" text-anchor="middle">hosting estático</text>
+<rect x="586" y="70" width="196" height="72" rx="12" fill="#0A7C78"/>
+<text x="684.0" y="102" font-family="Inter, 'Helvetica Neue', Arial, sans-serif" font-size="18" font-weight="800" fill="#FFFFFF" text-anchor="middle">Vercel</text>
+<text x="684.0" y="124" font-family="Inter, 'Helvetica Neue', Arial, sans-serif" font-size="13" font-weight="500" fill="#F2EFFF" text-anchor="middle">despliegue en la nube</text>
+<rect x="12" y="156" width="148" height="82" rx="10" fill="#F3EEE1"/>
+<text x="24" y="190" font-family="Inter, 'Helvetica Neue', Arial, sans-serif" font-size="15" font-weight="700" fill="#0B1230" text-anchor="start">¿Quién puede</text>
+<text x="24" y="209" font-family="Inter, 'Helvetica Neue', Arial, sans-serif" font-size="15" font-weight="700" fill="#0B1230" text-anchor="start">abrirlo?</text>
+<rect x="170" y="156" width="196" height="82" rx="10" fill="#FFFFFF" stroke="#DDD6C5" stroke-width="1.5"/>
+<circle cx="192" cy="184" r="11" fill="#0A7C78"/>
+<path d="M186.5 184.22 L190.68 188.4 L197.72 179.82" fill="none" stroke="#FFFFFF" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/>
+<text x="212" y="189.0" font-family="Inter, 'Helvetica Neue', Arial, sans-serif" font-size="13.5" font-weight="500" fill="#171D33" text-anchor="start">Solo tú (mientras el</text>
+<text x="212" y="206.5" font-family="Inter, 'Helvetica Neue', Arial, sans-serif" font-size="13.5" font-weight="500" fill="#171D33" text-anchor="start">servidor corre)</text>
+<rect x="378" y="156" width="196" height="82" rx="10" fill="#FFFFFF" stroke="#DDD6C5" stroke-width="1.5"/>
+<circle cx="400" cy="184" r="11" fill="#0A7C78"/>
+<path d="M394.5 184.22 L398.68 188.4 L405.72 179.82" fill="none" stroke="#FFFFFF" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/>
+<text x="420" y="189.0" font-family="Inter, 'Helvetica Neue', Arial, sans-serif" font-size="13.5" font-weight="500" fill="#171D33" text-anchor="start">Cualquiera con el</text>
+<text x="420" y="206.5" font-family="Inter, 'Helvetica Neue', Arial, sans-serif" font-size="13.5" font-weight="500" fill="#171D33" text-anchor="start">enlace (según tu</text>
+<text x="420" y="224.0" font-family="Inter, 'Helvetica Neue', Arial, sans-serif" font-size="13.5" font-weight="500" fill="#171D33" text-anchor="start">configuración)</text>
+<rect x="586" y="156" width="196" height="82" rx="10" fill="#FFFFFF" stroke="#DDD6C5" stroke-width="1.5"/>
+<circle cx="608" cy="184" r="11" fill="#0A7C78"/>
+<path d="M602.5 184.22 L606.68 188.4 L613.72 179.82" fill="none" stroke="#FFFFFF" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/>
+<text x="628" y="189.0" font-family="Inter, 'Helvetica Neue', Arial, sans-serif" font-size="13.5" font-weight="500" fill="#171D33" text-anchor="start">Cualquiera con el</text>
+<text x="628" y="206.5" font-family="Inter, 'Helvetica Neue', Arial, sans-serif" font-size="13.5" font-weight="500" fill="#171D33" text-anchor="start">enlace (según tu</text>
+<text x="628" y="224.0" font-family="Inter, 'Helvetica Neue', Arial, sans-serif" font-size="13.5" font-weight="500" fill="#171D33" text-anchor="start">configuración)</text>
+<rect x="12" y="246" width="148" height="82" rx="10" fill="#F3EEE1"/>
+<text x="24" y="280" font-family="Inter, 'Helvetica Neue', Arial, sans-serif" font-size="15" font-weight="700" fill="#0B1230" text-anchor="start">¿Ejecuta Python</text>
+<text x="24" y="299" font-family="Inter, 'Helvetica Neue', Arial, sans-serif" font-size="15" font-weight="700" fill="#0B1230" text-anchor="start">/ FastAPI?</text>
+<rect x="170" y="246" width="196" height="82" rx="10" fill="#FFFFFF" stroke="#DDD6C5" stroke-width="1.5"/>
+<circle cx="192" cy="274" r="11" fill="#0A7C78"/>
+<path d="M186.5 274.22 L190.68 278.4 L197.72 269.82" fill="none" stroke="#FFFFFF" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/>
+<text x="212" y="279.0" font-family="Inter, 'Helvetica Neue', Arial, sans-serif" font-size="13.5" font-weight="500" fill="#171D33" text-anchor="start">Sí, en tu equipo</text>
+<rect x="378" y="246" width="196" height="82" rx="10" fill="#FFFFFF" stroke="#DDD6C5" stroke-width="1.5"/>
+<circle cx="400" cy="274" r="11" fill="#B3261E"/>
+<path d="M395.38 269.38 L404.62 278.62 M404.62 269.38 L395.38 278.62" fill="none" stroke="#FFFFFF" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/>
+<text x="420" y="279.0" font-family="Inter, 'Helvetica Neue', Arial, sans-serif" font-size="13.5" font-weight="500" fill="#171D33" text-anchor="start">No: solo archivos</text>
+<text x="420" y="296.5" font-family="Inter, 'Helvetica Neue', Arial, sans-serif" font-size="13.5" font-weight="500" fill="#171D33" text-anchor="start">HTML, CSS y JS</text>
+<rect x="586" y="246" width="196" height="82" rx="10" fill="#FFFFFF" stroke="#DDD6C5" stroke-width="1.5"/>
+<circle cx="608" cy="274" r="11" fill="#B8500A"/>
+<text x="608" y="278.95" font-family="Inter, 'Helvetica Neue', Arial, sans-serif" font-size="16.5" font-weight="800" fill="#FFFFFF" text-anchor="middle">!</text>
+<text x="628" y="279.0" font-family="Inter, 'Helvetica Neue', Arial, sans-serif" font-size="13.5" font-weight="500" fill="#171D33" text-anchor="start">Funciones de</text>
+<text x="628" y="296.5" font-family="Inter, 'Helvetica Neue', Arial, sans-serif" font-size="13.5" font-weight="500" fill="#171D33" text-anchor="start">servidor; verifica</text>
+<text x="628" y="314.0" font-family="Inter, 'Helvetica Neue', Arial, sans-serif" font-size="13.5" font-weight="500" fill="#171D33" text-anchor="start">compatibilidad</text>
+<rect x="12" y="336" width="148" height="82" rx="10" fill="#F3EEE1"/>
+<text x="24" y="370" font-family="Inter, 'Helvetica Neue', Arial, sans-serif" font-size="15" font-weight="700" fill="#0B1230" text-anchor="start">¿Dónde va la API</text>
+<text x="24" y="389" font-family="Inter, 'Helvetica Neue', Arial, sans-serif" font-size="15" font-weight="700" fill="#0B1230" text-anchor="start">key?</text>
+<rect x="170" y="336" width="196" height="82" rx="10" fill="#FFFFFF" stroke="#DDD6C5" stroke-width="1.5"/>
+<circle cx="192" cy="364" r="11" fill="#B8500A"/>
+<text x="192" y="368.95" font-family="Inter, 'Helvetica Neue', Arial, sans-serif" font-size="16.5" font-weight="800" fill="#FFFFFF" text-anchor="middle">!</text>
+<text x="212" y="369.0" font-family="Inter, 'Helvetica Neue', Arial, sans-serif" font-size="13.5" font-weight="500" fill="#171D33" text-anchor="start">Archivo .env local,</text>
+<text x="212" y="386.5" font-family="Inter, 'Helvetica Neue', Arial, sans-serif" font-size="13.5" font-weight="500" fill="#171D33" text-anchor="start">fuera de Git</text>
+<rect x="378" y="336" width="196" height="82" rx="10" fill="#FFFFFF" stroke="#DDD6C5" stroke-width="1.5"/>
+<circle cx="400" cy="364" r="11" fill="#B3261E"/>
+<path d="M395.38 359.38 L404.62 368.62 M404.62 359.38 L395.38 368.62" fill="none" stroke="#FFFFFF" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/>
+<text x="420" y="369.0" font-family="Inter, 'Helvetica Neue', Arial, sans-serif" font-size="13.5" font-weight="500" fill="#171D33" text-anchor="start">En ningún lado: no</text>
+<text x="420" y="386.5" font-family="Inter, 'Helvetica Neue', Arial, sans-serif" font-size="13.5" font-weight="500" fill="#171D33" text-anchor="start">protege secretos</text>
+<rect x="586" y="336" width="196" height="82" rx="10" fill="#FFFFFF" stroke="#DDD6C5" stroke-width="1.5"/>
+<circle cx="608" cy="364" r="11" fill="#0A7C78"/>
+<path d="M602.5 364.22 L606.68 368.4 L613.72 359.82" fill="none" stroke="#FFFFFF" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/>
+<text x="628" y="369.0" font-family="Inter, 'Helvetica Neue', Arial, sans-serif" font-size="13.5" font-weight="500" fill="#171D33" text-anchor="start">Variables de entorno</text>
+<text x="628" y="386.5" font-family="Inter, 'Helvetica Neue', Arial, sans-serif" font-size="13.5" font-weight="500" fill="#171D33" text-anchor="start">del proyecto</text>
+<rect x="12" y="426" width="148" height="82" rx="10" fill="#F3EEE1"/>
+<text x="24" y="460" font-family="Inter, 'Helvetica Neue', Arial, sans-serif" font-size="15" font-weight="700" fill="#0B1230" text-anchor="start">¿Para qué sirve?</text>
+<rect x="170" y="426" width="196" height="82" rx="10" fill="#FFFFFF" stroke="#DDD6C5" stroke-width="1.5"/>
+<circle cx="192" cy="454" r="11" fill="#0A7C78"/>
+<path d="M186.5 454.22 L190.68 458.4 L197.72 449.82" fill="none" stroke="#FFFFFF" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/>
+<text x="212" y="459.0" font-family="Inter, 'Helvetica Neue', Arial, sans-serif" font-size="13.5" font-weight="500" fill="#171D33" text-anchor="start">Desarrollar y probar</text>
+<rect x="378" y="426" width="196" height="82" rx="10" fill="#FFFFFF" stroke="#DDD6C5" stroke-width="1.5"/>
+<circle cx="400" cy="454" r="11" fill="#0A7C78"/>
+<path d="M394.5 454.22 L398.68 458.4 L405.72 449.82" fill="none" stroke="#FFFFFF" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/>
+<text x="420" y="459.0" font-family="Inter, 'Helvetica Neue', Arial, sans-serif" font-size="13.5" font-weight="500" fill="#171D33" text-anchor="start">Landing o dashboard</text>
+<text x="420" y="476.5" font-family="Inter, 'Helvetica Neue', Arial, sans-serif" font-size="13.5" font-weight="500" fill="#171D33" text-anchor="start">sin backend</text>
+<rect x="586" y="426" width="196" height="82" rx="10" fill="#FFFFFF" stroke="#DDD6C5" stroke-width="1.5"/>
+<circle cx="608" cy="454" r="11" fill="#0A7C78"/>
+<path d="M602.5 454.22 L606.68 458.4 L613.72 449.82" fill="none" stroke="#FFFFFF" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/>
+<text x="628" y="459.0" font-family="Inter, 'Helvetica Neue', Arial, sans-serif" font-size="13.5" font-weight="500" fill="#171D33" text-anchor="start">Landing + backend</text>
+<text x="628" y="476.5" font-family="Inter, 'Helvetica Neue', Arial, sans-serif" font-size="13.5" font-weight="500" fill="#171D33" text-anchor="start">seguro en línea</text>
+<circle cx="30" cy="540" r="9" fill="#B8500A"/>
+<text x="30" y="544.05" font-family="Inter, 'Helvetica Neue', Arial, sans-serif" font-size="13.5" font-weight="800" fill="#FFFFFF" text-anchor="middle">!</text>
+<text x="46" y="545" font-family="Inter, 'Helvetica Neue', Arial, sans-serif" font-size="12.5" font-weight="600" fill="#171D33" text-anchor="start">Un enlace publicado no garantiza una app que funcione de extremo a extremo: sin backend, el chat no responde.</text>
+</svg>

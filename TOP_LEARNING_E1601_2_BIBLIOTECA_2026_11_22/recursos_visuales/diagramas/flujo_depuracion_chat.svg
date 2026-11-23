@@ -1,0 +1,109 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 930" width="800" height="930" role="img" aria-labelledby="t d">
+<title id="t">Flujo de depuración cuando el chat no responde</title>
+<desc id="d">Diagrama de decisión vertical con cinco preguntas. 1) ¿Responde la interfaz? Si no, revisa el servidor del frontend y la consola. 2) ¿La petición llega al backend? Si no, revisa URL, puerto y CORS. 3) ¿El backend tiene la API key? Si no, define la variable de entorno y reinicia. 4) ¿Qué código HTTP devuelve el proveedor? 401 o 403: clave inválida; 402 o 429: saldo o límite; 404: modelo o URL equivocados; 5xx: falla del proveedor. 5) ¿La interfaz muestra el campo reply? Si no, revisa cómo el frontend lee la respuesta.</desc>
+<rect x="0" y="0" width="800" height="930" fill="#FFFFFF"/>
+<text x="16" y="30" font-family="Inter, 'Helvetica Neue', Arial, sans-serif" font-size="20" font-weight="800" fill="#0B1230" text-anchor="start">El chat no responde: sigue este orden</text>
+<text x="16" y="50" font-family="Inter, 'Helvetica Neue', Arial, sans-serif" font-size="13.5" font-weight="500" fill="#454D6B" text-anchor="start">Cada pregunta descarta una causa. No saltes pasos.</text>
+<rect x="130" y="68" width="180" height="30" rx="15" fill="#0B1230"/>
+<text x="220" y="88" font-family="Inter, 'Helvetica Neue', Arial, sans-serif" font-size="13.5" font-weight="700" fill="#FFFFFF" text-anchor="middle">Envías un mensaje al chat</text>
+<path d="M220.0 98.0 L220.0 98.0" fill="none" stroke="#454D6B" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/>
+<polygon points="220.0,98.0 210.0,92.5 210.0,103.5" fill="#454D6B"/>
+<polygon points="220,98.0 370.0,150 220,202.0 70.0,150" fill="#FFFFFF" stroke="#5B3FD9" stroke-width="2.4" stroke-linejoin="round"/>
+<circle cx="104.0" cy="128.0" r="12" fill="#5B3FD9"/>
+<text x="104.0" y="133.0" font-family="Inter, 'Helvetica Neue', Arial, sans-serif" font-size="14" font-weight="800" fill="#FFFFFF" text-anchor="middle">1</text>
+<text x="220" y="146" font-family="Inter, 'Helvetica Neue', Arial, sans-serif" font-size="14.5" font-weight="700" fill="#0B1230" text-anchor="middle">¿Responde la interfaz?</text>
+<text x="220" y="164" font-family="Inter, 'Helvetica Neue', Arial, sans-serif" font-size="14.5" font-weight="700" fill="#0B1230" text-anchor="middle">(carga y escribe)</text>
+<path d="M220.0 202.0 L220.0 248.0" fill="none" stroke="#0A7C78" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/>
+<polygon points="220.0,248.0 225.5,238.0 214.5,238.0" fill="#0A7C78"/>
+<rect x="231.560546875" y="208.0" width="28.87890625" height="18" rx="9.0" fill="#FFFFFF" stroke="#0A7C78" stroke-width="1.2"/>
+<text x="246" y="221.025" font-family="Inter, 'Helvetica Neue', Arial, sans-serif" font-size="11.5" font-weight="800" fill="#0A7C78" text-anchor="middle">SÍ</text>
+<path d="M370.0 150.0 L466.0 150.0" fill="none" stroke="#B8500A" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/>
+<polygon points="466.0,150.0 456.0,144.5 456.0,155.5" fill="#B8500A"/>
+<rect x="376.15234375" y="129.0" width="35.6953125" height="18" rx="9.0" fill="#FFFFFF" stroke="#B8500A" stroke-width="1.2"/>
+<text x="394.0" y="142.025" font-family="Inter, 'Helvetica Neue', Arial, sans-serif" font-size="11.5" font-weight="800" fill="#B8500A" text-anchor="middle">NO</text>
+<rect x="470" y="106" width="322" height="88" rx="10" fill="#FDEBD9" stroke="#B8500A" stroke-width="1.8"/>
+<text x="482" y="128" font-family="Inter, 'Helvetica Neue', Arial, sans-serif" font-size="13.5" font-weight="800" fill="#B8500A" text-anchor="start">NO → revisa el frontend</text>
+<text x="482" y="147.0" font-family="Inter, 'Helvetica Neue', Arial, sans-serif" font-size="13" font-weight="400" fill="#171D33" text-anchor="start">Recarga con Ctrl+F5. Abre la consola del</text>
+<text x="482" y="163.5" font-family="Inter, 'Helvetica Neue', Arial, sans-serif" font-size="13" font-weight="400" fill="#171D33" text-anchor="start">navegador (F12) y lee el primer error en rojo.</text>
+<polygon points="220,248.0 370.0,300 220,352.0 70.0,300" fill="#FFFFFF" stroke="#5B3FD9" stroke-width="2.4" stroke-linejoin="round"/>
+<circle cx="104.0" cy="278.0" r="12" fill="#5B3FD9"/>
+<text x="104.0" y="283.0" font-family="Inter, 'Helvetica Neue', Arial, sans-serif" font-size="14" font-weight="800" fill="#FFFFFF" text-anchor="middle">2</text>
+<text x="220" y="296" font-family="Inter, 'Helvetica Neue', Arial, sans-serif" font-size="14.5" font-weight="700" fill="#0B1230" text-anchor="middle">¿La petición llega al</text>
+<text x="220" y="314" font-family="Inter, 'Helvetica Neue', Arial, sans-serif" font-size="14.5" font-weight="700" fill="#0B1230" text-anchor="middle">backend?</text>
+<path d="M220.0 352.0 L220.0 398.0" fill="none" stroke="#0A7C78" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/>
+<polygon points="220.0,398.0 225.5,388.0 214.5,388.0" fill="#0A7C78"/>
+<rect x="231.560546875" y="358.0" width="28.87890625" height="18" rx="9.0" fill="#FFFFFF" stroke="#0A7C78" stroke-width="1.2"/>
+<text x="246" y="371.025" font-family="Inter, 'Helvetica Neue', Arial, sans-serif" font-size="11.5" font-weight="800" fill="#0A7C78" text-anchor="middle">SÍ</text>
+<path d="M370.0 300.0 L466.0 300.0" fill="none" stroke="#B8500A" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/>
+<polygon points="466.0,300.0 456.0,294.5 456.0,305.5" fill="#B8500A"/>
+<rect x="376.15234375" y="279.0" width="35.6953125" height="18" rx="9.0" fill="#FFFFFF" stroke="#B8500A" stroke-width="1.2"/>
+<text x="394.0" y="292.025" font-family="Inter, 'Helvetica Neue', Arial, sans-serif" font-size="11.5" font-weight="800" fill="#B8500A" text-anchor="middle">NO</text>
+<rect x="470" y="256" width="322" height="88" rx="10" fill="#FDEBD9" stroke="#B8500A" stroke-width="1.8"/>
+<text x="482" y="278" font-family="Inter, 'Helvetica Neue', Arial, sans-serif" font-size="13.5" font-weight="800" fill="#B8500A" text-anchor="start">NO → revisa la conexión</text>
+<text x="482" y="297.0" font-family="Inter, 'Helvetica Neue', Arial, sans-serif" font-size="13" font-weight="400" fill="#171D33" text-anchor="start">URL y puerto del backend, que esté encendido</text>
+<text x="482" y="313.5" font-family="Inter, 'Helvetica Neue', Arial, sans-serif" font-size="13" font-weight="400" fill="#171D33" text-anchor="start">(/docs) y la configuración CORS. Mira la</text>
+<text x="482" y="330.0" font-family="Inter, 'Helvetica Neue', Arial, sans-serif" font-size="13" font-weight="400" fill="#171D33" text-anchor="start">pestaña Red.</text>
+<polygon points="220,398.0 370.0,450 220,502.0 70.0,450" fill="#FFFFFF" stroke="#5B3FD9" stroke-width="2.4" stroke-linejoin="round"/>
+<circle cx="104.0" cy="428.0" r="12" fill="#5B3FD9"/>
+<text x="104.0" y="433.0" font-family="Inter, 'Helvetica Neue', Arial, sans-serif" font-size="14" font-weight="800" fill="#FFFFFF" text-anchor="middle">3</text>
+<text x="220" y="446" font-family="Inter, 'Helvetica Neue', Arial, sans-serif" font-size="14.5" font-weight="700" fill="#0B1230" text-anchor="middle">¿El backend tiene la API</text>
+<text x="220" y="464" font-family="Inter, 'Helvetica Neue', Arial, sans-serif" font-size="14.5" font-weight="700" fill="#0B1230" text-anchor="middle">key?</text>
+<path d="M220.0 502.0 L220.0 548.0" fill="none" stroke="#0A7C78" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/>
+<polygon points="220.0,548.0 225.5,538.0 214.5,538.0" fill="#0A7C78"/>
+<rect x="231.560546875" y="508.0" width="28.87890625" height="18" rx="9.0" fill="#FFFFFF" stroke="#0A7C78" stroke-width="1.2"/>
+<text x="246" y="521.025" font-family="Inter, 'Helvetica Neue', Arial, sans-serif" font-size="11.5" font-weight="800" fill="#0A7C78" text-anchor="middle">SÍ</text>
+<path d="M370.0 450.0 L466.0 450.0" fill="none" stroke="#B8500A" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/>
+<polygon points="466.0,450.0 456.0,444.5 456.0,455.5" fill="#B8500A"/>
+<rect x="376.15234375" y="429.0" width="35.6953125" height="18" rx="9.0" fill="#FFFFFF" stroke="#B8500A" stroke-width="1.2"/>
+<text x="394.0" y="442.025" font-family="Inter, 'Helvetica Neue', Arial, sans-serif" font-size="11.5" font-weight="800" fill="#B8500A" text-anchor="middle">NO</text>
+<rect x="470" y="406" width="322" height="88" rx="10" fill="#FDEBD9" stroke="#B8500A" stroke-width="1.8"/>
+<text x="482" y="428" font-family="Inter, 'Helvetica Neue', Arial, sans-serif" font-size="13.5" font-weight="800" fill="#B8500A" text-anchor="start">NO → define la variable</text>
+<text x="482" y="447.0" font-family="Inter, 'Helvetica Neue', Arial, sans-serif" font-size="13" font-weight="400" fill="#171D33" text-anchor="start">Crea OPENROUTER_API_KEY en .env (local) o</text>
+<text x="482" y="463.5" font-family="Inter, 'Helvetica Neue', Arial, sans-serif" font-size="13" font-weight="400" fill="#171D33" text-anchor="start">en las variables de entorno de la plataforma y</text>
+<text x="482" y="480.0" font-family="Inter, 'Helvetica Neue', Arial, sans-serif" font-size="13" font-weight="400" fill="#171D33" text-anchor="start">reinicia.</text>
+<polygon points="220,548.0 370.0,600 220,652.0 70.0,600" fill="#FFFFFF" stroke="#5B3FD9" stroke-width="2.4" stroke-linejoin="round"/>
+<circle cx="104.0" cy="578.0" r="12" fill="#5B3FD9"/>
+<text x="104.0" y="583.0" font-family="Inter, 'Helvetica Neue', Arial, sans-serif" font-size="14" font-weight="800" fill="#FFFFFF" text-anchor="middle">4</text>
+<text x="220" y="596" font-family="Inter, 'Helvetica Neue', Arial, sans-serif" font-size="14.5" font-weight="700" fill="#0B1230" text-anchor="middle">¿Qué código HTTP</text>
+<text x="220" y="614" font-family="Inter, 'Helvetica Neue', Arial, sans-serif" font-size="14.5" font-weight="700" fill="#0B1230" text-anchor="middle">devuelve el proveedor?</text>
+<path d="M220.0 652.0 L220.0 698.0" fill="none" stroke="#0A7C78" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/>
+<polygon points="220.0,698.0 225.5,688.0 214.5,688.0" fill="#0A7C78"/>
+<rect x="231.560546875" y="658.0" width="28.87890625" height="18" rx="9.0" fill="#FFFFFF" stroke="#0A7C78" stroke-width="1.2"/>
+<text x="246" y="671.025" font-family="Inter, 'Helvetica Neue', Arial, sans-serif" font-size="11.5" font-weight="800" fill="#0A7C78" text-anchor="middle">SÍ</text>
+<polygon points="220,698.0 370.0,750 220,802.0 70.0,750" fill="#FFFFFF" stroke="#5B3FD9" stroke-width="2.4" stroke-linejoin="round"/>
+<circle cx="104.0" cy="728.0" r="12" fill="#5B3FD9"/>
+<text x="104.0" y="733.0" font-family="Inter, 'Helvetica Neue', Arial, sans-serif" font-size="14" font-weight="800" fill="#FFFFFF" text-anchor="middle">5</text>
+<text x="220" y="746" font-family="Inter, 'Helvetica Neue', Arial, sans-serif" font-size="14.5" font-weight="700" fill="#0B1230" text-anchor="middle">¿La interfaz muestra el</text>
+<text x="220" y="764" font-family="Inter, 'Helvetica Neue', Arial, sans-serif" font-size="14.5" font-weight="700" fill="#0B1230" text-anchor="middle">campo reply?</text>
+<path d="M370.0 750.0 L466.0 750.0" fill="none" stroke="#B8500A" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/>
+<polygon points="466.0,750.0 456.0,744.5 456.0,755.5" fill="#B8500A"/>
+<rect x="376.15234375" y="729.0" width="35.6953125" height="18" rx="9.0" fill="#FFFFFF" stroke="#B8500A" stroke-width="1.2"/>
+<text x="394.0" y="742.025" font-family="Inter, 'Helvetica Neue', Arial, sans-serif" font-size="11.5" font-weight="800" fill="#B8500A" text-anchor="middle">NO</text>
+<rect x="470" y="706" width="322" height="88" rx="10" fill="#FDEBD9" stroke="#B8500A" stroke-width="1.8"/>
+<text x="482" y="728" font-family="Inter, 'Helvetica Neue', Arial, sans-serif" font-size="13.5" font-weight="800" fill="#B8500A" text-anchor="start">NO → revisa el parseo</text>
+<text x="482" y="747.0" font-family="Inter, 'Helvetica Neue', Arial, sans-serif" font-size="13" font-weight="400" fill="#171D33" text-anchor="start">El frontend debe leer el campo reply del JSON.</text>
+<text x="482" y="763.5" font-family="Inter, 'Helvetica Neue', Arial, sans-serif" font-size="13" font-weight="400" fill="#171D33" text-anchor="start">Inspecciona la respuesta en la pestaña Red.</text>
+<path d="M370.0 600.0 L466.0 600.0" fill="none" stroke="#B8500A" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/>
+<polygon points="466.0,600.0 456.0,594.5 456.0,605.5" fill="#B8500A"/>
+<rect x="372.177734375" y="579.0" width="51.64453125" height="18" rx="9.0" fill="#FFFFFF" stroke="#B8500A" stroke-width="1.2"/>
+<text x="398.0" y="592.025" font-family="Inter, 'Helvetica Neue', Arial, sans-serif" font-size="11.5" font-weight="800" fill="#B8500A" text-anchor="middle">≠ 200</text>
+<rect x="470" y="538" width="322" height="124" rx="10" fill="#FDEBD9" stroke="#B8500A" stroke-width="1.8"/>
+<text x="482" y="558" font-family="Inter, 'Helvetica Neue', Arial, sans-serif" font-size="13.5" font-weight="800" fill="#B8500A" text-anchor="start">Lee el código y actúa</text>
+<text x="482" y="578" font-family="'JetBrains Mono', 'DejaVu Sans Mono', monospace" font-size="12.5" font-weight="800" fill="#0B1230" text-anchor="start">401 · 403</text>
+<text x="556" y="578" font-family="Inter, 'Helvetica Neue', Arial, sans-serif" font-size="12" font-weight="400" fill="#171D33" text-anchor="start">clave inválida, revocada o sin permiso</text>
+<text x="482" y="600" font-family="'JetBrains Mono', 'DejaVu Sans Mono', monospace" font-size="12.5" font-weight="800" fill="#0B1230" text-anchor="start">402 · 429</text>
+<text x="556" y="600" font-family="Inter, 'Helvetica Neue', Arial, sans-serif" font-size="12" font-weight="400" fill="#171D33" text-anchor="start">saldo o límite (panel del proveedor)</text>
+<text x="482" y="622" font-family="'JetBrains Mono', 'DejaVu Sans Mono', monospace" font-size="12.5" font-weight="800" fill="#0B1230" text-anchor="start">400 · 404</text>
+<text x="556" y="622" font-family="Inter, 'Helvetica Neue', Arial, sans-serif" font-size="12" font-weight="400" fill="#171D33" text-anchor="start">petición, modelo o URL incorrectos</text>
+<text x="482" y="644" font-family="'JetBrains Mono', 'DejaVu Sans Mono', monospace" font-size="12.5" font-weight="800" fill="#0B1230" text-anchor="start">5xx</text>
+<text x="556" y="644" font-family="Inter, 'Helvetica Neue', Arial, sans-serif" font-size="12" font-weight="400" fill="#171D33" text-anchor="start">falla del proveedor: reintenta</text>
+<path d="M220.0 802.0 L220.0 846.0" fill="none" stroke="#0A7C78" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/>
+<polygon points="220.0,846.0 225.5,836.0 214.5,836.0" fill="#0A7C78"/>
+<rect x="231.560546875" y="808.0" width="28.87890625" height="18" rx="9.0" fill="#FFFFFF" stroke="#0A7C78" stroke-width="1.2"/>
+<text x="246" y="821.025" font-family="Inter, 'Helvetica Neue', Arial, sans-serif" font-size="11.5" font-weight="800" fill="#0A7C78" text-anchor="middle">SÍ</text>
+<rect x="70" y="846" width="300" height="40" rx="20" fill="#DDF3F1" stroke="#0A7C78" stroke-width="2"/>
+<circle cx="96" cy="866" r="10" fill="#0A7C78"/>
+<path d="M91.0 866.2 L94.8 870.0 L101.2 862.2" fill="none" stroke="#FFFFFF" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/>
+<text x="234" y="871" font-family="Inter, 'Helvetica Neue', Arial, sans-serif" font-size="14" font-weight="700" fill="#0A7C78" text-anchor="middle">Funciona: guarda y celebra</text>
+<text x="790" y="914" font-family="Inter, 'Helvetica Neue', Arial, sans-serif" font-size="12.5" font-weight="600" fill="#454D6B" text-anchor="end">Plan B: copia el error EXACTO (sin claves) y pídele ayuda a tu asistente.</text>
+</svg>

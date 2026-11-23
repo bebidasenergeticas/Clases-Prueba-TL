@@ -1,0 +1,75 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 530" width="800" height="530" role="img" aria-labelledby="t d">
+<title id="t">Flujo de un turno de chat con memoria</title>
+<desc id="d">Seis pasos. 1) El navegador envía el ID de sesión y el mensaje. 2) El backend lee los últimos N mensajes de esa sesión en Supabase, filtrando por el usuario antes de llamar al modelo. 3) Construye el prompt con el system prompt (soul.md), el historial y el mensaje nuevo. 4) Llama a OpenRouter. 5) Guarda el turno completo en Supabase. 6) Devuelve la respuesta al navegador.</desc>
+<rect x="0" y="0" width="800" height="530" fill="#FFFFFF"/>
+<text x="16" y="30" font-family="Inter, 'Helvetica Neue', Arial, sans-serif" font-size="20" font-weight="800" fill="#0B1230" text-anchor="start">Un turno de chat con memoria</text>
+<text x="16" y="50" font-family="Inter, 'Helvetica Neue', Arial, sans-serif" font-size="13.5" font-weight="500" fill="#454D6B" text-anchor="start">Lo que hace el backend cada vez que la persona escribe</text>
+<rect x="16" y="84" width="230" height="124" rx="14" fill="#FFFFFF" stroke="#5B3FD9" stroke-width="2.4"/>
+<rect x="16" y="84" width="230" height="42" rx="14" fill="#5B3FD9"/>
+<rect x="16" y="112" width="230" height="14" rx="0" fill="#5B3FD9"/>
+<circle cx="42" cy="105" r="13" fill="#FFFFFF"/>
+<text x="42" y="110.5" font-family="Inter, 'Helvetica Neue', Arial, sans-serif" font-size="15" font-weight="800" fill="#5B3FD9" text-anchor="middle">1</text>
+<text x="64" y="111" font-family="Inter, 'Helvetica Neue', Arial, sans-serif" font-size="16" font-weight="700" fill="#FFFFFF" text-anchor="start">ID de sesión</text>
+<text x="30" y="150" font-family="Inter, 'Helvetica Neue', Arial, sans-serif" font-size="14" font-weight="400" fill="#171D33" text-anchor="start">El navegador envía session_id</text>
+<text x="30" y="169" font-family="Inter, 'Helvetica Neue', Arial, sans-serif" font-size="14" font-weight="400" fill="#171D33" text-anchor="start">y el mensaje nuevo.</text>
+<rect x="285" y="84" width="230" height="124" rx="14" fill="#FFFFFF" stroke="#0A7C78" stroke-width="2.4"/>
+<rect x="285" y="84" width="230" height="42" rx="14" fill="#0A7C78"/>
+<rect x="285" y="112" width="230" height="14" rx="0" fill="#0A7C78"/>
+<circle cx="311" cy="105" r="13" fill="#FFFFFF"/>
+<text x="311" y="110.5" font-family="Inter, 'Helvetica Neue', Arial, sans-serif" font-size="15" font-weight="800" fill="#0A7C78" text-anchor="middle">2</text>
+<text x="333" y="111" font-family="Inter, 'Helvetica Neue', Arial, sans-serif" font-size="16" font-weight="700" fill="#FFFFFF" text-anchor="start">Leer los últimos N</text>
+<text x="299" y="150" font-family="Inter, 'Helvetica Neue', Arial, sans-serif" font-size="14" font-weight="400" fill="#171D33" text-anchor="start">Consulta Supabase, solo filas</text>
+<text x="299" y="169" font-family="Inter, 'Helvetica Neue', Arial, sans-serif" font-size="14" font-weight="400" fill="#171D33" text-anchor="start">de ESA sesión y usuario.</text>
+<rect x="554" y="84" width="230" height="124" rx="14" fill="#FFFFFF" stroke="#B8500A" stroke-width="2.4"/>
+<rect x="554" y="84" width="230" height="42" rx="14" fill="#B8500A"/>
+<rect x="554" y="112" width="230" height="14" rx="0" fill="#B8500A"/>
+<circle cx="580" cy="105" r="13" fill="#FFFFFF"/>
+<text x="580" y="110.5" font-family="Inter, 'Helvetica Neue', Arial, sans-serif" font-size="15" font-weight="800" fill="#B8500A" text-anchor="middle">3</text>
+<text x="602" y="111" font-family="Inter, 'Helvetica Neue', Arial, sans-serif" font-size="16" font-weight="700" fill="#FFFFFF" text-anchor="start">Construir el prompt</text>
+<text x="568" y="150" font-family="Inter, 'Helvetica Neue', Arial, sans-serif" font-size="14" font-weight="400" fill="#171D33" text-anchor="start">System prompt (soul.md) +</text>
+<text x="568" y="169" font-family="Inter, 'Helvetica Neue', Arial, sans-serif" font-size="14" font-weight="400" fill="#171D33" text-anchor="start">historial + mensaje nuevo.</text>
+<rect x="554" y="260" width="230" height="124" rx="14" fill="#FFFFFF" stroke="#1F5FBF" stroke-width="2.4"/>
+<rect x="554" y="260" width="230" height="42" rx="14" fill="#1F5FBF"/>
+<rect x="554" y="288" width="230" height="14" rx="0" fill="#1F5FBF"/>
+<circle cx="580" cy="281" r="13" fill="#FFFFFF"/>
+<text x="580" y="286.5" font-family="Inter, 'Helvetica Neue', Arial, sans-serif" font-size="15" font-weight="800" fill="#1F5FBF" text-anchor="middle">4</text>
+<text x="602" y="287" font-family="Inter, 'Helvetica Neue', Arial, sans-serif" font-size="16" font-weight="700" fill="#FFFFFF" text-anchor="start">Llamar a OpenRouter</text>
+<text x="568" y="326" font-family="Inter, 'Helvetica Neue', Arial, sans-serif" font-size="14" font-weight="400" fill="#171D33" text-anchor="start">Petición con la API key leída</text>
+<text x="568" y="345" font-family="Inter, 'Helvetica Neue', Arial, sans-serif" font-size="14" font-weight="400" fill="#171D33" text-anchor="start">del entorno.</text>
+<rect x="285" y="260" width="230" height="124" rx="14" fill="#FFFFFF" stroke="#0A7C78" stroke-width="2.4"/>
+<rect x="285" y="260" width="230" height="42" rx="14" fill="#0A7C78"/>
+<rect x="285" y="288" width="230" height="14" rx="0" fill="#0A7C78"/>
+<circle cx="311" cy="281" r="13" fill="#FFFFFF"/>
+<text x="311" y="286.5" font-family="Inter, 'Helvetica Neue', Arial, sans-serif" font-size="15" font-weight="800" fill="#0A7C78" text-anchor="middle">5</text>
+<text x="333" y="287" font-family="Inter, 'Helvetica Neue', Arial, sans-serif" font-size="16" font-weight="700" fill="#FFFFFF" text-anchor="start">Guardar el turno</text>
+<text x="299" y="326" font-family="Inter, 'Helvetica Neue', Arial, sans-serif" font-size="14" font-weight="400" fill="#171D33" text-anchor="start">Inserta mensaje de usuario y</text>
+<text x="299" y="345" font-family="Inter, 'Helvetica Neue', Arial, sans-serif" font-size="14" font-weight="400" fill="#171D33" text-anchor="start">respuesta en messages.</text>
+<rect x="16" y="260" width="230" height="124" rx="14" fill="#FFFFFF" stroke="#5B3FD9" stroke-width="2.4"/>
+<rect x="16" y="260" width="230" height="42" rx="14" fill="#5B3FD9"/>
+<rect x="16" y="288" width="230" height="14" rx="0" fill="#5B3FD9"/>
+<circle cx="42" cy="281" r="13" fill="#FFFFFF"/>
+<text x="42" y="286.5" font-family="Inter, 'Helvetica Neue', Arial, sans-serif" font-size="15" font-weight="800" fill="#5B3FD9" text-anchor="middle">6</text>
+<text x="64" y="287" font-family="Inter, 'Helvetica Neue', Arial, sans-serif" font-size="16" font-weight="700" fill="#FFFFFF" text-anchor="start">Responder</text>
+<text x="30" y="326" font-family="Inter, 'Helvetica Neue', Arial, sans-serif" font-size="14" font-weight="400" fill="#171D33" text-anchor="start">Devuelve reply al frontend,</text>
+<text x="30" y="345" font-family="Inter, 'Helvetica Neue', Arial, sans-serif" font-size="14" font-weight="400" fill="#171D33" text-anchor="start">que lo muestra.</text>
+<path d="M247.0 146.0 L283.0 146.0" fill="none" stroke="#454D6B" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+<polygon points="283.0,146.0 273.0,140.5 273.0,151.5" fill="#454D6B"/>
+<path d="M516.0 146.0 L552.0 146.0" fill="none" stroke="#454D6B" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+<polygon points="552.0,146.0 542.0,140.5 542.0,151.5" fill="#454D6B"/>
+<path d="M669.0 210.0 L669.0 258.0" fill="none" stroke="#454D6B" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+<polygon points="669.0,258.0 674.5,248.0 663.5,248.0" fill="#454D6B"/>
+<path d="M552.0 322.0 L516.0 322.0" fill="none" stroke="#454D6B" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+<polygon points="516.0,322.0 526.0,327.5 526.0,316.5" fill="#454D6B"/>
+<path d="M283.0 322.0 L247.0 322.0" fill="none" stroke="#454D6B" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+<polygon points="247.0,322.0 257.0,327.5 257.0,316.5" fill="#454D6B"/>
+<rect x="362.96875" y="198.5" width="74.0625" height="19" rx="9.5" fill="#DDF3F1" stroke="#0A7C78" stroke-width="1.2"/>
+<text x="400" y="212.025" font-family="Inter, 'Helvetica Neue', Arial, sans-serif" font-size="11.5" font-weight="700" fill="#0A7C78" text-anchor="middle">Supabase</text>
+<rect x="362.96875" y="374.5" width="74.0625" height="19" rx="9.5" fill="#DDF3F1" stroke="#0A7C78" stroke-width="1.2"/>
+<text x="400" y="388.025" font-family="Inter, 'Helvetica Neue', Arial, sans-serif" font-size="11.5" font-weight="700" fill="#0A7C78" text-anchor="middle">Supabase</text>
+<text x="16" y="428" font-family="Inter, 'Helvetica Neue', Arial, sans-serif" font-size="13" font-weight="600" fill="#454D6B" text-anchor="start">Un turno completo = una pregunta y su respuesta, ambas guardadas.</text>
+<text x="16" y="446" font-family="Inter, 'Helvetica Neue', Arial, sans-serif" font-size="13" font-weight="600" fill="#454D6B" text-anchor="start">Abrir Supabase no significa que la memoria ya funcione: hay que leer y escribir de verdad.</text>
+<rect x="16" y="462" width="768" height="50" rx="10" fill="#FCE9E7" stroke="#B3261E" stroke-width="1.6"/>
+<circle cx="38" cy="487" r="10" fill="#B3261E"/>
+<text x="38" y="491.5" font-family="Inter, 'Helvetica Neue', Arial, sans-serif" font-size="15.0" font-weight="800" fill="#FFFFFF" text-anchor="middle">!</text>
+<text x="58" y="483" font-family="Inter, 'Helvetica Neue', Arial, sans-serif" font-size="13" font-weight="700" fill="#7F1710" text-anchor="start">Orden de seguridad: filtra por la sesión del usuario ANTES de llamar al modelo; nunca uses datos de otra sesión.</text>
+</svg>

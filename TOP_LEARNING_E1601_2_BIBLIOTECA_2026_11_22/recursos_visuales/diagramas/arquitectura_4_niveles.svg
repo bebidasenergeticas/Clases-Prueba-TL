@@ -1,0 +1,41 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 580" width="800" height="580" role="img" aria-labelledby="t d">
+<title id="t">Arquitectura progresiva de cuatro niveles</title>
+<desc id="d">Escalera ascendente de cuatro niveles. Nivel 1: Excel y dashboard local. Nivel 2: landing local con chat simulado. Nivel 3: landing y API backend segura desplegada. Nivel 4: memoria y datos persistentes en Supabase con reglas de acceso (RLS). Arriba, en línea punteada, una arquitectura opcional futura con n8n, marcada como no implementada en la práctica.</desc>
+<rect x="0" y="0" width="800" height="580" fill="#FFFFFF"/>
+<text x="16" y="30" font-family="Inter, 'Helvetica Neue', Arial, sans-serif" font-size="20" font-weight="800" fill="#0B1230" text-anchor="start">Arquitectura progresiva en 4 niveles</text>
+<text x="16" y="50" font-family="Inter, 'Helvetica Neue', Arial, sans-serif" font-size="13.5" font-weight="500" fill="#454D6B" text-anchor="start">Cada nivel conserva lo anterior y agrega una capacidad</text>
+<rect x="16" y="462" width="560" height="92" rx="14" fill="#ECE8FB" stroke="#5B3FD9" stroke-width="2.4"/>
+<circle cx="48" cy="508" r="20" fill="#5B3FD9"/>
+<text x="48" y="515" font-family="Inter, 'Helvetica Neue', Arial, sans-serif" font-size="21" font-weight="800" fill="#FFFFFF" text-anchor="middle">1</text>
+<text x="82" y="490" font-family="Inter, 'Helvetica Neue', Arial, sans-serif" font-size="16.5" font-weight="800" fill="#0B1230" text-anchor="start">Excel + dashboard local</text>
+<text x="82" y="511.0" font-family="Inter, 'Helvetica Neue', Arial, sans-serif" font-size="13.5" font-weight="400" fill="#171D33" text-anchor="start">Datos simulados en .xlsx, FastAPI y gráficas en tu equipo.</text>
+<text x="82" y="544" font-family="Inter, 'Helvetica Neue', Arial, sans-serif" font-size="12.5" font-weight="700" fill="#5B3FD9" text-anchor="start">Corre en: tu computadora</text>
+<rect x="72" y="354" width="560" height="92" rx="14" fill="#DDF3F1" stroke="#0A7C78" stroke-width="2.4"/>
+<circle cx="104" cy="400" r="20" fill="#0A7C78"/>
+<text x="104" y="407" font-family="Inter, 'Helvetica Neue', Arial, sans-serif" font-size="21" font-weight="800" fill="#FFFFFF" text-anchor="middle">2</text>
+<text x="138" y="382" font-family="Inter, 'Helvetica Neue', Arial, sans-serif" font-size="16.5" font-weight="800" fill="#0B1230" text-anchor="start">Landing local + chat simulado</text>
+<text x="138" y="403.0" font-family="Inter, 'Helvetica Neue', Arial, sans-serif" font-size="13.5" font-weight="400" fill="#171D33" text-anchor="start">Página del restaurante; el chat contesta con reglas, sin modelo real.</text>
+<text x="138" y="436" font-family="Inter, 'Helvetica Neue', Arial, sans-serif" font-size="12.5" font-weight="700" fill="#0A7C78" text-anchor="start">Corre en: tu computadora</text>
+<rect x="128" y="246" width="560" height="92" rx="14" fill="#FDEBD9" stroke="#B8500A" stroke-width="2.4"/>
+<circle cx="160" cy="292" r="20" fill="#B8500A"/>
+<text x="160" y="299" font-family="Inter, 'Helvetica Neue', Arial, sans-serif" font-size="21" font-weight="800" fill="#FFFFFF" text-anchor="middle">3</text>
+<text x="194" y="274" font-family="Inter, 'Helvetica Neue', Arial, sans-serif" font-size="16.5" font-weight="800" fill="#0B1230" text-anchor="start">Landing + API backend segura</text>
+<text x="194" y="295.0" font-family="Inter, 'Helvetica Neue', Arial, sans-serif" font-size="13.5" font-weight="400" fill="#171D33" text-anchor="start">Backend desplegado; la API key vive en variables de entorno.</text>
+<text x="194" y="328" font-family="Inter, 'Helvetica Neue', Arial, sans-serif" font-size="12.5" font-weight="700" fill="#B8500A" text-anchor="start">Corre en: nube (p. ej. Vercel)</text>
+<rect x="184" y="138" width="560" height="92" rx="14" fill="#E4EEFB" stroke="#1F5FBF" stroke-width="2.4"/>
+<circle cx="216" cy="184" r="20" fill="#1F5FBF"/>
+<text x="216" y="191" font-family="Inter, 'Helvetica Neue', Arial, sans-serif" font-size="21" font-weight="800" fill="#FFFFFF" text-anchor="middle">4</text>
+<text x="250" y="166" font-family="Inter, 'Helvetica Neue', Arial, sans-serif" font-size="16.5" font-weight="800" fill="#0B1230" text-anchor="start">Memoria y datos persistentes</text>
+<text x="250" y="187.0" font-family="Inter, 'Helvetica Neue', Arial, sans-serif" font-size="13.5" font-weight="400" fill="#171D33" text-anchor="start">Supabase con tablas y reglas de acceso (RLS) por usuario.</text>
+<text x="250" y="220" font-family="Inter, 'Helvetica Neue', Arial, sans-serif" font-size="12.5" font-weight="700" fill="#1F5FBF" text-anchor="start">Corre en: nube + base de datos</text>
+<text x="16" y="90" font-family="Inter, 'Helvetica Neue', Arial, sans-serif" font-size="14" font-weight="700" fill="#0B1230" text-anchor="start">Subir de nivel es AGREGAR una capacidad, no</text>
+<text x="16" y="109" font-family="Inter, 'Helvetica Neue', Arial, sans-serif" font-size="14" font-weight="700" fill="#0B1230" text-anchor="start">rehacerlo todo.</text>
+<text x="16" y="134" font-family="Inter, 'Helvetica Neue', Arial, sans-serif" font-size="13.5" font-weight="400" fill="#454D6B" text-anchor="start">Cada nivel puede explicarse, probarse y detenerse</text>
+<text x="16" y="152" font-family="Inter, 'Helvetica Neue', Arial, sans-serif" font-size="13.5" font-weight="400" fill="#454D6B" text-anchor="start">ahí con un resultado útil.</text>
+<rect x="414" y="60" width="370" height="70" rx="12" fill="none" stroke="#5F6784" stroke-width="1.8" stroke-dasharray="7 5"/>
+<text x="428" y="84" font-family="Inter, 'Helvetica Neue', Arial, sans-serif" font-size="12.5" font-weight="800" fill="#5F6784" text-anchor="start" letter-spacing="0.8">OPCIONAL FUTURO · n8n</text>
+<text x="428" y="104" font-family="Inter, 'Helvetica Neue', Arial, sans-serif" font-size="13" font-weight="500" fill="#5F6784" text-anchor="start">Automatizaciones con webhooks. NO se implementó</text>
+<text x="428" y="121" font-family="Inter, 'Helvetica Neue', Arial, sans-serif" font-size="13" font-weight="500" fill="#5F6784" text-anchor="start">en esta práctica.</text>
+<path d="M600.0 132.0 L600.0 144.0" fill="none" stroke="#5F6784" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" stroke-dasharray="4 4"/>
+<polygon points="600.0,144.0 604.4,136.0 595.6,136.0" fill="#5F6784"/>
+</svg>

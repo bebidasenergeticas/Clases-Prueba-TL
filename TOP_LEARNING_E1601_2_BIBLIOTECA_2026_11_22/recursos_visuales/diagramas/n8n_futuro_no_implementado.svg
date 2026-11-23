@@ -1,0 +1,39 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 460" width="800" height="460" role="img" aria-labelledby="t d">
+<title id="t">Arquitectura futura con n8n — no implementada en la práctica</title>
+<desc id="d">Diagrama punteado y atenuado. La landing o el chat envía un evento a un webhook de n8n; el flujo de trabajo procesa con un modelo de lenguaje, guarda en una base de datos o una hoja y avisa por correo o mensajería. Está rotulado como arquitectura futura, no implementada en la práctica de la clase.</desc>
+<rect x="0" y="0" width="800" height="460" fill="#FFFFFF"/>
+<rect x="0" y="0" width="800" height="460" rx="0" fill="#FBF8F1"/>
+<rect x="12" y="12" width="776" height="436" rx="16" fill="none" stroke="#5F6784" stroke-width="2" stroke-dasharray="10 7"/>
+<rect x="28" y="26" width="194.55390625" height="22.5" rx="5" fill="#5F6784"/>
+<text x="36" y="40.0" font-family="Inter, 'Helvetica Neue', Arial, sans-serif" font-size="12.5" font-weight="800" fill="#FFFFFF" text-anchor="start" letter-spacing="1.2">ARQUITECTURA FUTURA</text>
+<text x="28" y="78" font-family="Inter, 'Helvetica Neue', Arial, sans-serif" font-size="20" font-weight="800" fill="#0B1230" text-anchor="start">Arquitectura futura — no implementada en la práctica</text>
+<text x="28" y="100" font-family="Inter, 'Helvetica Neue', Arial, sans-serif" font-size="13.5" font-weight="500" fill="#454D6B" text-anchor="start">Idea para el Nivel 2 del curso: conectar n8n con tus creaciones de vibe coding</text>
+<rect x="28" y="150" width="160" height="130" rx="12" fill="#FFFFFF" stroke="#5F6784" stroke-width="2" stroke-dasharray="6 4"/>
+<text x="108" y="186" font-family="Inter, 'Helvetica Neue', Arial, sans-serif" font-size="16.5" font-weight="800" fill="#2E3555" text-anchor="middle">Landing o chat</text>
+<text x="108.0" y="210.0" font-family="Inter, 'Helvetica Neue', Arial, sans-serif" font-size="13" font-weight="400" fill="#454D6B" text-anchor="middle">El usuario escribe o</text>
+<text x="108.0" y="226.5" font-family="Inter, 'Helvetica Neue', Arial, sans-serif" font-size="13" font-weight="400" fill="#454D6B" text-anchor="middle">envía un formulario</text>
+<rect x="222" y="150" width="160" height="130" rx="12" fill="#FFFFFF" stroke="#5F6784" stroke-width="2" stroke-dasharray="6 4"/>
+<text x="302" y="186" font-family="Inter, 'Helvetica Neue', Arial, sans-serif" font-size="16.5" font-weight="800" fill="#2E3555" text-anchor="middle">Webhook</text>
+<text x="302.0" y="210.0" font-family="Inter, 'Helvetica Neue', Arial, sans-serif" font-size="13" font-weight="400" fill="#454D6B" text-anchor="middle">Punto de entrada del</text>
+<text x="302.0" y="226.5" font-family="Inter, 'Helvetica Neue', Arial, sans-serif" font-size="13" font-weight="400" fill="#454D6B" text-anchor="middle">flujo en n8n</text>
+<rect x="416" y="150" width="160" height="130" rx="12" fill="#FFFFFF" stroke="#5F6784" stroke-width="2" stroke-dasharray="6 4"/>
+<text x="496" y="186" font-family="Inter, 'Helvetica Neue', Arial, sans-serif" font-size="16.5" font-weight="800" fill="#2E3555" text-anchor="middle">Procesar</text>
+<text x="496.0" y="210.0" font-family="Inter, 'Helvetica Neue', Arial, sans-serif" font-size="13" font-weight="400" fill="#454D6B" text-anchor="middle">Modelo de lenguaje y</text>
+<text x="496.0" y="226.5" font-family="Inter, 'Helvetica Neue', Arial, sans-serif" font-size="13" font-weight="400" fill="#454D6B" text-anchor="middle">reglas</text>
+<rect x="610" y="150" width="160" height="130" rx="12" fill="#FFFFFF" stroke="#5F6784" stroke-width="2" stroke-dasharray="6 4"/>
+<text x="690" y="186" font-family="Inter, 'Helvetica Neue', Arial, sans-serif" font-size="16.5" font-weight="800" fill="#2E3555" text-anchor="middle">Guardar y avisar</text>
+<text x="690.0" y="210.0" font-family="Inter, 'Helvetica Neue', Arial, sans-serif" font-size="13" font-weight="400" fill="#454D6B" text-anchor="middle">Base de datos u hoja</text>
+<text x="690.0" y="226.5" font-family="Inter, 'Helvetica Neue', Arial, sans-serif" font-size="13" font-weight="400" fill="#454D6B" text-anchor="middle">+ notificación</text>
+<path d="M192.0 215.0 L218.0 215.0" fill="none" stroke="#5F6784" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" stroke-dasharray="5 4"/>
+<polygon points="218.0,215.0 208.0,209.5 208.0,220.5" fill="#5F6784"/>
+<path d="M386.0 215.0 L412.0 215.0" fill="none" stroke="#5F6784" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" stroke-dasharray="5 4"/>
+<polygon points="412.0,215.0 402.0,209.5 402.0,220.5" fill="#5F6784"/>
+<path d="M580.0 215.0 L606.0 215.0" fill="none" stroke="#5F6784" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" stroke-dasharray="5 4"/>
+<polygon points="606.0,215.0 596.0,209.5 596.0,220.5" fill="#5F6784"/>
+<rect x="28" y="316" width="744" height="100" rx="12" fill="#FDEBD9" stroke="#B8500A" stroke-width="1.8"/>
+<circle cx="54" cy="366" r="13" fill="#B8500A"/>
+<text x="54" y="371.85" font-family="Inter, 'Helvetica Neue', Arial, sans-serif" font-size="19.5" font-weight="800" fill="#FFFFFF" text-anchor="middle">!</text>
+<text x="80" y="346" font-family="Inter, 'Helvetica Neue', Arial, sans-serif" font-size="14.5" font-weight="800" fill="#7A3200" text-anchor="start">NO se construyó ni se probó en la sesión. Un webhook vacío no es un flujo funcional.</text>
+<text x="80" y="388" font-family="Inter, 'Helvetica Neue', Arial, sans-serif" font-size="13.5" font-weight="500" fill="#171D33" text-anchor="start">PENDIENTE DE COMPROBAR: nodos, credenciales y límites del plan se verificarán en la documentación</text>
+<text x="80" y="406" font-family="Inter, 'Helvetica Neue', Arial, sans-serif" font-size="13.5" font-weight="500" fill="#171D33" text-anchor="start">oficial antes de enseñarlo.</text>
+</svg>

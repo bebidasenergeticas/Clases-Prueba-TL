@@ -99,7 +99,7 @@ def arquitectura_general():
 
 # =========================================================================
 def localhost_vs_pages_vs_vercel():
-    s = Svg(800, 600,
+    s = Svg(800, 566,
             "Comparación: localhost, GitHub Pages y Vercel",
             "Tabla visual de tres columnas. Localhost: solo tu computadora, ejecuta el backend mientras el servidor esté encendido, "
             "las claves viven en un archivo .env local. GitHub Pages: sitio estático público, no ejecuta Python ni FastAPI y no protege claves. "
@@ -122,10 +122,10 @@ def localhost_vs_pages_vs_vercel():
         s.text(x + cw / 2, 102, t, 18, 800, WHITE, "middle")
         s.text(x + cw / 2, 124, sub, 13, 500, "#F2EFFF", "middle")
     y = 156
-    rh = 104
+    rh = 90
     for r, (label, cells) in enumerate(rows):
         s.rect(12, y, 148, rh - 8, IVORY2, None, 0, 10)
-        s.para(24, y + 40, label, 124, 15, 700, MID, lh=19)
+        s.para(24, y + 34, label, 124, 15, 700, MID, lh=19)
         for i, (k, txt) in enumerate(cells):
             x = x0 + i * (cw + gap)
             s.rect(x, y, cw, rh - 8, WHITE, RULE, 1.5, 10)
@@ -133,8 +133,8 @@ def localhost_vs_pages_vs_vercel():
             ic(x + 22, y + 28, 11, {"ok": TEAL, "no": RED, "warn": ORA}[k])
             s.para(x + 42, y + 33, txt, cw - 54, 13.5, 500, INK, lh=17.5)
         y += rh
-    s.icon_warn(30, 586, 9, ORA)
-    s.text(46, 591, "Un enlace publicado no garantiza una app que funcione de extremo a extremo: sin backend, el chat no responde.", 12.5, 600, INK)
+    s.icon_warn(30, 540, 9, ORA)
+    s.text(46, 545, "Un enlace publicado no garantiza una app que funcione de extremo a extremo: sin backend, el chat no responde.", 12.5, 600, INK)
     done(s, "localhost_vs_pages_vs_vercel")
 
 
@@ -147,8 +147,8 @@ def excel_fastapi_dashboard_asistente():
             "Una nota aclara que el Excel vive en la computadora; en un despliegue público se necesita almacenamiento accesible en la nube.")
     s.text(16, 30, "De Excel a dashboard con asistente", 20, 800, MID)
     s.text(16, 50, "Nivel 1 · versión local · datos de Puerto A&M (simulación académica)", 13.5, 500, SOFT)
-    xs = [16, 214, 412, 610]
-    w = 174
+    xs = [16, 222, 428, 634]
+    w = 150
     items = [
         ("1", "Excel", ["Archivo .xlsx con ventas, costos y pedidos simulados"], VIO, VIOS),
         ("2", "FastAPI", ["Lee el Excel, valida y calcula los KPIs"], TEAL, TEALS),
@@ -160,7 +160,7 @@ def excel_fastapi_dashboard_asistente():
         s.circle(x + 26, 118, 14, c)
         s.text(x + 26, 123.5, n, 15, 800, WHITE, "middle")
         s.text(x + 50, 124, t, 18, 800, MID)
-        s.para(x + 14, 160, l[0], w - 28, 14, 400, INK, lh=18.5)
+        s.para(x + 12, 160, l[0], w - 24, 13.5, 400, INK, lh=17.5)
     # mini iconos
     s.icon_db(xs[0] + 14, 215, 30, 34, VIO, WHITE)
     s.icon_server(xs[1] + 14, 215, 40, 36, TEAL, WHITE)
@@ -171,13 +171,13 @@ def excel_fastapi_dashboard_asistente():
     for i in range(3):
         x1 = xs[i] + w
         s.arrow([(x1 + 2, 185), (xs[i + 1] - 2, 185)], SOFT, 3)
-    s.pill(xs[0] + w + 12, 168, "lee", 11.5, WHITE, RULE2, SOFT, 600, h=19)
-    s.pill(xs[1] + w + 12, 168, "JSON", 11.5, WHITE, RULE2, SOFT, 600, h=19)
-    s.pill(xs[2] + w + 12, 168, "contexto", 11.5, WHITE, RULE2, SOFT, 600, h=19)
+    s.pill(xs[0] + w + 28, 165, "lee", 11.5, WHITE, RULE2, SOFT, 600, h=19)
+    s.pill(xs[1] + w + 28, 165, "JSON", 11.5, WHITE, RULE2, SOFT, 600, h=19)
+    s.pill(xs[2] + w + 28, 165, "cifras", 11.5, WHITE, RULE2, SOFT, 600, h=19)
     # cajas inferiores
     s.rect(16, 306, 768, 62, ORAS, ORA, 1.8, 12)
     s.icon_warn(40, 337, 12, ORA)
-    s.para(64, 331, "Todo corre en TU computadora. Si apagas el equipo, el Excel y el servidor dejan de estar disponibles.", 700, 14, 700, "#7A3200", lh=19)
+    s.para(64, 342, "Todo corre en TU computadora. Si apagas el equipo, el Excel y el servidor dejan de estar disponibles.", 700, 14, 700, "#7A3200", lh=19)
     s.rect(16, 382, 768, 62, TEALS, TEAL, 1.8, 12)
     s.icon_check(40, 413, 12, TEAL)
     s.para(64, 407, "Para publicarlo hace falta almacenamiento accesible desde la nube (por ejemplo, una base de datos) y un backend en línea: eso es el Nivel 2 y 3.", 700, 14, 600, INK, lh=19)
@@ -204,7 +204,7 @@ def _table(s, x, y, w, name, cols, hdr=VIO, hdr2=VIOD, rowh=25, ghost=False):
 
 
 def modelo_datos_memoria():
-    s = Svg(800, 700,
+    s = Svg(800, 624,
             "Modelo de datos de la memoria: conversations, messages, orders, order_items y reservations",
             "Cinco tablas de PostgreSQL. conversations tiene id (clave primaria) y owner_id, que apunta a auth.users. messages tiene conversation_id que apunta a "
             "conversations. reservations y orders también apuntan a conversations mediante conversation_id y tienen owner_id. order_items tiene order_id que apunta a orders. "
@@ -213,14 +213,14 @@ def modelo_datos_memoria():
     s.text(16, 50, "Esquema ilustrativo; el SQL probado está en fuentes_editables/sql/ · datos de Puerto A&M = simulación académica", 12.5, 500, SOFT)
     W = 236
     ax, bx, cx = 12, 282, 552
-    y1, y2 = 92, 392
+    y1, y2 = 92, 340
     _table(s, ax, y1, W, "messages", [("PK", "id", "uuid"), ("FK", "conversation_id", "uuid"), ("", "role", "text"), ("", "body", "text"), ("", "created_at", "timestamptz")])
     _table(s, bx, y1, W, "conversations", [("PK", "id", "uuid"), ("FK", "owner_id", "uuid"), ("", "channel", "text"), ("", "created_at", "timestamptz"), ("", "updated_at", "timestamptz")], hdr=VIOD)
     _table(s, cx, y1, W, "reservations", [("PK", "id", "uuid"), ("FK", "owner_id", "uuid"), ("FK", "conversation_id", "uuid"), ("", "personas", "integer"), ("", "fecha · hora", "date · time"), ("", "estado", "text")])
     _table(s, bx, y2, W, "orders", [("PK", "id", "uuid"), ("FK", "owner_id", "uuid"), ("FK", "conversation_id", "uuid"), ("", "estado", "text"), ("", "total", "numeric")], hdr=VIOD)
     _table(s, cx, y2, W, "order_items", [("PK", "id", "uuid"), ("FK", "order_id", "uuid"), ("", "producto", "text"), ("", "cantidad", "integer"), ("", "precio_unitario", "numeric")])
     # auth.users fantasma
-    _table(s, ax, y2, W, "auth.users", [("PK", "id", "uuid"), ("", "(gestionada por", ""), ("", " Supabase Auth)", "")], hdr=MUTE, ghost=True)
+    _table(s, ax, y2, W, "auth.users", [("PK", "id", "uuid"), ("", "Gestionada por", ""), ("", "Supabase Auth.", ""), ("", "owner_id apunta", ""), ("", "aquí desde 4 tablas", "")], hdr=MUTE, ghost=True)
     # flechas FK
     # messages.conversation_id -> conversations.id
     s.arrow([(ax + W, 172), (bx - 2, 172)], TEAL, 2.6)
@@ -229,17 +229,13 @@ def modelo_datos_memoria():
     s.arrow([(cx, 198), (bx + W + 2, 198)], TEAL, 2.6)
     s.pill((bx + W + cx) / 2, 180, "N : 1", 11.5, WHITE, TEAL, TEAL, 700, h=19)
     # orders.conversation_id -> conversations  (vertical)
-    s.arrow([(bx + W / 2 + 40, y2 + 100), (bx + W / 2 + 40, y2 - 28), (bx + W / 2 + 40, 92 + 34 + 6 + 25 * 5 + 6 + 2)], TEAL, 2.6)
-    s.pill(bx + W / 2 + 40, 357, "N : 1", 11.5, WHITE, TEAL, TEAL, 700, h=19)
+    s.arrow([(bx + W / 2, y2 - 2), (bx + W / 2, 92 + 34 + 6 + 25 * 5 + 6 + 3)], TEAL, 2.6)
+    s.pill(bx + W / 2, (y2 + 265) / 2, "N : 1", 11.5, WHITE, TEAL, TEAL, 700, h=19)
     # order_items.order_id -> orders.id
     s.arrow([(cx, y2 + 74), (bx + W + 2, y2 + 74)], TEAL, 2.6)
     s.pill((bx + W + cx) / 2, y2 + 56, "N : 1", 11.5, WHITE, TEAL, TEAL, 700, h=19)
-    # owner_id -> auth.users  (línea discontinua a la izquierda)
-    s.path(f"M{bx} {y2 + 70} H{ax + W + 24} V{y2 + 60} H{ax + W + 2}", "none", MUTE, 2, "6 4")
-    s.add(f'<polygon points="{ax + W + 2},{y2 + 60} {ax + W + 12},{y2 + 54.5} {ax + W + 12},{y2 + 65.5}" fill="{MUTE}"/>')
-    s.text(ax + W + 28, y2 + 90, "owner_id → auth.users", 11.5, 600, MUTE)
     # leyenda
-    ly = 632
+    ly = 556
     s.rect(12, ly - 18, 776, 62, IVORY2, None, 0, 10)
     s.rect(24, ly - 6, 30, 19, ORA, None, rx=4); s.text(39, ly + 8, "PK", 11.5, 800, WHITE, "middle")
     s.text(62, ly + 8, "Clave primaria: identifica una fila de forma única.", 13, 500, INK)
@@ -252,7 +248,7 @@ def modelo_datos_memoria():
 
 # =========================================================================
 def linea_tiempo_sesion():
-    s = Svg(800, 480,
+    s = Svg(800, 560,
             "Línea de tiempo aproximada de la sesión del 22/11/2026",
             "Línea horizontal de 00:00 a 03:15 con nueve hitos aproximados: 00:00 teoría; 00:20 dashboard; 00:40 landing; 01:05 OpenRouter; "
             "01:30 GitHub; 01:55 Supabase; 02:30 Claude Code y Vercel; 03:00 dudas; 03:15 cierre. Los minutos son aproximados y se reconstruyeron a partir de la transcripción.")
@@ -269,39 +265,36 @@ def linea_tiempo_sesion():
               (195, "03:15", "Cierre", "", VIO)]
     X0, X1 = 44, 756
     sc = (X1 - X0) / 195.0
-    yb = 250
+    yb = 296
     # barra segmentada
     for i, (m, t, a, b, c) in enumerate(events[:-1]):
         nx = events[i + 1][0]
         s.rect(X0 + m * sc, yb - 7, (nx - m) * sc, 14, c, WHITE, 1.5, rx=0 if i else 7)
     s.rect(X1 - 7, yb - 7, 7, 14, VIO, None, 0, 0)
     s.add(f'<rect x="{X0}" y="{yb - 7}" width="{X1 - X0}" height="14" rx="7" fill="none" stroke="{WHITE}" stroke-width="0"/>')
-    levels = [(-1, 86), (1, 86), (-1, 168), (1, 168)]   # (lado, distancia)
+    levels = [(-1, 84), (1, 84), (-1, 168), (1, 168)]   # (lado, distancia)
     for i, (m, t, a, b, c) in enumerate(events):
         x = X0 + m * sc
         side, dist = levels[i % 4]
         yl = yb + side * dist
-        s.line(x, yb + side * 8, x, yl - side * (-6 if side < 0 else 6) + (0), c, 2, "3 3" if dist > 100 else None)
-        s.circle(x, yb, 9, WHITE, c, 3.4)
         bw = 126
         bx = min(max(x - bw / 2, 8), 800 - bw - 8)
-        by = yl - 34 if side < 0 else yl - 2
-        if side < 0:
-            by = yl - 56
-        else:
-            by = yl - 2
+        by = yl - 58 if side < 0 else yl
+        edge = by + 58 if side < 0 else by
+        s.line(x, yb + side * 8, x, edge, c, 2, "3 3" if dist > 100 else None)
+        s.circle(x, yb, 9, WHITE, c, 3.4)
         s.rect(bx, by, bw, 58, WHITE, c, 2, 10)
         s.text(bx + 10, by + 20, t, 14, 800, c, mono=True)
         s.text(bx + 10, by + 38, a, 14.5, 700, MID)
         if b:
             s.text(bx + 10, by + 53, b, 12, 500, SOFT)
-    s.pill(400, 452, "≈ Los minutos son aproximados y se reconstruyeron de la transcripción", 12.5, IVORY2, RULE2, SOFT, 600)
+    s.pill(400, 540, "≈ Los minutos son aproximados y se reconstruyeron de la transcripción", 12.5, IVORY2, RULE2, SOFT, 600)
     done(s, "linea_tiempo_sesion")
 
 
 # =========================================================================
 def flujo_depuracion_chat():
-    s = Svg(800, 860,
+    s = Svg(800, 930,
             "Flujo de depuración cuando el chat no responde",
             "Diagrama de decisión vertical con cinco preguntas. 1) ¿Responde la interfaz? Si no, revisa el servidor del frontend y la consola. "
             "2) ¿La petición llega al backend? Si no, revisa URL, puerto y CORS. 3) ¿El backend tiene la API key? Si no, define la variable de entorno y reinicia. "
@@ -326,8 +319,8 @@ def flujo_depuracion_chat():
         s.text(x + 12, y + 22, title, 13.5, 800, color)
         s.para(x + 12, y + 41, body, w - 24, 13, 400, INK, lh=16.5)
 
-    cx, dw, dh = 250, 300, 104
-    ys = [138, 270, 402, 534, 666]
+    cx, dw, dh = 220, 300, 104
+    ys = [150, 300, 450, 600, 750]
     qs = ["¿Responde la interfaz? (carga y escribe)", "¿La petición llega al backend?", "¿El backend tiene la API key?",
           "¿Qué código HTTP devuelve el proveedor?", "¿La interfaz muestra el campo reply?"]
     fixes = [("NO → revisa el frontend", "Recarga con Ctrl+F5. Abre la consola del navegador (F12) y lee el primer error en rojo."),
@@ -336,43 +329,43 @@ def flujo_depuracion_chat():
              ("≠ 200 → mira el código", None),
              ("NO → revisa el parseo", "El frontend debe leer el campo reply del JSON. Inspecciona la respuesta en la pestaña Red.")]
     # inicio
-    s.rect(cx - 90, 70, 180, 30, MID, None, 0, 15)
-    s.text(cx, 90, "Envías un mensaje al chat", 13.5, 700, WHITE, "middle")
-    s.arrow([(cx, 100), (cx, ys[0] - dh / 2)], SOFT)
+    s.rect(cx - 90, 68, 180, 30, MID, None, 0, 15)
+    s.text(cx, 88, "Envías un mensaje al chat", 13.5, 700, WHITE, "middle")
+    s.arrow([(cx, 98), (cx, ys[0] - dh / 2)], SOFT)
     for i, y in enumerate(ys):
         diamond(cx, y, dw, dh, i + 1, qs[i])
         if i < 4:
             s.arrow([(cx, y + dh / 2), (cx, ys[i + 1] - dh / 2)], TEAL, 2.6)
             s.pill(cx + 26, y + dh / 2 + 15, "SÍ", 11.5, WHITE, TEAL, TEAL, 800, h=18)
         if fixes[i][1]:
-            s.arrow([(cx + dw / 2, y), (500, y)], ORA, 2.6)
+            s.arrow([(cx + dw / 2, y), (466, y)], ORA, 2.6)
             s.pill(cx + dw / 2 + 24, y - 12, "NO", 11.5, WHITE, ORA, ORA, 800, h=18)
-            fixbox(504, y - 44, 288, 88, fixes[i][0], fixes[i][1])
+            fixbox(470, y - 44, 322, 88, fixes[i][0], fixes[i][1])
     # caja códigos
     y = ys[3]
-    s.arrow([(cx + dw / 2, y), (500, y)], ORA, 2.6)
+    s.arrow([(cx + dw / 2, y), (466, y)], ORA, 2.6)
     s.pill(cx + dw / 2 + 28, y - 12, "≠ 200", 11.5, WHITE, ORA, ORA, 800, h=18)
-    s.rect(504, y - 62, 288, 124, ORAS, ORA, 1.8, 10)
-    s.text(516, y - 42, "Lee el código y actúa", 13.5, 800, ORA)
-    rows = [("401 · 403", "clave inválida, revocada o sin permiso"), ("402 · 429", "saldo o límite de uso (panel del proveedor)"),
-            ("400 · 404", "petición, modelo o URL incorrectos"), ("5xx", "falla del proveedor: reintenta o cambia de modelo")]
+    s.rect(470, y - 62, 322, 124, ORAS, ORA, 1.8, 10)
+    s.text(482, y - 42, "Lee el código y actúa", 13.5, 800, ORA)
+    rows = [("401 · 403", "clave inválida, revocada o sin permiso"), ("402 · 429", "saldo o límite (panel del proveedor)"),
+            ("400 · 404", "petición, modelo o URL incorrectos"), ("5xx", "falla del proveedor: reintenta")]
     for i, (c, t) in enumerate(rows):
         yy = y - 22 + i * 22
-        s.text(516, yy, c, 12.5, 800, MID, mono=True)
-        s.text(586, yy, t, 12, 400, INK)
+        s.text(482, yy, c, 12.5, 800, MID, mono=True)
+        s.text(556, yy, t, 12, 400, INK)
     # final
-    s.arrow([(cx, ys[4] + dh / 2), (cx, 790)], TEAL, 2.6)
+    s.arrow([(cx, ys[4] + dh / 2), (cx, 846)], TEAL, 2.6)
     s.pill(cx + 26, ys[4] + dh / 2 + 15, "SÍ", 11.5, WHITE, TEAL, TEAL, 800, h=18)
-    s.rect(cx - 150, 790, 300, 40, TEALS, TEAL, 2, 20)
-    s.icon_check(cx - 124, 810, 10)
-    s.text(cx + 14, 815, "Funciona: guarda y celebra", 14, 700, TEAL, "middle")
-    s.text(790, 850, "Plan B: copia el error EXACTO (sin claves) y pídele ayuda a tu asistente.", 12.5, 600, SOFT, "end")
+    s.rect(cx - 150, 846, 300, 40, TEALS, TEAL, 2, 20)
+    s.icon_check(cx - 124, 866, 10)
+    s.text(cx + 14, 871, "Funciona: guarda y celebra", 14, 700, TEAL, "middle")
+    s.text(790, 914, "Plan B: copia el error EXACTO (sin claves) y pídele ayuda a tu asistente.", 12.5, 600, SOFT, "end")
     done(s, "flujo_depuracion_chat")
 
 
 # =========================================================================
 def flujo_turno_memoria():
-    s = Svg(800, 520,
+    s = Svg(800, 530,
             "Flujo de un turno de chat con memoria",
             "Seis pasos. 1) El navegador envía el ID de sesión y el mensaje. 2) El backend lee los últimos N mensajes de esa sesión en Supabase, "
             "filtrando por el usuario antes de llamar al modelo. 3) Construye el prompt con el system prompt (soul.md), el historial y el mensaje nuevo. "
@@ -385,8 +378,8 @@ def flujo_turno_memoria():
              ("4", "Llamar a OpenRouter", "Petición con la API key leída del entorno.", BLUE),
              ("5", "Guardar el turno", "Inserta mensaje de usuario y respuesta en messages.", TEAL),
              ("6", "Responder", "Devuelve reply al frontend, que lo muestra.", VIO)]
-    w, h = 230, 150
-    pos = [(16, 84), (285, 84), (554, 84), (554, 290), (285, 290), (16, 290)]
+    w, h = 230, 124
+    pos = [(16, 84), (285, 84), (554, 84), (554, 260), (285, 260), (16, 260)]
     for (n, t, b, c), (x, y) in zip(steps, pos):
         s.rect(x, y, w, h, WHITE, c, 2.4, 14)
         s.rect(x, y, w, 42, c, None, 0, 14)
@@ -394,27 +387,27 @@ def flujo_turno_memoria():
         s.circle(x + 26, y + 21, 13, WHITE)
         s.text(x + 26, y + 26.5, n, 15, 800, c, "middle")
         s.text(x + 48, y + 27, t, 16, 700, WHITE)
-        s.para(x + 14, y + 68, b, w - 28, 14, 400, INK, lh=19)
-    # flechas
-    s.arrow([(246, 159), (283, 159)], SOFT, 3)
-    s.arrow([(515, 159), (552, 159)], SOFT, 3)
-    s.arrow([(669, 236), (669, 288)], SOFT, 3)
-    s.arrow([(552, 365), (515, 365)], SOFT, 3)
-    s.arrow([(283, 365), (246, 365)], SOFT, 3)
-    # etiquetas externas
-    s.pill(400, 262, "Supabase (PostgreSQL)", 12, TEALS, TEAL, TEAL, 700)
-    s.arrow([(400, 276), (400, 288)], TEAL, 2, head=7)
-    s.pill(669, 262, "", 1, WHITE, WHITE, WHITE, 400) if False else None
-    s.rect(16, 466, 768, 40, REDS, RED, 1.6, 10)
-    s.icon_warn(38, 486, 10, RED)
-    s.text(58, 491, "Orden de seguridad: filtra por la sesión del usuario ANTES de llamar al modelo; nunca confíes en datos de otra sesión.", 13, 700, REDD)
-    s.text(16, 446, "Un turno completo = una pregunta y su respuesta, ambas guardadas. Abrir Supabase no significa que la memoria ya funcione.", 12.5, 600, SOFT)
+        s.para(x + 14, y + 66, b, w - 28, 14, 400, INK, lh=19)
+    s.arrow([(247, 146), (283, 146)], SOFT, 3)
+    s.arrow([(516, 146), (552, 146)], SOFT, 3)
+    s.arrow([(669, 210), (669, 258)], SOFT, 3)
+    s.arrow([(552, 322), (516, 322)], SOFT, 3)
+    s.arrow([(283, 322), (247, 322)], SOFT, 3)
+    for cx_ in (400,):
+        s.pill(cx_, 84 + 124, "Supabase", 11.5, TEALS, TEAL, TEAL, 700, h=19)
+        s.pill(cx_, 260 + 124, "Supabase", 11.5, TEALS, TEAL, TEAL, 700, h=19)
+    s.pill(669, 84 + 124 + 24, "OpenRouter", 11.5, VIOS, VIO, VIOD, 700, h=19) if False else None
+    s.text(16, 428, "Un turno completo = una pregunta y su respuesta, ambas guardadas.", 13, 600, SOFT)
+    s.text(16, 446, "Abrir Supabase no significa que la memoria ya funcione: hay que leer y escribir de verdad.", 13, 600, SOFT)
+    s.rect(16, 462, 768, 50, REDS, RED, 1.6, 10)
+    s.icon_warn(38, 487, 10, RED)
+    s.para(58, 483, "Orden de seguridad: filtra por la sesión del usuario ANTES de llamar al modelo; nunca uses datos de otra sesión.", 712, 13, 700, REDD, lh=17)
     done(s, "flujo_turno_memoria")
 
 
 # =========================================================================
 def arquitectura_4_niveles():
-    s = Svg(800, 600,
+    s = Svg(800, 580,
             "Arquitectura progresiva de cuatro niveles",
             "Escalera ascendente de cuatro niveles. Nivel 1: Excel y dashboard local. Nivel 2: landing local con chat simulado. "
             "Nivel 3: landing y API backend segura desplegada. Nivel 4: memoria y datos persistentes en Supabase con reglas de acceso (RLS). "
@@ -425,21 +418,22 @@ def arquitectura_4_niveles():
           ("2", "Landing local + chat simulado", "Página del restaurante; el chat contesta con reglas, sin modelo real.", "Corre en: tu computadora", TEAL, TEALS),
           ("3", "Landing + API backend segura", "Backend desplegado; la API key vive en variables de entorno.", "Corre en: nube (p. ej. Vercel)", ORA, ORAS),
           ("4", "Memoria y datos persistentes", "Supabase con tablas y reglas de acceso (RLS) por usuario.", "Corre en: nube + base de datos", BLUE, BLUES)]
-    w = 600
+    w = 560
     for i, (n, t, b, where, c, cs) in enumerate(lv):
-        x = 16 + i * 62
-        y = 462 - i * 112 + 0
-        s.rect(x, y, w - 0 if False else 340 + i * 62 + 0, 98, cs, c, 2.4, 14)
-        s.circle(x + 30, y + 49, 20, c)
-        s.text(x + 30, y + 56, n, 21, 800, WHITE, "middle")
-        s.text(x + 64, y + 28, t, 16.5, 800, MID)
-        s.para(x + 64, y + 49, b, 250 + i * 62 - 20, 13.5, 400, INK, lh=17.5)
-        s.text(x + 64, y + 86, where, 12.5, 700, c)
-    # ghost n8n
-    s.rect(398, 60, 386, 72, "none", MUTE, 1.8, 12, "7 5")
-    s.text(412, 84, "OPCIONAL FUTURO · n8n", 12.5, 800, MUTE, spacing=0.8)
-    s.para(412, 104, "Automatizaciones con webhooks. NO se implementó en esta práctica.", 360, 13, 500, MUTE, lh=17)
-    s.arrow([(560, 134), (560, 150)], MUTE, 2, "4 4", head=8)
+        x = 16 + i * 56
+        y = 462 - i * 108
+        s.rect(x, y, w, 92, cs, c, 2.4, 14)
+        s.circle(x + 32, y + 46, 20, c)
+        s.text(x + 32, y + 53, n, 21, 800, WHITE, "middle")
+        s.text(x + 66, y + 28, t, 16.5, 800, MID)
+        s.para(x + 66, y + 49, b, w - 90, 13.5, 400, INK, lh=17.5)
+        s.text(x + 66, y + 82, where, 12.5, 700, c)
+    s.para(16, 90, "Subir de nivel es AGREGAR una capacidad, no rehacerlo todo.", 330, 14, 700, MID, lh=19)
+    s.para(16, 134, "Cada nivel puede explicarse, probarse y detenerse ahí con un resultado útil.", 330, 13.5, 400, SOFT, lh=18)
+    s.rect(414, 60, 370, 70, "none", MUTE, 1.8, 12, "7 5")
+    s.text(428, 84, "OPCIONAL FUTURO · n8n", 12.5, 800, MUTE, spacing=0.8)
+    s.para(428, 104, "Automatizaciones con webhooks. NO se implementó en esta práctica.", 345, 13, 500, MUTE, lh=17)
+    s.arrow([(600, 132), (600, 144)], MUTE, 2, "4 4", head=8)
     done(s, "arquitectura_4_niveles")
 
 
@@ -476,8 +470,8 @@ def flujo_seguro_api_key():
     s.text(454, 98, "CORRECTO", 16, 800, WHITE, spacing=1.2)
     # navegador
     s.rect(424, 134, 130, 70, WHITE, TEAL, 1.8, 10)
-    s.icon_browser(436, 146, 36, 28, TEAL)
-    s.text(480, 163, "Navegador", 13.5, 700, MID)
+    s.icon_browser(434, 148, 30, 24, TEAL)
+    s.text(472, 165, "Navegador", 13, 700, MID)
     s.text(436, 190, "sin ninguna clave", 12, 500, SOFT)
     s.rect(630, 134, 142, 70, WHITE, TEAL, 1.8, 10)
     s.icon_lock(642, 146, 28, TEAL)
@@ -490,7 +484,7 @@ def flujo_seguro_api_key():
     s.text(672, 266, "Variable de", 12.5, 700, WHITE)
     s.text(672, 282, "entorno", 12.5, 700, WHITE)
     s.text(642, 296, "", 11, 400, WHITE)
-    s.arrow([(701, 205), (701, 236)], ORAB, 2.6)
+    s.arrow([(701, 236), (701, 207)], ORAB, 2.6)
     s.rect(630, 336, 142, 56, WHITE, VIO, 1.8, 10)
     s.text(701, 360, "OpenRouter", 14, 700, MID, "middle")
     s.text(701, 378, "recibe la clave", 12, 500, SOFT, "middle")

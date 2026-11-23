@@ -1,0 +1,87 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 560" width="800" height="560" role="img" aria-labelledby="t d">
+<title id="t">Dónde guardar la API key: incorrecto frente a correcto</title>
+<desc id="d">Dos paneles. A la izquierda, el camino incorrecto en rojo: la clave escrita en el código del frontend, pegada en un chat o prompt, o dentro de un archivo .env subido a un repositorio público; cualquiera puede leerla. A la derecha, el camino correcto en verde azulado: el navegador llama a tu backend, que lee la clave de una variable de entorno y es el único que habla con OpenRouter. Si una clave se expone, hay que revocarla y crear otra.</desc>
+<rect x="0" y="0" width="800" height="560" fill="#FFFFFF"/>
+<text x="16" y="30" font-family="Inter, 'Helvetica Neue', Arial, sans-serif" font-size="20" font-weight="800" fill="#0B1230" text-anchor="start">¿Dónde vive la API key?</text>
+<text x="16" y="50" font-family="Inter, 'Helvetica Neue', Arial, sans-serif" font-size="13.5" font-weight="500" fill="#454D6B" text-anchor="start">La regla no tiene excepciones: solo en el backend, solo en variables de entorno</text>
+<rect x="12" y="70" width="382" height="400" rx="16" fill="#FCE9E7" stroke="#B3261E" stroke-width="2"/>
+<rect x="12" y="70" width="382" height="42" rx="16" fill="#B3261E"/>
+<rect x="12" y="96" width="382" height="16" rx="0" fill="#B3261E"/>
+<circle cx="38" cy="91" r="11" fill="#FFFFFF"/>
+<path d="M33.38 86.38 L42.62 95.62 M42.62 86.38 L33.38 95.62" fill="none" stroke="#FFFFFF" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/>
+<path d="M32.5 85.5 L43.5 96.5 M43.5 85.5 L32.5 96.5" stroke="#B3261E" stroke-width="2.6" stroke-linecap="round"/>
+<text x="60" y="98" font-family="Inter, 'Helvetica Neue', Arial, sans-serif" font-size="16" font-weight="800" fill="#FFFFFF" text-anchor="start" letter-spacing="1.2">INCORRECTO</text>
+<rect x="28" y="130" width="350" height="78" rx="10" fill="#FFFFFF" stroke="#B3261E" stroke-width="1.6"/>
+<text x="42" y="154" font-family="'JetBrains Mono', 'DejaVu Sans Mono', monospace" font-size="13" font-weight="700" fill="#B3261E" text-anchor="start">script.js</text>
+<text x="42" y="175" font-family="'JetBrains Mono', 'DejaVu Sans Mono', monospace" font-size="12.5" font-weight="500" fill="#171D33" text-anchor="start">const KEY = &quot;sk-or-…&quot;</text>
+<text x="42" y="195" font-family="Inter, 'Helvetica Neue', Arial, sans-serif" font-size="13" font-weight="600" fill="#454D6B" text-anchor="start">Clave dentro del frontend</text>
+<rect x="28" y="222" width="350" height="78" rx="10" fill="#FFFFFF" stroke="#B3261E" stroke-width="1.6"/>
+<text x="42" y="246" font-family="'JetBrains Mono', 'DejaVu Sans Mono', monospace" font-size="13" font-weight="700" fill="#B3261E" text-anchor="start">Chat / prompt</text>
+<text x="42" y="267" font-family="'JetBrains Mono', 'DejaVu Sans Mono', monospace" font-size="12.5" font-weight="500" fill="#171D33" text-anchor="start">“Usa mi clave sk-or-…”</text>
+<text x="42" y="287" font-family="Inter, 'Helvetica Neue', Arial, sans-serif" font-size="13" font-weight="600" fill="#454D6B" text-anchor="start">Clave pegada en un chat</text>
+<rect x="28" y="314" width="350" height="78" rx="10" fill="#FFFFFF" stroke="#B3261E" stroke-width="1.6"/>
+<text x="42" y="338" font-family="'JetBrains Mono', 'DejaVu Sans Mono', monospace" font-size="13" font-weight="700" fill="#B3261E" text-anchor="start">.env en GitHub</text>
+<text x="42" y="359" font-family="'JetBrains Mono', 'DejaVu Sans Mono', monospace" font-size="12.5" font-weight="500" fill="#171D33" text-anchor="start">OPENROUTER_API_KEY=…</text>
+<text x="42" y="379" font-family="Inter, 'Helvetica Neue', Arial, sans-serif" font-size="13" font-weight="600" fill="#454D6B" text-anchor="start">Archivo secreto en el repositorio</text>
+<rect x="28" y="408" width="350" height="50" rx="10" fill="#FFFFFF" stroke="#B3261E" stroke-width="1.6"/>
+<circle cx="52" cy="433" r="11" fill="#B3261E"/>
+<text x="52" y="437.95" font-family="Inter, 'Helvetica Neue', Arial, sans-serif" font-size="16.5" font-weight="800" fill="#FFFFFF" text-anchor="middle">!</text>
+<text x="72" y="428.0" font-family="Inter, 'Helvetica Neue', Arial, sans-serif" font-size="13" font-weight="700" fill="#7F1710" text-anchor="start">Cualquiera puede leerla: la verán otras</text>
+<text x="72" y="444.5" font-family="Inter, 'Helvetica Neue', Arial, sans-serif" font-size="13" font-weight="700" fill="#7F1710" text-anchor="start">personas, bots y registros públicos.</text>
+<rect x="406" y="70" width="382" height="400" rx="16" fill="#DDF3F1" stroke="#0A7C78" stroke-width="2"/>
+<rect x="406" y="70" width="382" height="42" rx="16" fill="#0A7C78"/>
+<rect x="406" y="96" width="382" height="16" rx="0" fill="#0A7C78"/>
+<circle cx="432" cy="91" r="11" fill="#FFFFFF"/>
+<path d="M426.5 91.22 L430.68 95.4 L437.72 86.82" fill="none" stroke="#FFFFFF" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/>
+<path d="M426.8 91 L430.6 95 L437.5 87" fill="none" stroke="#0A7C78" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/>
+<text x="454" y="98" font-family="Inter, 'Helvetica Neue', Arial, sans-serif" font-size="16" font-weight="800" fill="#FFFFFF" text-anchor="start" letter-spacing="1.2">CORRECTO</text>
+<rect x="424" y="134" width="130" height="70" rx="10" fill="#FFFFFF" stroke="#0A7C78" stroke-width="1.8"/>
+<rect x="434" y="148" width="30" height="24" rx="5" fill="#FFFFFF" stroke="#0A7C78" stroke-width="2.2"/>
+<line x1="434" y1="154.72" x2="464" y2="154.72" stroke="#0A7C78" stroke-width="2" stroke-linecap="round"/>
+<circle cx="440.0" cy="151.36" r="1.7" fill="#0A7C78"/>
+<circle cx="446.5" cy="151.36" r="1.7" fill="#0A7C78"/>
+<circle cx="453.0" cy="151.36" r="1.7" fill="#0A7C78"/>
+<text x="472" y="165" font-family="Inter, 'Helvetica Neue', Arial, sans-serif" font-size="13" font-weight="700" fill="#0B1230" text-anchor="start">Navegador</text>
+<text x="436" y="190" font-family="Inter, 'Helvetica Neue', Arial, sans-serif" font-size="12" font-weight="500" fill="#454D6B" text-anchor="start">sin ninguna clave</text>
+<rect x="630" y="134" width="142" height="70" rx="10" fill="#FFFFFF" stroke="#0A7C78" stroke-width="1.8"/>
+<path d="M649.1 158.3 V154.4 A6.9 6.9 0 0 1 662.9 154.4 V158.3" fill="none" stroke="#0A7C78" stroke-width="2.8000000000000003" stroke-linecap="round" stroke-linejoin="round"/>
+<rect x="644.52" y="158.32" width="22.959999999999997" height="15.680000000000001" rx="2.8000000000000003" fill="#0A7C78"/>
+<circle cx="656.0" cy="164.9056" r="1.9600000000000002" fill="#FFFFFF"/>
+<rect x="655.3" y="164.9056" width="1.4000000000000001" height="4.3904000000000005" rx="1" fill="#FFFFFF"/>
+<text x="678" y="164" font-family="Inter, 'Helvetica Neue', Arial, sans-serif" font-size="14" font-weight="700" fill="#0B1230" text-anchor="start">Backend</text>
+<text x="642" y="190" font-family="Inter, 'Helvetica Neue', Arial, sans-serif" font-size="12" font-weight="500" fill="#454D6B" text-anchor="start">único con la clave</text>
+<path d="M554.0 169.0 L628.0 169.0" fill="none" stroke="#0A7C78" stroke-width="2.8" stroke-linecap="round" stroke-linejoin="round"/>
+<polygon points="628.0,169.0 618.0,163.5 618.0,174.5" fill="#0A7C78"/>
+<rect x="556.607421875" y="142.5" width="68.78515625" height="19" rx="9.5" fill="#FFFFFF" stroke="#0A7C78" stroke-width="1.2"/>
+<text x="591" y="156.025" font-family="Inter, 'Helvetica Neue', Arial, sans-serif" font-size="11.5" font-weight="700" fill="#0A7C78" text-anchor="middle">/api/chat</text>
+<rect x="630" y="238" width="142" height="64" rx="10" fill="#0B1230"/>
+<circle cx="647.8" cy="262.0" r="4.800000000000001" fill="none" stroke="#FF9A3C" stroke-width="2.2"/>
+<line x1="652.6" y1="262.0" x2="666" y2="262.0" stroke="#FF9A3C" stroke-width="2.2" stroke-linecap="round"/>
+<line x1="660.72" y1="262.0" x2="660.72" y2="265.84" stroke="#FF9A3C" stroke-width="2.2" stroke-linecap="round"/>
+<line x1="664.32" y1="262.0" x2="664.32" y2="264.88" stroke="#FF9A3C" stroke-width="2.2" stroke-linecap="round"/>
+<text x="672" y="266" font-family="Inter, 'Helvetica Neue', Arial, sans-serif" font-size="12.5" font-weight="700" fill="#FFFFFF" text-anchor="start">Variable de</text>
+<text x="672" y="282" font-family="Inter, 'Helvetica Neue', Arial, sans-serif" font-size="12.5" font-weight="700" fill="#FFFFFF" text-anchor="start">entorno</text>
+<text x="642" y="296" font-family="Inter, 'Helvetica Neue', Arial, sans-serif" font-size="11" font-weight="400" fill="#FFFFFF" text-anchor="start"></text>
+<path d="M701.0 236.0 L701.0 207.0" fill="none" stroke="#FF9A3C" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/>
+<polygon points="701.0,207.0 695.5,217.0 706.5,217.0" fill="#FF9A3C"/>
+<rect x="630" y="336" width="142" height="56" rx="10" fill="#FFFFFF" stroke="#5B3FD9" stroke-width="1.8"/>
+<text x="701" y="360" font-family="Inter, 'Helvetica Neue', Arial, sans-serif" font-size="14" font-weight="700" fill="#0B1230" text-anchor="middle">OpenRouter</text>
+<text x="701" y="378" font-family="Inter, 'Helvetica Neue', Arial, sans-serif" font-size="12" font-weight="500" fill="#454D6B" text-anchor="middle">recibe la clave</text>
+<path d="M701.0 302.0 L701.0 334.0" fill="none" stroke="#0A7C78" stroke-width="2.8" stroke-linecap="round" stroke-linejoin="round"/>
+<polygon points="701.0,334.0 706.5,324.0 695.5,324.0" fill="#0A7C78"/>
+<text x="424" y="252" font-family="Inter, 'Helvetica Neue', Arial, sans-serif" font-size="13" font-weight="500" fill="#171D33" text-anchor="start">En local: archivo .env</text>
+<text x="424" y="269" font-family="Inter, 'Helvetica Neue', Arial, sans-serif" font-size="13" font-weight="500" fill="#171D33" text-anchor="start">ignorado por Git (.gitignore).</text>
+<text x="424" y="302" font-family="Inter, 'Helvetica Neue', Arial, sans-serif" font-size="13" font-weight="500" fill="#171D33" text-anchor="start">En la nube: Environment</text>
+<text x="424" y="319" font-family="Inter, 'Helvetica Neue', Arial, sans-serif" font-size="13" font-weight="500" fill="#171D33" text-anchor="start">Variables del proyecto en la</text>
+<text x="424" y="336" font-family="Inter, 'Helvetica Neue', Arial, sans-serif" font-size="13" font-weight="500" fill="#171D33" text-anchor="start">plataforma.</text>
+<rect x="422" y="408" width="350" height="50" rx="10" fill="#FFFFFF" stroke="#0A7C78" stroke-width="1.6"/>
+<circle cx="446" cy="433" r="11" fill="#0A7C78"/>
+<path d="M440.5 433.22 L444.68 437.4 L451.72 428.82" fill="none" stroke="#FFFFFF" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/>
+<text x="466" y="428.0" font-family="Inter, 'Helvetica Neue', Arial, sans-serif" font-size="13" font-weight="700" fill="#06524F" text-anchor="start">El navegador nunca ve la clave; solo ve la</text>
+<text x="466" y="444.5" font-family="Inter, 'Helvetica Neue', Arial, sans-serif" font-size="13" font-weight="700" fill="#06524F" text-anchor="start">respuesta del backend.</text>
+<rect x="12" y="486" width="776" height="56" rx="12" fill="#0B1230"/>
+<circle cx="40" cy="514" r="13" fill="#FF9A3C"/>
+<text x="40" y="519.85" font-family="Inter, 'Helvetica Neue', Arial, sans-serif" font-size="19.5" font-weight="800" fill="#FFFFFF" text-anchor="middle">!</text>
+<text x="64" y="508" font-family="Inter, 'Helvetica Neue', Arial, sans-serif" font-size="13.5" font-weight="600" fill="#FFFFFF" text-anchor="start">¿Se expuso una clave? Revócala de inmediato en el panel del proveedor, crea otra y actualiza la variable de</text>
+<text x="64" y="526" font-family="Inter, 'Helvetica Neue', Arial, sans-serif" font-size="13.5" font-weight="600" fill="#FFFFFF" text-anchor="start">entorno. Borrar el mensaje no basta.</text>
+</svg>
